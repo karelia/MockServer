@@ -13,7 +13,7 @@
 		<header id="top_header">
 			<div id="library" class="hideInXcode">
 				<h1><a id="libraryTitle" href="../index.html">MockServer </a></h1>
-				<a id="developerHome" href="../index.html">Elegant Chaos</a>
+				<a id="developerHome" href="../index.html">Karelia Software</a>
 			</div>
 			
 			<div id="title" role="banner">
@@ -99,56 +99,50 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<ul>
-<li><p>A server which runs locally and &ldquo;pretends&rdquo; to be something else.</p></li>
-<li><p>You provide the server with an optional port to run on, and a list of responses.
-*</p></li>
-<li>The responses consist of an array of arrays, in this format:</li>
-<li>  pattern, command, command&hellip;
-*</li>
-<li>The pattern is a regular expression which is matched against input received by the server.</li>
-<li>The commands are NSString, NSData, or NSNumber objects, which are processed when</li>
-<li>the pattern has been matched.
-*</li>
-<li>NSData objects are sent back directly as output.</li>
-<li>NSString objects are also sent back, except for the constant CloseCommand string, which closes the connection instead.</li>
-<li>NSNumber objects are interpreted as times, in seconds, to pause before sending back further output.
-*</li>
-<li><h2>Ports</h2>
+						<p>A server which runs locally and &ldquo;pretends&rdquo; to be something else.</p>
 
-<p>*</p></li>
-<li>If you give the server no port, it is assigned one at random. You can discover this using the port property, so that</li>
-<li>you can pass it on to the test code that will be making a connection.
-*</li>
-<li>This is generally preferrable to setting a fixed port, as the system doesn&rsquo;t always free up ports instantly, so if you</li>
-<li>run multiple tests on a fixed port in quick succession you may find that the server fails to bind.
-*</li>
-<li><h2>Data Transfers</h2>
+<p>You provide the server with an optional port to run on, and a list of responses.</p>
 
-<p>*</p></li>
-<li>As well as listening on it&rsquo;s assigned port, the server listens on a second port which can be used to fake FTP</li>
-<li>passive data connections.</li>
-<li>Any connection on this port will cause the contents of the server&rsquo;s data property to be sent back, followed by</li>
-<li>the connection closing.
-*</li>
-<li><h2>Substitions</h2>
+<p>The responses consist of an array of arrays, in this format:
+pattern, command, command&hellip;</p>
 
-<p>*</p></li>
-<li>There is a subsitituion system which allows the output that is sent back to vary somewhat based on context.</li>
-<li>You can use variables $0, $1, $2 etc in a response, to refer to parts of the pattern that was matched against.</li>
-<li>Other substitutions that are currently implemented:
-*</li>
-<li>  $address     the IP address of the server; should be 127.0.0.1</li>
-<li>  $server        a fake name for the server, to return (eg in FTP responses)</li>
-<li>  $pasv          the IP address and port number of the data connection, in FTP format (eg 127,0,0,1,120,12)</li>
-<li>  $size           the size of the server&rsquo;s data property
-*</li>
-<li><h2>Examples</h2>
+<p>The pattern is a regular expression which is matched against input received by the server.
+The commands are NSString, NSData, or NSNumber objects, which are processed when
+the pattern has been matched.</p>
 
-<p>*</p></li>
-<li>See the MockServerTests.m file for some examples.</li>
-</ul>
+<p>NSData objects are sent back directly as output.
+NSString objects are also sent back, except for the constant CloseCommand string, which closes the connection instead.
+NSNumber objects are interpreted as times, in seconds, to pause before sending back further output.</p>
 
+<h2>Ports</h2>
+
+<p>If you give the server no port, it is assigned one at random. You can discover this using the port property, so that
+you can pass it on to the test code that will be making a connection.</p>
+
+<p>This is generally preferrable to setting a fixed port, as the system doesn&rsquo;t always free up ports instantly, so if you
+run multiple tests on a fixed port in quick succession you may find that the server fails to bind.</p>
+
+<h2>Data Transfers</h2>
+
+<p>As well as listening on it&rsquo;s assigned port, the server listens on a second port which can be used to fake FTP
+passive data connections.
+Any connection on this port will cause the contents of the server&rsquo;s data property to be sent back, followed by
+the connection closing.</p>
+
+<h2>Substitions</h2>
+
+<p>There is a subsitituion system which allows the output that is sent back to vary somewhat based on context.
+You can use variables $0, $1, $2 etc in a response, to refer to parts of the pattern that was matched against.
+Other substitutions that are currently implemented:</p>
+
+<p>$address     the IP address of the server; should be 127.0.0.1
+$server        a fake name for the server, to return (eg in FTP responses)
+$pasv          the IP address and port number of the data connection, in FTP format (eg 127,0,0,1,120,12)
+$size           the size of the server&rsquo;s data property</p>
+
+<h2>Examples</h2>
+
+<p>See the MockServerTests.m file for some examples.</p>
 					</div>
 					
 					
@@ -174,7 +168,7 @@
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Elegant Chaos. All rights reserved. (Last updated: 2012-11-08)</span><br />
+						<p><span class="copyright">&copy; 2012 Karelia Software. All rights reserved. (Last updated: 2012-11-08)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						
