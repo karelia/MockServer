@@ -3,10 +3,10 @@
 //  Copyright 2012 Karelia Software. All rights reserved.
 //
 
-#import "MockServerResponder.h"
-#import "MockServer.h"
+#import "KSMockServerResponder.h"
+#import "KSMockServer.h"
 
-@interface MockServerResponder()
+@interface KSMockServerResponder()
 
 @property (strong, nonatomic) NSArray* requests;
 @property (strong, nonatomic) NSArray* responses;
@@ -14,7 +14,7 @@
 
 @end
 
-@implementation MockServerResponder
+@implementation KSMockServerResponder
 
 @synthesize initialResponse = _initialResponse;
 @synthesize requests = _requests;
@@ -22,9 +22,9 @@
 
 #pragma mark - Object Lifecycle
 
-+ (MockServerResponder*)responderWithResponses:(NSArray *)responses
++ (KSMockServerResponder*)responderWithResponses:(NSArray *)responses
 {
-    MockServerResponder* server = [[MockServerResponder alloc] initWithResponses:responses];
+    KSMockServerResponder* server = [[KSMockServerResponder alloc] initWithResponses:responses];
 
     return [server autorelease];
 }

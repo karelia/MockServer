@@ -8,24 +8,24 @@
 #import <sys/socket.h>
 #import <netinet/in.h>   // for IPPROTO_TCP, sockaddr_in
 
-#import "MockServer.h"
-#import "MockServerConnection.h"
-#import "MockServerListener.h"
-#import "MockServerResponder.h"
+#import "KSMockServer.h"
+#import "KSMockServerConnection.h"
+#import "KSMockServerListener.h"
+#import "KSMockServerResponder.h"
 
-@interface MockServer()
+@interface KSMockServer()
 
-@property (strong, nonatomic) MockServerConnection* connection;
+@property (strong, nonatomic) KSMockServerConnection* connection;
 @property (strong, nonatomic) NSMutableArray* dataConnections;
-@property (strong, nonatomic) MockServerListener* dataListener;
-@property (strong, nonatomic) MockServerListener* listener;
-@property (strong, nonatomic) MockServerResponder* responder;
+@property (strong, nonatomic) KSMockServerListener* dataListener;
+@property (strong, nonatomic) KSMockServerListener* listener;
+@property (strong, nonatomic) KSMockServerResponder* responder;
 @property (assign, atomic) BOOL running;
 
 
 @end
 
-@implementation MockServer
+@implementation KSMockServer
 
 @synthesize connection = _connection;
 @synthesize data = _data;
@@ -41,16 +41,16 @@ NSString *const InitialResponseKey = @"«initial»";
 
 #pragma mark - Object Lifecycle
 
-+ (MockServer*)serverWithResponses:(NSArray*)responses
++ (KSMockServer*)serverWithResponses:(NSArray*)responses
 {
-    MockServer* server = [[MockServer alloc] initWithPort:0 responses:responses];
+    KSMockServer* server = [[KSMockServer alloc] initWithPort:0 responses:responses];
 
     return [server autorelease];
 }
 
-+ (MockServer*)serverWithPort:(NSUInteger)port responses:(NSArray*)responses
++ (KSMockServer*)serverWithPort:(NSUInteger)port responses:(NSArray*)responses
 {
-    MockServer* server = [[MockServer alloc] initWithPort:port responses:responses];
+    KSMockServer* server = [[KSMockServer alloc] initWithPort:port responses:responses];
 
     return [server autorelease];
 }
@@ -60,15 +60,15 @@ NSString *const InitialResponseKey = @"«initial»";
     if ((self = [super init]) != nil)
     {
         self.queue = [NSOperationQueue currentQueue];
-        self.responder = [MockServerResponder responderWithResponses:responses];
-        self.listener = [MockServerListener listenerWithPort:port connectionBlock:^BOOL(int socket) {
+        self.responder = [KSMockServerResponder responderWithResponses:responses];
+        self.listener = [KSMockServerListener listenerWithPort:port connectionBlock:^BOOL(int socket) {
             MockServerAssert(socket != 0);
 
             BOOL ok = self.connection == nil;
             if (ok)
             {
                 MockServerLog(@"received connection");
-                self.connection = [MockServerConnection connectionWithSocket:socket responder:self.responder server:self];
+                self.connection = [KSMockServerConnection connectionWithSocket:socket responder:self.responder server:self];
             }
 
             return ok;
@@ -110,7 +110,7 @@ NSString *const InitialResponseKey = @"«initial»";
     [self.connection cancel];
     [self.listener stop:@"stopped externally"];
     [self.dataListener stop:@"stopped externally"];
-    for (MockServerConnection* connection in self.dataConnections)
+    for (KSMockServerConnection* connection in self.dataConnections)
     {
         [connection cancel];
     }
@@ -155,8 +155,8 @@ NSString *const InitialResponseKey = @"«initial»";
 - (void)makeDataListener
 {
     self.dataConnections = [NSMutableArray array];
-    __block MockServer* server = self;
-    self.dataListener = [MockServerListener listenerWithPort:0 connectionBlock:^BOOL(int socket) {
+    __block KSMockServer* server = self;
+    self.dataListener = [KSMockServerListener listenerWithPort:0 connectionBlock:^BOOL(int socket) {
 
         MockServerLog(@"got connection on data listener");
 
@@ -167,8 +167,8 @@ NSString *const InitialResponseKey = @"«initial»";
         }
 
         NSArray* responses = @[ @[InitialResponseKey, data, CloseCommand ] ];
-        MockServerResponder* responder = [MockServerResponder responderWithResponses:responses];
-        MockServerConnection* connection = [MockServerConnection connectionWithSocket:socket responder:responder server:server];
+        KSMockServerResponder* responder = [KSMockServerResponder responderWithResponses:responses];
+        KSMockServerConnection* connection = [KSMockServerConnection connectionWithSocket:socket responder:responder server:server];
         [self.dataConnections addObject:connection];
 
         return YES;

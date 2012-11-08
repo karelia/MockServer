@@ -55,15 +55,15 @@
  * See the MockServerTests.m file for some examples.
  */
 
-@interface MockServer : NSObject<NSStreamDelegate>
+@interface KSMockServer : NSObject<NSStreamDelegate>
 
 @property (strong, nonatomic) NSData* data;
 @property (readonly, nonatomic) NSUInteger port;
 @property (strong, nonatomic) NSOperationQueue* queue;
 @property (readonly, atomic) BOOL running;
 
-+ (MockServer*)serverWithResponses:(NSArray*)responses;
-+ (MockServer*)serverWithPort:(NSUInteger)port responses:(NSArray*)responses;
++ (KSMockServer*)serverWithResponses:(NSArray*)responses;
++ (KSMockServer*)serverWithPort:(NSUInteger)port responses:(NSArray*)responses;
 
 - (id)initWithPort:(NSUInteger)port responses:(NSArray*)responses;
 

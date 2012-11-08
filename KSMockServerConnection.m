@@ -5,24 +5,24 @@
 
 #import <Foundation/Foundation.h>
 
-#import "MockServerConnection.h"
+#import "KSMockServerConnection.h"
 
-#import "MockServer.h"
-#import "MockServerListener.h"
-#import "MockServerResponder.h"
+#import "KSMockServer.h"
+#import "KSMockServerListener.h"
+#import "KSMockServerResponder.h"
 
-@interface MockServerConnection()
+@interface KSMockServerConnection()
 
 @property (strong, nonatomic) NSInputStream* input;
 @property (strong, nonatomic) NSOutputStream* output;
 @property (strong, nonatomic) NSMutableData* outputData;
-@property (strong, nonatomic) MockServerResponder* responder;
-@property (strong, nonatomic) MockServer* server;
+@property (strong, nonatomic) KSMockServerResponder* responder;
+@property (strong, nonatomic) KSMockServer* server;
 
 
 @end
 
-@implementation MockServerConnection
+@implementation KSMockServerConnection
 
 @synthesize input   = _input;
 @synthesize output = _output;
@@ -32,14 +32,14 @@
 
 #pragma mark - Object Lifecycle
 
-+ (MockServerConnection*)connectionWithSocket:(int)socket responder:(MockServerResponder*)responder server:(MockServer *)server
++ (KSMockServerConnection*)connectionWithSocket:(int)socket responder:(KSMockServerResponder*)responder server:(KSMockServer *)server
 {
-    MockServerConnection* connection = [[MockServerConnection alloc] initWithSocket:socket responder:responder server:server];
+    KSMockServerConnection* connection = [[KSMockServerConnection alloc] initWithSocket:socket responder:responder server:server];
 
     return [connection autorelease];
 }
 
-- (id)initWithSocket:(int)socket responder:(MockServerResponder*)responder server:(MockServer *)server
+- (id)initWithSocket:(int)socket responder:(KSMockServerResponder*)responder server:(KSMockServer *)server
 {
     if ((self = [super init]) != nil)
     {

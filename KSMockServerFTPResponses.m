@@ -3,10 +3,10 @@
 //  Copyright 2012 Karelia Software. All rights reserved.
 //
 
-#import "MockServerFTPResponses.h"
-#import "MockServer.h"
+#import "KSMockServerFTPResponses.h"
+#import "KSMockServer.h"
 
-@implementation MockServerFTPResponses
+@implementation KSMockServerFTPResponses
 
 + (NSArray*)initialResponse
 {

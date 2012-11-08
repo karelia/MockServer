@@ -8,13 +8,13 @@
 #import <sys/socket.h>
 #import <netinet/in.h>   // for IPPROTO_TCP, sockaddr_in
 
-#import "MockServerListener.h"
+#import "KSMockServerListener.h"
 
-#import "MockServer.h"
-#import "MockServerConnection.h"
-#import "MockServerResponder.h"
+#import "KSMockServer.h"
+#import "KSMockServerConnection.h"
+#import "KSMockServerResponder.h"
 
-@interface MockServerListener()
+@interface KSMockServerListener()
 
 @property (copy, nonatomic) ConnectionBlock connectionBlock;
 @property (assign, nonatomic) CFSocketRef listener;
@@ -22,16 +22,16 @@
 
 @end
 
-@implementation MockServerListener
+@implementation KSMockServerListener
 
 @synthesize listener = _listener;
 @synthesize port = _port;
 
 #pragma mark - Object Lifecycle
 
-+ (MockServerListener*)listenerWithPort:(NSUInteger)port connectionBlock:(ConnectionBlock)block
++ (KSMockServerListener*)listenerWithPort:(NSUInteger)port connectionBlock:(ConnectionBlock)block
 {
-    MockServerListener* listener = [[MockServerListener alloc] initWithPort:port connectionBlock:block];
+    KSMockServerListener* listener = [[KSMockServerListener alloc] initWithPort:port connectionBlock:block];
 
     return [listener autorelease];
 }
@@ -136,7 +136,7 @@
 
 static void callbackAcceptConnection(CFSocketRef s, CFSocketCallBackType type, CFDataRef address, const void *data, void *info)
 {
-    MockServerListener* obj = (MockServerListener*)info;
+    KSMockServerListener* obj = (KSMockServerListener*)info;
     MockServerAssert(type == kCFSocketAcceptCallBack);
     MockServerAssert(obj && (obj.listener == s));
     MockServerAssert(data);

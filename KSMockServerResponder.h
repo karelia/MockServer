@@ -5,13 +5,13 @@
 
 #import <Foundation/Foundation.h>
 
-@class MockServer;
+@class KSMockServer;
 
-@interface MockServerResponder : NSObject
+@interface KSMockServerResponder : NSObject
 
 @property (strong, nonatomic, readonly) NSArray* initialResponse;
 
-+ (MockServerResponder*)responderWithResponses:(NSArray*)responses;
++ (KSMockServerResponder*)responderWithResponses:(NSArray*)responses;
 
 - (id)initWithResponses:(NSArray*)responses;
 

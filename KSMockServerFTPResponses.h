@@ -9,7 +9,7 @@
  * A collection of stock responses that can be used to fake an FTP server.
  */
 
-@interface MockServerFTPResponses : NSObject
+@interface KSMockServerFTPResponses : NSObject
 
 + (NSArray*)initialResponse;
 + (NSArray*)userOkResponse;

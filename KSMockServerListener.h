@@ -5,13 +5,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MockServerListener : NSObject
+@interface KSMockServerListener : NSObject
 
 typedef BOOL (^ConnectionBlock)(int socket);
 
 @property (readonly, nonatomic) NSUInteger port;
 
-+ (MockServerListener*)listenerWithPort:(NSUInteger)port connectionBlock:(ConnectionBlock)block;
++ (KSMockServerListener*)listenerWithPort:(NSUInteger)port connectionBlock:(ConnectionBlock)block;
 
 - (id)initWithPort:(NSUInteger)port connectionBlock:(ConnectionBlock)block;
 

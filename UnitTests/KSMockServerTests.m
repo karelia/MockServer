@@ -3,16 +3,16 @@
 //  Copyright 2012 Karelia Software. All rights reserved.
 //
 
-#import "MockServer.h"
-#import "MockServerFTPResponses.h"
+#import "KSMockServer.h"
+#import "KSMockServerFTPResponses.h"
 
 #import <SenTestingKit/SenTestingKit.h>
 
-@interface MockServerTests : SenTestCase
+@interface KSMockServerTests : SenTestCase
 
 @end
 
-@implementation MockServerTests
+@implementation KSMockServerTests
 
 static NSString *const HTTPHeader = @"HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=iso-8859-1\r\n\r\n";
 static NSString*const HTTPContent = @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\"><html><head><title>example</title></head><body>example result</body></html>\n";
@@ -27,9 +27,9 @@ static NSString*const HTTPContent = @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 
     return responses;
 }
 
-- (MockServer*)setupServerWithResponses:(NSArray*)responses
+- (KSMockServer*)setupServerWithResponses:(NSArray*)responses
 {
-    MockServer* server = [MockServer serverWithPort:0 responses:responses];
+    KSMockServer* server = [KSMockServer serverWithPort:0 responses:responses];
 
     STAssertNotNil(server, @"got server");
     [server start];
@@ -38,7 +38,7 @@ static NSString*const HTTPContent = @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 
     return started ? server : nil;
 }
 
-- (NSString*)stringForScheme:(NSString*)scheme path:(NSString*)path method:(NSString*)method server:(MockServer*)server
+- (NSString*)stringForScheme:(NSString*)scheme path:(NSString*)path method:(NSString*)method server:(KSMockServer*)server
 {
     NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://127.0.0.1:%ld%@", scheme, (long)server.port, path]];
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url];
@@ -46,14 +46,14 @@ static NSString*const HTTPContent = @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 
     return [self stringForRequest:request server:server];
 }
 
-- (NSString*)stringForScheme:(NSString*)scheme path:(NSString*)path server:(MockServer*)server
+- (NSString*)stringForScheme:(NSString*)scheme path:(NSString*)path server:(KSMockServer*)server
 {
     NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://127.0.0.1:%ld%@", scheme, (long)server.port, path]];
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
     return [self stringForRequest:request server:server];
 }
 
-- (NSString*)stringForRequest:(NSURLRequest*)request server:(MockServer*)server
+- (NSString*)stringForRequest:(NSURLRequest*)request server:(KSMockServer*)server
 {
     __block NSString* string = nil;
 
@@ -80,7 +80,7 @@ static NSString*const HTTPContent = @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 
 
 - (void)testHTTPGet
 {
-    MockServer* server = [self setupServerWithResponses:[self httpResponses]];
+    KSMockServer* server = [self setupServerWithResponses:[self httpResponses]];
     if (server)
     {
         NSString* string = [self stringForScheme:@"http" path:@"/index.html" method:@"GET" server:server];
@@ -90,7 +90,7 @@ static NSString*const HTTPContent = @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 
 
 - (void)testHTTPHead
 {
-    MockServer* server = [self setupServerWithResponses:[self httpResponses]];
+    KSMockServer* server = [self setupServerWithResponses:[self httpResponses]];
     if (server)
     {
         NSString* string = [self stringForScheme:@"http" path:@"/index.html" method:@"HEAD" server:server];
@@ -100,7 +100,7 @@ static NSString*const HTTPContent = @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 
 
 - (void)testFTP
 {
-    MockServer* server = [self setupServerWithResponses:[MockServerFTPResponses standardResponses]];
+    KSMockServer* server = [self setupServerWithResponses:[KSMockServerFTPResponses standardResponses]];
     if (server)
     {
         NSString* testData = @"This is some test data";
