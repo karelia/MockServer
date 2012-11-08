@@ -60,7 +60,7 @@
 
 + (NSArray*)retrResponse
 {
-    return @[@"RETR ([a-zA-Z0-9.]+/)", @"150 Opening BINARY mode data connection for '$1' ($size bytes).\r\n"];
+    return @[@"RETR ([a-zA-Z0-9./]+)", @"150 Opening BINARY mode data connection for '$1' ($size bytes).\r\n"];
 }
 
 + (NSArray*)listResponse
