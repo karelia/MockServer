@@ -18,7 +18,7 @@ NSNumber objects are interpreted as times, in seconds, to pause before sending b
 
 ## Ports
 
-If you give the server no port, it is assigned one at random. You can discover this using the port property, so that
+If you give the server no port, it is assigned one at random. You can discover this using the `server.port` property, so that
 you can pass it on to the test code that will be making a connection.
 
 This is generally preferrable to setting a fixed port, as the system doesn't always free up ports instantly, so if you
@@ -28,19 +28,21 @@ run multiple tests on a fixed port in quick succession you may find that the ser
 
 As well as listening on it's assigned port, the server listens on a second port which can be used to fake FTP
 passive data connections.
-Any connection on this port will cause the contents of the server's data property to be sent back, followed by
+
+Any connection on this port will cause the contents of the `server.data` property to be sent back, followed by
 the connection closing.
 
 ## Substitions
 
 There is a subsitituion system which allows the output that is sent back to vary somewhat based on context.
-You can use variables $0, $1, $2 etc in a response, to refer to parts of the pattern that was matched against.
+You can use variables `$0`, `$1`, `$2` etc in a response, to refer to parts of the pattern that was matched against.
+
 Other substitutions that are currently implemented:
 
     $address     the IP address of the server; should be 127.0.0.1
-    $server        a fake name for the server, to return (eg in FTP responses)
-    $pasv          the IP address and port number of the data connection, in FTP format (eg 127,0,0,1,120,12)
-    $size           the size of the server's data property
+    $server      a fake name for the server, to return (eg in FTP responses)
+    $pasv        the IP address and port number of the data connection, in FTP format (eg 127,0,0,1,120,12)
+    $size        the size of the server's data property
 
 ## Examples
 
