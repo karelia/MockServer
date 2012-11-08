@@ -43,6 +43,7 @@
 		2239A207164C53F3008D4ADE /* KSMockServerListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSMockServerListener.m; sourceTree = SOURCE_ROOT; };
 		2239A208164C53F3008D4ADE /* KSMockServerResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSMockServerResponder.h; sourceTree = SOURCE_ROOT; };
 		2239A209164C53F3008D4ADE /* KSMockServerResponder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSMockServerResponder.m; sourceTree = SOURCE_ROOT; };
+		2239A216164C5D0A008D4ADE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -96,6 +97,7 @@
 		29B97314FDCFA39411CA2CEA /* Connection */ = {
 			isa = PBXGroup;
 			children = (
+				2239A216164C5D0A008D4ADE /* README.md */,
 				22B47C59164AE5EE006E80EB /* MockServer */,
 				2239A1FB164C5381008D4ADE /* UnitTests */,
 				29B97317FDCFA39411CA2CEA /* Resources */,

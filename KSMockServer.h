@@ -10,7 +10,7 @@
 
 /**
  * A server which runs locally and "pretends" to be something else.
-
+ *
  * You provide the server with an optional port to run on, and a list of responses.
  *
  * The responses consist of an array of arrays, in this format:
