@@ -97,10 +97,10 @@
  Loop in the current run loop until something calls stop on the server.
  
  Typically you start the server, initiate the network operation that you want
- to test, then call [KSMockServer runUntilStopped] in your test case. 
+ to test, then call <runUntilStopped> in your test case.
 
  In a completion block or delegate method of your network operation, you 
- can then call [KSMockServer stop] on the server, at which point your test case will continue
+ can then call <stop> on the server, at which point your test case will continue
  executing and you can verify that you got the results you were expecting.
  
  */
