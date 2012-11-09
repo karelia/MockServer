@@ -32,12 +32,43 @@
 	
 	
 	
+	<option value="tasks">Tasks</option>
 	
 	
 	
 	
 	
+	<option value="properties">Properties</option>
 	
+	<option value="//api/name/data">&nbsp;&nbsp;&nbsp;&nbsp;data</option>
+	
+	<option value="//api/name/port">&nbsp;&nbsp;&nbsp;&nbsp;port</option>
+	
+	<option value="//api/name/running">&nbsp;&nbsp;&nbsp;&nbsp;running</option>
+	
+	
+	
+	
+	<option value="class_methods">Class Methods</option>
+	
+	<option value="//api/name/serverWithPort:responses:">&nbsp;&nbsp;&nbsp;&nbsp;+ serverWithPort:responses:</option>
+	
+	<option value="//api/name/serverWithResponses:">&nbsp;&nbsp;&nbsp;&nbsp;+ serverWithResponses:</option>
+	
+	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/initWithPort:responses:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithPort:responses:</option>
+	
+	<option value="//api/name/runUntilStopped">&nbsp;&nbsp;&nbsp;&nbsp;- runUntilStopped</option>
+	
+	<option value="//api/name/standardSubstitutions">&nbsp;&nbsp;&nbsp;&nbsp;- standardSubstitutions</option>
+	
+	<option value="//api/name/start">&nbsp;&nbsp;&nbsp;&nbsp;- start</option>
+	
+	<option value="//api/name/stop">&nbsp;&nbsp;&nbsp;&nbsp;- stop</option>
 	
 	
 	
@@ -53,13 +84,49 @@
 
 
 
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+</ul></li>
 
 
 
 
 
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/data">data</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/port">port</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/running">running</a></span></li>
+	
+</ul></li>
 
 
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/serverWithPort:responses:">serverWithPort:responses:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/serverWithResponses:">serverWithResponses:</a></span></li>
+	
+</ul></li>
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithPort:responses:">initWithPort:responses:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/runUntilStopped">runUntilStopped</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/standardSubstitutions">standardSubstitutions</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/start">start</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/stop">stop</a></span></li>
+	
+</ul></li>
 
 
 			</ul>
@@ -99,63 +166,582 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>A server which runs locally and &ldquo;pretends&rdquo; to be something else.</p>
+						<pre><code>A server which runs locally and "pretends" to be something else.
 
-<p>You provide the server with an optional port to run on, and a list of responses.</p>
+You provide the server with an optional port to run on, and a list of responses.
 
-<p>The responses consist of an array of arrays, in this format:
-pattern, command, command&hellip;</p>
+The responses consist of an array of arrays, in this format:
+pattern, command, command...
 
-<p>The pattern is a regular expression which is matched against input received by the server.
+The pattern is a regular expression which is matched against input received by the server.
 The commands are NSString, NSData, or NSNumber objects, which are processed when
-the pattern has been matched.</p>
+the pattern has been matched.
 
-<p>NSData objects are sent back directly as output.
-NSString objects are also sent back, except for the constant CloseCommand string, which closes the connection instead.
-NSNumber objects are interpreted as times, in seconds, to pause before sending back further output.</p>
+See the documentation.
 
-<h2>Ports</h2>
-
-<p>If you give the server no port, it is assigned one at random. You can discover this using the port property, so that
-you can pass it on to the test code that will be making a connection.</p>
-
-<p>This is generally preferrable to setting a fixed port, as the system doesn&rsquo;t always free up ports instantly, so if you
-run multiple tests on a fixed port in quick succession you may find that the server fails to bind.</p>
-
-<h2>Data Transfers</h2>
-
-<p>As well as listening on it&rsquo;s assigned port, the server listens on a second port which can be used to fake FTP
-passive data connections.
-Any connection on this port will cause the contents of the server&rsquo;s data property to be sent back, followed by
-the connection closing.</p>
-
-<h2>Substitions</h2>
-
-<p>There is a subsitituion system which allows the output that is sent back to vary somewhat based on context.
-You can use variables $0, $1, $2 etc in a response, to refer to parts of the pattern that was matched against.
-Other substitutions that are currently implemented:</p>
-
-<p>$address     the IP address of the server; should be 127.0.0.1
-$server        a fake name for the server, to return (eg in FTP responses)
-$pasv          the IP address and port number of the data connection, in FTP format (eg 127,0,0,1,120,12)
-$size           the size of the server&rsquo;s data property</p>
-
-<h2>Examples</h2>
-
-<p>See the MockServerTests.m file for some examples.</p>
+See also the MockServerTests.m file for some examples.
+</code></pre>
 					</div>
 					
 					
 					
 					
 					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						
+						
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/data">&nbsp;&nbsp;data</a></code>
+		<span class="tooltip"><p>This data will automatically be sent when something connects to the passive data connection.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/port">&nbsp;&nbsp;port</a></code>
+		<span class="tooltip"><p>The port that the server is running on.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/running">&nbsp;&nbsp;running</a></code>
+		<span class="tooltip"><p>YES if the server is running. NO if the stop method has been called.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/serverWithResponses:">+&nbsp;serverWithResponses:</a></code>
+		<span class="tooltip"><p>Make a server that uses the given responses.
+The server will listen on an automatically allocated port.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/serverWithPort:responses:">+&nbsp;serverWithPort:responses:</a></code>
+		<span class="tooltip"><p>Make a server that uses the given responses, and listens on a given port.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithPort:responses:">&ndash;&nbsp;initWithPort:responses:</a></code>
+		<span class="tooltip"><p>Initialise with a given set of responses, listening on a given port.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/start">&ndash;&nbsp;start</a></code>
+		<span class="tooltip"><p>Start the server.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/stop">&ndash;&nbsp;stop</a></code>
+		<span class="tooltip"><p>Stop the server.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/runUntilStopped">&ndash;&nbsp;runUntilStopped</a></code>
+		<span class="tooltip"><p>Loop in the current run loop until something calls stop on the server.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/standardSubstitutions">&ndash;&nbsp;standardSubstitutions</a></code>
+		<span class="tooltip"><p>Returns a standard set of variable substitutions.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+					</div>
 					
 					
 					
 					
 					
+					<div class="section section-methods">
+						<a title="Properties" name="properties"></a>
+						<h2 class="subtitle subtitle-methods">Properties</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/data" title="data"></a>
+	<h3 class="subsubtitle method-title">data</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>This data will automatically be sent when something connects to the passive data connection.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (strong, nonatomic) NSData *data</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KSMockServer.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/port" title="port"></a>
+	<h3 class="subsubtitle method-title">port</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The port that the server is running on.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (readonly, nonatomic) NSUInteger port</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KSMockServer.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/running" title="running"></a>
+	<h3 class="subsubtitle method-title">running</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>YES if the server is running. NO if the stop method has been called.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (readonly, atomic) BOOL running</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KSMockServer.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
 					
 					
+					
+					<div class="section section-methods">
+						<a title="Class Methods" name="class_methods"></a>
+						<h2 class="subtitle subtitle-methods">Class Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/serverWithPort:responses:" title="serverWithPort:responses:"></a>
+	<h3 class="subsubtitle method-title">serverWithPort:responses:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Make a server that uses the given responses, and listens on a given port.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (KSMockServer *)serverWithPort:(NSUInteger)<em>port</em> responses:(NSArray *)<em>responses</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>port</em></dt>
+			<dd><p>The port to listen on.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>responses</em></dt>
+			<dd><p>An array of responses that the server uses to respond to connections.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A new auto-released server instance.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<div class="note"><p><strong>Note:</strong> The system doesn&rsquo;t always free up ports instantly, so if you run multiple</p>
+
+<pre><code>        tests on a fixed port in quick succession you may find that the server fails to bind.
+</code></pre></div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KSMockServer.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/serverWithResponses:" title="serverWithResponses:"></a>
+	<h3 class="subsubtitle method-title">serverWithResponses:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Make a server that uses the given responses.
+The server will listen on an automatically allocated port.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (KSMockServer *)serverWithResponses:(NSArray *)<em>responses</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>responses</em></dt>
+			<dd><p>An array of responses that the server uses to respond to connections.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A new auto-released server instance.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KSMockServer.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/initWithPort:responses:" title="initWithPort:responses:"></a>
+	<h3 class="subsubtitle method-title">initWithPort:responses:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Initialise with a given set of responses, listening on a given port.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (id)initWithPort:(NSUInteger)<em>port</em> responses:(NSArray *)<em>responses</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>port</em></dt>
+			<dd><p>The port to listen on.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>responses</em></dt>
+			<dd><p>An array of responses that the server uses to respond to connections.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A new auto-released server instance.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<div class="note"><p><strong>Note:</strong> The system doesn&rsquo;t always free up ports instantly, so if you run multiple
+tests on a fixed port in quick succession you may find that the server fails to bind.</p></div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KSMockServer.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/runUntilStopped" title="runUntilStopped"></a>
+	<h3 class="subsubtitle method-title">runUntilStopped</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Loop in the current run loop until something calls stop on the server.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)runUntilStopped</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Typically you start the server, initiate the network operation that you want
+to test, then call runUntilStopped in your test case.</p>
+
+<p>In a completion block or delegate method of your network operation, you
+can then call stop on the server, at which point your test case will continue
+executing and you can verify that you got the results you were expecting.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KSMockServer.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/standardSubstitutions" title="standardSubstitutions"></a>
+	<h3 class="subsubtitle method-title">standardSubstitutions</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns a standard set of variable substitutions.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (NSDictionary *)standardSubstitutions</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<div class="note"><p><strong>Note:</strong> needs more explanation</p></div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KSMockServer.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/start" title="start"></a>
+	<h3 class="subsubtitle method-title">start</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Start the server.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)start</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KSMockServer.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/stop" title="stop"></a>
+	<h3 class="subsubtitle method-title">stop</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Stop the server.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)stop</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KSMockServer.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
 					
 					
 				</div>
