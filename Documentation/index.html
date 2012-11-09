@@ -40,9 +40,9 @@
 
 <p>You provide the server with an optional port to run on, and a list of responses.</p>
 
-<p>The responses consist of an array of arrays, in this format:</p>
+<p>The responses consist of an array of arrays. Each of the inner arrays is in this format:</p>
 
-<pre><code>pattern, command, command...
+<pre><code>@[pattern, command, command...]
 </code></pre>
 
 <p>The pattern is a regular expression which is matched against input received by the server.
@@ -55,7 +55,7 @@ NSNumber objects are interpreted as times, in seconds, to pause before sending b
 
 <h2>Ports</h2>
 
-<p>If you give the server no port, it is assigned one at random. You can discover this using the <code>server.port</code> property, so that
+<p>If you give the server no port, it is assigned one at random. You can discover this using the <a href="Classes/KSMockServer.html#//api/name/port">[KSMockServer port]</a> property, so that
 you can pass it on to the test code that will be making a connection.</p>
 
 <p>This is generally preferrable to setting a fixed port, as the system doesn&rsquo;t always free up ports instantly, so if you
@@ -66,7 +66,7 @@ run multiple tests on a fixed port in quick succession you may find that the ser
 <p>As well as listening on it&rsquo;s assigned port, the server listens on a second port which can be used to fake FTP
 passive data connections.</p>
 
-<p>Any connection on this port will cause the contents of the <code>server.data</code> property to be sent back, followed by
+<p>Any connection on this port will cause the contents of the &lt;KSMockServer.data> property to be sent back, followed by
 the connection closing.</p>
 
 <h2>Substitions</h2>
