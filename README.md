@@ -44,6 +44,8 @@ Other substitutions that are currently implemented:
     $pasv        the IP address and port number of the data connection, in FTP format (eg 127,0,0,1,120,12)
     $size        the size of the server's data property
 
-## Examples
+## For More Information
 
-See the MockServerTests.m file for some examples.
+See the [documentation](http://karelia.github.com/MockServer/Documentation/).
+
+See also the MockServerTests.m file for some examples.
