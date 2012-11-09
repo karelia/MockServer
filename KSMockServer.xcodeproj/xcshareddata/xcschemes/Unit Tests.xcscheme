@@ -19,7 +19,7 @@
                BlueprintIdentifier = "220AD7971509019B00748655"
                BuildableName = "UnitTests.octest"
                BlueprintName = "UnitTests"
-               ReferencedContainer = "container:MockServer.xcodeproj">
+               ReferencedContainer = "container:KSMockServer.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
