@@ -166,21 +166,20 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<pre><code>A server which runs locally and "pretends" to be something else.
+						<p>A server which runs locally and &ldquo;pretends&rdquo; to be something else.</p>
 
-You provide the server with an optional port to run on, and a list of responses.
+<p>You provide the server with an optional port to run on, and a list of responses.</p>
 
-The responses consist of an array of arrays, in this format:
-pattern, command, command...
+<p>The responses consist of an array of arrays, in this format:
+pattern, command, command&hellip;</p>
 
-The pattern is a regular expression which is matched against input received by the server.
+<p>The pattern is a regular expression which is matched against input received by the server.
 The commands are NSString, NSData, or NSNumber objects, which are processed when
-the pattern has been matched.
+the pattern has been matched.</p>
 
-See the documentation.
+<p>See the <a href="http://karelia.github.com/MockServer/Documentation/">documentation</a>.</p>
 
-See also the MockServerTests.m file for some examples.
-</code></pre>
+<p>See also the MockServerTests.m file for some examples.</p>
 					</div>
 					
 					
@@ -440,10 +439,7 @@ The server will listen on an automatically allocated port.</p></span>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<div class="note"><p><strong>Note:</strong> The system doesn&rsquo;t always free up ports instantly, so if you run multiple</p>
-
-<pre><code>        tests on a fixed port in quick succession you may find that the server fails to bind.
-</code></pre></div>
+		<div class="note"><p><strong>Note:</strong> The system doesn&rsquo;t always free up ports instantly, so if you run multiple tests on a fixed port in quick succession you may find that the server fails to bind.</p></div>
 	</div>
 	
 	
@@ -564,8 +560,7 @@ The server will listen on an automatically allocated port.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<div class="note"><p><strong>Note:</strong> The system doesn&rsquo;t always free up ports instantly, so if you run multiple
-tests on a fixed port in quick succession you may find that the server fails to bind.</p></div>
+		<div class="note"><p><strong>Note:</strong> The system doesn&rsquo;t always free up ports instantly, so if you run multiple tests on a fixed port in quick succession you may find that the server fails to bind.</p></div>
 	</div>
 	
 	
@@ -607,10 +602,10 @@ tests on a fixed port in quick succession you may find that the server fails to 
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Typically you start the server, initiate the network operation that you want
-to test, then call runUntilStopped in your test case.</p>
+to test, then call [KSMockServer runUntilStopped] in your test case.</p>
 
 <p>In a completion block or delegate method of your network operation, you
-can then call stop on the server, at which point your test case will continue
+can then call [KSMockServer stop] on the server, at which point your test case will continue
 executing and you can verify that you got the results you were expecting.</p>
 	</div>
 	
