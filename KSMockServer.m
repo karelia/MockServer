@@ -19,6 +19,7 @@
 @property (strong, nonatomic) NSMutableArray* dataConnections;
 @property (strong, nonatomic) KSMockServerListener* dataListener;
 @property (strong, nonatomic) KSMockServerListener* listener;
+@property (strong, nonatomic) NSOperationQueue* queue;
 @property (strong, nonatomic) KSMockServerResponder* responder;
 @property (assign, atomic) BOOL running;
 
