@@ -219,7 +219,7 @@ the pattern has been matched.</p>
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/serverWithResponder:">+&nbsp;serverWithResponder:</a></code>
-		<span class="tooltip"><p>Make a server that uses the given responses.
+		<span class="tooltip"><p>Make a server that uses the given responder object to reply to incoming requests.
 The server will listen on an automatically allocated port.</p></span>
 	</span>
 	
@@ -227,7 +227,7 @@ The server will listen on an automatically allocated port.</p></span>
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/serverWithPort:responder:">+&nbsp;serverWithPort:responder:</a></code>
-		<span class="tooltip"><p>Make a server that uses the given responses, and listens on a given port.</p></span>
+		<span class="tooltip"><p>Make a server that uses the given responder object to reply to incoming requests, and listens on a given port.</p></span>
 	</span>
 	
 	
@@ -402,7 +402,7 @@ The server will listen on an automatically allocated port.</p></span>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Make a server that uses the given responses, and listens on a given port.</p>
+		<p>Make a server that uses the given responder object to reply to incoming requests, and listens on a given port.</p>
 	</div>		
 	
     
@@ -420,8 +420,8 @@ The server will listen on an automatically allocated port.</p></span>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>responses</em></dt>
-			<dd><p>An array of responses that the server uses to respond to connections.</p></dd>
+			<dt><em>responder</em></dt>
+			<dd><p>An object that replies to incoming requests.</p></dd>
 		</dl>
 		
 	</div>
@@ -463,7 +463,7 @@ The server will listen on an automatically allocated port.</p></span>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Make a server that uses the given responses.
+		<p>Make a server that uses the given responder object to reply to incoming requests.
 The server will listen on an automatically allocated port.</p>
 	</div>		
 	
@@ -477,8 +477,8 @@ The server will listen on an automatically allocated port.</p>
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>responses</em></dt>
-			<dd><p>An array of responses that the server uses to respond to connections.</p></dd>
+			<dt><em>responder</em></dt>
+			<dd><p>An object that replies to incoming requests.</p></dd>
 		</dl>
 		
 	</div>
@@ -541,8 +541,8 @@ The server will listen on an automatically allocated port.</p>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>responses</em></dt>
-			<dd><p>An array of responses that the server uses to respond to connections.</p></dd>
+			<dt><em>responder</em></dt>
+			<dd><p>An object that replies to incoming requests.</p></dd>
 		</dl>
 		
 	</div>
