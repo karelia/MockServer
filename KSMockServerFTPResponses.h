@@ -164,10 +164,19 @@
 + (NSArray*)deleFileDoesntExistResponse;
 
 /**
+ Response to a SITE CHMOD command. Pretends that the chmod worked ok.
+
+ @return Array containing the regexp pattern to match against, and a list of commands that will be sent back to the client.
+ */
+
++ (NSArray*)chmodResponse;
+
+/**
  Response to an unknown command. Sends back the correct 500 response code, along with the command.
 
  @return Array containing the regexp pattern to match against, and a list of commands that will be sent back to the client.
  */
+
 
 + (NSArray*)commandNotUnderstoodResponse;
 

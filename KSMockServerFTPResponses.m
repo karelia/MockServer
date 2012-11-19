@@ -93,6 +93,11 @@
     return @[ @"DELE ([a-zA-Z0-9.]+)", @"550 $1: No such file or directory.\r\n" ];
 }
 
++ (NSArray*)chmodResponse
+{
+    return @[ @"SITE CHMOD (\\d+) ([a-zA-Z0-9.]+)", @"200 CHMOD Command okay.\r\n" ];
+}
+
 + (NSArray*)commandNotUnderstoodResponse
 {
     return @[@"(\\w+).*", @"500 '$1': command not understood.", CloseCommand];
@@ -115,6 +120,7 @@
     [self mkdResponse],
     [self storResponse],
     [self deleResponse],
+    [self chmodResponse],
     [self commandNotUnderstoodResponse],
     ];
 
