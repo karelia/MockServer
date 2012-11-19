@@ -268,7 +268,22 @@ NSNumber objects are interpreted as times, in seconds, to pause before sending b
 
     
 	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>responses</em></dt>
+			<dd><p>An array of patterns and commands.</p></dd>
+		</dl>
+		
+	</div>
 	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>The new responder object.</p>
+	</div>
 	
 	
 	
@@ -322,7 +337,22 @@ NSNumber objects are interpreted as times, in seconds, to pause before sending b
 
     
 	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>responses</em></dt>
+			<dd><p>An array of patterns and commands.</p></dd>
+		</dl>
+		
+	</div>
 	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>The new responder object.</p>
+	</div>
 	
 	
 	
@@ -332,7 +362,8 @@ NSNumber objects are interpreted as times, in seconds, to pause before sending b
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>The responses consist of an array of arrays. Each of the inner arrays is in this format:</p>
 
-<p>@[pattern, command, command&hellip;]</p>
+<pre><code> @[pattern, command, command...]
+</code></pre>
 
 <p>The pattern is a regular expression which is matched against input received by the server.</p>
 	</div>
