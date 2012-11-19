@@ -45,16 +45,9 @@
 	
 	
 	
-	<option value="class_methods">Class Methods</option>
-	
-	<option value="//api/name/responderWithResponses:">&nbsp;&nbsp;&nbsp;&nbsp;+ responderWithResponses:</option>
-	
-	
 	
 	
 	<option value="instance_methods">Instance Methods</option>
-	
-	<option value="//api/name/initWithResponses:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithResponses:</option>
 	
 	<option value="//api/name/responseForRequest:substitutions:">&nbsp;&nbsp;&nbsp;&nbsp;- responseForRequest:substitutions:</option>
 	
@@ -88,17 +81,9 @@
 
 
 
-<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/responderWithResponses:">responderWithResponses:</a></span></li>
-	
-</ul></li>
-
 
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithResponses:">initWithResponses:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/responseForRequest:substitutions:">responseForRequest:substitutions:</a></span></li>
 	
@@ -140,18 +125,6 @@
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
 						<p>Object which responds to incoming data by outputting a list of commands.</p>
-
-<p>The default implementation of this class works by matching the input against a list
-of regular expression patterns, but subclasses could implement other schemes,
-(in theory they could even implement proper server implications, although that&rsquo;s
-not the intention).</p>
-
-<p>Commands, in this context, means an array of  NSString, NSData, or NSNumber
-objects.</p>
-
-<p>NSData objects are sent back directly as output.
-NSString objects are also sent back, except for the constant CloseCommand string, which closes the connection instead.
-NSNumber objects are interpreted as times, in seconds, to pause before sending back further output.</p>
 					</div>
 					
 					
@@ -173,20 +146,6 @@ NSNumber objects are interpreted as times, in seconds, to pause before sending b
 		<span class="tooltip"><p>The commands to execute when a connection is first made.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/responderWithResponses:">+&nbsp;responderWithResponses:</a></code>
-		<span class="tooltip"><p>Return a new responder object, using an array of responses.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/initWithResponses:">&ndash;&nbsp;initWithResponses:</a></code>
-		<span class="tooltip"><p>Initialise a new responder object, using an array of responses.</p></span>
-	</span>
-	
 	
 </li><li>
 	<span class="tooltip">
@@ -248,139 +207,11 @@ NSNumber objects are interpreted as times, in seconds, to pause before sending b
 					
 					
 					
-					<div class="section section-methods">
-						<a title="Class Methods" name="class_methods"></a>
-						<h2 class="subtitle subtitle-methods">Class Methods</h2>
-						
-						<div class="section-method">
-	<a name="//api/name/responderWithResponses:" title="responderWithResponses:"></a>
-	<h3 class="subsubtitle method-title">responderWithResponses:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Return a new responder object, using an array of responses.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>+ (KSMockServerResponder *)responderWithResponses:(NSArray *)<em>responses</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>responses</em></dt>
-			<dd><p>An array of patterns and commands.</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	<div class="method-subsection return">
-		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>The new responder object.</p>
-	</div>
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>The responses consist of an array of arrays. Each of the inner arrays is in this format:</p>
-
-<pre><code> @[pattern, command, command...]
-</code></pre>
-
-<p>The pattern is a regular expression which is matched against input received by the server.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KSMockServerResponder.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-					</div>
-					
 					
 					
 					<div class="section section-methods">
 						<a title="Instance Methods" name="instance_methods"></a>
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
-						
-						<div class="section-method">
-	<a name="//api/name/initWithResponses:" title="initWithResponses:"></a>
-	<h3 class="subsubtitle method-title">initWithResponses:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Initialise a new responder object, using an array of responses.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (id)initWithResponses:(NSArray *)<em>responses</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>responses</em></dt>
-			<dd><p>An array of patterns and commands.</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	<div class="method-subsection return">
-		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>The new responder object.</p>
-	</div>
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>The responses consist of an array of arrays. Each of the inner arrays is in this format:</p>
-
-<pre><code> @[pattern, command, command...]
-</code></pre>
-
-<p>The pattern is a regular expression which is matched against input received by the server.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KSMockServerResponder.h</code><br />
-	</div>				
-	
-	
-</div>
 						
 						<div class="section-method">
 	<a name="//api/name/responseForRequest:substitutions:" title="responseForRequest:substitutions:"></a>
