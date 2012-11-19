@@ -50,22 +50,22 @@
 @property (readonly, atomic) BOOL running;
 
 /** 
- Make a server that uses the given responses.
+ Make a server that uses the given responder object to reply to incoming requests.
  The server will listen on an automatically allocated port.
  
- @param responses An array of responses that the server uses to respond to connections.
+ @param responder An object that replies to incoming requests.
  @return A new auto-released server instance.
  */
 
 + (KSMockServer*)serverWithResponder:(KSMockServerResponder*)responder;
 
 /**
- Make a server that uses the given responses, and listens on a given port.
+ Make a server that uses the given responder object to reply to incoming requests, and listens on a given port.
 
  @note The system doesn't always free up ports instantly, so if you run multiple tests on a fixed port in quick succession you may find that the server fails to bind.
 
  @param port The port to listen on.
- @param responses An array of responses that the server uses to respond to connections.
+ @param responder An object that replies to incoming requests.
  @return A new auto-released server instance.
  */
 
@@ -77,7 +77,7 @@
  @note The system doesn't always free up ports instantly, so if you run multiple tests on a fixed port in quick succession you may find that the server fails to bind.
 
  @param port The port to listen on.
- @param responses An array of responses that the server uses to respond to connections.
+ @param responder An object that replies to incoming requests.
  @return A new auto-released server instance.
  */
 
