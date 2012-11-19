@@ -184,11 +184,14 @@
 
 - (void)cleanupStream:(NSStream*)stream
 {
-    if (stream)
+    @synchronized(stream)
     {
-        stream.delegate = nil;
-        [stream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-        [stream close];
+        if (stream)
+        {
+            stream.delegate = nil;
+            [stream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+            [stream close];
+        }
     }
 }
 - (void)disconnectStreams:(NSString*)reason
