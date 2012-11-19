@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>Design Document</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<meta name="viewport" content="width=550" />
+		<link rel="stylesheet" type="text/css" href="../../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../../css/stylesPrint.css" />	
+		<meta name="generator" content="appledoc 2.1 (build 840)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">MockServer </a></h1>
+				<a id="developerHome" href="../index.html">Karelia Software</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode" id="pageTitleHeader">Design Document</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar"></ul>
+		</header>
+		<article>
+			<a title="Design Document" name="top"></a>
+			<div id="overview_contents" role="main">
+				<div id="container">	
+					<p>This document describes at a high level the design of the Mock Server system.</p>
+
+<p>The intention is to provide a proxy object that can run on the local machine and stand in for a server.</p>
+
+<p>This allows us to write unit tests that expect to run against a particular kind of server, without them actually needing a proper internet connection.</p>
+
+<p>Because the stand-in servers are actually faked, it also allows us to script particular situations, such as the server rejecting credentials sent to it. This is a real help when testing alternate paths through networking code, particular with regard to error handling.</p>
+
+<h2>Key Classes</h2>
+
+<p>Essentially the design revolves around the interation of four classes: KSMockServer, KSMockServerConnection, KSMockServerListener, and a subclass of KSMockServerResponder.</p>
+
+<p>The KSMockServer is the focus and holds references to all the other objects. By default it is also the only object that user code interacts with directly, other than creating and passing in a KSMockServerResponder instance for it to use.</p>
+
+<h2>Listening For Connections</h2>
+
+<p>When started, the server creates two KSMockServerListener objects.</p>
+
+<p>One of these is the &ldquo;main&rdquo; listener, and uses the port that was specified when the server object was created.</p>
+
+<p>The second of these is a &ldquo;data&rdquo; listener, which is used to simulate data connections (eg a passive connection for FTP). This always uses a system assigned port.</p>
+
+<h2>Connecting To The Main Port</h2>
+
+<p>When a connection is made on the main socket, the server creates a KSMockServerConnection object to service it, and associates a KSMockServerResponder object with the connection.</p>
+
+<p>A normal server would spawn a connection and keep listening for additional connections on the same port, on the assumption that simultaneous requests could come in from multiple clients.</p>
+
+<p>The KSMockServer currently assumes that it&rsquo;s only going to be used by unit tests, and as such that it&rsquo;s only going to receive a single connection. This is only for the sake of simplicity &ndash; it isn&rsquo;t an inherent part of the design and it would be easy enough to expand the implementation to allow simultaneous connections if required.</p>
+
+<h2>Responding To Requests</h2>
+
+<p>When the main server connection receives input, it passes the input to its associated KSMockServerRepsponder object.</p>
+
+<p>The role of the responder object is to process input, and return a list of &ldquo;commands&rdquo; to execute.</p>
+
+<p>These commands currently consist of NSString, NSData, or NSNumber objects.</p>
+
+<ul>
+<li>NSData objects are sent back directly as output.</li>
+<li>NSString objects are also sent back, except for the constant CloseCommand string, which closes the connection instead.</li>
+<li>NSNumber objects are interpreted as times, in seconds, to pause before sending back further output.</li>
+</ul>
+
+
+<p>KSMockServerResponder is an abstract class. Currently there is a single implementation &ndash; KSMockServerRegExResponder.</p>
+
+<p>This class uses pattern matching to select one from a series of pre-baked responses.</p>
+
+<p>The class also performs text substitutions on the NSString items that it returns. This allows you to add a certain amount of dynamism to the responses that are returned.</p>
+
+<h2>Passive Data Requests</h2>
+
+<p>Some protocols require the use of additional data connections &ndash; for example FTP data downloads/uploads in passive mode use a second port that the server listens on. The server passes the details of this port back to the client on the main connection, and the client then connects to the second port to perform the data transfer.</p>
+
+<p>To support this, the server also listens on a second port, and the KSMockServerRegExResponder includes some text substutions which allow the port details to be returned in the correct FTP format (if necessary we can add other substititions to support other protocols).</p>
+
+<p>In a real ftp server, a listener on this second connection would be created dynamically in response to incoming commands, and in theory many listeners could exist at once serving multiple connections.</p>
+
+<p>As with the KSMockServer only supporting a single connection on the main port, we also simplify the handling of data connections by only supporting a single data listener, and by setting it up once when the server starts. The assumption here is that a test will only need one of these connections at any one time.</p>
+
+<p>Currently, when a connection is received on this port, the server immediately sends back the contents of its data property, and then closes the connection. Internally the server uses a second KSMockServerRegExResponder, attached to a KSMockServerConnection, to achieve this.</p>
+
+<p>This behaviour is sufficient to simulate an FTP data download, but may not be adequate for other server protocols that we wish to support. As such, this area may require additional work in the future.</p>
+
+<h2>Setting Up Responder Responses</h2>
+
+<p>The current unit test examples set up the table of responder patterns and commands in code.</p>
+
+<p>In theory, there&rsquo;s no reason why this table couldn&rsquo;t be loaded from a data file instead, and for complex examples this may well be preferrable.</p>
+
+<p>The only complication with this is that server protocols are often very sensitive to things like the exact format of end of line separators &ndash; expecting CR/LF pairs for example.</p>
+
+<p>If you load in the patterns and responses from a file, you need to ensure that the loading mechanism deals with this adequately and doesn&rsquo;t end up processing away some of these separators.</p>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2012 Karelia Software. All rights reserved. (Last updated: 2012-11-19)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
+						
+					
+					</div>
+				</div>
+			</div>
+		</article>
+	</body>
+</html>
