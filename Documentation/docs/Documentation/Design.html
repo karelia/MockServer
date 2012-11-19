@@ -35,13 +35,13 @@
 
 <h2>Key Classes</h2>
 
-<p>Essentially the design revolves around the interation of four classes: KSMockServer, KSMockServerConnection, KSMockServerListener, and a subclass of KSMockServerResponder.</p>
+<p>Essentially the design revolves around the interation of four classes: <a href="../../Classes/KSMockServer.html">KSMockServer</a>, <a href="../../Classes/KSMockServerConnection.html">KSMockServerConnection</a>, <a href="../../Classes/KSMockServerListener.html">KSMockServerListener</a>, and a subclass of <a href="../../Classes/KSMockServerResponder.html">KSMockServerResponder</a>.</p>
 
-<p>The KSMockServer is the focus and holds references to all the other objects. By default it is also the only object that user code interacts with directly, other than creating and passing in a KSMockServerResponder instance for it to use.</p>
+<p>The <a href="../../Classes/KSMockServer.html">KSMockServer</a> is the focus and holds references to all the other objects. By default it is also the only object that user code interacts with directly, other than creating and passing in a <a href="../../Classes/KSMockServerResponder.html">KSMockServerResponder</a> instance for it to use.</p>
 
 <h2>Listening For Connections</h2>
 
-<p>When started, the server creates two KSMockServerListener objects.</p>
+<p>When started, the server creates two <a href="../../Classes/KSMockServerListener.html">KSMockServerListener</a> objects.</p>
 
 <p>One of these is the &ldquo;main&rdquo; listener, and uses the port that was specified when the server object was created.</p>
 
@@ -49,17 +49,25 @@
 
 <h2>Connecting To The Main Port</h2>
 
-<p>When a connection is made on the main socket, the server creates a KSMockServerConnection object to service it, and associates a KSMockServerResponder object with the connection.</p>
+<p>When a connection is made on the main socket, the server creates a <a href="../../Classes/KSMockServerConnection.html">KSMockServerConnection</a> object to service it, and associates a <a href="../../Classes/KSMockServerResponder.html">KSMockServerResponder</a> object with the connection.</p>
 
 <p>A normal server would spawn a connection and keep listening for additional connections on the same port, on the assumption that simultaneous requests could come in from multiple clients.</p>
 
-<p>The KSMockServer currently assumes that it&rsquo;s only going to be used by unit tests, and as such that it&rsquo;s only going to receive a single connection. This is only for the sake of simplicity &ndash; it isn&rsquo;t an inherent part of the design and it would be easy enough to expand the implementation to allow simultaneous connections if required.</p>
+<p>The <a href="../../Classes/KSMockServer.html">KSMockServer</a> currently assumes that it&rsquo;s only going to be used by unit tests, and as such that it&rsquo;s only going to receive a single connection. This is only for the sake of simplicity &ndash; it isn&rsquo;t an inherent part of the design and it would be easy enough to expand the implementation to allow simultaneous connections if required.</p>
+
+<p>The <a href="../../Classes/KSMockServerConnection.html">KSMockServerConnection</a> object really just lives in a loop, reading input from the stream that it&rsquo;s associated with, passing it to the <a href="../../Classes/KSMockServerResponder.html">KSMockServerResponder</a> object, and acting on the commands that it gets back (generally by sending back data).</p>
 
 <h2>Responding To Requests</h2>
 
-<p>When the main server connection receives input, it passes the input to its associated KSMockServerRepsponder object.</p>
+<p>When a <a href="../../Classes/KSMockServerConnection.html">KSMockServerConnection</a> receives input, it passes the input to its associated <a href="../../Classes/KSMockServerResponder.html">KSMockServerResponder</a> object.</p>
 
 <p>The role of the responder object is to process input, and return a list of &ldquo;commands&rdquo; to execute.</p>
+
+<p><a href="../../Classes/KSMockServerResponder.html">KSMockServerResponder</a> is an abstract class. Currently there is a single implementation &ndash; <a href="../../Classes/KSMockServerRegExResponder.html">KSMockServerRegExResponder</a>.</p>
+
+<p>This class uses pattern matching to select one from a series of pre-baked responses. It is given a list of patterns, and works through them in order until one matches.</p>
+
+<p>It then returns the list of &ldquo;commands&rdquo; associated with that pattern.</p>
 
 <p>These commands currently consist of NSString, NSData, or NSNumber objects.</p>
 
@@ -70,23 +78,23 @@
 </ul>
 
 
-<p>KSMockServerResponder is an abstract class. Currently there is a single implementation &ndash; KSMockServerRegExResponder.</p>
-
-<p>This class uses pattern matching to select one from a series of pre-baked responses.</p>
-
 <p>The class also performs text substitutions on the NSString items that it returns. This allows you to add a certain amount of dynamism to the responses that are returned.</p>
+
+<p>A <a href="../../Classes/KSMockServerResponder.html">KSMockServerResponder</a> also has an <initialResponse> property. The list of commands associated with this property is returned automatically by the associated <a href="../../Classes/KSMockServerConnection.html">KSMockServerConnection</a> when a connection first starts.</p>
+
+<p>Setting this property is essential for faking any protocol that starts by sending something back to the client. For example, an FTP server typically starts by sending something like this: &ldquo;220 10.1.1.23 FTP server (ACME FTP Server v1.1) ready.\r\n&rdquo;.</p>
 
 <h2>Passive Data Requests</h2>
 
 <p>Some protocols require the use of additional data connections &ndash; for example FTP data downloads/uploads in passive mode use a second port that the server listens on. The server passes the details of this port back to the client on the main connection, and the client then connects to the second port to perform the data transfer.</p>
 
-<p>To support this, the server also listens on a second port, and the KSMockServerRegExResponder includes some text substutions which allow the port details to be returned in the correct FTP format (if necessary we can add other substititions to support other protocols).</p>
+<p>To support this, the server also listens on a second port, and the <a href="../../Classes/KSMockServerRegExResponder.html">KSMockServerRegExResponder</a> includes some text substutions which allow the port details to be returned in the correct FTP format (if necessary we can add other substititions to support other protocols).</p>
 
 <p>In a real ftp server, a listener on this second connection would be created dynamically in response to incoming commands, and in theory many listeners could exist at once serving multiple connections.</p>
 
 <p>As with the KSMockServer only supporting a single connection on the main port, we also simplify the handling of data connections by only supporting a single data listener, and by setting it up once when the server starts. The assumption here is that a test will only need one of these connections at any one time.</p>
 
-<p>Currently, when a connection is received on this port, the server immediately sends back the contents of its data property, and then closes the connection. Internally the server uses a second KSMockServerRegExResponder, attached to a KSMockServerConnection, to achieve this.</p>
+<p>Currently, when a connection is received on this port, the server immediately sends back the contents of its data property, and then closes the connection. Internally the server uses a second <a href="../../Classes/KSMockServerRegExResponder.html">KSMockServerRegExResponder</a>, attached to a <a href="../../Classes/KSMockServerConnection.html">KSMockServerConnection</a>, to achieve this.</p>
 
 <p>This behaviour is sufficient to simulate an FTP data download, but may not be adequate for other server protocols that we wish to support. As such, this area may require additional work in the future.</p>
 
