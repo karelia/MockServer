@@ -5,6 +5,7 @@
 
 #import "KSMockServer.h"
 #import "KSMockServerFTPResponses.h"
+#import "KSMockServerRegExResponder.h"
 
 #import <SenTestingKit/SenTestingKit.h>
 
@@ -29,7 +30,8 @@ static NSString*const HTTPContent = @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 
 
 - (KSMockServer*)setupServerWithResponses:(NSArray*)responses
 {
-    KSMockServer* server = [KSMockServer serverWithPort:0 responses:responses];
+    KSMockServerRegExResponder* responder = [KSMockServerRegExResponder responderWithResponses:responses];
+    KSMockServer* server = [KSMockServer serverWithPort:0 responder:responder];
 
     STAssertNotNil(server, @"got server");
     [server start];

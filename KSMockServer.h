@@ -8,6 +8,8 @@
 #define MockServerLog NSLog
 #define MockServerAssert(x) assert((x))
 
+@class KSMockServerResponder;
+
 /**
 
  A server which runs locally and "pretends" to be something else.
@@ -55,7 +57,7 @@
  @return A new auto-released server instance.
  */
 
-+ (KSMockServer*)serverWithResponses:(NSArray*)responses;
++ (KSMockServer*)serverWithResponder:(KSMockServerResponder*)responder;
 
 /**
  Make a server that uses the given responses, and listens on a given port.
@@ -67,7 +69,7 @@
  @return A new auto-released server instance.
  */
 
-+ (KSMockServer*)serverWithPort:(NSUInteger)port responses:(NSArray*)responses;
++ (KSMockServer*)serverWithPort:(NSUInteger)port responder:(KSMockServerResponder*)responder;
 
 /**
  Initialise with a given set of responses, listening on a given port.
@@ -79,7 +81,7 @@
  @return A new auto-released server instance.
  */
 
-- (id)initWithPort:(NSUInteger)port responses:(NSArray*)responses;
+- (id)initWithPort:(NSUInteger)port responder:(KSMockServerResponder*)responder;
 
 /**
  Start the server.

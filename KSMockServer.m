@@ -11,7 +11,7 @@
 #import "KSMockServer.h"
 #import "KSMockServerConnection.h"
 #import "KSMockServerListener.h"
-#import "KSMockServerResponder.h"
+#import "KSMockServerRegExResponder.h"
 
 @interface KSMockServer()
 
@@ -42,26 +42,26 @@ NSString *const InitialResponseKey = @"«initial»";
 
 #pragma mark - Object Lifecycle
 
-+ (KSMockServer*)serverWithResponses:(NSArray*)responses
++ (KSMockServer*)serverWithResponder:(KSMockServerResponder*)responder
 {
-    KSMockServer* server = [[KSMockServer alloc] initWithPort:0 responses:responses];
+    KSMockServer* server = [[KSMockServer alloc] initWithPort:0 responder:responder];
 
     return [server autorelease];
 }
 
-+ (KSMockServer*)serverWithPort:(NSUInteger)port responses:(NSArray*)responses
++ (KSMockServer*)serverWithPort:(NSUInteger)port responder:(KSMockServerResponder*)responder
 {
-    KSMockServer* server = [[KSMockServer alloc] initWithPort:port responses:responses];
+    KSMockServer* server = [[KSMockServer alloc] initWithPort:port responder:responder];
 
     return [server autorelease];
 }
 
-- (id)initWithPort:(NSUInteger)port responses:(NSArray*)responses
+- (id)initWithPort:(NSUInteger)port responder:(KSMockServerResponder*)responder
 {
     if ((self = [super init]) != nil)
     {
         self.queue = [NSOperationQueue currentQueue];
-        self.responder = [KSMockServerResponder responderWithResponses:responses];
+        self.responder = responder;
         self.listener = [KSMockServerListener listenerWithPort:port connectionBlock:^BOOL(int socket) {
             MockServerAssert(socket != 0);
 
@@ -168,7 +168,7 @@ NSString *const InitialResponseKey = @"«initial»";
         }
 
         NSArray* responses = @[ @[InitialResponseKey, data, CloseCommand ] ];
-        KSMockServerResponder* responder = [KSMockServerResponder responderWithResponses:responses];
+        KSMockServerRegExResponder* responder = [KSMockServerRegExResponder responderWithResponses:responses];
         KSMockServerConnection* connection = [KSMockServerConnection connectionWithSocket:socket responder:responder server:server];
         [self.dataConnections addObject:connection];
 
