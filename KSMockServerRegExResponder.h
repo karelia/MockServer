@@ -8,10 +8,7 @@
 /**
  Object which responds to incoming data by outputting a list of commands.
  
- This class works by matching the input against a list
- of regular expression patterns, but subclasses could implement other schemes,
- (in theory they could even implement proper server implications, although that's
- not the intention).
+ This class works by matching the input against a list of regular expression patterns.
  
  Commands, in this context, means an array of  NSString, NSData, or NSNumber
  objects.

@@ -7,7 +7,9 @@
 	<key>--company-id</key>
 	<string>com.karelia</string>
 	<key>--include</key>
-	<array/>
+	<array>
+		<string>Documentation</string>
+	</array>
 	<key>--index-desc</key>
 	<array>
 		<string>README.md</string>
