@@ -31,11 +31,11 @@ Connecting To The Main Port
 
 When a connection is made on the main socket, the server creates a <KSMockServerConnection> object to service it, and associates a <KSMockServerResponder> object with the connection.
 
-A normal server would spawn a connection and keep listening for additional connections on the same port, on the assumption that simultaneous requests could come in from multiple clients.
+In general with unit tests it should only really be dealing with a single connection at a time. However, there are situations such as the HTTP authentication handshake where a response on the first connection can cause it to close and a second connection attempt be made. In these situations the second connection may occur before the first has completely finished closing.
 
-The <KSMockServer> currently assumes that it's only going to be used by unit tests, and as such that it's only going to receive a single connection. This is only for the sake of simplicity - it isn't an inherent part of the design and it would be easy enough to expand the implementation to allow simultaneous connections if required.
+For this reason, the server can accept multiple simultaneous connections. It just spawns a new <KSMockServerConnection> for each one though, using the same responses.
 
-The <KSMockServerConnection> object really just lives in a loop, reading input from the stream that it's associated with, passing it to the <KSMockServerResponder> object, and acting on the commands that it gets back (generally by sending back data).
+Each <KSMockServerConnection> object just lives on the current run loop, reading input from the stream that it's associated with, passing it to the <KSMockServerResponder> object, and acting on the commands that it gets back (generally by sending back data). When it is closed (externally, or in response to a close command), it tells the server, which then releases it.
 
 Responding To Requests
 ----------------------
