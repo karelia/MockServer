@@ -68,7 +68,13 @@
         MockServerLog(@"error parsing responses file: %@", error);
     }
 
-    return [self responderWithResponses:responses];
+    KSMockServerRegExResponder* result = nil;
+    if ([responses count])
+    {
+        result = [self responderWithResponses:responses];
+    }
+
+    return result;
 }
 
 - (id)initWithResponses:(NSArray *)responses
