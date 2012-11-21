@@ -50,6 +50,12 @@
 
 @property (readonly, atomic) BOOL running;
 
+/**
+ Responder object that reacts to input.
+ */
+
+@property (strong, nonatomic) KSMockServerResponder* responder;
+
 /** 
  Make a server that uses the given responder object to reply to incoming requests.
  The server will listen on an automatically allocated port.

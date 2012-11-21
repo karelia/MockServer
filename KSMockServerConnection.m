@@ -225,6 +225,17 @@
     return result;
 }
 
+- (KSMockServerResponder*)responder
+{
+    KSMockServerResponder* result = _responder;
+    if (!result)
+    {
+        result = self.server.responder;
+    }
+
+    return result;
+}
+
 - (void)stream:(NSStream*)stream handleEvent:(NSStreamEvent)eventCode
 {
     MockServerAssert((stream == self.input) || (stream == self.output));

@@ -19,7 +19,6 @@
 @property (strong, nonatomic) KSMockServerListener* dataListener;
 @property (strong, nonatomic) KSMockServerListener* listener;
 @property (strong, nonatomic) NSOperationQueue* queue;
-@property (strong, nonatomic) KSMockServerResponder* responder;
 @property (strong, nonatomic) NSDateFormatter* rfc1123DateFormatter;
 @property (assign, atomic) BOOL running;
 
@@ -77,7 +76,7 @@ NSString *const InitialResponseKey = @"«initial»";
             MockServerLog(@"received connection");
             @synchronized(self.connections)
             {
-                KSMockServerConnection* connection = [KSMockServerConnection connectionWithSocket:socket responder:self.responder server:self];
+                KSMockServerConnection* connection = [KSMockServerConnection connectionWithSocket:socket responder:nil server:self];
                 [self.connections addObject:connection];
             }
 
