@@ -15,6 +15,8 @@
 		2239A20D164C53F3008D4ADE /* KSMockServerListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 2239A207164C53F3008D4ADE /* KSMockServerListener.m */; };
 		2239A20E164C53F3008D4ADE /* KSMockServerResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2239A209164C53F3008D4ADE /* KSMockServerResponder.m */; };
 		22662EE7165D219A005FCC4A /* KSMockServerResponseCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 22662EE6165D219A005FCC4A /* KSMockServerResponseCollection.m */; };
+		22662EEF165D2C65005FCC4A /* ftp.json in Resources */ = {isa = PBXBuildFile; fileRef = 22662EED165D2C65005FCC4A /* ftp.json */; };
+		22662EF0165D2C65005FCC4A /* webdav.json in Resources */ = {isa = PBXBuildFile; fileRef = 22662EEE165D2C65005FCC4A /* webdav.json */; };
 		22F6D0D5165A4A3400443CC9 /* .appledoc.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22F6D0D4165A4A3400443CC9 /* .appledoc.plist */; };
 		22F6D0D8165A5B2400443CC9 /* KSMockServerRegExResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F6D0D7165A5B2400443CC9 /* KSMockServerRegExResponder.m */; };
 /* End PBXBuildFile section */
@@ -49,6 +51,8 @@
 		2239A216164C5D0A008D4ADE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		22662EE5165D2199005FCC4A /* KSMockServerResponseCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSMockServerResponseCollection.h; sourceTree = SOURCE_ROOT; };
 		22662EE6165D219A005FCC4A /* KSMockServerResponseCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSMockServerResponseCollection.m; sourceTree = SOURCE_ROOT; };
+		22662EED165D2C65005FCC4A /* ftp.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ftp.json; sourceTree = "<group>"; };
+		22662EEE165D2C65005FCC4A /* webdav.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = webdav.json; sourceTree = "<group>"; };
 		22F6D0D4165A4A3400443CC9 /* .appledoc.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = .appledoc.plist; path = ../.appledoc.plist; sourceTree = "<group>"; };
 		22F6D0D6165A5B2400443CC9 /* KSMockServerRegExResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSMockServerRegExResponder.h; sourceTree = SOURCE_ROOT; };
 		22F6D0D7165A5B2400443CC9 /* KSMockServerRegExResponder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSMockServerRegExResponder.m; sourceTree = SOURCE_ROOT; };
@@ -83,6 +87,8 @@
 			children = (
 				2239A1FC164C5381008D4ADE /* KSMockServerTests.m */,
 				2239A1FD164C5381008D4ADE /* UnitTest-Info.plist */,
+				22662EED165D2C65005FCC4A /* ftp.json */,
+				22662EEE165D2C65005FCC4A /* webdav.json */,
 			);
 			path = UnitTests;
 			sourceTree = "<group>";
@@ -214,6 +220,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				22F6D0D5165A4A3400443CC9 /* .appledoc.plist in Resources */,
+				22662EEF165D2C65005FCC4A /* ftp.json in Resources */,
+				22662EF0165D2C65005FCC4A /* webdav.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

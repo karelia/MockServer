@@ -1,0 +1,167 @@
+{
+    "sets":
+    {
+        "default": {
+            "responses": ["initial", "user", "password", "sys", "pwd", "type", "cwd", "pasv", "size", "retr", "list", "mkd", "stor", "dele", "chmod", "unknown" ]
+        },
+
+        "bad login": {
+            "responses": ["initial", "user", "password-bad", "unknown" ]
+        }
+
+    },
+
+    "responses":
+    {
+        "initial" : {
+            "pattern" : "«initial»",
+            "commands" : [
+                          "220 $address FTP server ($server) ready.\r\n"
+                          ]
+        },
+
+        "user" : {
+            "pattern" : "USER (\\w+)",
+            "commands" : [
+                          "331 User $1 accepted, provide password.\r\n"
+                          ]
+        },
+
+        "password" : {
+            "pattern" : "PASS (\\w+)",
+            "commands" : [
+                          @"230 User user logged in.\r\n"
+                          ]
+        },
+
+        "password-bad" : {
+            "pattern" : "PASS (\\w+)",
+            "commands" : [
+                          "530 Login incorrect.\r\n"
+                          ]
+        },
+
+        "sys" : {
+            "pattern" : "SYST",
+            "commands" : [
+                          "215 UNIX Type: L8 Version: $server\r\n"
+                          ]
+        }
+
+        "pwd" : {
+            "pattern" : "PWD",
+            "commands" : [
+                          "257 \"/\" is the current directory.\r\n"
+                          ]
+        }
+
+        "type" :
+        {
+            "pattern" : "TYPE (\\w+)",
+            "commands" : [
+                          "200 Type set to $1.\r\n"
+                          ]
+        }
+
+        "cwd" :
+        {
+            "pattern" : "CWD .*",
+            "commands" : [
+                          "250 CWD command successful.\r\n"
+                          ]
+        }
+
+        "pasv" :
+        {
+            "pattern" : "PASV",
+            "commands" : [
+                          "227 Entering Passive Mode ($pasv)\r\n"
+                          ]
+        }
+
+        "size" :
+        {
+            "pattern" : "SIZE ([a-zA-Z0-9.]+)",
+            "commands" : [
+                          "213 $size\r\n"
+                          ]
+        }
+
+        "retr" :
+        {
+            "pattern" : "RETR ([a-zA-Z0-9./]+)",
+            "commands" : [
+                          "150 Opening BINARY mode data connection for '$1' ($size bytes).\r\n"
+                          ]
+        }
+
+        "list" :
+        {
+            "pattern" : "LIST", @(0.1),
+            "commands" : [
+                          "150 Opening ASCII mode data connection for '/bin/ls'.\r\n",
+                          0.1,
+                          "226 Transfer complete.\r\n"
+                          ]
+        }
+
+        "mkd" :
+        {
+            "pattern" : "MKD (\\w+)",
+            "commands" : [
+                          "257 \"$1\" directory created.\r\n"
+                          ]
+        }
+
+        "mkdFileExists" :
+        {
+            "pattern" :  "MKD (\\w+)",
+            "commands" : [
+                          "550 $1: File exists.\r\n"
+                          ]
+        }
+
+        "stor" :
+        {
+            "pattern" :  "STOR ([a-zA-Z0-9.]+)",
+            "commands" : [
+                          0.1,
+                          "150 Opening ASCII mode data connection for '$1'.\r\n",
+                          0.2,
+                          "226 Transfer complete.\r\n"
+                          ]
+        }
+
+        "dele" :
+        {
+            "pattern" :  "DELE ([a-zA-Z0-9.]+)",
+            "commands" : [
+                          "250 DELE command successful.\r\n"
+                          ]
+        }
+
+        "deleFileDoesntExist" :
+        {
+            "pattern" :  "DELE ([a-zA-Z0-9.]+)",
+            "commands" : [
+                          "550 $1: No such file or directory.\r\n"
+                          ]
+        }
+
+        "chmod" :
+        {
+            "pattern" :  "SITE CHMOD (\\d+) ([a-zA-Z0-9.]+)",
+            "commands" : [
+                          "200 CHMOD Command okay.\r\n"
+                          ]
+        }
+
+        "commandNotUnderstood" :
+        {
+            "pattern" : "(\\w+).*",
+            "commands" : [
+                          "500 '$1': command not understood.", "«close»"
+                          ]
+        }
+    }
+}
