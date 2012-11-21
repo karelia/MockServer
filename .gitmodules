@@ -1,0 +1,3 @@
+[submodule "UnitTests/OCUnit2JUnit"]
+	path = UnitTests/OCUnit2JUnit
+	url = https://github.com/ciryon/OCUnit2JUnit
