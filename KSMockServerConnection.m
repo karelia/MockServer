@@ -84,12 +84,12 @@
     NSInteger bytesRead = [self.input read:buffer maxLength:sizeof(buffer)];
     if (bytesRead == -1)
     {
-        [self disconnectStreams:@"Network read error"];
+        [self disconnectStreams:@"read error"];
     }
 
     else if (bytesRead == 0)
     {
-        [self disconnectStreams:@"No more data"];
+        [self disconnectStreams:@"no more data"];
     }
 
     else
@@ -202,6 +202,7 @@
     [self cleanupStream:self.output];
     self.output = nil;
 
+    [self.server connectionDidClose:self];
     MockServerLog(@"disconnected: %@", reason);
 }
 

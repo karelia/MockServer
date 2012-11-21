@@ -9,6 +9,7 @@
 #define MockServerAssert(x) assert((x))
 
 @class KSMockServerResponder;
+@class KSMockServerConnection;
 
 /**
 
@@ -117,6 +118,12 @@
  */
 
 - (NSDictionary*)standardSubstitutions;
+
+/**
+ Called by a connection when it closes.
+ */
+
+- (void)connectionDidClose:(KSMockServerConnection*)connection;
 
 @end
 

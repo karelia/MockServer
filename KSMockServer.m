@@ -15,7 +15,7 @@
 
 @interface KSMockServer()
 
-@property (strong, nonatomic) KSMockServerConnection* connection;
+@property (strong, nonatomic) NSMutableArray* connections;
 @property (strong, nonatomic) NSMutableArray* dataConnections;
 @property (strong, nonatomic) KSMockServerListener* dataListener;
 @property (strong, nonatomic) KSMockServerListener* listener;
@@ -28,7 +28,7 @@
 
 @implementation KSMockServer
 
-@synthesize connection = _connection;
+@synthesize connections = _connections;
 @synthesize data = _data;
 @synthesize dataConnections = _dataConnections;
 @synthesize dataListener = _dataListener;
@@ -62,17 +62,18 @@ NSString *const InitialResponseKey = @"«initial»";
     {
         self.queue = [NSOperationQueue currentQueue];
         self.responder = responder;
+        self.connections = [NSMutableArray array];
         self.listener = [KSMockServerListener listenerWithPort:port connectionBlock:^BOOL(int socket) {
             MockServerAssert(socket != 0);
 
-            BOOL ok = self.connection == nil;
-            if (ok)
+            MockServerLog(@"received connection");
+            @synchronized(self.connections)
             {
-                MockServerLog(@"received connection");
-                self.connection = [KSMockServerConnection connectionWithSocket:socket responder:self.responder server:self];
+                KSMockServerConnection* connection = [KSMockServerConnection connectionWithSocket:socket responder:self.responder server:self];
+                [self.connections addObject:connection];
             }
 
-            return ok;
+            return YES;
         }];
     }
 
@@ -81,7 +82,7 @@ NSString *const InitialResponseKey = @"«initial»";
 
 - (void)dealloc
 {
-    [_connection release];
+    [_connections release];
     [_data release];
     [_dataConnections release];
     [_dataListener release];
@@ -108,12 +109,25 @@ NSString *const InitialResponseKey = @"«initial»";
 
 - (void)stop
 {
-    [self.connection cancel];
     [self.listener stop:@"stopped externally"];
     [self.dataListener stop:@"stopped externally"];
-    for (KSMockServerConnection* connection in self.dataConnections)
+
+    @synchronized(self.connections)
     {
-        [connection cancel];
+        for (KSMockServerConnection* connection in self.connections)
+        {
+            [connection cancel];
+        }
+        [self.connections removeAllObjects];
+    }
+
+    @synchronized(self.dataConnections)
+    {
+        for (KSMockServerConnection* connection in self.dataConnections)
+        {
+            [connection cancel];
+        }
+        [self.dataConnections removeAllObjects];
     }
 
     self.running = NO;
@@ -180,6 +194,18 @@ NSString *const InitialResponseKey = @"«initial»";
 
 - (void)disposeDataListener
 {
+}
+
+#pragma mark - Streams
+
+- (void)connectionDidClose:(KSMockServerConnection*)connection
+{
+    @synchronized(self.connections)
+    {
+        NSAssert([self.connections indexOfObject:connection] != NSNotFound, @"connection should be in our list");
+        [self.connections removeObject:connection];
+        MockServerLog(@"main connection %@ closed", connection);
+    }
 }
 
 @end
