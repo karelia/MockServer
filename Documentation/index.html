@@ -53,6 +53,8 @@ the pattern has been matched.</p>
 NSString objects are also sent back, except for the constant CloseCommand string, which closes the connection instead.
 NSNumber objects are interpreted as times, in seconds, to pause before sending back further output.</p>
 
+<p>The server includes a facilty for loading these response arrays easily from a JSON file.</p>
+
 <h2>Ports</h2>
 
 <p>If you give the server no port, it is assigned one at random. You can discover this using the <a href="Classes/KSMockServer.html#//api/name/port">[KSMockServer port]</a> property, so that
@@ -80,13 +82,14 @@ You can use variables <code>$0</code>, <code>$1</code>, <code>$2</code> etc in a
 $server      a fake name for the server, to return (eg in FTP responses)
 $pasv        the IP address and port number of the data connection, in FTP format (eg 127,0,0,1,120,12)
 $size        the size of the server's data property
+$date        the current date &amp; time in RFC1123 format
 </code></pre>
 
 <h2>For More Information</h2>
 
 <p>See the <a href="http://karelia.github.com/MockServer/Documentation/">documentation</a>.</p>
 
-<p>See also the MockServerTests.m file for some examples.</p>
+<p>See also the MockServerTests.m file for some examples of usage, and the ftp.json and webdav.json files for examples of responses.</p>
 						
 						
 					</div>
@@ -112,13 +115,13 @@ $size        the size of the server's data property
 							
 							<li><a href="Classes/KSMockServerConnection.html">KSMockServerConnection</a></li>
 							
-							<li><a href="Classes/KSMockServerFTPResponses.html">KSMockServerFTPResponses</a></li>
-							
 							<li><a href="Classes/KSMockServerListener.html">KSMockServerListener</a></li>
 							
 							<li><a href="Classes/KSMockServerRegExResponder.html">KSMockServerRegExResponder</a></li>
 							
 							<li><a href="Classes/KSMockServerResponder.html">KSMockServerResponder</a></li>
+							
+							<li><a href="Classes/KSMockServerResponseCollection.html">KSMockServerResponseCollection</a></li>
 							
 						</ul>
 					</div>

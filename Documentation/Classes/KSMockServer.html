@@ -44,6 +44,8 @@
 	
 	<option value="//api/name/port">&nbsp;&nbsp;&nbsp;&nbsp;port</option>
 	
+	<option value="//api/name/responder">&nbsp;&nbsp;&nbsp;&nbsp;responder</option>
+	
 	<option value="//api/name/running">&nbsp;&nbsp;&nbsp;&nbsp;running</option>
 	
 	
@@ -63,6 +65,8 @@
 	<option value="//api/name/connectionDidClose:">&nbsp;&nbsp;&nbsp;&nbsp;- connectionDidClose:</option>
 	
 	<option value="//api/name/initWithPort:responder:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithPort:responder:</option>
+	
+	<option value="//api/name/pause">&nbsp;&nbsp;&nbsp;&nbsp;- pause</option>
 	
 	<option value="//api/name/runUntilStopped">&nbsp;&nbsp;&nbsp;&nbsp;- runUntilStopped</option>
 	
@@ -100,6 +104,8 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/port">port</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/responder">responder</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/running">running</a></span></li>
 	
 </ul></li>
@@ -121,6 +127,8 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/connectionDidClose:">connectionDidClose:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithPort:responder:">initWithPort:responder:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/pause">pause</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/runUntilStopped">runUntilStopped</a></span></li>
 	
@@ -222,6 +230,13 @@ the pattern has been matched.</p>
 	
 </li><li>
 	<span class="tooltip">
+		<code><a href="#//api/name/responder">&nbsp;&nbsp;responder</a></code>
+		<span class="tooltip"><p>Responder object that reacts to input.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/serverWithResponder:">+&nbsp;serverWithResponder:</a></code>
 		<span class="tooltip"><p>Make a server that uses the given responder object to reply to incoming requests.
 The server will listen on an automatically allocated port.</p></span>
@@ -251,8 +266,19 @@ The server will listen on an automatically allocated port.</p></span>
 	
 </li><li>
 	<span class="tooltip">
+		<code><a href="#//api/name/pause">&ndash;&nbsp;pause</a></code>
+		<span class="tooltip"><p>Temporarily stop the server.
+This causes <a href="#//api/name/runUntilStopped">runUntilStopped</a> to return,
+but the server is will actually still be running,
+and you can call <a href="#//api/name/runUntilStopped">runUntilStopped</a> again to resume.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/stop">&ndash;&nbsp;stop</a></code>
-		<span class="tooltip"><p>Stop the server.</p></span>
+		<span class="tooltip"><p>Stop the server.
+The listeners will be shut down at this point.</p></span>
 	</span>
 	
 	
@@ -339,6 +365,42 @@ The server will listen on an automatically allocated port.</p></span>
     
 
 	<div class="method-subsection method-declaration"><code>@property (readonly, nonatomic) NSUInteger port</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KSMockServer.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/responder" title="responder"></a>
+	<h3 class="subsubtitle method-title">responder</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Responder object that reacts to input.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (strong, nonatomic) KSMockServerResponder *responder</code></div>
 
     
 	
@@ -625,6 +687,45 @@ The server will listen on an automatically allocated port.</p>
 </div>
 						
 						<div class="section-method">
+	<a name="//api/name/pause" title="pause"></a>
+	<h3 class="subsubtitle method-title">pause</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Temporarily stop the server.
+This causes <a href="#//api/name/runUntilStopped">runUntilStopped</a> to return,
+but the server is will actually still be running,
+and you can call <a href="#//api/name/runUntilStopped">runUntilStopped</a> again to resume.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)pause</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KSMockServer.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/runUntilStopped" title="runUntilStopped"></a>
 	<h3 class="subsubtitle method-title">runUntilStopped</h3>
 	
@@ -754,7 +855,8 @@ executing and you can verify that you got the results you were expecting.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Stop the server.</p>
+		<p>Stop the server.
+The listeners will be shut down at this point.</p>
 	</div>		
 	
     

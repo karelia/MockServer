@@ -35,9 +35,9 @@
 
 <h2>Key Classes</h2>
 
-<p>Essentially the design revolves around the interation of four classes: <a href="../../Classes/KSMockServer.html">KSMockServer</a>, <a href="../../Classes/KSMockServerConnection.html">KSMockServerConnection</a>, <a href="../../Classes/KSMockServerListener.html">KSMockServerListener</a>, and a subclass of <a href="../../Classes/KSMockServerResponder.html">KSMockServerResponder</a>.</p>
+<p>Essentially the design revolves around the interation of these classes: <a href="../../Classes/KSMockServer.html">KSMockServer</a>, <a href="../../Classes/KSMockServerConnection.html">KSMockServerConnection</a>, <a href="../../Classes/KSMockServerListener.html">KSMockServerListener</a>, <a href="../../Classes/KSMockServerResponseCollection.html">KSMockServerResponseCollection</a> and a subclass of <a href="../../Classes/KSMockServerResponder.html">KSMockServerResponder</a>.</p>
 
-<p>The <a href="../../Classes/KSMockServer.html">KSMockServer</a> is the focus and holds references to all the other objects. By default it is also the only object that user code interacts with directly, other than creating and passing in a <a href="../../Classes/KSMockServerResponder.html">KSMockServerResponder</a> instance for it to use.</p>
+<p>The <a href="../../Classes/KSMockServer.html">KSMockServer</a> is the focus and holds references to all the other objects.</p>
 
 <h2>Listening For Connections</h2>
 
@@ -83,6 +83,8 @@
 <p>A <a href="../../Classes/KSMockServerResponder.html">KSMockServerResponder</a> also has an <initialResponse> property. The list of commands associated with this property is returned automatically by the associated <a href="../../Classes/KSMockServerConnection.html">KSMockServerConnection</a> when a connection first starts.</p>
 
 <p>Setting this property is essential for faking any protocol that starts by sending something back to the client. For example, an FTP server typically starts by sending something like this: &ldquo;220 10.1.1.23 FTP server (ACME FTP Server v1.1) ready.\r\n&rdquo;.</p>
+
+<p>To make life easier, the <a href="../../Classes/KSMockServerResponseCollection.html">KSMockServerResponseCollection</a> class allows you to create <a href="../../Classes/KSMockServerRegExResponder.html">KSMockServerRegExResponder</a> objects by loading the response data from disk. See the ftp.json and webdav.json files for examples of the file format.</p>
 
 <h2>Passive Data Requests</h2>
 
