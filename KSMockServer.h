@@ -91,7 +91,17 @@
 - (void)start;
 
 /**
+ Temporarily stop the server.
+ This causes <runUntilStopped> to return, 
+ but the server is will actually still be running, 
+ and you can call <runUntilStopped> again to resume.
+ */
+
+- (void)pause;
+
+/**
  Stop the server.
+ The listeners will be shut down at this point.
  */
 
 - (void)stop;

@@ -107,18 +107,32 @@ NSString *const InitialResponseKey = @"«initial»";
     }
 }
 
+- (void)pause
+{
+    self.running = NO;
+}
+
 - (void)stop
+{
+    [self.queue addOperationWithBlock:^{
+        [self stopConnections];
+    }];
+}
+
+- (void)stopConnections
 {
     [self.listener stop:@"stopped externally"];
     [self.dataListener stop:@"stopped externally"];
 
     @synchronized(self.connections)
     {
-        for (KSMockServerConnection* connection in self.connections)
+        NSArray* connections = [self.connections copy];
+        for (KSMockServerConnection* connection in connections)
         {
             [connection cancel];
         }
-        [self.connections removeAllObjects];
+        [connections release];
+        NSAssert([self.connections count] == 0, @"all connections should have closed");
     }
 
     @synchronized(self.dataConnections)
@@ -135,6 +149,7 @@ NSString *const InitialResponseKey = @"«initial»";
 
 - (void)runUntilStopped
 {
+    self.running = YES;
     while (self.running)
     {
         @autoreleasepool {
