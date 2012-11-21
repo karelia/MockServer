@@ -2,7 +2,15 @@
     "sets":
     {
         "default": {
-            "responses": ["initial", "user", "password", "sys", "pwd", "type", "cwd", "pasv", "size", "retr", "list", "mkd", "stor", "dele", "chmod", "unknown" ]
+            "responses": ["initial", "user", "password", "sys", "pwd", "type", "cwd", "pasv", "size", "retr", "list", "mkd", "stor", "dele", "chmod", "commandNotUnderstood" ]
+        },
+
+        "delete fail": {
+            "responses": ["initial", "user", "password", "sys", "pwd", "type", "cwd", "pasv", "size", "retr", "list", "mkd", "stor", "deleFileDoesntExist", "chmod", "commandNotUnderstood" ]
+        },
+
+        "mkdir fail": {
+            "responses": ["initial", "user", "password", "sys", "pwd", "type", "cwd", "pasv", "size", "retr", "list", "mkdFileExists", "stor", "dele", "chmod", "commandNotUnderstood" ]
         },
 
         "bad login": {
