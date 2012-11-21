@@ -2,11 +2,13 @@
     "sets":
     {
         "default": {
-            "responses": ["find", "delete", "mkcol", "unauthorized", "unknown" ]
+            "responses": ["find", "put", "delete", "mkcol", "unauthorized", "unknown" ],
+            "comment" : "All commands succeed"
         },
 
         "make fails": {
-            "responses": ["find", "delete", "mkcol-fail", "unauthorized", "unknown" ]
+            "responses": ["find", "put", "delete", "mkcol-fail", "unauthorized", "unknown" ],
+            "comment" : "Making directory fails as if it already exists"
         }
 
     },
@@ -52,6 +54,15 @@
                           "</D:response>",
 
                           "</D:multistatus>",
+                          "«close»"
+                          ]
+        },
+
+        "put": {
+            "pattern": "PUT.*Authorization: Basic dXNlcjpwYXNz.*",
+
+            "commands" : [
+                          "HTTP/1.1 200 OK\r\n\r\n",
                           "«close»"
                           ]
         },
