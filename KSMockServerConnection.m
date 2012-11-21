@@ -115,7 +115,7 @@
 
 - (void)processClose
 {
-    MockServerLog(@"closed connection");
+    MockServerLogDetail(@"closed connection");
     [self.output close];
     [self.input close];
 }
@@ -163,7 +163,7 @@
         NSUInteger written = [self.output write:[self.outputData bytes] maxLength:bytesToWrite];
         [self.outputData replaceBytesInRange:NSMakeRange(0, written) withBytes:nil length:0];
 
-        MockServerLog(@"wrote %ld bytes", (long)written);
+        MockServerLogDetail(@"wrote %ld bytes", (long)written);
     }
 }
 
@@ -203,7 +203,7 @@
     self.output = nil;
 
     [self.server connectionDidClose:self];
-    MockServerLog(@"disconnected: %@", reason);
+    MockServerLogDetail(@"disconnected: %@", reason);
 }
 
 - (NSString*)nameForStream:(NSStream*)stream
@@ -244,7 +244,7 @@
     {
         case NSStreamEventOpenCompleted:
         {
-            MockServerLog(@"opened %@ stream", [self nameForStream:stream]);
+            MockServerLogDetail(@"opened %@ stream", [self nameForStream:stream]);
             if (stream == self.input)
             {
                 [self processCommands:self.responder.initialResponse];
@@ -274,7 +274,7 @@
 
         case NSStreamEventEndEncountered:
         {
-            MockServerLog(@"got eof for %@ stream", [self nameForStream:stream]);
+            MockServerLogDetail(@"got eof for %@ stream", [self nameForStream:stream]);
             break;
         }
 

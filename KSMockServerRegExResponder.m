@@ -29,54 +29,6 @@
     return [server autorelease];
 }
 
-+ (KSMockServerRegExResponder*)responderWithURL:(NSURL*)url set:(NSString*)setName
-{
-    NSMutableArray* responses = [NSMutableArray array];
-
-    NSError* error = nil;
-    NSData* data = [NSData dataWithContentsOfURL:url options:NSDataReadingUncached error:&error];
-    NSDictionary* info = @{};
-    if (data)
-    {
-        info = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-    }
-
-    if (info)
-    {
-        NSDictionary* setInfo = info[@"sets"];
-        NSDictionary* responseInfo = info[@"responses"];
-        NSDictionary* set = setInfo[setName];
-        NSArray* responseNames = set[@"responses"];
-        for (NSString* name in responseNames)
-        {
-            NSDictionary* response = responseInfo[name];
-            if (response)
-            {
-                NSMutableArray* array = [NSMutableArray array];
-                [array addObject:response[@"pattern"]];
-                [array addObjectsFromArray:response[@"commands"]];
-                [responses addObject:array];
-            }
-            else
-            {
-                MockServerLog(@"unknown response %@ in set %@", name, setName);
-            }
-        }
-    }
-    else
-    {
-        MockServerLog(@"error parsing responses file: %@", error);
-    }
-
-    KSMockServerRegExResponder* result = nil;
-    if ([responses count])
-    {
-        result = [self responderWithResponses:responses];
-    }
-
-    return result;
-}
-
 - (id)initWithResponses:(NSArray *)responses
 {
     if ((self = [super init]) != nil)
@@ -138,7 +90,7 @@
         NSTextCheckingResult* match = [expression firstMatchInString:request options:0 range:wholeString];
         if (match)
         {
-            MockServerLog(@"matched with request pattern %@", expression);
+            MockServerLogDetail(@"matched with request pattern %@", expression);
             NSArray* rawCommands = self.responses[n];
             commands = [self substitutedCommands:rawCommands match:match request:request substitutions:substitutions];
             matched = YES;
@@ -187,7 +139,7 @@
                     [substituted replaceOccurrencesOfString:key withString:replacement options:0 range:NSMakeRange(0, [substituted length])];
                 }];
 
-                MockServerLog(@"expanded response %@ as %@", command, substituted);
+                MockServerLogDetail(@"expanded response %@ as %@", command, substituted);
                 command = substituted;
             }
         }

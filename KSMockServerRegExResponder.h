@@ -40,23 +40,6 @@
 
 
 /**
- Return a new responder object, using a given response set from the file at a given URL.
-
- The responses consist of an array of arrays. Each of the inner arrays is in this format:
-
- @[pattern, command, command...]
-
- The pattern is a regular expression which is matched against input received by the server.
-
- @param url The URL of the response file.
- @param set The response set from the file to use.
- @return The new responder object.
-
- */
-
-+ (KSMockServerRegExResponder*)responderWithURL:(NSURL*)url set:(NSString*)set;
-
-/**
  Initialise a new responder object, using an array of responses.
 
  The responses consist of an array of arrays. Each of the inner arrays is in this format:

@@ -42,7 +42,7 @@
     {
         self.connectionBlock = block;
         self.port = port;
-        MockServerLog(@"made listener at port %ld", (long) port);
+        MockServerLogDetail(@"made listener at port %ld", (long) port);
     }
 
     return self;
@@ -115,7 +115,7 @@
         self.listener = nil;
     }
 
-    MockServerLog(@"listener stopped because: %@", reason);
+    MockServerLogDetail(@"listener stopped because: %@", reason);
 }
 
 
@@ -128,7 +128,7 @@
     BOOL ok = self.connectionBlock(socket);
     if (!ok)
     {
-        MockServerLog(@"connection failed, closing socket");
+        MockServerLogDetail(@"connection failed, closing socket");
         int error = close(socket);
         MockServerAssert(error == 0);
     }
@@ -158,7 +158,7 @@ static void callbackAcceptConnection(CFSocketRef s, CFSocketCallBackType type, C
 
     if (result)
     {
-        MockServerLog(@"got socket %d", fd);
+        MockServerLogDetail(@"got socket %d", fd);
     }
     else
     {

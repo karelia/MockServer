@@ -73,7 +73,7 @@ NSString *const InitialResponseKey = @"«initial»";
         self.listener = [KSMockServerListener listenerWithPort:port connectionBlock:^BOOL(int socket) {
             MockServerAssert(socket != 0);
 
-            MockServerLog(@"received connection");
+            MockServerLogDetail(@"received connection");
             @synchronized(self.connections)
             {
                 KSMockServerConnection* connection = [KSMockServerConnection connectionWithSocket:socket responder:nil server:self];
@@ -187,7 +187,7 @@ NSString *const InitialResponseKey = @"«initial»";
         __block KSMockServer* server = self;
         self.dataListener = [KSMockServerListener listenerWithPort:0 connectionBlock:^BOOL(int socket) {
 
-            MockServerLog(@"got connection on data listener");
+            MockServerLogDetail(@"got connection on data listener");
 
             NSData* data = server.data;
             if (!data)
@@ -219,7 +219,7 @@ NSString *const InitialResponseKey = @"«initial»";
     {
         NSAssert([self.connections indexOfObject:connection] != NSNotFound, @"connection should be in our list");
         [self.connections removeObject:connection];
-        MockServerLog(@"main connection %@ closed", connection);
+        MockServerLogDetail(@"connection %@ closed", connection);
     }
 }
 

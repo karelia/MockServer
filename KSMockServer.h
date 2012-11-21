@@ -5,8 +5,17 @@
 
 #import <Foundation/Foundation.h>
 
+#ifndef MockServerLog
 #define MockServerLog NSLog
+#endif
+
+#ifndef MockServerLogDetail
+#define MockServerLogDetail NSLog
+#endif
+
+#ifndef MockServerAssert
 #define MockServerAssert(x) assert((x))
+#endif
 
 @class KSMockServerResponder;
 @class KSMockServerConnection;
