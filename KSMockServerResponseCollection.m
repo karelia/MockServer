@@ -44,6 +44,7 @@
         }
         else
         {
+            MockServerLog(@"failed to load response collection with error: %@", error);
             [self release];
             self = nil;
         }
@@ -60,7 +61,7 @@
     [super dealloc];
 }
 
-- (KSMockServerRegExResponder*)responderWithName:(NSString *)name
+- (NSArray*)responsesWithName:(NSString*)name
 {
     NSMutableArray* responses = [NSMutableArray array];
 
@@ -81,6 +82,13 @@
             MockServerLog(@"unknown response %@ in set %@", responseName, name);
         }
     }
+
+    return responses;
+}
+
+- (KSMockServerRegExResponder*)responderWithName:(NSString *)name
+{
+    NSArray* responses = [self responsesWithName:name];
 
     return [KSMockServerRegExResponder responderWithResponses:responses];
 }

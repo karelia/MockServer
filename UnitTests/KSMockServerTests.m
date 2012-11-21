@@ -6,6 +6,7 @@
 #import "KSMockServer.h"
 #import "KSMockServerFTPResponses.h"
 #import "KSMockServerRegExResponder.h"
+#import "KSMockServerResponseCollection.h"
 
 #import <SenTestingKit/SenTestingKit.h>
 
@@ -102,7 +103,10 @@ static NSString*const HTTPContent = @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 
 
 - (void)testFTP
 {
-    KSMockServer* server = [self setupServerWithResponses:[KSMockServerFTPResponses standardResponses]];
+    NSURL* collectionURL = [[NSBundle bundleForClass:[self class]] URLForResource:@"ftp" withExtension:@"json"];
+    KSMockServerResponseCollection* collection = [KSMockServerResponseCollection collectionWithURL:collectionURL];
+    NSArray* responses = [collection responsesWithName:@"default"];
+    KSMockServer* server = [self setupServerWithResponses:responses];
     if (server)
     {
         NSString* testData = @"This is some test data";

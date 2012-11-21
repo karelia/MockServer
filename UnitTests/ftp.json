@@ -30,7 +30,7 @@
         "password" : {
             "pattern" : "PASS (\\w+)",
             "commands" : [
-                          @"230 User user logged in.\r\n"
+                          "230 User user logged in.\r\n"
                           ]
         },
 
@@ -46,14 +46,14 @@
             "commands" : [
                           "215 UNIX Type: L8 Version: $server\r\n"
                           ]
-        }
+        },
 
         "pwd" : {
             "pattern" : "PWD",
             "commands" : [
                           "257 \"/\" is the current directory.\r\n"
                           ]
-        }
+        },
 
         "type" :
         {
@@ -61,7 +61,7 @@
             "commands" : [
                           "200 Type set to $1.\r\n"
                           ]
-        }
+        },
 
         "cwd" :
         {
@@ -69,7 +69,7 @@
             "commands" : [
                           "250 CWD command successful.\r\n"
                           ]
-        }
+        },
 
         "pasv" :
         {
@@ -77,7 +77,7 @@
             "commands" : [
                           "227 Entering Passive Mode ($pasv)\r\n"
                           ]
-        }
+        },
 
         "size" :
         {
@@ -85,7 +85,7 @@
             "commands" : [
                           "213 $size\r\n"
                           ]
-        }
+        },
 
         "retr" :
         {
@@ -93,17 +93,18 @@
             "commands" : [
                           "150 Opening BINARY mode data connection for '$1' ($size bytes).\r\n"
                           ]
-        }
+        },
 
         "list" :
         {
-            "pattern" : "LIST", @(0.1),
+            "pattern" : "LIST",
             "commands" : [
+                          0.1,
                           "150 Opening ASCII mode data connection for '/bin/ls'.\r\n",
                           0.1,
                           "226 Transfer complete.\r\n"
                           ]
-        }
+        },
 
         "mkd" :
         {
@@ -111,7 +112,7 @@
             "commands" : [
                           "257 \"$1\" directory created.\r\n"
                           ]
-        }
+        },
 
         "mkdFileExists" :
         {
@@ -119,7 +120,7 @@
             "commands" : [
                           "550 $1: File exists.\r\n"
                           ]
-        }
+        },
 
         "stor" :
         {
@@ -130,7 +131,7 @@
                           0.2,
                           "226 Transfer complete.\r\n"
                           ]
-        }
+        },
 
         "dele" :
         {
@@ -138,7 +139,7 @@
             "commands" : [
                           "250 DELE command successful.\r\n"
                           ]
-        }
+        },
 
         "deleFileDoesntExist" :
         {
@@ -146,7 +147,7 @@
             "commands" : [
                           "550 $1: No such file or directory.\r\n"
                           ]
-        }
+        },
 
         "chmod" :
         {
@@ -154,7 +155,7 @@
             "commands" : [
                           "200 CHMOD Command okay.\r\n"
                           ]
-        }
+        },
 
         "commandNotUnderstood" :
         {

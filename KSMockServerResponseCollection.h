@@ -28,12 +28,20 @@
 
 + (KSMockServerResponseCollection*)collectionWithURL:(NSURL*)url;
 
+/**
+ Return the set of responses with a given name.
+
+ @param name The name of the response set to use.
+ @return An array of responses.
+ */
+
+- (NSArray*)responsesWithName:(NSString*)name;
 
 /**
  Return a responder using the set of responses with a given name.
  
  @param name The name of the response set to use.
- @return An array of responses.
+ @return A responder which uses the set of responses.
  */
 
 - (KSMockServerRegExResponder*)responderWithName:(NSString*)name;
