@@ -44,6 +44,7 @@ Other substitutions that are currently implemented:
     $server      a fake name for the server, to return (eg in FTP responses)
     $pasv        the IP address and port number of the data connection, in FTP format (eg 127,0,0,1,120,12)
     $size        the size of the server's data property
+    $date        the current date & time in RFC1123 format
 
 ## For More Information
 
