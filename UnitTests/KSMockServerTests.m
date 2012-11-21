@@ -4,7 +4,6 @@
 //
 
 #import "KSMockServer.h"
-#import "KSMockServerFTPResponses.h"
 #import "KSMockServerRegExResponder.h"
 #import "KSMockServerResponseCollection.h"
 
