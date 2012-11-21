@@ -16,7 +16,6 @@
 @interface KSMockServer()
 
 @property (strong, nonatomic) NSMutableArray* connections;
-@property (strong, nonatomic) NSMutableArray* dataConnections;
 @property (strong, nonatomic) KSMockServerListener* dataListener;
 @property (strong, nonatomic) KSMockServerListener* listener;
 @property (strong, nonatomic) NSOperationQueue* queue;
@@ -31,7 +30,6 @@
 
 @synthesize connections = _connections;
 @synthesize data = _data;
-@synthesize dataConnections = _dataConnections;
 @synthesize dataListener = _dataListener;
 @synthesize listener = _listener;
 @synthesize queue = _queue;
@@ -94,7 +92,6 @@ NSString *const InitialResponseKey = @"«initial»";
 {
     [_connections release];
     [_data release];
-    [_dataConnections release];
     [_dataListener release];
     [_queue release];
     [_responder release];
@@ -145,15 +142,6 @@ NSString *const InitialResponseKey = @"«initial»";
         NSAssert([self.connections count] == 0, @"all connections should have closed");
     }
 
-    @synchronized(self.dataConnections)
-    {
-        for (KSMockServerConnection* connection in self.dataConnections)
-        {
-            [connection cancel];
-        }
-        [self.dataConnections removeAllObjects];
-    }
-
     self.running = NO;
 }
 
@@ -195,27 +183,29 @@ NSString *const InitialResponseKey = @"«initial»";
 
 - (void)makeDataListener
 {
-    self.dataConnections = [NSMutableArray array];
-    __block KSMockServer* server = self;
-    self.dataListener = [KSMockServerListener listenerWithPort:0 connectionBlock:^BOOL(int socket) {
+    @synchronized(self.connections)
+    {
+        __block KSMockServer* server = self;
+        self.dataListener = [KSMockServerListener listenerWithPort:0 connectionBlock:^BOOL(int socket) {
 
-        MockServerLog(@"got connection on data listener");
+            MockServerLog(@"got connection on data listener");
 
-        NSData* data = server.data;
-        if (!data)
-        {
-            data = [@"Test data" dataUsingEncoding:NSUTF8StringEncoding];
-        }
+            NSData* data = server.data;
+            if (!data)
+            {
+                data = [@"Test data" dataUsingEncoding:NSUTF8StringEncoding];
+            }
 
-        NSArray* responses = @[ @[InitialResponseKey, data, CloseCommand ] ];
-        KSMockServerRegExResponder* responder = [KSMockServerRegExResponder responderWithResponses:responses];
-        KSMockServerConnection* connection = [KSMockServerConnection connectionWithSocket:socket responder:responder server:server];
-        [self.dataConnections addObject:connection];
-
-        return YES;
-    }];
-
-    [self.dataListener start];
+            NSArray* responses = @[ @[InitialResponseKey, data, CloseCommand ] ];
+            KSMockServerRegExResponder* responder = [KSMockServerRegExResponder responderWithResponses:responses];
+            KSMockServerConnection* connection = [KSMockServerConnection connectionWithSocket:socket responder:responder server:server];
+            [self.connections addObject:connection];
+            
+            return YES;
+        }];
+        
+        [self.dataListener start];
+    }
 }
 
 - (void)disposeDataListener
