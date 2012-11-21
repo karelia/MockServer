@@ -21,6 +21,7 @@
 @property (strong, nonatomic) KSMockServerListener* listener;
 @property (strong, nonatomic) NSOperationQueue* queue;
 @property (strong, nonatomic) KSMockServerResponder* responder;
+@property (strong, nonatomic) NSDateFormatter* rfc1123DateFormatter;
 @property (assign, atomic) BOOL running;
 
 
@@ -35,6 +36,7 @@
 @synthesize listener = _listener;
 @synthesize queue = _queue;
 @synthesize responder = _responder;
+@synthesize rfc1123DateFormatter = _rfc1123DateFormatter;
 @synthesize running = _running;
 
 NSString *const CloseCommand = @"«close»";
@@ -63,6 +65,14 @@ NSString *const InitialResponseKey = @"«initial»";
         self.queue = [NSOperationQueue currentQueue];
         self.responder = responder;
         self.connections = [NSMutableArray array];
+
+        NSDateFormatter* formatter = [[[NSDateFormatter alloc] init] autorelease];
+        [formatter setFormatterBehavior:NSDateFormatterBehavior10_4];
+        [formatter setLocale:[[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"] autorelease]];
+        [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+        [formatter setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss zzz"];
+        self.rfc1123DateFormatter = formatter;
+
         self.listener = [KSMockServerListener listenerWithPort:port connectionBlock:^BOOL(int socket) {
             MockServerAssert(socket != 0);
 
@@ -174,7 +184,8 @@ NSString *const InitialResponseKey = @"«initial»";
     @"$address" : @"127.0.0.1",
     @"$server" : @"fakeserver 20121107",
     @"$size" : [NSString stringWithFormat:@"%ld", (long) [self.data length]],
-    @"$pasv" : [NSString stringWithFormat:@"127,0,0,1,%ld,%ld", extraPort / 256L, extraPort % 256L]
+    @"$pasv" : [NSString stringWithFormat:@"127,0,0,1,%ld,%ld", extraPort / 256L, extraPort % 256L],
+    @"$date" : [self.rfc1123DateFormatter stringFromDate:[NSDate date]],
     };
 
     return substitutions;
