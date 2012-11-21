@@ -11,10 +11,9 @@ Because the stand-in servers are actually faked, it also allows us to script par
 Key Classes
 -----------
 
-Essentially the design revolves around the interation of four classes: <KSMockServer>, <KSMockServerConnection>, <KSMockServerListener>, and a subclass of <KSMockServerResponder>.
+Essentially the design revolves around the interation of these classes: <KSMockServer>, <KSMockServerConnection>, <KSMockServerListener>, <KSMockServerResponseCollection> and a subclass of <KSMockServerResponder>.
 
-The <KSMockServer> is the focus and holds references to all the other objects. By default it is also the only object that user code interacts with directly, other than creating and passing in a <KSMockServerResponder> instance for it to use.
-
+The <KSMockServer> is the focus and holds references to all the other objects. 
 
 Listening For Connections
 -------------------------
@@ -62,6 +61,7 @@ A <KSMockServerResponder> also has an <initialResponse> property. The list of co
 
 Setting this property is essential for faking any protocol that starts by sending something back to the client. For example, an FTP server typically starts by sending something like this: "220 10.1.1.23 FTP server (ACME FTP Server v1.1) ready.\r\n".
 
+To make life easier, the <KSMockServerResponseCollection> class allows you to create <KSMockServerRegExResponder> objects by loading the response data from disk. See the ftp.json and webdav.json files for examples of the file format.
 
 Passive Data Requests
 ---------------------

@@ -17,6 +17,8 @@ NSData objects are sent back directly as output.
 NSString objects are also sent back, except for the constant CloseCommand string, which closes the connection instead.
 NSNumber objects are interpreted as times, in seconds, to pause before sending back further output.
 
+The server includes a facilty for loading these response arrays easily from a JSON file.
+
 ## Ports
 
 If you give the server no port, it is assigned one at random. You can discover this using the <[KSMockServer port]> property, so that
@@ -50,4 +52,4 @@ Other substitutions that are currently implemented:
 
 See the [documentation](http://karelia.github.com/MockServer/Documentation/).
 
-See also the MockServerTests.m file for some examples.
+See also the MockServerTests.m file for some examples of usage, and the ftp.json and webdav.json files for examples of responses.
