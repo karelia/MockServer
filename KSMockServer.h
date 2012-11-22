@@ -116,20 +116,23 @@
 
 /**
  Stop the server.
- The listeners will be shut down at this point.
+ This causes <runUntilStopped> to return.
+ The listeners will be shut down at this point, so only
+ call this when you are done with the server.
  */
 
 - (void)stop;
 
 /**
- Loop in the current run loop until something calls stop on the server.
+ Loop in the current run loop until something calls pause or stop on the server.
  
  Typically you start the server, initiate the network operation that you want
  to test, then call runUntilStopped in your test case.
 
  In a completion block or delegate method of your network operation, you 
- can then call <stop> on the server, at which point your test case will continue
- executing and you can verify that you got the results you were expecting.
+ can then call <stop> on the server (or <pause> if you want to continue with
+ more operations), at which point this method will return, and your test case
+ will resume executing.
  
  */
 
