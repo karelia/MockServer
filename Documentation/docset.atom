@@ -1,18 +1,18 @@
 <?xml version="1.0" standalone="no"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:docset="http://developer.apple.com/rss/docset_extensions" xml:lang="en">
-    <id>http://karelia.github.com/MockServer/Documentation/docset.atom/20121121162616</id>
+    <id>http://karelia.github.com/MockServer/Documentation/docset.atom/20121122112602</id>
     <title type="text">MockServer Documentation</title>
     <rights>Copyright © 2012 Karelia Software. All rights reserved.</rights>
     <link rel="self" href="http://karelia.github.com/MockServer/Documentation/docset.atom"></link>
     <docset:publisherName>Karelia Software</docset:publisherName>
     <docset:publisherID>com.karelia.documentation</docset:publisherID>
-    <updated>2012-11-21T16:26:16+00:00</updated>
+    <updated>2012-11-22T11:26:02+00:00</updated>
     <entry>
-        <id>tag:karelia.github.com,2012-11-21:com.karelia.MockServer/1.0.0</id>
+        <id>tag:karelia.github.com,2012-11-22:com.karelia.MockServer/1.0.0</id>
         <title type="text">MockServer Documentation</title>
-        <updated>2012-11-21T16:26:16+00:00</updated>
+        <updated>2012-11-22T11:26:02+00:00</updated>
         <content type="text">MockServer Documentation (v1.0.0)</content>
-        <link rel="enclosure" type="application/octet-stream" href="http://karelia.github.com/MockServer/Documentation/com.karelia.MockServer-1.0.xar" length="75057"></link>
+        <link rel="enclosure" type="application/octet-stream" href="http://karelia.github.com/MockServer/Documentation/com.karelia.MockServer-1.0.xar" length="74632"></link>
         <docset:identifier>com.karelia.MockServer</docset:identifier>
         <docset:version>1.0.0</docset:version>
         <docset:minimumXcodeVersion>3.0.0</docset:minimumXcodeVersion>
