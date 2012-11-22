@@ -149,6 +149,10 @@
 
 /**
  Called by a connection when it closes.
+ 
+ *Not intended to be called by user code.*
+ 
+ @param connection The connection that closed.
  */
 
 - (void)connectionDidClose:(KSMockServerConnection*)connection;
