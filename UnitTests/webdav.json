@@ -43,7 +43,7 @@
                           "</D:propstat>",
                           "</D:response>",
 
-                          "</D:multistatus>",
+                          "</D:multistatus>\r\n",
                           "«close»"
                           ]
         },
@@ -106,7 +106,7 @@
 
         "unknown":
         {
-            "pattern" : ".*",
+            "pattern" : ".*\r\n\r\n.*",
             "commands" : [
                           "HTTP/1.0 401 Unauthorized\r\n",
                           "WWW-Authenticate: Basic realm=\"test\"\r\n\r\n",
