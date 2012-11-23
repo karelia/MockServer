@@ -108,68 +108,7 @@
 
 <p>Some of the unit test examples set up the table of responder patterns and commands in code. Others use the <a href="../../Classes/KMSResponseCollection.html">KMSResponseCollection</a> class to load the responses from a JSON file.</p>
 
-<p>JSON is chose here in preference to the plist format, as it allows the embedding of \r and \n. Server protocols are often very sensitive to things like the exact format of end of line separators &ndash; expecting CR/LF pairs for example &ndash; so being able to embed explicit line feeds and carriage returns is helpful.</p>
-
-<p>The format of the JSON files is illustrated by this example:</p>
-
-<pre><code>{
-    "sets":
-    {
-        "default": {
-            "responses": [ "initial", "response1", "response2" ],
-        },
-
-        "bad pass": {
-            "responses": [ "initial", "response1", "response3" ],
-        },
-
-    },
-
-    "responses":
-    {
-        "initial" : {
-            "pattern" : "«initial»",
-            "commands" : [
-                          "220 $address FTP server ($server) ready.\r\n"
-                          ]
-        },
-
-        "response1" : {
-            "pattern" : "USER (\\w+)",
-            "commands" : [
-                          "331 User $1 accepted, provide password.\r\n"
-                          ],
-            "comment" : "Response to a USER command, indicating that the user has been accepted."
-
-        },
-
-        "response2" : {
-            "pattern" : "PASS (\\w+)",
-            "commands" : [
-                          "230 User user logged in.\r\n"
-                          ],
-            "comment" : "Response to a PASS command, indicating that the user/pass combination was ok."
-        },
-
-        "response3" : {
-            "pattern" : "PASS (\\w+)",
-            "commands" : [
-                          "530 Login incorrect.\r\n"
-                          ],
-            "comment" : "Response to a PASS command, indicating that the user/pass combination was bad."
-        }
-}
-</code></pre>
-
-<p>In this case we give responses for the USER/PASS handshake for an ftp server.</p>
-
-<p>We define two &ldquo;sets&rdquo;. The default one gives the response that you&rsquo;d expect if the USER/PASS values were correct. The &ldquo;bad pass&rdquo; one gives the response you&rsquo;d expect if the given credentials were incorrect.</p>
-
-<p>There are currently two special values that can be used in the responses.</p>
-
-<p>The pattern: &ldquo;«initial»&rdquo; is used to define a response that will always be sent immediately when the connection starts.</p>
-
-<p>A response of &ldquo;«close»&rdquo; is not sent back to the client. Instead it is interpreted as an instruction to close the connection.</p>
+<p>See the <a href="../../docs/Documentation/Responses.html">Responses</a> guide for more information on how to do this using either method.</p>
 				</div>
 				<div id="footer">
 					<hr />
