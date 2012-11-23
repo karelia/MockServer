@@ -12,16 +12,7 @@
 
 @implementation KSMockServerResponder
 
-@synthesize initialResponse = _initialResponse;
-
 #pragma mark - Object Lifecycle
-
-- (void)dealloc
-{
-    [_initialResponse release];
-
-    [super dealloc];
-}
 
 #pragma mark - Public API
 

@@ -69,6 +69,7 @@
 
 - (void)dealloc
 {
+    [_initialResponse release];
     [_responses release];
     [_requests release];
     

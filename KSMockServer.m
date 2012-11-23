@@ -57,6 +57,8 @@ NSString *const InitialResponseKey = @"«initial»";
 
 - (id)initWithPort:(NSUInteger)port responder:(KSMockServerResponder*)responder
 {
+    NSAssert(responder != nil, @"should be given a valid responder");
+
     if ((self = [super init]) != nil)
     {
         self.queue = [NSOperationQueue currentQueue];

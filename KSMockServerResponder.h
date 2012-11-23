@@ -23,7 +23,7 @@
  The commands to execute when a connection is first made.
  */
 
-@property (strong, nonatomic, readonly) NSArray* initialResponse;
+- (NSArray*)initialResponse;
 
 /**
  Return a list of commands in response to a given input request.

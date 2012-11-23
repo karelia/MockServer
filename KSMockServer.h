@@ -39,7 +39,7 @@
 
  */
 
-@interface KSMockServer : NSObject<NSStreamDelegate>
+@interface KSMockServer : NSObject
 
 /**
  This data will automatically be sent when something connects to the passive data connection.
@@ -57,7 +57,7 @@
  YES if the server is running. NO if the stop method has been called.
  */
 
-@property (readonly, atomic) BOOL running;
+@property (readonly, atomic, getter = isRunning) BOOL running;
 
 /**
  Responder object that reacts to input.
