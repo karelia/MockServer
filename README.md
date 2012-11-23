@@ -1,9 +1,11 @@
 Mock Server
 ===========
 
-A server which runs locally and "pretends" to be something else.
+A server which runs locally and pretends to be something else.
 
-You provide the server with an optional port to run on, and a list of responses.
+You provide the server with an optional port to run on, and a responder object which is responsible for taking some input from the port and providing some output to send back.
+
+The default responder class works by pattern matching the input, and takes an array of predefined responses.
 
 The responses consist of an array of arrays. Each of the inner arrays is in this format:
 

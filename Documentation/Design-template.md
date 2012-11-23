@@ -11,9 +11,13 @@ Because the stand-in servers are actually faked, it also allows us to script par
 Key Classes
 -----------
 
-Essentially the design revolves around the interation of these classes: <KMS>, <KMSConnection>, <KMSListener>, <KMSResponseCollection> and a subclass of <KMSResponder>.
+Essentially the design revolves around the interation of these classes: <KMSServer>, <KMSConnection>, <KMSListener>, <KMSResponseCollection> and a subclass of <KMSResponder>.
 
-The <KMS> is the focus and holds references to all the other objects. 
+The <KMSServer> is the focus and holds references to all the other objects. 
+
+The abstract <KMSResponder> class is responsible for the actual behaviour of the server. We currently provide one concrete subclass of this - <KMSRegExResponder> - which works by pattern matching. You'll can create one of these to pass to the <KMSServer> object, or you can use the <KMSResponseCollection> class to generate them from a JSON file defining their contents.
+
+The internal <KMSConnection> and <KMSListener> classes are responsible for implementing the networking. Their function is mentioned below, but you shouldn't need to deal with them directly.
 
 Listening For Connections
 -------------------------
@@ -22,7 +26,7 @@ When started, the server creates two <KMSListener> objects.
 
 One of these is the "main" listener, and uses the port that was specified when the server object was created.
 
-The second of these is a "data" listener, which is used to simulate data connections (eg a passive connection for FTP). This always uses a system assigned port.
+The second of these is a "data" listener, which is used to simulate data connections (eg a passive connection for FTP). This always uses a system assigned port. See "Passive Data Requests" below for more about this listener.
 
 
 Connecting To The Main Port
@@ -32,9 +36,9 @@ When a connection is made on the main socket, the server creates a <KMSConnectio
 
 In general with unit tests it should only really be dealing with a single connection at a time. However, there are situations such as the HTTP authentication handshake where a response on the first connection can cause it to close and a second connection attempt be made. In these situations the second connection may occur before the first has completely finished closing.
 
-For this reason, the server can accept multiple simultaneous connections. It just spawns a new <KMSConnection> for each one though, using the same responses.
+For this reason, the server can accept multiple simultaneous connections. It just spawns a new <KMSConnection> for each one, using the same responder object.
 
-Each <KMSConnection> object just lives on the current run loop, reading input from the stream that it's associated with, passing it to the <KMSResponder> object, and acting on the commands that it gets back (generally by sending back data). When it is closed (externally, or in response to a close command), it tells the server, which then releases it.
+Each <KMSConnection> object lives on the current run loop, reading input from the stream that it's associated with, passing it to the <KMSResponder> object, and acting on the commands that it gets back (generally by sending back data). When it is closed (externally, or in response to a close command), it tells the server, which then releases it.
 
 Responding To Requests
 ----------------------
@@ -72,7 +76,7 @@ To support this, the server also listens on a second port, and the <KMSRegExResp
 
 In a real ftp server, a listener on this second connection would be created dynamically in response to incoming commands, and in theory many listeners could exist at once serving multiple connections.
 
-As with the KMSServer only supporting a single connection on the main port, we also simplify the handling of data connections by only supporting a single data listener, and by setting it up once when the server starts. The assumption here is that a test will only need one of these connections at any one time.
+In our case we simplify the handling of data connections by only supporting a single data listener, and by setting it up once when the server starts. The assumption here is that a test will only need one of these connections at any one time.
 
 Currently, when a connection is received on this port, the server immediately sends back the contents of its data property, and then closes the connection. Internally the server uses a second <KMSRegExResponder>, attached to a <KMSConnection>, to achieve this.
 
@@ -82,12 +86,72 @@ This behaviour is sufficient to simulate an FTP data download, but may not be ad
 Setting Up Responder Responses
 ------------------------------
 
-The current unit test examples set up the table of responder patterns and commands in code.
+Some of the unit test examples set up the table of responder patterns and commands in code. Others use the <KMSResponseCollection> class to load the responses from a JSON file.
 
-In theory, there's no reason why this table couldn't be loaded from a data file instead, and for complex examples this may well be preferrable.
+JSON is chose here in preference to the plist format, as it allows the embedding of \r and \n. Server protocols are often very sensitive to things like the exact format of end of line separators - expecting CR/LF pairs for example - so being able to embed explicit line feeds and carriage returns is helpful.
 
-The only complication with this is that server protocols are often very sensitive to things like the exact format of end of line separators - expecting CR/LF pairs for example.
+The format of the JSON files is illustrated by this example:
 
-If you load in the patterns and responses from a file, you need to ensure that the loading mechanism deals with this adequately and doesn't end up processing away some of these separators.
+    {
+        "sets":
+        {
+            "default": {
+                "responses": [ "initial", "response1", "response2" ],
+            },
+
+            "bad pass": {
+                "responses": [ "initial", "response1", "response3" ],
+            },
+
+        },
+
+        "responses":
+        {
+            "initial" : {
+                "pattern" : "«initial»",
+                "commands" : [
+                              "220 $address FTP server ($server) ready.\r\n"
+                              ]
+            },
+
+            "response1" : {
+                "pattern" : "USER (\\w+)",
+                "commands" : [
+                              "331 User $1 accepted, provide password.\r\n"
+                              ],
+                "comment" : "Response to a USER command, indicating that the user has been accepted."
+
+            },
+
+            "response2" : {
+                "pattern" : "PASS (\\w+)",
+                "commands" : [
+                              "230 User user logged in.\r\n"
+                              ],
+                "comment" : "Response to a PASS command, indicating that the user/pass combination was ok."
+            },
+
+            "response3" : {
+                "pattern" : "PASS (\\w+)",
+                "commands" : [
+                              "530 Login incorrect.\r\n"
+                              ],
+                "comment" : "Response to a PASS command, indicating that the user/pass combination was bad."
+            }
+    }
+
+
+In this case we give responses for the USER/PASS handshake for an ftp server.
+
+We define two "sets". The default one gives the response that you'd expect if the USER/PASS values were correct. The "bad pass" one gives the response you'd expect if the given credentials were incorrect.
+
+There are currently two special values that can be used in the responses.
+
+The pattern: "«initial»" is used to define a response that will always be sent immediately when the connection starts.
+
+A response of "«close»" is not sent back to the client. Instead it is interpreted as an instruction to close the connection.
+
+
+
 
 
