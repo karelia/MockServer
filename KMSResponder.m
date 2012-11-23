@@ -16,6 +16,11 @@
 
 #pragma mark - Public API
 
+- (NSArray*)initialResponse
+{
+    return nil;
+}
+
 - (NSArray*)responseForRequest:(NSString*)request substitutions:(NSDictionary*)substitutions
 {
     return nil;
