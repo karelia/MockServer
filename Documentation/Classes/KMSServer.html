@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
-		<title>KSMockServer Class Reference</title>
+		<title>KMSServer Class Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
@@ -17,7 +17,7 @@
 			</div>
 			
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">KSMockServer Class Reference</h1>
+				<h1 class="hideInXcode">KMSServer Class Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -145,7 +145,7 @@
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="KSMockServer Class Reference" name="top"></a>
+				<a title="KMSServer Class Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -154,7 +154,7 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">KSMockServer Class Reference</h1>
+						<h1 class="title title-header">KMSServer Class Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
@@ -164,11 +164,8 @@
 	<td class="specification-title">Inherits from</td>
 	<td class="specification-value">NSObject</td>
 </tr><tr>
-	<td class="specification-title">Conforms to</td>
-	<td class="specification-value">NSStreamDelegate</td>
-</tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">KSMockServer.h</td>
+	<td class="specification-value">KMSServer.h</td>
 </tr>
 						</tbody></table></div>
 					
@@ -191,7 +188,7 @@ the pattern has been matched.</p>
 
 <p>See the <a href="http://karelia.github.com/MockServer/Documentation/">documentation</a>.</p>
 
-<p>See also the MockServerTests.m file for some examples.</p>
+<p>See also the KMSTests.m file for some examples.</p>
 					</div>
 					
 					
@@ -269,7 +266,7 @@ The server will listen on an automatically allocated port.</p></span>
 		<code><a href="#//api/name/pause">&ndash;&nbsp;pause</a></code>
 		<span class="tooltip"><p>Temporarily stop the server.
 This causes <a href="#//api/name/runUntilStopped">runUntilStopped</a> to return,
-but the server is will actually still be running,
+but the server will actually still be running,
 and you can call <a href="#//api/name/runUntilStopped">runUntilStopped</a> again to resume.</p></span>
 	</span>
 	
@@ -348,7 +345,7 @@ call this when you are done with the server.</p></span>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KSMockServer.h</code><br />
+		<code class="declared-in-ref">KMSServer.h</code><br />
 	</div>				
 	
 	
@@ -384,7 +381,7 @@ call this when you are done with the server.</p></span>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KSMockServer.h</code><br />
+		<code class="declared-in-ref">KMSServer.h</code><br />
 	</div>				
 	
 	
@@ -402,7 +399,7 @@ call this when you are done with the server.</p></span>
 	
     
 
-	<div class="method-subsection method-declaration"><code>@property (strong, nonatomic) KSMockServerResponder *responder</code></div>
+	<div class="method-subsection method-declaration"><code>@property (strong, nonatomic) KMSResponder *responder</code></div>
 
     
 	
@@ -420,7 +417,7 @@ call this when you are done with the server.</p></span>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KSMockServer.h</code><br />
+		<code class="declared-in-ref">KMSServer.h</code><br />
 	</div>				
 	
 	
@@ -438,7 +435,7 @@ call this when you are done with the server.</p></span>
 	
     
 
-	<div class="method-subsection method-declaration"><code>@property (readonly, atomic) BOOL running</code></div>
+	<div class="method-subsection method-declaration"><code>@property (readonly, atomic, getter=isRunning) BOOL running</code></div>
 
     
 	
@@ -456,7 +453,7 @@ call this when you are done with the server.</p></span>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KSMockServer.h</code><br />
+		<code class="declared-in-ref">KMSServer.h</code><br />
 	</div>				
 	
 	
@@ -482,7 +479,7 @@ call this when you are done with the server.</p></span>
 	
     
 
-	<div class="method-subsection method-declaration"><code>+ (KSMockServer *)serverWithPort:(NSUInteger)<em>port</em> responder:(KSMockServerResponder *)<em>responder</em></code></div>
+	<div class="method-subsection method-declaration"><code>+ (KMSServer *)serverWithPort:(NSUInteger)<em>port</em> responder:(KMSResponder *)<em>responder</em></code></div>
 
     
 	
@@ -525,7 +522,7 @@ call this when you are done with the server.</p></span>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KSMockServer.h</code><br />
+		<code class="declared-in-ref">KMSServer.h</code><br />
 	</div>				
 	
 	
@@ -544,7 +541,7 @@ The server will listen on an automatically allocated port.</p>
 	
     
 
-	<div class="method-subsection method-declaration"><code>+ (KSMockServer *)serverWithResponder:(KSMockServerResponder *)<em>responder</em></code></div>
+	<div class="method-subsection method-declaration"><code>+ (KMSServer *)serverWithResponder:(KMSResponder *)<em>responder</em></code></div>
 
     
 	
@@ -577,7 +574,7 @@ The server will listen on an automatically allocated port.</p>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KSMockServer.h</code><br />
+		<code class="declared-in-ref">KMSServer.h</code><br />
 	</div>				
 	
 	
@@ -603,7 +600,7 @@ The server will listen on an automatically allocated port.</p>
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (void)connectionDidClose:(KSMockServerConnection *)<em>connection</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)connectionDidClose:(KMSConnection *)<em>connection</em></code></div>
 
     
 	
@@ -636,7 +633,7 @@ The server will listen on an automatically allocated port.</p>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KSMockServer.h</code><br />
+		<code class="declared-in-ref">KMSServer.h</code><br />
 	</div>				
 	
 	
@@ -654,7 +651,7 @@ The server will listen on an automatically allocated port.</p>
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (id)initWithPort:(NSUInteger)<em>port</em> responder:(KSMockServerResponder *)<em>responder</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (id)initWithPort:(NSUInteger)<em>port</em> responder:(KMSResponder *)<em>responder</em></code></div>
 
     
 	
@@ -677,7 +674,7 @@ The server will listen on an automatically allocated port.</p>
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>A new auto-released server instance.</p>
+		<p>A new server instance.</p>
 	</div>
 	
 	
@@ -697,7 +694,7 @@ The server will listen on an automatically allocated port.</p>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KSMockServer.h</code><br />
+		<code class="declared-in-ref">KMSServer.h</code><br />
 	</div>				
 	
 	
@@ -712,7 +709,7 @@ The server will listen on an automatically allocated port.</p>
 	<div class="method-subsection brief-description">
 		<p>Temporarily stop the server.
 This causes <a href="#//api/name/runUntilStopped">runUntilStopped</a> to return,
-but the server is will actually still be running,
+but the server will actually still be running,
 and you can call <a href="#//api/name/runUntilStopped">runUntilStopped</a> again to resume.</p>
 	</div>		
 	
@@ -736,7 +733,7 @@ and you can call <a href="#//api/name/runUntilStopped">runUntilStopped</a> again
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KSMockServer.h</code><br />
+		<code class="declared-in-ref">KMSServer.h</code><br />
 	</div>				
 	
 	
@@ -783,7 +780,7 @@ will resume executing.</p>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KSMockServer.h</code><br />
+		<code class="declared-in-ref">KMSServer.h</code><br />
 	</div>				
 	
 	
@@ -824,7 +821,7 @@ will resume executing.</p>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KSMockServer.h</code><br />
+		<code class="declared-in-ref">KMSServer.h</code><br />
 	</div>				
 	
 	
@@ -860,7 +857,7 @@ will resume executing.</p>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KSMockServer.h</code><br />
+		<code class="declared-in-ref">KMSServer.h</code><br />
 	</div>				
 	
 	
@@ -899,7 +896,7 @@ call this when you are done with the server.</p>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KSMockServer.h</code><br />
+		<code class="declared-in-ref">KMSServer.h</code><br />
 	</div>				
 	
 	
@@ -918,7 +915,7 @@ call this when you are done with the server.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Karelia Software. All rights reserved. (Last updated: 2012-11-22)</span><br />
+						<p><span class="copyright">&copy; 2012 Karelia Software. All rights reserved. (Last updated: 2012-11-23)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						

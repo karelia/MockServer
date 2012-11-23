@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
-		<title>KSMockServerConnection Class Reference</title>
+		<title>KMSResponseCollection Class Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
@@ -17,7 +17,7 @@
 			</div>
 			
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">KSMockServerConnection Class Reference</h1>
+				<h1 class="hideInXcode">KMSResponseCollection Class Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -42,16 +42,16 @@
 	
 	<option value="class_methods">Class Methods</option>
 	
-	<option value="//api/name/connectionWithSocket:responder:server:">&nbsp;&nbsp;&nbsp;&nbsp;+ connectionWithSocket:responder:server:</option>
+	<option value="//api/name/collectionWithURL:">&nbsp;&nbsp;&nbsp;&nbsp;+ collectionWithURL:</option>
 	
 	
 	
 	
 	<option value="instance_methods">Instance Methods</option>
 	
-	<option value="//api/name/cancel">&nbsp;&nbsp;&nbsp;&nbsp;- cancel</option>
+	<option value="//api/name/responderWithName:">&nbsp;&nbsp;&nbsp;&nbsp;- responderWithName:</option>
 	
-	<option value="//api/name/initWithSocket:responder:server:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithSocket:responder:server:</option>
+	<option value="//api/name/responsesWithName:">&nbsp;&nbsp;&nbsp;&nbsp;- responsesWithName:</option>
 	
 	
 	
@@ -79,7 +79,7 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/connectionWithSocket:responder:server:">connectionWithSocket:responder:server:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/collectionWithURL:">collectionWithURL:</a></span></li>
 	
 </ul></li>
 
@@ -87,9 +87,9 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/cancel">cancel</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/responderWithName:">responderWithName:</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithSocket:responder:server:">initWithSocket:responder:server:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/responsesWithName:">responsesWithName:</a></span></li>
 	
 </ul></li>
 
@@ -98,7 +98,7 @@
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="KSMockServerConnection Class Reference" name="top"></a>
+				<a title="KMSResponseCollection Class Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -107,7 +107,7 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">KSMockServerConnection Class Reference</h1>
+						<h1 class="title title-header">KMSResponseCollection Class Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
@@ -117,11 +117,8 @@
 	<td class="specification-title">Inherits from</td>
 	<td class="specification-value">NSObject</td>
 </tr><tr>
-	<td class="specification-title">Conforms to</td>
-	<td class="specification-value">NSStreamDelegate</td>
-</tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">KSMockServerConnection.h</td>
+	<td class="specification-value">KMSResponseCollection.h</td>
 </tr>
 						</tbody></table></div>
 					
@@ -131,7 +128,11 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>Object which uses the supplied KSMockServerResponder to respond to incoming data on a given socket.</p>
+						<p>Loads a group of named mock server responses from a JSON file,
+and allows you to obtain a responder using one of them.</p>
+
+<p>Keeping the responses in JSON is a lot simpler than
+building up the array in code.</p>
 					</div>
 					
 					
@@ -149,22 +150,22 @@
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/connectionWithSocket:responder:server:">+&nbsp;connectionWithSocket:responder:server:</a></code>
-		<span class="tooltip"><p>Return a new connection on a given socket.</p></span>
+		<code><a href="#//api/name/collectionWithURL:">+&nbsp;collectionWithURL:</a></code>
+		<span class="tooltip"><p>Return a new collection, using the file at a given URL.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initWithSocket:responder:server:">&ndash;&nbsp;initWithSocket:responder:server:</a></code>
-		<span class="tooltip"><p>Return a new connection on a given socket.</p></span>
+		<code><a href="#//api/name/responsesWithName:">&ndash;&nbsp;responsesWithName:</a></code>
+		<span class="tooltip"><p>Return the set of responses with a given name.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/cancel">&ndash;&nbsp;cancel</a></code>
-		<span class="tooltip"><p>Disconnect the streams we&rsquo;re managing.</p></span>
+		<code><a href="#//api/name/responderWithName:">&ndash;&nbsp;responderWithName:</a></code>
+		<span class="tooltip"><p>Return a responder using the set of responses with a given name.</p></span>
 	</span>
 	
 	
@@ -184,18 +185,18 @@
 						<h2 class="subtitle subtitle-methods">Class Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/connectionWithSocket:responder:server:" title="connectionWithSocket:responder:server:"></a>
-	<h3 class="subsubtitle method-title">connectionWithSocket:responder:server:</h3>
+	<a name="//api/name/collectionWithURL:" title="collectionWithURL:"></a>
+	<h3 class="subsubtitle method-title">collectionWithURL:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Return a new connection on a given socket.</p>
+		<p>Return a new collection, using the file at a given URL.</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>+ (KSMockServerConnection *)connectionWithSocket:(int)<em>socket</em> responder:(KSMockServerResponder *)<em>responder</em> server:(KSMockServer *)<em>server</em></code></div>
+	<div class="method-subsection method-declaration"><code>+ (KMSResponseCollection *)collectionWithURL:(NSURL *)<em>url</em></code></div>
 
     
 	
@@ -203,18 +204,8 @@
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>socket</em></dt>
-			<dd><p>The system socket to respond on.</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>responder</em></dt>
-			<dd><p>A KSMockServerResponder object which is responsible for receiving input and responding to it.</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>server</em></dt>
-			<dd><p>The server which received the original connection.</p></dd>
+			<dt><em>url</em></dt>
+			<dd><p>The URL of the response collection file.</p></dd>
 		</dl>
 		
 	</div>
@@ -223,7 +214,7 @@
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>A new connection.</p>
+		<p>The new responder collection object.</p>
 	</div>
 	
 	
@@ -238,7 +229,7 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KSMockServerConnection.h</code><br />
+		<code class="declared-in-ref">KMSResponseCollection.h</code><br />
 	</div>				
 	
 	
@@ -253,54 +244,18 @@
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/cancel" title="cancel"></a>
-	<h3 class="subsubtitle method-title">cancel</h3>
+	<a name="//api/name/responderWithName:" title="responderWithName:"></a>
+	<h3 class="subsubtitle method-title">responderWithName:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Disconnect the streams we&rsquo;re managing.</p>
+		<p>Return a responder using the set of responses with a given name.</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (void)cancel</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KSMockServerConnection.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/initWithSocket:responder:server:" title="initWithSocket:responder:server:"></a>
-	<h3 class="subsubtitle method-title">initWithSocket:responder:server:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Return a new connection on a given socket.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (id)initWithSocket:(int)<em>socket</em> responder:(KSMockServerResponder *)<em>responder</em> server:(KSMockServer *)<em>server</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (KMSRegExResponder *)responderWithName:(NSString *)<em>name</em></code></div>
 
     
 	
@@ -308,18 +263,8 @@
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>socket</em></dt>
-			<dd><p>The system socket to respond on.</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>responder</em></dt>
-			<dd><p>A KSMockServerResponder object which is responsible for receiving input and responding to it.</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>server</em></dt>
-			<dd><p>The server which received the original connection.</p></dd>
+			<dt><em>name</em></dt>
+			<dd><p>The name of the response set to use.</p></dd>
 		</dl>
 		
 	</div>
@@ -328,7 +273,7 @@
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>A new connection.</p>
+		<p>A responder which uses the set of responses.</p>
 	</div>
 	
 	
@@ -343,7 +288,58 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KSMockServerConnection.h</code><br />
+		<code class="declared-in-ref">KMSResponseCollection.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/responsesWithName:" title="responsesWithName:"></a>
+	<h3 class="subsubtitle method-title">responsesWithName:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Return the set of responses with a given name.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (NSArray *)responsesWithName:(NSString *)<em>name</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>name</em></dt>
+			<dd><p>The name of the response set to use.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>An array of responses.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KMSResponseCollection.h</code><br />
 	</div>				
 	
 	
@@ -362,7 +358,7 @@
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Karelia Software. All rights reserved. (Last updated: 2012-11-22)</span><br />
+						<p><span class="copyright">&copy; 2012 Karelia Software. All rights reserved. (Last updated: 2012-11-23)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						

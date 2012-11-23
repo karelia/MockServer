@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
-		<title>KSMockServerResponder Class Reference</title>
+		<title>KMSResponder Class Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
@@ -17,7 +17,7 @@
 			</div>
 			
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">KSMockServerResponder Class Reference</h1>
+				<h1 class="hideInXcode">KMSResponder Class Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -38,16 +38,13 @@
 	
 	
 	
-	<option value="properties">Properties</option>
-	
-	<option value="//api/name/initialResponse">&nbsp;&nbsp;&nbsp;&nbsp;initialResponse</option>
-	
-	
 	
 	
 	
 	
 	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/initialResponse">&nbsp;&nbsp;&nbsp;&nbsp;- initialResponse</option>
 	
 	<option value="//api/name/responseForRequest:substitutions:">&nbsp;&nbsp;&nbsp;&nbsp;- responseForRequest:substitutions:</option>
 	
@@ -73,17 +70,13 @@
 
 
 
-<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initialResponse">initialResponse</a></span></li>
-	
-</ul></li>
-
 
 
 
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initialResponse">initialResponse</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/responseForRequest:substitutions:">responseForRequest:substitutions:</a></span></li>
 	
@@ -94,7 +87,7 @@
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="KSMockServerResponder Class Reference" name="top"></a>
+				<a title="KMSResponder Class Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -103,7 +96,7 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">KSMockServerResponder Class Reference</h1>
+						<h1 class="title title-header">KMSResponder Class Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
@@ -114,7 +107,7 @@
 	<td class="specification-value">NSObject</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">KSMockServerResponder.h</td>
+	<td class="specification-value">KMSResponder.h</td>
 </tr>
 						</tbody></table></div>
 					
@@ -127,10 +120,10 @@
 						<p>Object which responds to incoming data by outputting a list of commands.</p>
 
 <p>This is an abstract class. Subclasses can choose to perform some sort of
-pattern matching to choose from a set of predefined responses (see <a href="../Classes/KSMockServerRegExResponder.html">KSMockServerRegExResponder</a>),
+pattern matching to choose from a set of predefined responses (see <a href="../Classes/KMSRegExResponder.html">KMSRegExResponder</a>),
 or they can implement a state machine or some other complex behaviour.
 In theory they could even implement proper server implications, although that&rsquo;s not really the intention
-of the MockServer system.</p>
+of the KMSServer system.</p>
 					</div>
 					
 					
@@ -148,10 +141,10 @@ of the MockServer system.</p>
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initialResponse">&nbsp;&nbsp;initialResponse</a></code>
+		<code><a href="#//api/name/initialResponse">&ndash;&nbsp;initialResponse</a></code>
 		<span class="tooltip"><p>The commands to execute when a connection is first made.</p></span>
 	</span>
-	<span class="task-item-suffix">property</span>
+	
 	
 </li><li>
 	<span class="tooltip">
@@ -169,9 +162,13 @@ of the MockServer system.</p>
 					
 					
 					
+					
+					
+					
+					
 					<div class="section section-methods">
-						<a title="Properties" name="properties"></a>
-						<h2 class="subtitle subtitle-methods">Properties</h2>
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
 	<a name="//api/name/initialResponse" title="initialResponse"></a>
@@ -185,7 +182,7 @@ of the MockServer system.</p>
 	
     
 
-	<div class="method-subsection method-declaration"><code>@property (strong, nonatomic, readonly) NSArray *initialResponse</code></div>
+	<div class="method-subsection method-declaration"><code>- (NSArray *)initialResponse</code></div>
 
     
 	
@@ -203,21 +200,11 @@ of the MockServer system.</p>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KSMockServerResponder.h</code><br />
+		<code class="declared-in-ref">KMSResponder.h</code><br />
 	</div>				
 	
 	
 </div>
-						
-					</div>
-					
-					
-					
-					
-					
-					<div class="section section-methods">
-						<a title="Instance Methods" name="instance_methods"></a>
-						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
 	<a name="//api/name/responseForRequest:substitutions:" title="responseForRequest:substitutions:"></a>
@@ -269,7 +256,7 @@ of the MockServer system.</p>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KSMockServerResponder.h</code><br />
+		<code class="declared-in-ref">KMSResponder.h</code><br />
 	</div>				
 	
 	
@@ -288,7 +275,7 @@ of the MockServer system.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Karelia Software. All rights reserved. (Last updated: 2012-11-22)</span><br />
+						<p><span class="copyright">&copy; 2012 Karelia Software. All rights reserved. (Last updated: 2012-11-23)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						

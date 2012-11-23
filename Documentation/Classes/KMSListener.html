@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
-		<title>KSMockServerRegExResponder Class Reference</title>
+		<title>KMSListener Class Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
@@ -17,7 +17,7 @@
 			</div>
 			
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">KSMockServerRegExResponder Class Reference</h1>
+				<h1 class="hideInXcode">KMSListener Class Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -38,18 +38,27 @@
 	
 	
 	
+	<option value="properties">Properties</option>
+	
+	<option value="//api/name/port">&nbsp;&nbsp;&nbsp;&nbsp;port</option>
+	
+	
 	
 	
 	<option value="class_methods">Class Methods</option>
 	
-	<option value="//api/name/responderWithResponses:">&nbsp;&nbsp;&nbsp;&nbsp;+ responderWithResponses:</option>
+	<option value="//api/name/listenerWithPort:connectionBlock:">&nbsp;&nbsp;&nbsp;&nbsp;+ listenerWithPort:connectionBlock:</option>
 	
 	
 	
 	
 	<option value="instance_methods">Instance Methods</option>
 	
-	<option value="//api/name/initWithResponses:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithResponses:</option>
+	<option value="//api/name/initWithPort:connectionBlock:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithPort:connectionBlock:</option>
+	
+	<option value="//api/name/start">&nbsp;&nbsp;&nbsp;&nbsp;- start</option>
+	
+	<option value="//api/name/stop:">&nbsp;&nbsp;&nbsp;&nbsp;- stop:</option>
 	
 	
 	
@@ -73,11 +82,17 @@
 
 
 
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/port">port</a></span></li>
+	
+</ul></li>
+
 
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/responderWithResponses:">responderWithResponses:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/listenerWithPort:connectionBlock:">listenerWithPort:connectionBlock:</a></span></li>
 	
 </ul></li>
 
@@ -85,7 +100,11 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithResponses:">initWithResponses:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithPort:connectionBlock:">initWithPort:connectionBlock:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/start">start</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/stop:">stop:</a></span></li>
 	
 </ul></li>
 
@@ -94,7 +113,7 @@
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="KSMockServerRegExResponder Class Reference" name="top"></a>
+				<a title="KMSListener Class Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -103,7 +122,7 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">KSMockServerRegExResponder Class Reference</h1>
+						<h1 class="title title-header">KMSListener Class Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
@@ -111,10 +130,10 @@
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
 	<td class="specification-title">Inherits from</td>
-	<td class="specification-value"><a href="../Classes/KSMockServerResponder.html">KSMockServerResponder</a> : NSObject</td>
+	<td class="specification-value">NSObject</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">KSMockServerRegExResponder.h</td>
+	<td class="specification-value">KMSListener.h</td>
 </tr>
 						</tbody></table></div>
 					
@@ -124,16 +143,8 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>Object which responds to incoming data by outputting a list of commands.</p>
-
-<p>This class works by matching the input against a list of regular expression patterns.</p>
-
-<p>Commands, in this context, means an array of  NSString, NSData, or NSNumber
-objects.</p>
-
-<p>NSData objects are sent back directly as output.
-NSString objects are also sent back, except for the constant CloseCommand string, which closes the connection instead.
-NSNumber objects are interpreted as times, in seconds, to pause before sending back further output.</p>
+						<p>Object which listens on a given socket and executes a block
+when an incoming connection is received.</p>
 					</div>
 					
 					
@@ -151,15 +162,36 @@ NSNumber objects are interpreted as times, in seconds, to pause before sending b
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/responderWithResponses:">+&nbsp;responderWithResponses:</a></code>
-		<span class="tooltip"><p>Return a new responder object, using an array of responses.</p></span>
+		<code><a href="#//api/name/port">&nbsp;&nbsp;port</a></code>
+		<span class="tooltip"><p>The port we&rsquo;re listening on.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/listenerWithPort:connectionBlock:">+&nbsp;listenerWithPort:connectionBlock:</a></code>
+		<span class="tooltip"><p>Returns a new listener object for a given port.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initWithResponses:">&ndash;&nbsp;initWithResponses:</a></code>
-		<span class="tooltip"><p>Initialise a new responder object, using an array of responses.</p></span>
+		<code><a href="#//api/name/initWithPort:connectionBlock:">&ndash;&nbsp;initWithPort:connectionBlock:</a></code>
+		<span class="tooltip"><p>Initialise a new listener object for a given port.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/start">&ndash;&nbsp;start</a></code>
+		<span class="tooltip"><p>Start listening.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/stop:">&ndash;&nbsp;stop:</a></code>
+		<span class="tooltip"><p>Stop listening.</p></span>
 	</span>
 	
 	
@@ -172,58 +204,31 @@ NSNumber objects are interpreted as times, in seconds, to pause before sending b
 					
 					
 					
-					
-					
 					<div class="section section-methods">
-						<a title="Class Methods" name="class_methods"></a>
-						<h2 class="subtitle subtitle-methods">Class Methods</h2>
+						<a title="Properties" name="properties"></a>
+						<h2 class="subtitle subtitle-methods">Properties</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/responderWithResponses:" title="responderWithResponses:"></a>
-	<h3 class="subsubtitle method-title">responderWithResponses:</h3>
+	<a name="//api/name/port" title="port"></a>
+	<h3 class="subsubtitle method-title">port</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Return a new responder object, using an array of responses.</p>
+		<p>The port we&rsquo;re listening on.</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>+ (KSMockServerRegExResponder *)responderWithResponses:(NSArray *)<em>responses</em></code></div>
+	<div class="method-subsection method-declaration"><code>@property (readonly, nonatomic) NSUInteger port</code></div>
 
     
 	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>responses</em></dt>
-			<dd><p>An array of patterns and commands.</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	<div class="method-subsection return">
-		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>The new responder object.</p>
-	</div>
 	
 	
 	
 	
 	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>The responses consist of an array of arrays. Each of the inner arrays is in this format:</p>
-
-<pre><code> @[pattern, command, command...]
-</code></pre>
-
-<p>The pattern is a regular expression which is matched against input received by the server.</p>
-	</div>
 	
 	
 	
@@ -233,7 +238,71 @@ NSNumber objects are interpreted as times, in seconds, to pause before sending b
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KSMockServerRegExResponder.h</code><br />
+		<code class="declared-in-ref">KMSListener.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Class Methods" name="class_methods"></a>
+						<h2 class="subtitle subtitle-methods">Class Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/listenerWithPort:connectionBlock:" title="listenerWithPort:connectionBlock:"></a>
+	<h3 class="subsubtitle method-title">listenerWithPort:connectionBlock:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns a new listener object for a given port.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (KMSListener *)listenerWithPort:(NSUInteger)<em>port</em> connectionBlock:(ConnectionBlock)<em>block</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>port</em></dt>
+			<dd><p>The port to listen on. Passing zero here causes the system to allocate a port.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>block</em></dt>
+			<dd><p>The block to execute when a connection is received.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>The new listener.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KMSListener.h</code><br />
 	</div>				
 	
 	
@@ -248,18 +317,18 @@ NSNumber objects are interpreted as times, in seconds, to pause before sending b
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/initWithResponses:" title="initWithResponses:"></a>
-	<h3 class="subsubtitle method-title">initWithResponses:</h3>
+	<a name="//api/name/initWithPort:connectionBlock:" title="initWithPort:connectionBlock:"></a>
+	<h3 class="subsubtitle method-title">initWithPort:connectionBlock:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Initialise a new responder object, using an array of responses.</p>
+		<p>Initialise a new listener object for a given port.</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (id)initWithResponses:(NSArray *)<em>responses</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (id)initWithPort:(NSUInteger)<em>port</em> connectionBlock:(ConnectionBlock)<em>block</em></code></div>
 
     
 	
@@ -267,8 +336,13 @@ NSNumber objects are interpreted as times, in seconds, to pause before sending b
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>responses</em></dt>
-			<dd><p>An array of patterns and commands.</p></dd>
+			<dt><em>port</em></dt>
+			<dd><p>The port to listen on. Passing zero here causes the system to allocate a port.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>block</em></dt>
+			<dd><p>The block to execute when a connection is received.</p></dd>
 		</dl>
 		
 	</div>
@@ -277,22 +351,12 @@ NSNumber objects are interpreted as times, in seconds, to pause before sending b
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>The new responder object.</p>
+		<p>The new listener.</p>
 	</div>
 	
 	
 	
 	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>The responses consist of an array of arrays. Each of the inner arrays is in this format:</p>
-
-<pre><code> @[pattern, command, command...]
-</code></pre>
-
-<p>The pattern is a regular expression which is matched against input received by the server.</p>
-	</div>
 	
 	
 	
@@ -302,7 +366,94 @@ NSNumber objects are interpreted as times, in seconds, to pause before sending b
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KSMockServerRegExResponder.h</code><br />
+		<code class="declared-in-ref">KMSListener.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/start" title="start"></a>
+	<h3 class="subsubtitle method-title">start</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Start listening.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (BOOL)start</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>YES if we manage to start ok.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KMSListener.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/stop:" title="stop:"></a>
+	<h3 class="subsubtitle method-title">stop:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Stop listening.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)stop:(NSString *)<em>reason</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>reason</em></dt>
+			<dd><p>The reason we&rsquo;re stopping (used for logging only).</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KMSListener.h</code><br />
 	</div>				
 	
 	
@@ -321,7 +472,7 @@ NSNumber objects are interpreted as times, in seconds, to pause before sending b
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Karelia Software. All rights reserved. (Last updated: 2012-11-22)</span><br />
+						<p><span class="copyright">&copy; 2012 Karelia Software. All rights reserved. (Last updated: 2012-11-23)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						
