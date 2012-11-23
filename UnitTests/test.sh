@@ -16,6 +16,6 @@ testerr="$build/error.log"
 rm -rf "$build"
 mkdir -p "$build"
 
-xcodebuild -workspace "KSMockServer.xcworkspace" -scheme "Unit Tests" -sdk "macosx" -config "Debug" test OBJROOT="$obj" SYMROOT="$sym" > "$testout" 2> "$testerr"
+xcodebuild -workspace "MockServer.xcworkspace" -scheme "Unit Tests" -sdk "macosx" -config "Debug" test OBJROOT="$obj" SYMROOT="$sym" > "$testout" 2> "$testerr"
 cd "$build"
 "../$ocunit2junit" < "$testout"
