@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# This script builds and runs the unit tests and produces output in a format that is compatible with Jenkins.
+
 base=`dirname $0`
 echo "$base"
 pushd "$base/.." > /dev/null
