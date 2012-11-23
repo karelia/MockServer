@@ -8,13 +8,13 @@
 #import <sys/socket.h>
 #import <netinet/in.h>   // for IPPROTO_TCP, sockaddr_in
 
-#import "KSMockServerListener.h"
+#import "KMSListener.h"
 
-#import "KSMockServer.h"
-#import "KSMockServerConnection.h"
-#import "KSMockServerResponder.h"
+#import "KMSServer.h"
+#import "KMSConnection.h"
+#import "KMSResponder.h"
 
-@interface KSMockServerListener()
+@interface KMSListener()
 
 @property (copy, nonatomic) ConnectionBlock connectionBlock;
 @property (assign, nonatomic) CFSocketRef listener;
@@ -22,16 +22,16 @@
 
 @end
 
-@implementation KSMockServerListener
+@implementation KMSListener
 
 @synthesize listener = _listener;
 @synthesize port = _port;
 
 #pragma mark - Object Lifecycle
 
-+ (KSMockServerListener*)listenerWithPort:(NSUInteger)port connectionBlock:(ConnectionBlock)block
++ (KMSListener*)listenerWithPort:(NSUInteger)port connectionBlock:(ConnectionBlock)block
 {
-    KSMockServerListener* listener = [[KSMockServerListener alloc] initWithPort:port connectionBlock:block];
+    KMSListener* listener = [[KMSListener alloc] initWithPort:port connectionBlock:block];
 
     return [listener autorelease];
 }
@@ -42,7 +42,7 @@
     {
         self.connectionBlock = block;
         self.port = port;
-        MockServerLogDetail(@"made listener at port %ld", (long) port);
+        KMSLogDetail(@"made listener at port %ld", (long) port);
     }
 
     return self;
@@ -86,7 +86,7 @@
 
     if (success)
     {
-        MockServerAssert(self.port != 0);
+        KMSAssert(self.port != 0);
         NSLog(@"listener started on port %ld", self.port);
     }
     else
@@ -97,7 +97,7 @@
             int err = close(socket);
             if (!err)
             {
-                MockServerLog(@"couldn't close socket %d", socket);
+                KMSLog(@"couldn't close socket %d", socket);
             }
         }
     }
@@ -115,7 +115,7 @@
         self.listener = nil;
     }
 
-    MockServerLogDetail(@"listener stopped because: %@", reason);
+    KMSLogDetail(@"listener stopped because: %@", reason);
 }
 
 
@@ -123,23 +123,23 @@
 
 - (void)acceptConnectionOnSocket:(int)socket
 {
-    MockServerAssert(socket >= 0);
+    KMSAssert(socket >= 0);
 
     BOOL ok = self.connectionBlock(socket);
     if (!ok)
     {
-        MockServerLogDetail(@"connection failed, closing socket");
+        KMSLogDetail(@"connection failed, closing socket");
         int error = close(socket);
-        MockServerAssert(error == 0);
+        KMSAssert(error == 0);
     }
 }
 
 static void callbackAcceptConnection(CFSocketRef s, CFSocketCallBackType type, CFDataRef address, const void *data, void *info)
 {
-    KSMockServerListener* obj = (KSMockServerListener*)info;
-    MockServerAssert(type == kCFSocketAcceptCallBack);
-    MockServerAssert(obj && (obj.listener == s));
-    MockServerAssert(data);
+    KMSListener* obj = (KMSListener*)info;
+    KMSAssert(type == kCFSocketAcceptCallBack);
+    KMSAssert(obj && (obj.listener == s));
+    KMSAssert(data);
 
     if (obj && data && (type == kCFSocketAcceptCallBack))
     {
@@ -158,11 +158,11 @@ static void callbackAcceptConnection(CFSocketRef s, CFSocketCallBackType type, C
 
     if (result)
     {
-        MockServerLogDetail(@"got socket %d", fd);
+        KMSLogDetail(@"got socket %d", fd);
     }
     else
     {
-        MockServerLog(@"couldn't make socket");
+        KMSLog(@"couldn't make socket");
     }
 
     return result;
@@ -180,7 +180,7 @@ static void callbackAcceptConnection(CFSocketRef s, CFSocketCallBackType type, C
     BOOL result = (err == 0);
     if (!result)
     {
-        MockServerLog(@"couldn't bind socket %d, error %d", socket, err);
+        KMSLog(@"couldn't bind socket %d, error %d", socket, err);
     }
     
     return result;
@@ -193,7 +193,7 @@ static void callbackAcceptConnection(CFSocketRef s, CFSocketCallBackType type, C
 
     if (!result)
     {
-        MockServerLog(@"couldn't listen on socket %d", socket);
+        KMSLog(@"couldn't listen on socket %d", socket);
     }
 
     return result;
@@ -214,12 +214,12 @@ static void callbackAcceptConnection(CFSocketRef s, CFSocketCallBackType type, C
     BOOL result = (err == 0);
     if (result)
     {
-        MockServerAssert(addrLen == sizeof(addr));
+        KMSAssert(addrLen == sizeof(addr));
         self.port = ntohs(addr.sin_port);
     }
     else
     {
-        MockServerLog(@"couldn't retrieve socket port");
+        KMSLog(@"couldn't retrieve socket port");
     }
 
     return result;
@@ -229,20 +229,20 @@ static void callbackAcceptConnection(CFSocketRef s, CFSocketCallBackType type, C
 {
     CFSocketContext context = { 0, (void *) self, NULL, NULL, NULL };
 
-    MockServerAssert(self.listener == NULL);
+    KMSAssert(self.listener == NULL);
     self.listener = CFSocketCreateWithNative(NULL, socket, kCFSocketAcceptCallBack, callbackAcceptConnection, &context);
 
     BOOL result = (self.listener != nil);
     if (result)
     {
         CFRunLoopSourceRef source = CFSocketCreateRunLoopSource(NULL, self.listener, 0);
-        MockServerAssert(source);
+        KMSAssert(source);
         CFRunLoopAddSource(CFRunLoopGetCurrent(), source, kCFRunLoopDefaultMode);
         CFRelease(source);
     }
     else
     {
-        MockServerLog(@"couldn't make CFSocket for socket %d", socket);
+        KMSLog(@"couldn't make CFSocket for socket %d", socket);
     }
 
     return result;

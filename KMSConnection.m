@@ -5,24 +5,24 @@
 
 #import <Foundation/Foundation.h>
 
-#import "KSMockServerConnection.h"
+#import "KMSConnection.h"
 
-#import "KSMockServer.h"
-#import "KSMockServerListener.h"
-#import "KSMockServerResponder.h"
+#import "KMSServer.h"
+#import "KMSListener.h"
+#import "KMSResponder.h"
 
-@interface KSMockServerConnection()
+@interface KMSConnection()
 
 @property (strong, nonatomic) NSInputStream* input;
 @property (strong, nonatomic) NSOutputStream* output;
 @property (strong, nonatomic) NSMutableData* outputData;
-@property (strong, nonatomic) KSMockServerResponder* responder;
-@property (strong, nonatomic) KSMockServer* server;
+@property (strong, nonatomic) KMSResponder* responder;
+@property (strong, nonatomic) KMSServer* server;
 
 
 @end
 
-@implementation KSMockServerConnection
+@implementation KMSConnection
 
 @synthesize input   = _input;
 @synthesize output = _output;
@@ -32,14 +32,14 @@
 
 #pragma mark - Object Lifecycle
 
-+ (KSMockServerConnection*)connectionWithSocket:(int)socket responder:(KSMockServerResponder*)responder server:(KSMockServer *)server
++ (KMSConnection*)connectionWithSocket:(int)socket responder:(KMSResponder*)responder server:(KMSServer*)server
 {
-    KSMockServerConnection* connection = [[KSMockServerConnection alloc] initWithSocket:socket responder:responder server:server];
+    KMSConnection* connection = [[KMSConnection alloc] initWithSocket:socket responder:responder server:server];
 
     return [connection autorelease];
 }
 
-- (id)initWithSocket:(int)socket responder:(KSMockServerResponder*)responder server:(KSMockServer *)server
+- (id)initWithSocket:(int)socket responder:(KMSResponder*)responder server:(KMSServer*)server
 {
     if ((self = [super init]) != nil)
     {
@@ -96,7 +96,7 @@
     {
         NSDictionary* substitutions = [self.server standardSubstitutions];
         NSString* request = [[NSString alloc] initWithBytes:buffer length:bytesRead encoding:NSUTF8StringEncoding];
-        MockServerLog(@"got request '%@'", request);
+        KMSLog(@"got request '%@'", request);
         NSArray* commands = [self.responder responseForRequest:request substitutions:substitutions];
         if (commands)
         {
@@ -115,7 +115,7 @@
 
 - (void)processClose
 {
-    MockServerLogDetail(@"closed connection");
+    KMSLogDetail(@"closed connection");
     [self.output close];
     [self.input close];
 }
@@ -142,7 +142,7 @@
                 method = @selector(processOutput);
                 if (isString)
                 {
-                    MockServerLog(@"queued output %@", command);
+                    KMSLog(@"queued output %@", command);
                     command = [command dataUsingEncoding:NSUTF8StringEncoding];
                 }
                 [self.outputData appendData:command];
@@ -163,7 +163,7 @@
         NSUInteger written = [self.output write:[self.outputData bytes] maxLength:bytesToWrite];
         [self.outputData replaceBytesInRange:NSMakeRange(0, written) withBytes:nil length:0];
 
-        MockServerLogDetail(@"wrote %ld bytes", (long)written);
+        KMSLogDetail(@"wrote %ld bytes", (long)written);
     }
 }
 
@@ -171,7 +171,7 @@
 
 - (id)setupStream:(NSStream*)stream
 {
-    MockServerAssert(stream);
+    KMSAssert(stream);
 
     [stream setProperty:(id)kCFBooleanTrue forKey:(NSString *)kCFStreamPropertyShouldCloseNativeSocket];
     stream.delegate = self;
@@ -203,7 +203,7 @@
     self.output = nil;
 
     [self.server connectionDidClose:self];
-    MockServerLogDetail(@"disconnected: %@", reason);
+    KMSLogDetail(@"disconnected: %@", reason);
 }
 
 - (NSString*)nameForStream:(NSStream*)stream
@@ -225,9 +225,9 @@
     return result;
 }
 
-- (KSMockServerResponder*)responder
+- (KMSResponder*)responder
 {
-    KSMockServerResponder* result = _responder;
+    KMSResponder* result = _responder;
     if (!result)
     {
         result = self.server.responder;
@@ -238,13 +238,13 @@
 
 - (void)stream:(NSStream*)stream handleEvent:(NSStreamEvent)eventCode
 {
-    MockServerAssert((stream == self.input) || (stream == self.output));
+    KMSAssert((stream == self.input) || (stream == self.output));
 
     switch (eventCode)
     {
         case NSStreamEventOpenCompleted:
         {
-            MockServerLogDetail(@"opened %@ stream", [self nameForStream:stream]);
+            KMSLogDetail(@"opened %@ stream", [self nameForStream:stream]);
             if (stream == self.input)
             {
                 [self processCommands:self.responder.initialResponse];
@@ -254,35 +254,35 @@
 
         case NSStreamEventHasBytesAvailable:
         {
-            MockServerAssert(stream == self.input);     // should never happen for the output stream
+            KMSAssert(stream == self.input);     // should never happen for the output stream
             [self processInput];
             break;
         }
 
         case NSStreamEventHasSpaceAvailable:
         {
-            MockServerAssert(stream == self.output);     // should never happen for the input stream
+            KMSAssert(stream == self.output);     // should never happen for the input stream
             [self processOutput];
             break;
         }
 
         case NSStreamEventErrorOccurred:
         {
-            MockServerLog(@"got error for %@ stream", [self nameForStream:stream]);
+            KMSLog(@"got error for %@ stream", [self nameForStream:stream]);
             [self disconnectStreams:@"Stream open error"];
             break;
         }
 
         case NSStreamEventEndEncountered:
         {
-            MockServerLogDetail(@"got eof for %@ stream", [self nameForStream:stream]);
+            KMSLogDetail(@"got eof for %@ stream", [self nameForStream:stream]);
             break;
         }
 
         default:
         {
-            MockServerLog(@"unknown event for %@ stream", [self nameForStream:stream]);
-            MockServerAssert(NO);
+            KMSLog(@"unknown event for %@ stream", [self nameForStream:stream]);
+            KMSAssert(NO);
             break;
         }
     }

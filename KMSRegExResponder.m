@@ -3,10 +3,10 @@
 //  Copyright 2012 Karelia Software. All rights reserved.
 //
 
-#import "KSMockServerRegExResponder.h"
-#import "KSMockServer.h"
+#import "KMSRegExResponder.h"
+#import "KMSServer.h"
 
-@interface KSMockServerRegExResponder()
+@interface KMSRegExResponder()
 
 @property (strong, nonatomic) NSArray* requests;
 @property (strong, nonatomic) NSArray* responses;
@@ -14,7 +14,7 @@
 
 @end
 
-@implementation KSMockServerRegExResponder
+@implementation KMSRegExResponder
 
 @synthesize initialResponse = _initialResponse;
 @synthesize requests = _requests;
@@ -22,9 +22,9 @@
 
 #pragma mark - Object Lifecycle
 
-+ (KSMockServerRegExResponder*)responderWithResponses:(NSArray *)responses
++ (KMSRegExResponder*)responderWithResponses:(NSArray *)responses
 {
-    KSMockServerRegExResponder* server = [[KSMockServerRegExResponder alloc] initWithResponses:responses];
+    KMSRegExResponder* server = [[KMSRegExResponder alloc] initWithResponses:responses];
 
     return [server autorelease];
 }
@@ -91,7 +91,7 @@
         NSTextCheckingResult* match = [expression firstMatchInString:request options:0 range:wholeString];
         if (match)
         {
-            MockServerLogDetail(@"matched with request pattern %@", expression);
+            KMSLogDetail(@"matched with request pattern %@", expression);
             NSArray* rawCommands = self.responses[n];
             commands = [self substitutedCommands:rawCommands match:match request:request substitutions:substitutions];
             matched = YES;
@@ -140,7 +140,7 @@
                     [substituted replaceOccurrencesOfString:key withString:replacement options:0 range:NSMakeRange(0, [substituted length])];
                 }];
 
-                MockServerLogDetail(@"expanded response %@ as %@", command, substituted);
+                KMSLogDetail(@"expanded response %@ as %@", command, substituted);
                 command = substituted;
             }
         }

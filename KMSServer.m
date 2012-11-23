@@ -8,16 +8,16 @@
 #import <sys/socket.h>
 #import <netinet/in.h>   // for IPPROTO_TCP, sockaddr_in
 
-#import "KSMockServer.h"
-#import "KSMockServerConnection.h"
-#import "KSMockServerListener.h"
-#import "KSMockServerRegExResponder.h"
+#import "KMSServer.h"
+#import "KMSConnection.h"
+#import "KMSListener.h"
+#import "KMSRegExResponder.h"
 
-@interface KSMockServer()
+@interface KMSServer()
 
 @property (strong, nonatomic) NSMutableArray* connections;
-@property (strong, nonatomic) KSMockServerListener* dataListener;
-@property (strong, nonatomic) KSMockServerListener* listener;
+@property (strong, nonatomic) KMSListener* dataListener;
+@property (strong, nonatomic) KMSListener* listener;
 @property (strong, nonatomic) NSOperationQueue* queue;
 @property (strong, nonatomic) NSDateFormatter* rfc1123DateFormatter;
 @property (assign, atomic) BOOL running;
@@ -25,7 +25,7 @@
 
 @end
 
-@implementation KSMockServer
+@implementation KMSServer
 
 @synthesize connections = _connections;
 @synthesize data = _data;
@@ -41,21 +41,21 @@ NSString *const InitialResponseKey = @"«initial»";
 
 #pragma mark - Object Lifecycle
 
-+ (KSMockServer*)serverWithResponder:(KSMockServerResponder*)responder
++ (KMSServer*)serverWithResponder:(KMSResponder*)responder
 {
-    KSMockServer* server = [[KSMockServer alloc] initWithPort:0 responder:responder];
+    KMSServer* server = [[KMSServer alloc] initWithPort:0 responder:responder];
 
     return [server autorelease];
 }
 
-+ (KSMockServer*)serverWithPort:(NSUInteger)port responder:(KSMockServerResponder*)responder
++ (KMSServer*)serverWithPort:(NSUInteger)port responder:(KMSResponder*)responder
 {
-    KSMockServer* server = [[KSMockServer alloc] initWithPort:port responder:responder];
+    KMSServer* server = [[KMSServer alloc] initWithPort:port responder:responder];
 
     return [server autorelease];
 }
 
-- (id)initWithPort:(NSUInteger)port responder:(KSMockServerResponder*)responder
+- (id)initWithPort:(NSUInteger)port responder:(KMSResponder*)responder
 {
     NSAssert(responder != nil, @"should be given a valid responder");
 
@@ -72,13 +72,13 @@ NSString *const InitialResponseKey = @"«initial»";
         [formatter setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss zzz"];
         self.rfc1123DateFormatter = formatter;
 
-        self.listener = [KSMockServerListener listenerWithPort:port connectionBlock:^BOOL(int socket) {
-            MockServerAssert(socket != 0);
+        self.listener = [KMSListener listenerWithPort:port connectionBlock:^BOOL(int socket) {
+            KMSAssert(socket != 0);
 
-            MockServerLogDetail(@"received connection");
+            KMSLogDetail(@"received connection");
             @synchronized(self.connections)
             {
-                KSMockServerConnection* connection = [KSMockServerConnection connectionWithSocket:socket responder:nil server:self];
+                KMSConnection* connection = [KMSConnection connectionWithSocket:socket responder:nil server:self];
                 [self.connections addObject:connection];
             }
 
@@ -109,8 +109,8 @@ NSString *const InitialResponseKey = @"«initial»";
     {
         [self makeDataListener];
 
-        MockServerAssert(self.port != 0);
-        MockServerLog(@"server started on port %ld", self.port);
+        KMSAssert(self.port != 0);
+        KMSLog(@"server started on port %ld", self.port);
         self.running = YES;
     }
 }
@@ -135,7 +135,7 @@ NSString *const InitialResponseKey = @"«initial»";
     @synchronized(self.connections)
     {
         NSArray* connections = [self.connections copy];
-        for (KSMockServerConnection* connection in connections)
+        for (KMSConnection* connection in connections)
         {
             [connection cancel];
         }
@@ -186,10 +186,10 @@ NSString *const InitialResponseKey = @"«initial»";
 {
     @synchronized(self.connections)
     {
-        __block KSMockServer* server = self;
-        self.dataListener = [KSMockServerListener listenerWithPort:0 connectionBlock:^BOOL(int socket) {
+        __block KMSServer* server = self;
+        self.dataListener = [KMSListener listenerWithPort:0 connectionBlock:^BOOL(int socket) {
 
-            MockServerLogDetail(@"got connection on data listener");
+            KMSLogDetail(@"got connection on data listener");
 
             NSData* data = server.data;
             if (!data)
@@ -198,8 +198,8 @@ NSString *const InitialResponseKey = @"«initial»";
             }
 
             NSArray* responses = @[ @[InitialResponseKey, data, CloseCommand ] ];
-            KSMockServerRegExResponder* responder = [KSMockServerRegExResponder responderWithResponses:responses];
-            KSMockServerConnection* connection = [KSMockServerConnection connectionWithSocket:socket responder:responder server:server];
+            KMSRegExResponder* responder = [KMSRegExResponder responderWithResponses:responses];
+            KMSConnection* connection = [KMSConnection connectionWithSocket:socket responder:responder server:server];
             [self.connections addObject:connection];
             
             return YES;
@@ -215,13 +215,13 @@ NSString *const InitialResponseKey = @"«initial»";
 
 #pragma mark - Streams
 
-- (void)connectionDidClose:(KSMockServerConnection*)connection
+- (void)connectionDidClose:(KMSConnection*)connection
 {
     @synchronized(self.connections)
     {
         NSAssert([self.connections indexOfObject:connection] != NSNotFound, @"connection should be in our list");
         [self.connections removeObject:connection];
-        MockServerLogDetail(@"connection %@ closed", connection);
+        KMSLogDetail(@"connection %@ closed", connection);
     }
 }
 

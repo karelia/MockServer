@@ -5,19 +5,17 @@
 
 #import <Foundation/Foundation.h>
 
-@class KSMockServer;
-
 /**
  Object which responds to incoming data by outputting a list of commands.
  
  This is an abstract class. Subclasses can choose to perform some sort of
- pattern matching to choose from a set of predefined responses (see <KSMockServerRegExResponder>),
+ pattern matching to choose from a set of predefined responses (see <KMSRegExResponder>),
  or they can implement a state machine or some other complex behaviour.
  In theory they could even implement proper server implications, although that's not really the intention
- of the MockServer system.
+ of the KMS system.
  */
 
-@interface KSMockServerResponder : NSObject
+@interface KMSResponder : NSObject
 
 /**
  The commands to execute when a connection is first made.

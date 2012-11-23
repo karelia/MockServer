@@ -3,7 +3,7 @@
 //  Copyright 2012 Karelia Software. All rights reserved.
 //
 
-#import "KSMockServerResponder.h"
+#import "KMSResponder.h"
 
 /**
  Object which responds to incoming data by outputting a list of commands.
@@ -19,7 +19,7 @@
 
  */
 
-@interface KSMockServerRegExResponder : KSMockServerResponder
+@interface KMSRegExResponder : KMSResponder
 
 
 /**
@@ -36,7 +36,7 @@
 
  */
 
-+ (KSMockServerRegExResponder*)responderWithResponses:(NSArray*)responses;
++ (KMSRegExResponder*)responderWithResponses:(NSArray*)responses;
 
 
 /**

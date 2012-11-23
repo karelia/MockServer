@@ -1,4 +1,4 @@
-MockServer
+KMS
 ==========
 
 A server which runs locally and "pretends" to be something else.
@@ -21,7 +21,7 @@ The server includes a facilty for loading these response arrays easily from a JS
 
 ## Ports
 
-If you give the server no port, it is assigned one at random. You can discover this using the <[KSMockServer port]> property, so that
+If you give the server no port, it is assigned one at random. You can discover this using the <[KMS port]> property, so that
 you can pass it on to the test code that will be making a connection.
 
 This is generally preferrable to setting a fixed port, as the system doesn't always free up ports instantly, so if you
@@ -32,7 +32,7 @@ run multiple tests on a fixed port in quick succession you may find that the ser
 As well as listening on it's assigned port, the server listens on a second port which can be used to fake FTP
 passive data connections.
 
-Any connection on this port will cause the contents of the <[KSMockServer data]> property to be sent back, followed by
+Any connection on this port will cause the contents of the <[KMS data]> property to be sent back, followed by
 the connection closing.
 
 ## Substitions
@@ -50,6 +50,6 @@ Other substitutions that are currently implemented:
 
 ## For More Information
 
-See the [documentation](http://karelia.github.com/MockServer/Documentation/).
+See the [documentation](http://karelia.github.com/KMS/Documentation/).
 
-See also the MockServerTests.m file for some examples of usage, and the ftp.json and webdav.json files for examples of responses.
+See also the KMSTests.m file for some examples of usage, and the ftp.json and webdav.json files for examples of responses.

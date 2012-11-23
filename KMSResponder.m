@@ -3,14 +3,14 @@
 //  Copyright 2012 Karelia Software. All rights reserved.
 //
 
-#import "KSMockServerResponder.h"
-#import "KSMockServer.h"
+#import "KMSResponder.h"
+#import "KMSServer.h"
 
-@interface KSMockServerResponder()
+@interface KMSResponder()
 
 @end
 
-@implementation KSMockServerResponder
+@implementation KMSResponder
 
 #pragma mark - Object Lifecycle
 

@@ -3,24 +3,24 @@
 //  Copyright 2012 Karelia Software. All rights reserved.
 //
 
-#import "KSMockServerResponseCollection.h"
-#import "KSMockServerRegExResponder.h"
-#import "KSMockServer.h"
+#import "KMSResponseCollection.h"
+#import "KMSRegExResponder.h"
+#import "KMSServer.h"
 
-@interface KSMockServerResponseCollection()
+@interface KMSResponseCollection()
 
 @property (strong, nonatomic) NSDictionary* sets;
 @property (strong, nonatomic) NSDictionary* responses;
 
 @end
 
-@implementation KSMockServerResponseCollection
+@implementation KMSResponseCollection
 
 #pragma mark - Object Lifecycle
 
-+ (KSMockServerResponseCollection*)collectionWithURL:(NSURL *)url
++ (KMSResponseCollection*)collectionWithURL:(NSURL *)url
 {
-    KSMockServerResponseCollection* collection = [[KSMockServerResponseCollection alloc] initWithURL:url];
+    KMSResponseCollection* collection = [[KMSResponseCollection alloc] initWithURL:url];
 
     return [collection autorelease];
 }
@@ -44,7 +44,7 @@
         }
         else
         {
-            MockServerLog(@"failed to load response collection with error: %@", error);
+            KMSLog(@"failed to load response collection with error: %@", error);
             [self release];
             self = nil;
         }
@@ -79,18 +79,18 @@
         }
         else
         {
-            MockServerLog(@"unknown response %@ in set %@", responseName, name);
+            KMSLog(@"unknown response %@ in set %@", responseName, name);
         }
     }
 
     return responses;
 }
 
-- (KSMockServerRegExResponder*)responderWithName:(NSString *)name
+- (KMSRegExResponder*)responderWithName:(NSString *)name
 {
     NSArray* responses = [self responsesWithName:name];
 
-    return [KSMockServerRegExResponder responderWithResponses:responses];
+    return [KMSRegExResponder responderWithResponses:responses];
 }
 
 @end

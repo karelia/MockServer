@@ -3,17 +3,17 @@
 //  Copyright 2012 Karelia Software. All rights reserved.
 //
 
-#import "KSMockServer.h"
-#import "KSMockServerRegExResponder.h"
-#import "KSMockServerResponseCollection.h"
+#import "KMSServer.h"
+#import "KMSRegExResponder.h"
+#import "KMSResponseCollection.h"
 
 #import <SenTestingKit/SenTestingKit.h>
 
-@interface KSMockServerTests : SenTestCase
+@interface KMSTests : SenTestCase
 
 @end
 
-@implementation KSMockServerTests
+@implementation KMSTests
 
 static NSString *const HTTPHeader = @"HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=iso-8859-1\r\n\r\n";
 static NSString*const HTTPContent = @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\"><html><head><title>example</title></head><body>example result</body></html>\n";
@@ -28,10 +28,10 @@ static NSString*const HTTPContent = @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 
     return responses;
 }
 
-- (KSMockServer*)setupServerWithResponses:(NSArray*)responses
+- (KMSServer*)setupServerWithResponses:(NSArray*)responses
 {
-    KSMockServerRegExResponder* responder = [KSMockServerRegExResponder responderWithResponses:responses];
-    KSMockServer* server = [KSMockServer serverWithPort:0 responder:responder];
+    KMSRegExResponder* responder = [KMSRegExResponder responderWithResponses:responses];
+    KMSServer* server = [KMSServer serverWithPort:0 responder:responder];
 
     STAssertNotNil(server, @"got server");
     [server start];
@@ -40,7 +40,7 @@ static NSString*const HTTPContent = @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 
     return started ? server : nil;
 }
 
-- (NSString*)stringForScheme:(NSString*)scheme path:(NSString*)path method:(NSString*)method server:(KSMockServer*)server
+- (NSString*)stringForScheme:(NSString*)scheme path:(NSString*)path method:(NSString*)method server:(KMSServer*)server
 {
     NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://127.0.0.1:%ld%@", scheme, (long)server.port, path]];
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url];
@@ -48,14 +48,14 @@ static NSString*const HTTPContent = @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 
     return [self stringForRequest:request server:server];
 }
 
-- (NSString*)stringForScheme:(NSString*)scheme path:(NSString*)path server:(KSMockServer*)server
+- (NSString*)stringForScheme:(NSString*)scheme path:(NSString*)path server:(KMSServer*)server
 {
     NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://127.0.0.1:%ld%@", scheme, (long)server.port, path]];
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
     return [self stringForRequest:request server:server];
 }
 
-- (NSString*)stringForRequest:(NSURLRequest*)request server:(KSMockServer*)server
+- (NSString*)stringForRequest:(NSURLRequest*)request server:(KMSServer*)server
 {
     __block NSString* string = nil;
 
@@ -82,7 +82,7 @@ static NSString*const HTTPContent = @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 
 
 - (void)testHTTPGet
 {
-    KSMockServer* server = [self setupServerWithResponses:[self httpResponses]];
+    KMSServer* server = [self setupServerWithResponses:[self httpResponses]];
     if (server)
     {
         NSString* string = [self stringForScheme:@"http" path:@"/index.html" method:@"GET" server:server];
@@ -92,7 +92,7 @@ static NSString*const HTTPContent = @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 
 
 - (void)testHTTPHead
 {
-    KSMockServer* server = [self setupServerWithResponses:[self httpResponses]];
+    KMSServer* server = [self setupServerWithResponses:[self httpResponses]];
     if (server)
     {
         NSString* string = [self stringForScheme:@"http" path:@"/index.html" method:@"HEAD" server:server];
@@ -103,9 +103,9 @@ static NSString*const HTTPContent = @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 
 - (void)testFTP
 {
     NSURL* collectionURL = [[NSBundle bundleForClass:[self class]] URLForResource:@"ftp" withExtension:@"json"];
-    KSMockServerResponseCollection* collection = [KSMockServerResponseCollection collectionWithURL:collectionURL];
+    KMSResponseCollection* collection = [KMSResponseCollection collectionWithURL:collectionURL];
     NSArray* responses = [collection responsesWithName:@"default"];
-    KSMockServer* server = [self setupServerWithResponses:responses];
+    KMSServer* server = [self setupServerWithResponses:responses];
     if (server)
     {
         NSString* testData = @"This is some test data";

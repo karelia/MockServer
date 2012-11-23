@@ -5,8 +5,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class KSMockServer;
-@class KSMockServerRegExResponder;
+@class KMSRegExResponder;
 
 /**
  Loads a group of named mock server responses from a JSON file,
@@ -16,7 +15,7 @@
  building up the array in code.
  */
 
-@interface KSMockServerResponseCollection : NSObject
+@interface KMSResponseCollection : NSObject
 
 /**
  Return a new collection, using the file at a given URL.
@@ -26,7 +25,7 @@
 
  */
 
-+ (KSMockServerResponseCollection*)collectionWithURL:(NSURL*)url;
++ (KMSResponseCollection*)collectionWithURL:(NSURL*)url;
 
 /**
  Return the set of responses with a given name.
@@ -44,6 +43,6 @@
  @return A responder which uses the set of responses.
  */
 
-- (KSMockServerRegExResponder*)responderWithName:(NSString*)name;
+- (KMSRegExResponder*)responderWithName:(NSString*)name;
 
 @end

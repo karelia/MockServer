@@ -10,7 +10,7 @@
  when an incoming connection is received.
  */
 
-@interface KSMockServerListener : NSObject
+@interface KMSListener : NSObject
 
 /**
  Block which is run when a connection happens.
@@ -33,7 +33,7 @@ typedef BOOL (^ConnectionBlock)(int socket);
  @return The new listener.
  */
 
-+ (KSMockServerListener*)listenerWithPort:(NSUInteger)port connectionBlock:(ConnectionBlock)block;
++ (KMSListener*)listenerWithPort:(NSUInteger)port connectionBlock:(ConnectionBlock)block;
 
 /**
  Initialise a new listener object for a given port.

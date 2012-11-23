@@ -5,20 +5,20 @@
 
 #import <Foundation/Foundation.h>
 
-#ifndef MockServerLog
-#define MockServerLog NSLog
+#ifndef KMSLog
+#define KMSLog NSLog
 #endif
 
-#ifndef MockServerLogDetail
-#define MockServerLogDetail NSLog
+#ifndef KMSLogDetail
+#define KMSLogDetail NSLog
 #endif
 
-#ifndef MockServerAssert
-#define MockServerAssert(x) assert((x))
+#ifndef KMSAssert
+#define KMSAssert(x) assert((x))
 #endif
 
-@class KSMockServerResponder;
-@class KSMockServerConnection;
+@class KMSResponder;
+@class KMSConnection;
 
 /**
 
@@ -33,13 +33,13 @@
  The commands are NSString, NSData, or NSNumber objects, which are processed when
  the pattern has been matched.
 
- See the [documentation](http://karelia.github.com/MockServer/Documentation/).
+ See the [documentation](http://karelia.github.com/KMS/Documentation/).
 
- See also the MockServerTests.m file for some examples.
+ See also the KMSTests.m file for some examples.
 
  */
 
-@interface KSMockServer : NSObject
+@interface KMSServer : NSObject
 
 /**
  This data will automatically be sent when something connects to the passive data connection.
@@ -63,7 +63,7 @@
  Responder object that reacts to input.
  */
 
-@property (strong, nonatomic) KSMockServerResponder* responder;
+@property (strong, nonatomic) KMSResponder* responder;
 
 /** 
  Make a server that uses the given responder object to reply to incoming requests.
@@ -73,7 +73,7 @@
  @return A new auto-released server instance.
  */
 
-+ (KSMockServer*)serverWithResponder:(KSMockServerResponder*)responder;
++ (KMSServer*)serverWithResponder:(KMSResponder*)responder;
 
 /**
  Make a server that uses the given responder object to reply to incoming requests, and listens on a given port.
@@ -85,7 +85,7 @@
  @return A new auto-released server instance.
  */
 
-+ (KSMockServer*)serverWithPort:(NSUInteger)port responder:(KSMockServerResponder*)responder;
++ (KMSServer*)serverWithPort:(NSUInteger)port responder:(KMSResponder*)responder;
 
 /**
  Initialise with a given set of responses, listening on a given port.
@@ -97,7 +97,7 @@
  @return A new server instance.
  */
 
-- (id)initWithPort:(NSUInteger)port responder:(KSMockServerResponder*)responder;
+- (id)initWithPort:(NSUInteger)port responder:(KMSResponder*)responder;
 
 /**
  Start the server.
@@ -155,7 +155,7 @@
  @param connection The connection that closed.
  */
 
-- (void)connectionDidClose:(KSMockServerConnection*)connection;
+- (void)connectionDidClose:(KMSConnection*)connection;
 
 @end
 
