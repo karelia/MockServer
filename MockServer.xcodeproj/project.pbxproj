@@ -57,7 +57,6 @@
 		22F6D0D7165A5B2400443CC9 /* KMSRegExResponder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMSRegExResponder.m; sourceTree = SOURCE_ROOT; };
 		22F6D0DA165A65AB00443CC9 /* Classes.graffle */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Classes.graffle; sourceTree = "<group>"; };
 		22F6D0DB165A65AB00443CC9 /* Design-template.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Design-template.md"; sourceTree = "<group>"; wrapsLines = 1; };
-		22F6D0DC165A65AB00443CC9 /* Example Sequence.graffle */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Example Sequence.graffle"; sourceTree = "<group>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -137,7 +136,6 @@
 				22F6D0D4165A4A3400443CC9 /* .appledoc.plist */,
 				22F6D0DA165A65AB00443CC9 /* Classes.graffle */,
 				22F6D0DB165A65AB00443CC9 /* Design-template.md */,
-				22F6D0DC165A65AB00443CC9 /* Example Sequence.graffle */,
 			);
 			path = Documentation;
 			sourceTree = "<group>";
