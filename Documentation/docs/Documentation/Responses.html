@@ -27,7 +27,7 @@
 				<div id="container">	
 					<p>The <a href="../../Classes/KMSRegExResponder.html">KMSRegExResponder</a> expects an array containing responses.</p>
 
-<p>You can either create this array in code, or you can use the <a href="../../Classes/KMSResponseCollection.html">KMSResponseCollection</a> class to load the responses from a JSON file.</p>
+<p>You can either create this array in code, or you can use the <KMSResponseCollection> class to load the responses from a JSON file.</p>
 
 <h2>Defining Responses Using JSON</h2>
 
@@ -95,6 +95,30 @@
 <p>A response of &ldquo;«close»&rdquo; is not sent back to the client. Instead it is interpreted as an instruction to close the connection.</p>
 
 <h2>Defining Responses In Code</h2>
+
+<p>To define responses in code, you simply need to make an array of arrays.</p>
+
+<p>Each of the inner arrays is in this format:</p>
+
+<pre><code>@[pattern, command, command...]
+</code></pre>
+
+<p>Commands are objects of the class NSData, NSString or NSNumber.</p>
+
+<ul>
+<li>NSData objects are sent back directly as output.</li>
+<li>NSString objects are also sent back, except for the constant CloseCommand string, which closes the connection instead.</li>
+<li>NSNumber objects are interpreted as times, in seconds, to pause before sending back further output.</li>
+</ul>
+
+
+<p>There are a couple of special constants that you can use when defining your responses.</p>
+
+<p>The pattern <InitialResponseKey> is used to define a response that will always be sent immediately when the connection starts.</p>
+
+<p>A response of <CloseCommand> is not sent back to the client. Instead it is interpreted as an instruction to close the connection.</p>
+
+<p>Once you have your arrays, simple call <a href="../../Classes/KMSRegExResponder.html#//api/name/responderWithResponses:">[KMSRegExResponder responderWithResponses:]</a> passing in the array.</p>
 				</div>
 				<div id="footer">
 					<hr />
