@@ -88,8 +88,8 @@ Commands are objects of the class NSData, NSString or NSNumber.
 
 There are a couple of special constants that you can use when defining your responses.
 
-The pattern <InitialResponseKey> is used to define a response that will always be sent immediately when the connection starts.
+The pattern **InitialResponseKey** is used to define a response that will always be sent immediately when the connection starts.
 
-A response of <CloseCommand> is not sent back to the client. Instead it is interpreted as an instruction to close the connection.
+A response of **CloseCommand** is not sent back to the client. Instead it is interpreted as an instruction to close the connection.
 
 Once you have your arrays, simple call <[KMSRegExResponder responderWithResponses:]> passing in the array.
