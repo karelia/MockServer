@@ -72,7 +72,7 @@ To support this, the server also listens on a second port, and the <KMSRegExResp
 
 In a real ftp server, a listener on this second connection would be created dynamically in response to incoming commands, and in theory many listeners could exist at once serving multiple connections.
 
-As with the KMS only supporting a single connection on the main port, we also simplify the handling of data connections by only supporting a single data listener, and by setting it up once when the server starts. The assumption here is that a test will only need one of these connections at any one time.
+As with the KMSServer only supporting a single connection on the main port, we also simplify the handling of data connections by only supporting a single data listener, and by setting it up once when the server starts. The assumption here is that a test will only need one of these connections at any one time.
 
 Currently, when a connection is received on this port, the server immediately sends back the contents of its data property, and then closes the connection. Internally the server uses a second <KMSRegExResponder>, attached to a <KMSConnection>, to achieve this.
 

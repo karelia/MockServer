@@ -33,7 +33,7 @@
  The commands are NSString, NSData, or NSNumber objects, which are processed when
  the pattern has been matched.
 
- See the [documentation](http://karelia.github.com/KMS/Documentation/).
+ See the [documentation](http://karelia.github.com/MockServer/Documentation/).
 
  See also the KMSTests.m file for some examples.
 

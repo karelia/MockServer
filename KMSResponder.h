@@ -12,7 +12,7 @@
  pattern matching to choose from a set of predefined responses (see <KMSRegExResponder>),
  or they can implement a state machine or some other complex behaviour.
  In theory they could even implement proper server implications, although that's not really the intention
- of the KMS system.
+ of the KMSServer system.
  */
 
 @interface KMSResponder : NSObject
