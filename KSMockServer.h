@@ -94,7 +94,7 @@
 
  @param port The port to listen on.
  @param responder An object that replies to incoming requests.
- @return A new auto-released server instance.
+ @return A new server instance.
  */
 
 - (id)initWithPort:(NSUInteger)port responder:(KSMockServerResponder*)responder;
