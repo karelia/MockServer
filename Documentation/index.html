@@ -36,9 +36,11 @@
 						
 						<h1>Mock Server</h1>
 
-<p>A server which runs locally and &ldquo;pretends&rdquo; to be something else.</p>
+<p>A server which runs locally and pretends to be something else.</p>
 
-<p>You provide the server with an optional port to run on, and a list of responses.</p>
+<p>You provide the server with an optional port to run on, and a responder object which is responsible for taking some input from the port and providing some output to send back.</p>
+
+<p>The default responder class works by pattern matching the input, and takes an array of predefined responses.</p>
 
 <p>The responses consist of an array of arrays. Each of the inner arrays is in this format:</p>
 
@@ -101,6 +103,8 @@ $date        the current date &amp; time in RFC1123 format
 						<ul>
                         
                         <li><a href="docs/Documentation/Design.html">Design</a></li>
+                        
+                        <li><a href="docs/Documentation/Responses.html">Responses</a></li>
                         
 						</ul>
                         </div>

@@ -35,9 +35,13 @@
 
 <h2>Key Classes</h2>
 
-<p>Essentially the design revolves around the interation of these classes: <KMS>, <a href="../../Classes/KMSConnection.html">KMSConnection</a>, <a href="../../Classes/KMSListener.html">KMSListener</a>, <a href="../../Classes/KMSResponseCollection.html">KMSResponseCollection</a> and a subclass of <a href="../../Classes/KMSResponder.html">KMSResponder</a>.</p>
+<p>Essentially the design revolves around the interation of these classes: <a href="../../Classes/KMSServer.html">KMSServer</a>, <a href="../../Classes/KMSConnection.html">KMSConnection</a>, <a href="../../Classes/KMSListener.html">KMSListener</a>, <a href="../../Classes/KMSResponseCollection.html">KMSResponseCollection</a> and a subclass of <a href="../../Classes/KMSResponder.html">KMSResponder</a>.</p>
 
-<p>The <KMS> is the focus and holds references to all the other objects.</p>
+<p>The <a href="../../Classes/KMSServer.html">KMSServer</a> is the focus and holds references to all the other objects.</p>
+
+<p>The abstract <a href="../../Classes/KMSResponder.html">KMSResponder</a> class is responsible for the actual behaviour of the server. We currently provide one concrete subclass of this &ndash; <a href="../../Classes/KMSRegExResponder.html">KMSRegExResponder</a> &ndash; which works by pattern matching. You&rsquo;ll can create one of these to pass to the <a href="../../Classes/KMSServer.html">KMSServer</a> object, or you can use the <a href="../../Classes/KMSResponseCollection.html">KMSResponseCollection</a> class to generate them from a JSON file defining their contents.</p>
+
+<p>The internal <a href="../../Classes/KMSConnection.html">KMSConnection</a> and <a href="../../Classes/KMSListener.html">KMSListener</a> classes are responsible for implementing the networking. Their function is mentioned below, but you shouldn&rsquo;t need to deal with them directly.</p>
 
 <h2>Listening For Connections</h2>
 
@@ -45,7 +49,7 @@
 
 <p>One of these is the &ldquo;main&rdquo; listener, and uses the port that was specified when the server object was created.</p>
 
-<p>The second of these is a &ldquo;data&rdquo; listener, which is used to simulate data connections (eg a passive connection for FTP). This always uses a system assigned port.</p>
+<p>The second of these is a &ldquo;data&rdquo; listener, which is used to simulate data connections (eg a passive connection for FTP). This always uses a system assigned port. See &ldquo;Passive Data Requests&rdquo; below for more about this listener.</p>
 
 <h2>Connecting To The Main Port</h2>
 
@@ -53,9 +57,9 @@
 
 <p>In general with unit tests it should only really be dealing with a single connection at a time. However, there are situations such as the HTTP authentication handshake where a response on the first connection can cause it to close and a second connection attempt be made. In these situations the second connection may occur before the first has completely finished closing.</p>
 
-<p>For this reason, the server can accept multiple simultaneous connections. It just spawns a new <a href="../../Classes/KMSConnection.html">KMSConnection</a> for each one though, using the same responses.</p>
+<p>For this reason, the server can accept multiple simultaneous connections. It just spawns a new <a href="../../Classes/KMSConnection.html">KMSConnection</a> for each one, using the same responder object.</p>
 
-<p>Each <a href="../../Classes/KMSConnection.html">KMSConnection</a> object just lives on the current run loop, reading input from the stream that it&rsquo;s associated with, passing it to the <a href="../../Classes/KMSResponder.html">KMSResponder</a> object, and acting on the commands that it gets back (generally by sending back data). When it is closed (externally, or in response to a close command), it tells the server, which then releases it.</p>
+<p>Each <a href="../../Classes/KMSConnection.html">KMSConnection</a> object lives on the current run loop, reading input from the stream that it&rsquo;s associated with, passing it to the <a href="../../Classes/KMSResponder.html">KMSResponder</a> object, and acting on the commands that it gets back (generally by sending back data). When it is closed (externally, or in response to a close command), it tells the server, which then releases it.</p>
 
 <h2>Responding To Requests</h2>
 
@@ -94,7 +98,7 @@
 
 <p>In a real ftp server, a listener on this second connection would be created dynamically in response to incoming commands, and in theory many listeners could exist at once serving multiple connections.</p>
 
-<p>As with the KMSServer only supporting a single connection on the main port, we also simplify the handling of data connections by only supporting a single data listener, and by setting it up once when the server starts. The assumption here is that a test will only need one of these connections at any one time.</p>
+<p>In our case we simplify the handling of data connections by only supporting a single data listener, and by setting it up once when the server starts. The assumption here is that a test will only need one of these connections at any one time.</p>
 
 <p>Currently, when a connection is received on this port, the server immediately sends back the contents of its data property, and then closes the connection. Internally the server uses a second <a href="../../Classes/KMSRegExResponder.html">KMSRegExResponder</a>, attached to a <a href="../../Classes/KMSConnection.html">KMSConnection</a>, to achieve this.</p>
 
@@ -102,13 +106,70 @@
 
 <h2>Setting Up Responder Responses</h2>
 
-<p>The current unit test examples set up the table of responder patterns and commands in code.</p>
+<p>Some of the unit test examples set up the table of responder patterns and commands in code. Others use the <a href="../../Classes/KMSResponseCollection.html">KMSResponseCollection</a> class to load the responses from a JSON file.</p>
 
-<p>In theory, there&rsquo;s no reason why this table couldn&rsquo;t be loaded from a data file instead, and for complex examples this may well be preferrable.</p>
+<p>JSON is chose here in preference to the plist format, as it allows the embedding of \r and \n. Server protocols are often very sensitive to things like the exact format of end of line separators &ndash; expecting CR/LF pairs for example &ndash; so being able to embed explicit line feeds and carriage returns is helpful.</p>
 
-<p>The only complication with this is that server protocols are often very sensitive to things like the exact format of end of line separators &ndash; expecting CR/LF pairs for example.</p>
+<p>The format of the JSON files is illustrated by this example:</p>
 
-<p>If you load in the patterns and responses from a file, you need to ensure that the loading mechanism deals with this adequately and doesn&rsquo;t end up processing away some of these separators.</p>
+<pre><code>{
+    "sets":
+    {
+        "default": {
+            "responses": [ "initial", "response1", "response2" ],
+        },
+
+        "bad pass": {
+            "responses": [ "initial", "response1", "response3" ],
+        },
+
+    },
+
+    "responses":
+    {
+        "initial" : {
+            "pattern" : "«initial»",
+            "commands" : [
+                          "220 $address FTP server ($server) ready.\r\n"
+                          ]
+        },
+
+        "response1" : {
+            "pattern" : "USER (\\w+)",
+            "commands" : [
+                          "331 User $1 accepted, provide password.\r\n"
+                          ],
+            "comment" : "Response to a USER command, indicating that the user has been accepted."
+
+        },
+
+        "response2" : {
+            "pattern" : "PASS (\\w+)",
+            "commands" : [
+                          "230 User user logged in.\r\n"
+                          ],
+            "comment" : "Response to a PASS command, indicating that the user/pass combination was ok."
+        },
+
+        "response3" : {
+            "pattern" : "PASS (\\w+)",
+            "commands" : [
+                          "530 Login incorrect.\r\n"
+                          ],
+            "comment" : "Response to a PASS command, indicating that the user/pass combination was bad."
+        }
+}
+</code></pre>
+
+<p>In this case we give responses for the USER/PASS handshake for an ftp server.</p>
+
+<p>We define two &ldquo;sets&rdquo;. The default one gives the response that you&rsquo;d expect if the USER/PASS values were correct. The &ldquo;bad pass&rdquo; one gives the response you&rsquo;d expect if the given credentials were incorrect.</p>
+
+<p>There are currently two special values that can be used in the responses.</p>
+
+<p>The pattern: &ldquo;«initial»&rdquo; is used to define a response that will always be sent immediately when the connection starts.</p>
+
+<p>A response of &ldquo;«close»&rdquo; is not sent back to the client. Instead it is interpreted as an instruction to close the connection.</p>
 				</div>
 				<div id="footer">
 					<hr />
