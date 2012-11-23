@@ -10,7 +10,7 @@
 
 @property (strong, nonatomic) NSArray* requests;
 @property (strong, nonatomic) NSArray* responses;
-@property (strong, nonatomic, readwrite) NSArray* initialResponse;
+@property (copy, nonatomic, readwrite) NSArray* initialResponse;
 
 @end
 

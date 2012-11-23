@@ -84,10 +84,29 @@
 			children = (
 				2239A1FC164C5381008D4ADE /* KSMockServerTests.m */,
 				2239A1FD164C5381008D4ADE /* UnitTest-Info.plist */,
+				2262E767165FBFFD004BD4A2 /* Response Files */,
+			);
+			path = UnitTests;
+			sourceTree = "<group>";
+		};
+		2262E767165FBFFD004BD4A2 /* Response Files */ = {
+			isa = PBXGroup;
+			children = (
 				22662EED165D2C65005FCC4A /* ftp.json */,
 				22662EEE165D2C65005FCC4A /* webdav.json */,
 			);
-			path = UnitTests;
+			name = "Response Files";
+			sourceTree = "<group>";
+		};
+		2262E768165FC38D004BD4A2 /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				2239A202164C53F3008D4ADE /* KSMockServerConnection.h */,
+				2239A203164C53F3008D4ADE /* KSMockServerConnection.m */,
+				2239A206164C53F3008D4ADE /* KSMockServerListener.h */,
+				2239A207164C53F3008D4ADE /* KSMockServerListener.m */,
+			);
+			name = Internal;
 			sourceTree = "<group>";
 		};
 		22B47C59164AE5EE006E80EB /* MockServer */ = {
@@ -95,16 +114,13 @@
 			children = (
 				2239A200164C53F3008D4ADE /* KSMockServer.h */,
 				2239A201164C53F3008D4ADE /* KSMockServer.m */,
-				2239A202164C53F3008D4ADE /* KSMockServerConnection.h */,
-				2239A203164C53F3008D4ADE /* KSMockServerConnection.m */,
-				2239A206164C53F3008D4ADE /* KSMockServerListener.h */,
-				2239A207164C53F3008D4ADE /* KSMockServerListener.m */,
 				22F6D0D6165A5B2400443CC9 /* KSMockServerRegExResponder.h */,
 				22F6D0D7165A5B2400443CC9 /* KSMockServerRegExResponder.m */,
 				2239A208164C53F3008D4ADE /* KSMockServerResponder.h */,
 				2239A209164C53F3008D4ADE /* KSMockServerResponder.m */,
 				22662EE5165D2199005FCC4A /* KSMockServerResponseCollection.h */,
 				22662EE6165D219A005FCC4A /* KSMockServerResponseCollection.m */,
+				2262E768165FC38D004BD4A2 /* Internal */,
 			);
 			name = MockServer;
 			path = "unit test";

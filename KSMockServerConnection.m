@@ -254,6 +254,7 @@
 
         case NSStreamEventHasBytesAvailable:
         {
+            MockServerAssert(stream == self.input);     // should never happen for the output stream
             [self processInput];
             break;
         }

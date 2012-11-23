@@ -31,7 +31,7 @@
     {
         NSError* error = nil;
         NSData* data = [NSData dataWithContentsOfURL:url options:NSDataReadingUncached error:&error];
-        NSDictionary* info = @{};
+        NSDictionary* info = nil;
         if (data)
         {
             info = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
