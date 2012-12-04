@@ -8,6 +8,34 @@
 @class KMSServer;
 @class KMSResponseCollection;
 
+/**
+ Base class for unit tests that use KMSServer.
+ 
+ This class simplfies the setup and execution of KMSServer unit tests.
+ 
+ It's not the only way to use the KMSServer class, but if you're happy to load 
+ responses from a JSON file, it makes things simple.
+ 
+ The basic format for a test using this class is:
+ 
+ - (void)testSomething
+ {
+    if ([self setupServerWithScheme:@"ftp" responses:@"ftp"])
+    {
+        // make your network request here
+ 
+        [self runUntilStopped];
+
+        // test your results here
+    }
+ }
+
+ Your network request should ensure that it calls [self pause] or [self stop] from its delegate method or completion callback.
+ The runUntilStopped call will sit pumping the current run loop until one of these other calls is made - which is what gives the
+ networking code that you're testing time to do its thing.
+
+ */
+
 @interface KMSTestCase : SenTestCase
 
 @property (strong, nonatomic) KMSServer* server;
@@ -21,6 +49,8 @@
 /**
  Setup a test using a given scheme and the response from a given JSON file.
  
+ The response set called "default" is loaded from the response file. You can change to another set later by calling <useResponseSet>.
+
  @param scheme The URL scheme to use - eg ftp.
  @param responsesFile The name of the responses file. This should be a JSON file, added as a resource to the unit test bundle.
  @return YES if the test server got set up ok.

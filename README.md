@@ -54,4 +54,4 @@ Other substitutions that are currently implemented:
 
 See the [documentation](http://karelia.github.com/MockServer/Documentation/).
 
-See also the KMSTests.m file for some examples of usage, and the ftp.json and webdav.json files for examples of responses.
+See also the KMSManualTests.m and KMSCollectionTests.m files for some examples of usage, and the ftp.json and webdav.json files for examples of responses.
