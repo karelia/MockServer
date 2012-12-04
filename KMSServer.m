@@ -220,8 +220,8 @@ NSString *const InitialResponseKey = @"«initial»";
     @synchronized(self.connections)
     {
         NSAssert([self.connections indexOfObject:connection] != NSNotFound, @"connection should be in our list");
-        [self.connections removeObject:connection];
         KMSLogDetail(@"connection %@ closed", connection);
+        [self.connections removeObject:connection];
     }
 }
 
