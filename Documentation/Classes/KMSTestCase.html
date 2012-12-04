@@ -48,11 +48,9 @@
 	
 	<option value="//api/name/pause">&nbsp;&nbsp;&nbsp;&nbsp;- pause</option>
 	
-	<option value="//api/name/runUntilStopped">&nbsp;&nbsp;&nbsp;&nbsp;- runUntilStopped</option>
+	<option value="//api/name/runUntilPaused">&nbsp;&nbsp;&nbsp;&nbsp;- runUntilPaused</option>
 	
 	<option value="//api/name/setupServerWithScheme:responses:">&nbsp;&nbsp;&nbsp;&nbsp;- setupServerWithScheme:responses:</option>
-	
-	<option value="//api/name/stop">&nbsp;&nbsp;&nbsp;&nbsp;- stop</option>
 	
 	<option value="//api/name/stringForRequest:">&nbsp;&nbsp;&nbsp;&nbsp;- stringForRequest:</option>
 	
@@ -90,11 +88,9 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/pause">pause</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/runUntilStopped">runUntilStopped</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/runUntilPaused">runUntilPaused</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setupServerWithScheme:responses:">setupServerWithScheme:responses:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/stop">stop</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/stringForRequest:">stringForRequest:</a></span></li>
 	
@@ -153,7 +149,7 @@ responses from a JSON file, it makes things simple.</p>
   {
       // make your network request here</p>
 
-<pre><code>  [self runUntilStopped];
+<pre><code>  [self runUntilPaused];
 
   // test your results here
 </code></pre>
@@ -163,8 +159,8 @@ responses from a JSON file, it makes things simple.</p>
 </ul>
 
 
-<p>Your network request should ensure that it calls [self pause] or [self stop] from its delegate method or completion callback.
-The runUntilStopped call will sit pumping the current run loop until one of these other calls is made &ndash; which is what gives the
+<p>Your network request should ensure that it calls [self pause] from its delegate method or completion callback.
+The runUntilPaused call will sit pumping the current run loop until this happens &ndash; which is what gives the
 networking code that you&rsquo;re testing time to do its thing.</p>
 					</div>
 					
@@ -215,22 +211,15 @@ an NSString.</p></span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/runUntilStopped">&ndash;&nbsp;runUntilStopped</a></code>
-		<span class="tooltip"><p>Pump the current event loop until something calls <a href="#//api/name/pause">pause</a> or <a href="#//api/name/stop">stop</a> on the server.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/stop">&ndash;&nbsp;stop</a></code>
-		<span class="tooltip"><p>Calls <stop> on the server to cause <a href="#//api/name/runUntilStopped">runUntilStopped</a> to return.</p></span>
+		<code><a href="#//api/name/runUntilPaused">&ndash;&nbsp;runUntilPaused</a></code>
+		<span class="tooltip"><p>Pump the current event loop until something calls <a href="#//api/name/pause">pause</a> on the server.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/pause">&ndash;&nbsp;pause</a></code>
-		<span class="tooltip"><p>Calls <pause> on the server to cause <a href="#//api/name/runUntilStopped">runUntilStopped</a> to return.</p></span>
+		<span class="tooltip"><p>Calls <pause> on the server to cause <a href="#//api/name/runUntilPaused">runUntilPaused</a> to return.</p></span>
 	</span>
 	
 	
@@ -314,7 +303,7 @@ an NSString.</p></span>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Calls <pause> on the server to cause <a href="#//api/name/runUntilStopped">runUntilStopped</a> to return.</p>
+		<p>Calls <pause> on the server to cause <a href="#//api/name/runUntilPaused">runUntilPaused</a> to return.</p>
 	</div>		
 	
     
@@ -331,7 +320,7 @@ an NSString.</p></span>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>After this call, it&rsquo;s ok to call <a href="#//api/name/runUntilStopped">runUntilStopped</a> again to perform more work.</p>
+		<p>After this call, it&rsquo;s ok to call <a href="#//api/name/runUntilPaused">runUntilPaused</a> again to perform more work.</p>
 	</div>
 	
 	
@@ -349,18 +338,18 @@ an NSString.</p></span>
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/runUntilStopped" title="runUntilStopped"></a>
-	<h3 class="subsubtitle method-title">runUntilStopped</h3>
+	<a name="//api/name/runUntilPaused" title="runUntilPaused"></a>
+	<h3 class="subsubtitle method-title">runUntilPaused</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Pump the current event loop until something calls <a href="#//api/name/pause">pause</a> or <a href="#//api/name/stop">stop</a> on the server.</p>
+		<p>Pump the current event loop until something calls <a href="#//api/name/pause">pause</a> on the server.</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (void)runUntilStopped</code></div>
+	<div class="method-subsection method-declaration"><code>- (void)runUntilPaused</code></div>
 
     
 	
@@ -446,47 +435,6 @@ an NSString.</p></span>
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/stop" title="stop"></a>
-	<h3 class="subsubtitle method-title">stop</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Calls <stop> on the server to cause <a href="#//api/name/runUntilStopped">runUntilStopped</a> to return.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)stop</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>After this call, the server will have been shut down so it&rsquo;s not possible to call <a href="#//api/name/runUntilStopped">runUntilStopped</a> again to perform more work.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KMSTestCase.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
 	<a name="//api/name/stringForRequest:" title="stringForRequest:"></a>
 	<h3 class="subsubtitle method-title">stringForRequest:</h3>
 	
@@ -521,7 +469,7 @@ an NSString.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>This helper deals with calling <a href="#//api/name/runUntilStopped">runUntilStopped</a> to pump the event loop until the request is done, and then
+		<p>This helper deals with calling <a href="#//api/name/runUntilPaused">runUntilPaused</a> to pump the event loop until the request is done, and then
 calling <a href="#//api/name/pause">pause</a> to pause the server and return control to the test.</p>
 	</div>
 	
