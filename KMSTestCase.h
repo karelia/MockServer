@@ -86,6 +86,9 @@
  
  This helper deals with calling <runUntilStopped> to pump the event loop until the request is done, and then
  calling <pause> to pause the server and return control to the test.
+ 
+ @param request The request to perform.
+
  */
 
 - (NSString*)stringForRequest:(NSURLRequest*)request;
