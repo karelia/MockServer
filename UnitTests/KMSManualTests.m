@@ -74,10 +74,10 @@ static NSString*const HTTPContent = @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 
              string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
          }
 
-         [server stop];
+         [server pause];
      }];
 
-    [server runUntilStopped];
+    [server runUntilPaused];
 
     return [string autorelease];
 }
@@ -92,6 +92,8 @@ static NSString*const HTTPContent = @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 
         NSString* string = [self stringForScheme:@"http" path:@"/index.html" method:@"GET" server:server];
         STAssertEqualObjects(string, HTTPContent, @"wrong response");
     }
+
+    [server stop];
 }
 
 - (void)testHTTPHead
@@ -102,6 +104,8 @@ static NSString*const HTTPContent = @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 
         NSString* string = [self stringForScheme:@"http" path:@"/index.html" method:@"HEAD" server:server];
         STAssertEqualObjects(string, @"", @"wrong response");
     }
+
+    [server stop];
 }
 
 @end

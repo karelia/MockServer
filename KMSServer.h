@@ -107,16 +107,16 @@
 
 /**
  Temporarily stop the server.
- This causes <runUntilStopped> to return, 
+ This causes <runUntilPaused> to return,
  but the server will actually still be running,
- and you can call <runUntilStopped> again to resume.
+ and you can call <runUntilPaused> again to resume.
  */
 
 - (void)pause;
 
 /**
  Stop the server.
- This causes <runUntilStopped> to return.
+ This causes <runUntilPaused> to return.
  The listeners will be shut down at this point, so only
  call this when you are done with the server.
  */
@@ -127,7 +127,7 @@
  Loop in the current run loop until something calls pause or stop on the server.
  
  Typically you start the server, initiate the network operation that you want
- to test, then call runUntilStopped in your test case.
+ to test, then call runUntilPaused in your test case.
 
  In a completion block or delegate method of your network operation, you 
  can then call <stop> on the server (or <pause> if you want to continue with
@@ -136,7 +136,7 @@
  
  */
 
-- (void)runUntilStopped;
+- (void)runUntilPaused;
 
 
 /**

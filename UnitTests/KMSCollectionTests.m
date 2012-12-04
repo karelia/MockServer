@@ -36,9 +36,7 @@
         NSURLRequest* request = [NSURLRequest requestWithURL:url];
 
         // perform the request using NSURLConnection
-        // stringForRequest is a KMSTestCase helper which deals with the simple case of an NSURLConnection request
-        // for other types of request you may need to do more work, but if you examine the source of stringForRequest you'll see that the basic
-        // principle is quite straightfoward
+        // stringForRequest is a KMSTestCase helper which deals with the simple case of an NSURLConnection request that gets back a string
         NSString* string = [self stringForRequest:request];
 
         // check that we got back what we were expecting
@@ -46,4 +44,42 @@
     }
 }
 
+- (void)testFTPExplicit
+{
+    // test like the above one, but which doesn't use [self stringForRequest]
+    
+    // setup a server object, using the ftp: scheme and taking the "default" set of responses from the "ftp.json" file.
+    if ([self setupServerWithScheme:@"ftp" responses:@"ftp"])
+    {
+        // set up the data that the server will return
+        NSString* testData = @"This is some test data";
+        self.server.data = [testData dataUsingEncoding:NSUTF8StringEncoding];
+
+        // setup an ftp request
+        NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"ftp://user:pass@127.0.0.1:%ld/test.txt", (long)self.server.port]];
+        NSURLRequest* request = [NSURLRequest requestWithURL:url];
+
+        // perform the request using NSURLConnection
+        __block NSString* string = nil;
+
+        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse* response, NSData* data, NSError* error)
+         {
+             if (error)
+             {
+                 STFail(@"got error %@", error);
+             }
+             else
+             {
+                 string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+             }
+
+             [self pause];
+         }];
+
+        [self runUntilPaused];
+
+        // check that we got back what we were expecting
+        STAssertEqualObjects(string, testData, @"got the wrong response: %@", string);
+    }
+}
 @end

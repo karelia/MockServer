@@ -24,6 +24,7 @@
 
 - (void)tearDown
 {
+    [self.server stop];
     NSLog(@"\n\nSession transcript:\n%@\n\n", self.transcript);
 }
 
@@ -70,14 +71,9 @@
 }
 
 
-- (void)runUntilStopped
+- (void)runUntilPaused
 {
-    [self.server runUntilStopped];
-}
-
-- (void)stop
-{
-    [self.server stop];
+    [self.server runUntilPaused];
 }
 
 - (void)pause
@@ -104,7 +100,7 @@
          [self pause];
      }];
 
-    [self runUntilStopped];
+    [self runUntilPaused];
 
     return [string autorelease];
 }

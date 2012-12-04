@@ -24,14 +24,14 @@
     {
         // make your network request here
  
-        [self runUntilStopped];
+        [self runUntilPaused];
 
         // test your results here
     }
  }
 
- Your network request should ensure that it calls [self pause] or [self stop] from its delegate method or completion callback.
- The runUntilStopped call will sit pumping the current run loop until one of these other calls is made - which is what gives the
+ Your network request should ensure that it calls [self pause] from its delegate method or completion callback.
+ The runUntilPaused call will sit pumping the current run loop until this happens - which is what gives the
  networking code that you're testing time to do its thing.
 
  */
@@ -84,7 +84,7 @@
  Perform an [NSURLConnection sendAsynchronousRequest] call to the mock server, and return the result as
  an NSString.
  
- This helper deals with calling <runUntilStopped> to pump the event loop until the request is done, and then
+ This helper deals with calling <runUntilPaused> to pump the event loop until the request is done, and then
  calling <pause> to pause the server and return control to the test.
  
  @param request The request to perform.
@@ -94,23 +94,15 @@
 - (NSString*)stringForRequest:(NSURLRequest*)request;
 
 /**
- Pump the current event loop until something calls <pause> or <stop> on the server.
+ Pump the current event loop until something calls <pause> on the server.
  */
 
-- (void)runUntilStopped;
+- (void)runUntilPaused;
 
 /**
- Calls <stop> on the server to cause <runUntilStopped> to return.
-
- After this call, the server will have been shut down so it's not possible to call <runUntilStopped> again to perform more work.
- */
-
-- (void)stop;
-
-/**
- Calls <pause> on the server to cause <runUntilStopped> to return.
+ Calls <pause> on the server to cause <runUntilPaused> to return.
  
- After this call, it's ok to call <runUntilStopped> again to perform more work.
+ After this call, it's ok to call <runUntilPaused> again to perform more work.
  */
 
 - (void)pause;

@@ -146,7 +146,7 @@ NSString *const InitialResponseKey = @"«initial»";
     self.running = NO;
 }
 
-- (void)runUntilStopped
+- (void)runUntilPaused
 {
     self.running = YES;
     while (self.running)
