@@ -3,17 +3,21 @@
 //  Copyright 2012 Karelia Software. All rights reserved.
 //
 
+/***
+ Some example tests which use a KMSRegExResponder.
+ These tests build up the responses array manually in code. Alternatively, you can use KMSResponseCollection to load them from a JSON file.
+ */
+
 #import "KMSServer.h"
 #import "KMSRegExResponder.h"
-#import "KMSResponseCollection.h"
 
 #import <SenTestingKit/SenTestingKit.h>
 
-@interface KMSTests : SenTestCase
+@interface KMSManualTests : SenTestCase
 
 @end
 
-@implementation KMSTests
+@implementation KMSManualTests
 
 static NSString *const HTTPHeader = @"HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=iso-8859-1\r\n\r\n";
 static NSString*const HTTPContent = @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 2.0//EN\"><html><head><title>example</title></head><body>example result</body></html>\n";
@@ -97,24 +101,6 @@ static NSString*const HTTPContent = @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 
     {
         NSString* string = [self stringForScheme:@"http" path:@"/index.html" method:@"HEAD" server:server];
         STAssertEqualObjects(string, @"", @"wrong response");
-    }
-}
-
-- (void)testFTP
-{
-    NSURL* collectionURL = [[NSBundle bundleForClass:[self class]] URLForResource:@"ftp" withExtension:@"json"];
-    KMSResponseCollection* collection = [KMSResponseCollection collectionWithURL:collectionURL];
-    NSArray* responses = [collection responsesWithName:@"default"];
-    KMSServer* server = [self setupServerWithResponses:responses];
-    if (server)
-    {
-        NSString* testData = @"This is some test data";
-        server.data = [testData dataUsingEncoding:NSUTF8StringEncoding];
-        NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"ftp://user:pass@127.0.0.1:%ld/test.txt", (long)server.port]];
-        NSURLRequest* request = [NSURLRequest requestWithURL:url];
-
-        NSString* string = [self stringForRequest:request server:server];
-        STAssertEqualObjects(string, testData, @"wrong response");
     }
 }
 

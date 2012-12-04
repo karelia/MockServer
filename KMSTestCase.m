@@ -27,7 +27,7 @@
     NSLog(@"\n\nSession transcript:\n%@\n\n", self.transcript);
 }
 
-- (BOOL)setupSessionWithScheme:(NSString*)scheme responses:(NSString*)responsesFile;
+- (BOOL)setupServerWithScheme:(NSString*)scheme responses:(NSString*)responsesFile;
 {
     self.user = @"user";
     self.password = @"pass";
@@ -85,5 +85,28 @@
     [self.server pause];
 }
 
+
+- (NSString*)stringForRequest:(NSURLRequest*)request
+{
+    __block NSString* string = nil;
+
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse* response, NSData* data, NSError* error)
+     {
+         if (error)
+         {
+             NSLog(@"got error %@", error);
+         }
+         else
+         {
+             string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+         }
+
+         [self pause];
+     }];
+
+    [self runUntilStopped];
+
+    return [string autorelease];
+}
 
 @end

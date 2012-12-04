@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		220AD79A1509019B00748655 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220AD7991509019B00748655 /* SenTestingKit.framework */; };
-		2239A1FE164C5381008D4ADE /* KMSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2239A1FC164C5381008D4ADE /* KMSTests.m */; };
 		2239A20A164C53F3008D4ADE /* KMSServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2239A201164C53F3008D4ADE /* KMSServer.m */; };
 		2239A20B164C53F3008D4ADE /* KMSConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2239A203164C53F3008D4ADE /* KMSConnection.m */; };
 		2239A20D164C53F3008D4ADE /* KMSListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 2239A207164C53F3008D4ADE /* KMSListener.m */; };
 		2239A20E164C53F3008D4ADE /* KMSResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2239A209164C53F3008D4ADE /* KMSResponder.m */; };
+		224AB38F166E5A660066B1C6 /* KMSCollectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 224AB38D166E5A660066B1C6 /* KMSCollectionTests.m */; };
+		224AB390166E5A660066B1C6 /* KMSManualTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 224AB38E166E5A660066B1C6 /* KMSManualTests.m */; };
+		224AB393166E5A7A0066B1C6 /* KMSTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 224AB392166E5A7A0066B1C6 /* KMSTestCase.m */; };
 		22662EE7165D219A005FCC4A /* KMSResponseCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 22662EE6165D219A005FCC4A /* KMSResponseCollection.m */; };
 		22662EEF165D2C65005FCC4A /* ftp.json in Resources */ = {isa = PBXBuildFile; fileRef = 22662EED165D2C65005FCC4A /* ftp.json */; };
 		22662EF0165D2C65005FCC4A /* webdav.json in Resources */ = {isa = PBXBuildFile; fileRef = 22662EEE165D2C65005FCC4A /* webdav.json */; };
@@ -35,7 +37,6 @@
 /* Begin PBXFileReference section */
 		220AD7981509019B00748655 /* UnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		220AD7991509019B00748655 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		2239A1FC164C5381008D4ADE /* KMSTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMSTests.m; sourceTree = "<group>"; };
 		2239A1FD164C5381008D4ADE /* UnitTest-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "UnitTest-Info.plist"; sourceTree = "<group>"; };
 		2239A200164C53F3008D4ADE /* KMSServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMSServer.h; sourceTree = SOURCE_ROOT; };
 		2239A201164C53F3008D4ADE /* KMSServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMSServer.m; sourceTree = SOURCE_ROOT; };
@@ -46,6 +47,10 @@
 		2239A208164C53F3008D4ADE /* KMSResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMSResponder.h; sourceTree = SOURCE_ROOT; };
 		2239A209164C53F3008D4ADE /* KMSResponder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMSResponder.m; sourceTree = SOURCE_ROOT; };
 		2239A216164C5D0A008D4ADE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		224AB38D166E5A660066B1C6 /* KMSCollectionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMSCollectionTests.m; sourceTree = "<group>"; };
+		224AB38E166E5A660066B1C6 /* KMSManualTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMSManualTests.m; sourceTree = "<group>"; };
+		224AB391166E5A7A0066B1C6 /* KMSTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMSTestCase.h; sourceTree = SOURCE_ROOT; };
+		224AB392166E5A7A0066B1C6 /* KMSTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMSTestCase.m; sourceTree = SOURCE_ROOT; };
 		22662EE5165D2199005FCC4A /* KMSResponseCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMSResponseCollection.h; sourceTree = SOURCE_ROOT; };
 		22662EE6165D219A005FCC4A /* KMSResponseCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMSResponseCollection.m; sourceTree = SOURCE_ROOT; };
 		22662EED165D2C65005FCC4A /* ftp.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ftp.json; sourceTree = "<group>"; };
@@ -84,7 +89,8 @@
 			isa = PBXGroup;
 			children = (
 				22F4D568165FDED5003FCEB9 /* test.sh */,
-				2239A1FC164C5381008D4ADE /* KMSTests.m */,
+				224AB38D166E5A660066B1C6 /* KMSCollectionTests.m */,
+				224AB38E166E5A660066B1C6 /* KMSManualTests.m */,
 				2239A1FD164C5381008D4ADE /* UnitTest-Info.plist */,
 				2262E767165FBFFD004BD4A2 /* Response Files */,
 			);
@@ -122,6 +128,8 @@
 				2239A209164C53F3008D4ADE /* KMSResponder.m */,
 				22662EE5165D2199005FCC4A /* KMSResponseCollection.h */,
 				22662EE6165D219A005FCC4A /* KMSResponseCollection.m */,
+				224AB391166E5A7A0066B1C6 /* KMSTestCase.h */,
+				224AB392166E5A7A0066B1C6 /* KMSTestCase.m */,
 				2262E768165FC38D004BD4A2 /* Internal */,
 			);
 			name = MockServer;
@@ -261,13 +269,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2239A1FE164C5381008D4ADE /* KMSTests.m in Sources */,
 				2239A20A164C53F3008D4ADE /* KMSServer.m in Sources */,
 				2239A20B164C53F3008D4ADE /* KMSConnection.m in Sources */,
 				2239A20D164C53F3008D4ADE /* KMSListener.m in Sources */,
 				2239A20E164C53F3008D4ADE /* KMSResponder.m in Sources */,
 				22F6D0D8165A5B2400443CC9 /* KMSRegExResponder.m in Sources */,
 				22662EE7165D219A005FCC4A /* KMSResponseCollection.m in Sources */,
+				224AB38F166E5A660066B1C6 /* KMSCollectionTests.m in Sources */,
+				224AB390166E5A660066B1C6 /* KMSManualTests.m in Sources */,
+				224AB393166E5A7A0066B1C6 /* KMSTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
