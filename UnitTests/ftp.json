@@ -16,6 +16,21 @@
             "comment" : "Good responses except that mkdir fails as if the directory already exists."
         },
 
+        "chmod not understood": {
+            "responses": ["initial", "user", "password", "sys", "pwd", "type", "cwd", "pasv", "size", "retr", "list", "mkdFileExists", "stor", "dele", "commandNotUnderstood" ],
+            "comment" : "Good responses except that mkdir fails as if the directory already exists."
+        },
+
+        "chmod unsupported": {
+            "responses": ["initial", "user", "password", "sys", "pwd", "type", "cwd", "pasv", "size", "retr", "list", "mkdFileExists", "stor", "dele", "chmod unsupported", "commandNotUnderstood" ],
+            "comment" : "Good responses except that mkdir fails as if the directory already exists."
+        },
+
+        "chmod not permitted": {
+            "responses": ["initial", "user", "password", "sys", "pwd", "type", "cwd", "pasv", "size", "retr", "list", "mkdFileExists", "stor", "dele", "chmod not permitted", "commandNotUnderstood" ],
+            "comment" : "Good responses except that mkdir fails as if the directory already exists."
+        },
+
         "bad login": {
             "responses": ["initial", "user", "password-bad", "unknown" ],
             "comment" : "Responses as if the user/password is bad."
@@ -186,6 +201,24 @@
                           "200 CHMOD Command okay.\r\n"
                           ],
             "comment" : "Response to a SITE CHMOD command. Pretends that the chmod worked ok."
+        },
+
+        "chmod unsupported" :
+        {
+            "pattern" :  "SITE CHMOD (\\d+) ([a-zA-Z0-9.]+)",
+            "commands" : [
+                          "502 CHMOD Unsupported.\r\n"
+                          ],
+            "comment" : "Response to a SITE CHMOD command. Declares that chmod is unsupported."
+        },
+        
+        "chmod not permitted" :
+        {
+            "pattern" :  "SITE CHMOD (\\d+) ([a-zA-Z0-9.]+)",
+            "commands" : [
+                          "550 Operation not permitted.\r\n"
+                          ],
+            "comment" : "Response to a SITE CHMOD command. Declares that chmod is not permitted."
         },
 
         "commandNotUnderstood" :
