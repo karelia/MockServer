@@ -18,17 +18,17 @@
 
         "chmod not understood": {
             "responses": ["initial", "user", "password", "sys", "pwd", "type", "cwd", "pasv", "size", "retr", "list", "mkdFileExists", "stor", "dele", "commandNotUnderstood" ],
-            "comment" : "Good responses except that mkdir fails as if the directory already exists."
+            "comment" : "Good responses except that the server doesn't understand the CHMOD command."
         },
 
         "chmod unsupported": {
             "responses": ["initial", "user", "password", "sys", "pwd", "type", "cwd", "pasv", "size", "retr", "list", "mkdFileExists", "stor", "dele", "chmod unsupported", "commandNotUnderstood" ],
-            "comment" : "Good responses except that mkdir fails as if the directory already exists."
+            "comment" : "Good responses except that the server doesn't support the CHMOD command."
         },
 
         "chmod not permitted": {
             "responses": ["initial", "user", "password", "sys", "pwd", "type", "cwd", "pasv", "size", "retr", "list", "mkdFileExists", "stor", "dele", "chmod not permitted", "commandNotUnderstood" ],
-            "comment" : "Good responses except that mkdir fails as if the directory already exists."
+            "comment" : "Good responses except that the server doesn't allow the CHMOD command."
         },
 
         "bad login": {
@@ -225,7 +225,7 @@
         {
             "pattern" : "(\\w+).*",
             "commands" : [
-                          "500 '$1': command not understood.", "«close»"
+                          "500 '$1': command not understood.\r\n"
                           ],
             "comment" : "Response to an unknown command. Sends back the correct 500 response code, along with the command."
         }
