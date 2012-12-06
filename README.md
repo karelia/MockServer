@@ -63,7 +63,7 @@ See the full [documentation](http://karelia.github.com/MockServer/Documentation/
 
 See MockServer's own [unit tests](https://github.com/karelia/MockServer/tree/master/UnitTests) for some examples. KMSManualTests.m and KMSCollectionTests.m illustrate usage, and the ftp.json and webdav.json files give examples of responses files.
 
-If you find issues or have suggestions, please [report them on github](https://github.com/karelia/MockServer/issues), or mail me at `sam` at `elegantchaos` dot `com`.
+If you find issues or have suggestions, please [report them on github](https://github.com/karelia/MockServer/issues), or [mail me](http://www.bornsleepy.com/contact).
 
 **Note about the documentation**: The web version of this documentation was built with appledoc and the [gendoc script](https://github.com/samdeane/gendoc). 
 For some reason that I haven't figured out yet, appledoc seems to get some of the index links wrong, so clicking on the MockServer link at the top-left may sometimes give you a 404 error. Sorry about that - it's a known issue which I'll try to fix!
