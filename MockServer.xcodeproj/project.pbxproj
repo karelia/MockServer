@@ -143,9 +143,9 @@
 		22F6D0D9165A65AB00443CC9 /* Documentation */ = {
 			isa = PBXGroup;
 			children = (
+				2239A216164C5D0A008D4ADE /* README.md */,
 				22F4D567165FDCC3003FCEB9 /* Responses-template.md */,
 				227CF8B716709C7B00F28590 /* Logging-template.md */,
-				2239A216164C5D0A008D4ADE /* README.md */,
 				22F6D0D4165A4A3400443CC9 /* .appledoc.plist */,
 				22F6D0DA165A65AB00443CC9 /* Classes.graffle */,
 				22F6D0DB165A65AB00443CC9 /* Design-template.md */,
