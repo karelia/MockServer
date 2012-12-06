@@ -20,7 +20,6 @@
 @property (strong, nonatomic) KMSListener* listener;
 @property (strong, nonatomic) NSOperationQueue* queue;
 @property (strong, nonatomic) NSDateFormatter* rfc1123DateFormatter;
-@property (assign, atomic) BOOL running;
 
 
 @end
@@ -111,13 +110,18 @@ NSString *const InitialResponseKey = @"«initial»";
 
         KMSAssert(self.port != 0);
         KMSLog(@"server started on port %ld", self.port);
-        self.running = YES;
+        self.state = KMSRunning;
     }
 }
 
 - (void)pause
 {
-    self.running = NO;
+    self.state = KMSPauseRequested;
+}
+
+- (BOOL)isRunning
+{
+    return self.state == KMSRunning;
 }
 
 - (void)stop
@@ -143,18 +147,20 @@ NSString *const InitialResponseKey = @"«initial»";
         NSAssert([self.connections count] == 0, @"all connections should have closed");
     }
 
-    self.running = NO;
+    self.state = KMSStopped;
 }
 
 - (void)runUntilPaused
 {
-    self.running = YES;
-    while (self.running)
+    KMSAssert(self.state != KMSStopped);
+
+    while (self.state != KMSPauseRequested)
     {
         @autoreleasepool {
             [[NSRunLoop currentRunLoop] runUntilDate:[NSDate date]];
         }
     }
+    self.state = KMSPaused;
 }
 
 - (NSUInteger)port

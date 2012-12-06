@@ -39,7 +39,6 @@
 @interface KMSTestCase : SenTestCase
 
 @property (strong, nonatomic) KMSServer* server;
-@property (assign, nonatomic) BOOL running;
 @property (strong, nonatomic) NSString* user;
 @property (strong, nonatomic) NSString* password;
 @property (strong, nonatomic) KMSResponseCollection* responses;

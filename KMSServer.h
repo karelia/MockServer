@@ -4,6 +4,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "KMSState.h"
 
 #ifndef KMSLog
 #define KMSLog NSLog
@@ -19,6 +20,9 @@
 
 @class KMSResponder;
 @class KMSConnection;
+
+
+
 
 /**
 
@@ -58,6 +62,13 @@
  */
 
 @property (readonly, atomic, getter = isRunning) BOOL running;
+
+/**
+ Current state of the server. 
+ Will be KMSReady until started, KMSRunning whilst running, KMSPauseRequested when pause is called, and KMSPaused after runUntilPaused returns.
+ */
+
+@property (assign, atomic) KMSState state;
 
 /**
  Responder object that reacts to input.
