@@ -1,0 +1,7 @@
+
+#define KMSLog(...) do { NSString* s = [NSString stringWithFormat:__VA_ARGS__]; NSLog(@"MockServer: %@", s); } while (0)
+#define KMSLogDetail KMSLog
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif

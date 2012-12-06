@@ -87,7 +87,7 @@
     if (success)
     {
         KMSAssert(self.port != 0);
-        NSLog(@"listener started on port %ld", self.port);
+        KMSLog(@"listener started on port %ld", self.port);
     }
     else
     {
