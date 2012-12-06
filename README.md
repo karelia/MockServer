@@ -50,11 +50,20 @@ Other substitutions that are currently implemented:
     $size        the size of the server's data property
     $date        the current date & time in RFC1123 format
 
+## Requirements
+
+MockServer expects the modern runtime, and uses the latest syntax. It doesn't use ARC yet, but really only because I haven't got round to it.
+
+Currently I've only tested it on the Mac, but I think it should work on iOS. Let me know if you encounter any issues.
+
+
 ## For More Information
 
 See the full [documentation](http://karelia.github.com/MockServer/Documentation/) on the web (if you're reading this on the web, that link probably refers to this page!).
 
 See MockServer's own [unit tests](https://github.com/karelia/MockServer/tree/master/UnitTests) for some examples. KMSManualTests.m and KMSCollectionTests.m illustrate usage, and the ftp.json and webdav.json files give examples of responses files.
+
+If you find issues or have suggestions, please [report them on github](https://github.com/karelia/MockServer/issues), or mail me at `sam` at `elegantchaos` dot `com`.
 
 **Note about the documentation**: The web version of this documentation was built with appledoc and the [gendoc script](https://github.com/samdeane/gendoc). 
 For some reason that I haven't figured out yet, appledoc seems to get some of the index links wrong, so clicking on the MockServer link at the top-left may sometimes give you a 404 error. Sorry about that - it's a known issue which I'll try to fix!
