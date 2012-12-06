@@ -1,4 +1,7 @@
 
+//#define KMSLog(...) do { } while (0)
+//#define KMSLogDetail(...) do { } while (0)
+
 #define KMSLog(...) do { NSString* s = [NSString stringWithFormat:__VA_ARGS__]; NSLog(@"MockServer: %@", s); } while (0)
 #define KMSLogDetail KMSLog
 

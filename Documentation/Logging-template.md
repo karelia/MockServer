@@ -9,12 +9,12 @@ By default, these are both defined to work like NSLog, but you can override this
 
 For example, to turn off the detailed logging, add this to your .pch file (before it imports KMSServer.h):
 
-    #define KMSLogDetail(...)
+    #define KMSLogDetail(...)   do { } while(0)
     
 To turn off all logging, also add this:
 
 
-    #define KMSLog(...)
+    #define KMSLog(...)         do { } while(0)
 
 
 ## Redirecting Logging

@@ -15,7 +15,6 @@
     [_password release];
     [_responses release];
     [_server release];
-    [_transcript release];
     [_url release];
     [_user release];
 
@@ -25,14 +24,12 @@
 - (void)tearDown
 {
     [self.server stop];
-    NSLog(@"\n\nSession transcript:\n%@\n\n", self.transcript);
 }
 
 - (BOOL)setupServerWithScheme:(NSString*)scheme responses:(NSString*)responsesFile;
 {
     self.user = @"user";
     self.password = @"pass";
-    self.transcript = [[[NSMutableString alloc] init] autorelease];
 
     NSURL* url = [[NSBundle bundleForClass:[self class]] URLForResource:responsesFile withExtension:@"json"];
     self.responses = [KMSResponseCollection collectionWithURL:url];

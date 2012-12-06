@@ -44,7 +44,6 @@
 @property (strong, nonatomic) NSString* password;
 @property (strong, nonatomic) KMSResponseCollection* responses;
 @property (strong, nonatomic) NSURL* url;
-@property (strong, nonatomic) NSMutableString* transcript;
 
 /**
  Setup a test using a given scheme and the response from a given JSON file.
