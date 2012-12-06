@@ -52,9 +52,9 @@ Other substitutions that are currently implemented:
 
 ## For More Information
 
-See the [documentation](http://karelia.github.com/MockServer/Documentation/).
+See the full [documentation](http://karelia.github.com/MockServer/Documentation/) on the web (if you're reading this on the web, that link probably refers to this page!).
 
-See also the KMSManualTests.m and KMSCollectionTests.m files for some examples of usage, and the ftp.json and webdav.json files for examples of responses.
+See MockServer's own [unit tests](https://github.com/karelia/MockServer/tree/master/UnitTests) for some examples. KMSManualTests.m and KMSCollectionTests.m illustrate usage, and the ftp.json and webdav.json files give examples of responses files.
 
 **Note about the documentation**: The web version of this documentation was built with appledoc and the [gendoc script](https://github.com/samdeane/gendoc). 
 For some reason that I haven't figured out yet, appledoc seems to get some of the index links wrong, so clicking on the MockServer link at the top-left may sometimes give you a 404 error. Sorry about that - it's a known issue which I'll try to fix!
