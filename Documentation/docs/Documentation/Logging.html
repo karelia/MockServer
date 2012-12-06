@@ -35,12 +35,12 @@
 
 <p>For example, to turn off the detailed logging, add this to your .pch file (before it imports KMSServer.h):</p>
 
-<pre><code>#define KMSLogDetail(...)
+<pre><code>#define KMSLogDetail(...)   do { } while(0)
 </code></pre>
 
 <p>To turn off all logging, also add this:</p>
 
-<pre><code>#define KMSLog(...)
+<pre><code>#define KMSLog(...)         do { } while(0)
 </code></pre>
 
 <h2>Redirecting Logging</h2>
