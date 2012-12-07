@@ -116,13 +116,17 @@ NSString *const InitialResponseKey = @"«initial»";
 
 - (void)pause
 {
-    self.state = KMSPauseRequested;
+    [self.queue addOperationWithBlock:^{
+        KMSLogDetail(@"pause requested");
+        self.state = KMSPauseRequested;
+    }];
 }
 
 - (void)resume
 {
     KMSAssert(self.state != KMSPauseRequested);
 
+    KMSLogDetail(@"resumed");
     self.state = KMSRunning;
 }
 
@@ -133,6 +137,7 @@ NSString *const InitialResponseKey = @"«initial»";
 
 - (void)stop
 {
+    KMSLogDetail(@"stop requested");
     [self.queue addOperationWithBlock:^{
         [self stopConnections];
     }];
@@ -161,6 +166,7 @@ NSString *const InitialResponseKey = @"«initial»";
 {
     KMSAssert(self.state != KMSStopped);
 
+    KMSLogDetail(@"running until paused");
     while (self.state != KMSPauseRequested)
     {
         @autoreleasepool {
@@ -168,6 +174,7 @@ NSString *const InitialResponseKey = @"«initial»";
         }
     }
     self.state = KMSPaused;
+    KMSLogDetail(@"now paused");
 }
 
 - (NSUInteger)port
@@ -210,7 +217,7 @@ NSString *const InitialResponseKey = @"«initial»";
                 data = [@"Test data" dataUsingEncoding:NSUTF8StringEncoding];
             }
 
-            NSArray* responses = @[ @[InitialResponseKey, data, CloseCommand ] ];
+            NSArray* responses = @[ @[InitialResponseKey, data, @(0.1), CloseCommand ] ];
             KMSRegExResponder* responder = [KMSRegExResponder responderWithResponses:responses];
             KMSConnection* connection = [KMSConnection connectionWithSocket:socket responder:responder server:server];
             [self.connections addObject:connection];

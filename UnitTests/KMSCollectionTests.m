@@ -60,7 +60,40 @@
         NSURLRequest* request = [NSURLRequest requestWithURL:url];
 
         // perform the request using NSURLConnection
+        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse* response, NSData* data, NSError* error)
+         {
+             if (error)
+             {
+                 STFail(@"got error %@", error);
+             }
+             else
+             {
+                 NSString* string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                 STAssertEqualObjects(string, testData, @"got the wrong response: %@", string);
+             }
+
+             [self pause];
+         }];
+
+        [self runUntilPaused];
+
+        // check that we got back what we were expecting
+    }
+}
+
+- (void)testMultiple
+{
+    // setup a server object, using the ftp: scheme and taking the "default" set of responses from the "ftp.json" file.
+    if ([self setupServerWithScheme:@"ftp" responses:@"ftp"])
+    {
+        // setup an ftp request
+        NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"ftp://user:pass@127.0.0.1:%ld/test.txt", (long)self.server.port]];
+        NSURLRequest* request = [NSURLRequest requestWithURL:url];
+
         __block NSString* string = nil;
+
+        // perform the request once
+        self.server.data = [@"this is a test" dataUsingEncoding:NSUTF8StringEncoding];
 
         [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse* response, NSData* data, NSError* error)
          {
@@ -76,10 +109,34 @@
              [self pause];
          }];
 
+        NSLog(@"send request for test.txt");
         [self runUntilPaused];
+        STAssertEqualObjects(string, @"this is a test", @"got the wrong response: %@", string);
 
-        // check that we got back what we were expecting
-        STAssertEqualObjects(string, testData, @"got the wrong response: %@", string);
+        [self.server resume];
+
+        // perform the test again
+        self.server.data = [@"this is another test" dataUsingEncoding:NSUTF8StringEncoding];
+        url = [NSURL URLWithString:[NSString stringWithFormat:@"ftp://user:pass@127.0.0.1:%ld/another.txt", (long)self.server.port]];
+        request = [NSURLRequest requestWithURL:url];
+        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse* response, NSData* data, NSError* error)
+         {
+             if (error)
+             {
+                 STFail(@"got error %@", error);
+             }
+             else
+             {
+                 string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+             }
+
+             [self pause];
+         }];
+
+        NSLog(@"send request for another.txt");
+        [self runUntilPaused];
+        STAssertEqualObjects(string, @"this is another test", @"got the wrong response: %@", string);
     }
 }
+
 @end

@@ -37,6 +37,26 @@
                BlueprintName = "UnitTests"
                ReferencedContainer = "container:MockServer.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "KMSManualTests/testHTTPGet">
+               </Test>
+               <Test
+                  Identifier = "KMSManualTests/testHTTPHead">
+               </Test>
+               <Test
+                  Identifier = "KMSManualTests">
+               </Test>
+               <Test
+                  Identifier = "KMSCollectionTests/testFTP">
+               </Test>
+               <Test
+                  Identifier = "KMSCollectionTests/testFTPExplicit">
+               </Test>
+               <Test
+                  Identifier = "KMSTestCase">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>

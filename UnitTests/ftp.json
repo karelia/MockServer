@@ -128,7 +128,9 @@
         {
             "pattern" : "RETR ([a-zA-Z0-9./]+)",
             "commands" : [
-                          "150 Opening BINARY mode data connection for '$1' ($size bytes).\r\n"
+                          "150 Opening BINARY mode data connection for '$1' ($size bytes).\r\n",
+                          0.1,
+                          "226 Transfer complete.\r\n"
                           ],
             "comment" : "Response to a RETR command, which is used to retrieve a file. Pretends to start listening for a client connection (actually the listener is already listening), then pauses for a bit and finally returns an indication that the data has been sent. This is fake, as the sending of the data isn't synchronised with this response in any way, but the delay should ensure that the data actually has gone by the time the response is received."
         },
