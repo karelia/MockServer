@@ -78,6 +78,11 @@
     [self.server pause];
 }
 
+- (void)resume
+{
+    [self.server resume];
+}
+
 
 - (NSString*)stringForRequest:(NSURLRequest*)request
 {

@@ -118,12 +118,26 @@
 
 /**
  Temporarily stop the server.
- This causes <runUntilPaused> to return,
- but the server will actually still be running,
- and you can call <runUntilPaused> again to resume.
+ This causes <runUntilPaused> to return.
+ It doesn't actually do anything to the server other than
+ change its state variable - the underlying networking code
+ will actually still be running.
+ 
+ To perform another test, call <resume> (to reset the server
+ state), and you can then call <runUntilPaused> again.
  */
 
 - (void)pause;
+
+/**
+ Continue again after calling <runUntilPaused>/<pause>.
+ This doesn't actually do anything to underlying networking
+ code, which will still be running, but it resets the server's
+ state variable in preparation for another set of calls to
+ <runUntilPaused>/<pause>.
+ */
+
+- (void)resume;
 
 /**
  Stop the server.

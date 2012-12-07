@@ -119,6 +119,13 @@ NSString *const InitialResponseKey = @"«initial»";
     self.state = KMSPauseRequested;
 }
 
+- (void)resume
+{
+    KMSAssert(self.state != KMSPauseRequested);
+
+    self.state = KMSRunning;
+}
+
 - (BOOL)isRunning
 {
     return self.state == KMSRunning;
