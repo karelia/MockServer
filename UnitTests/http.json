@@ -1,0 +1,235 @@
+{
+    "sets":
+    {
+        "default": {
+            "responses": ["initial", "user", "password", "sys", "pwd", "type", "cwd", "pasv", "size", "retr", "list", "mkd", "stor", "dele", "chmod", "commandNotUnderstood" ],
+            "comment" : "Standard set of 'good' responses."
+        },
+
+        "delete fail": {
+            "responses": ["initial", "user", "password", "sys", "pwd", "type", "cwd", "pasv", "size", "retr", "list", "mkd", "stor", "deleFileDoesntExist", "chmod", "commandNotUnderstood" ],
+            "comment" : "Good responses except that delete fails as if the file doesn't exist."
+        },
+
+        "mkdir fail": {
+            "responses": ["initial", "user", "password", "sys", "pwd", "type", "cwd", "pasv", "size", "retr", "list", "mkdFileExists", "stor", "dele", "chmod", "commandNotUnderstood" ],
+            "comment" : "Good responses except that mkdir fails as if the directory already exists."
+        },
+
+        "chmod not understood": {
+            "responses": ["initial", "user", "password", "sys", "pwd", "type", "cwd", "pasv", "size", "retr", "list", "mkdFileExists", "stor", "dele", "commandNotUnderstood" ],
+            "comment" : "Good responses except that the server doesn't understand the CHMOD command."
+        },
+
+        "chmod unsupported": {
+            "responses": ["initial", "user", "password", "sys", "pwd", "type", "cwd", "pasv", "size", "retr", "list", "mkdFileExists", "stor", "dele", "chmod unsupported", "commandNotUnderstood" ],
+            "comment" : "Good responses except that the server doesn't support the CHMOD command."
+        },
+
+        "chmod not permitted": {
+            "responses": ["initial", "user", "password", "sys", "pwd", "type", "cwd", "pasv", "size", "retr", "list", "mkdFileExists", "stor", "dele", "chmod not permitted", "commandNotUnderstood" ],
+            "comment" : "Good responses except that the server doesn't allow the CHMOD command."
+        },
+
+        "bad login": {
+            "responses": ["initial", "user", "password-bad", "unknown" ],
+            "comment" : "Responses as if the user/password is bad."
+        }
+
+    },
+
+    "responses":
+    {
+        "initial" : {
+            "pattern" : "«initial»",
+            "commands" : [
+                          "220 $address FTP server ($server) ready.\r\n"
+                          ]
+        },
+
+        "user" : {
+            "pattern" : "USER (\\w+)",
+            "commands" : [
+                          "331 User $1 accepted, provide password.\r\n"
+                          ],
+            "comment" : "Response to a USER command, indicating that the user has been accepted."
+
+        },
+
+        "password" : {
+            "pattern" : "PASS (\\w+)",
+            "commands" : [
+                          "230 User user logged in.\r\n"
+                          ],
+            "comment" : "Response to a PASS command, indicating that the user/pass combination was ok."
+        },
+
+        "password-bad" : {
+            "pattern" : "PASS (\\w+)",
+            "commands" : [
+                          "530 Login incorrect.\r\n"
+                          ],
+            "comment" : "Response to a PASS command, indicating that the user/pass combination was bad."
+        },
+
+        "sys" : {
+            "pattern" : "SYST",
+            "commands" : [
+                          "215 UNIX Type: L8 Version: $server\r\n"
+                          ],
+            "comment" : "Response to a SYS command. Pretends to be a UNIX server."
+        },
+
+        "pwd" : {
+            "pattern" : "PWD",
+            "commands" : [
+                          "257 \"/\" is the current directory.\r\n"
+                          ],
+            "comment" : "Response to the PWD command. Pretends that the current path is '/'."
+        },
+
+        "type" :
+        {
+            "pattern" : "TYPE (\\w+)",
+            "commands" : [
+                          "200 Type set to $1.\r\n"
+                          ],
+            "comment" : "Response to the TYPE command. Pretends to have changed to the requested type."
+        },
+
+        "cwd" :
+        {
+            "pattern" : "CWD .*",
+            "commands" : [
+                          "250 CWD command successful.\r\n"
+                          ],
+            "comment" : "Response to the CWD command. Pretends to change directory."
+        },
+
+        "pasv" :
+        {
+            "pattern" : "PASV",
+            "commands" : [
+                          "227 Entering Passive Mode ($pasv)\r\n"
+                          ],
+            "comment" : "Response to the PASV command. Returns details of the server's data listener in the correct format for an FTP client to use."
+        },
+
+        "size" :
+        {
+            "pattern" : "SIZE ([a-zA-Z0-9.]+)",
+            "commands" : [
+                          "213 $size\r\n"
+                          ],
+            "comment" : "Response to a SIZE command. Returns the size of any NSData object attached to the server's <data> property."
+        },
+
+        "retr" :
+        {
+            "pattern" : "RETR ([a-zA-Z0-9./]+)",
+            "commands" : [
+                          "150 Opening BINARY mode data connection for '$1' ($size bytes).\r\n",
+                          0.1,
+                          "226 Transfer complete.\r\n"
+                          ],
+            "comment" : "Response to a RETR command, which is used to retrieve a file. Pretends to start listening for a client connection (actually the listener is already listening), then pauses for a bit and finally returns an indication that the data has been sent. This is fake, as the sending of the data isn't synchronised with this response in any way, but the delay should ensure that the data actually has gone by the time the response is received."
+        },
+
+        "list" :
+        {
+            "pattern" : "LIST",
+            "commands" : [
+                          0.1,
+                          "150 Opening ASCII mode data connection for '/bin/ls'.\r\n",
+                          0.1,
+                          "226 Transfer complete.\r\n"
+                          ],
+            "comment" : "Response to a LIST command, which is used to retrieve a directory listing. This works like the RETR response, so you should first set up the server's <data> property with the directory listing that you actually want to have returned."
+        },
+
+        "mkd" :
+        {
+            "pattern" : "MKD (\\w+)",
+            "commands" : [
+                          "257 \"$1\" directory created.\r\n"
+                          ],
+            "comment" : "Response to a MKD command. Pretends to create the directory as requested."
+        },
+
+        "mkdFileExists" :
+        {
+            "pattern" :  "MKD (\\w+)",
+            "commands" : [
+                          "550 $1: File exists.\r\n"
+                          ],
+            "comment" : "Response to a MKD command. Pretends to fail because the directory already existed."
+        },
+
+        "stor" :
+        {
+            "pattern" :  "STOR ([a-zA-Z0-9.]+)",
+            "commands" : [
+                          0.1,
+                          "150 Opening ASCII mode data connection for '$1'.\r\n",
+                          0.2,
+                          "226 Transfer complete.\r\n"
+                          ],
+            "comment" : "Response to a STOR command. Much like a RETR command, except that it's pretending to upload rather than download."
+
+        },
+
+        "dele" :
+        {
+            "pattern" :  "DELE ([a-zA-Z0-9.]+)",
+            "commands" : [
+                          "250 DELE command successful.\r\n"
+                          ],
+            "comment" : "Response to a DELE command. Pretends to successfully delete the file."
+        },
+
+        "deleFileDoesntExist" :
+        {
+            "pattern" :  "DELE ([a-zA-Z0-9.]+)",
+            "commands" : [
+                          "550 $1: No such file or directory.\r\n"
+                          ],
+            "comment" : "Response to a DELE command. Pretends to fail because the file didn't exist."
+        },
+
+        "chmod" :
+        {
+            "pattern" :  "SITE CHMOD (\\d+) ([a-zA-Z0-9.]+)",
+            "commands" : [
+                          "200 CHMOD Command okay.\r\n"
+                          ],
+            "comment" : "Response to a SITE CHMOD command. Pretends that the chmod worked ok."
+        },
+
+        "chmod unsupported" :
+        {
+            "pattern" :  "SITE CHMOD (\\d+) ([a-zA-Z0-9.]+)",
+            "commands" : [
+                          "502 CHMOD Unsupported.\r\n"
+                          ],
+            "comment" : "Response to a SITE CHMOD command. Declares that chmod is unsupported."
+        },
+        
+        "chmod not permitted" :
+        {
+            "pattern" :  "SITE CHMOD (\\d+) ([a-zA-Z0-9.]+)",
+            "commands" : [
+                          "550 Operation not permitted.\r\n"
+                          ],
+            "comment" : "Response to a SITE CHMOD command. Declares that chmod is not permitted."
+        },
+
+        "commandNotUnderstood" :
+        {
+            "pattern" : "(\\w+).*",
+            "commands" : [
+                          "500 '$1': command not understood.\r\n"
+                          ],
+            "comment" : "Response to an unknown command. Sends back the correct 500 response code, along with the command."
+        }
+    }
+}
