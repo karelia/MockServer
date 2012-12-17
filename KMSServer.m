@@ -36,6 +36,7 @@
 @synthesize running = _running;
 
 NSString *const CloseCommand = @"«close»";
+NSString *const DataCommand = @"«data»";
 NSString *const InitialResponseKey = @"«initial»";
 
 #pragma mark - Object Lifecycle

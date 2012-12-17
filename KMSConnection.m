@@ -142,8 +142,16 @@
                 method = @selector(processOutput);
                 if (isString)
                 {
-                    KMSLog(@"queued output %@", command);
-                    command = [command dataUsingEncoding:NSUTF8StringEncoding];
+                    if ([command isEqual:DataCommand])
+                    {
+                        command = self.server.data;
+                        KMSLog(@"queued server.data as output");
+                    }
+                    else
+                    {
+                        KMSLog(@"queued output %@", command);
+                        command = [command dataUsingEncoding:NSUTF8StringEncoding];
+                    }
                 }
                 [self.outputData appendData:command];
             }

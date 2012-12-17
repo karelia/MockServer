@@ -186,6 +186,13 @@
 
 /**
  When the server encounters this as an output item,
+ it writes back the contents of it's data property.
+ */
+
+extern NSString *const DataCommand;
+
+/**
+ When the server encounters this as an output item,
  it closes the connection.
  */
 

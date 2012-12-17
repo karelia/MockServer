@@ -62,11 +62,13 @@ In this case we give responses for the USER/PASS handshake for an ftp server.
 
 We define two "sets". The default one gives the response that you'd expect if the USER/PASS values were correct. The "bad pass" one gives the response you'd expect if the given credentials were incorrect.
 
-There are currently two special values that can be used in the responses.
+There are currently three special values that can be used in the responses.
 
 The pattern: "«initial»" is used to define a response that will always be sent immediately when the connection starts.
 
 A response of "«close»" is not sent back to the client. Instead it is interpreted as an instruction to close the connection.
+
+A response of "«data»" causes the value of the <[MockServer data]> property to be sent back to the client.
 
 
 
@@ -89,6 +91,8 @@ Commands are objects of the class NSData, NSString or NSNumber.
 There are a couple of special constants that you can use when defining your responses.
 
 The pattern **InitialResponseKey** is used to define a response that will always be sent immediately when the connection starts.
+
+A response of **DataCommand** causes the value of the <[MockServer data]> property to be sent back to the client.
 
 A response of **CloseCommand** is not sent back to the client. Instead it is interpreted as an instruction to close the connection.
 
