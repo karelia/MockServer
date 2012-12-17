@@ -27,6 +27,8 @@
 
 - (id)initWithURL:(NSURL*)url
 {
+    KMSAssert(url != nil);
+
     if ((self = [super init]) != nil)
     {
         NSError* error = nil;
