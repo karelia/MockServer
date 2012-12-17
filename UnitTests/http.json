@@ -5,7 +5,6 @@
             "responses": ["get", "put", "unauthorized", "unknown" ],
             "comment" : "All commands succeed"
         },
-
     },
 
     "responses":
@@ -34,7 +33,6 @@
         {
             "pattern": ".*Authorization: Basic .*",
             "commands": [
-
                          "HTTP/1.0 501 Not Implemented\r\n\r\b",
                          "«close»"
                          ]
