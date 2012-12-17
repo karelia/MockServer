@@ -2,12 +2,12 @@
     "sets":
     {
         "default": {
-            "responses": ["find", "put", "delete", "mkcol", "unauthorized", "unknown" ],
+            "responses": ["find", "put", "delete", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "All commands succeed"
         },
 
         "make fails": {
-            "responses": ["find", "put", "delete", "mkcol-fail", "unauthorized", "unknown" ],
+            "responses": ["find", "put", "delete", "mkcol-fail", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "Making directory fails as if it already exists"
         }
 
@@ -93,7 +93,17 @@
                           ]
         },
 
-        "unauthorized":
+        "command-unauthorized": {
+            "pattern": "(PROPFIND|GET|PUT|DELETE|MKCOL).*Authorization: Basic .*",
+
+            "commands" : [
+                          "HTTP/1.0 401 Unauthorized\r\n",
+                          "WWW-Authenticate: Basic realm=\"test\"\r\n\r\n",
+                          "«close»"
+                          ]
+        },
+
+        "unknown":
         {
             "pattern": ".*Authorization: Basic .*",
             "commands": [
@@ -104,7 +114,7 @@
         },
 
 
-        "unknown":
+        "unauthorized":
         {
             "pattern" : ".*\r\n\r\n.*",
             "commands" : [

@@ -2,7 +2,12 @@
     "sets":
     {
         "default": {
-            "responses": ["get", "put", "unauthorized", "unknown" ],
+            "responses": ["get", "put", "unknown" ],
+            "comment" : "All commands succeed"
+        },
+
+        "authorized": {
+            "responses": ["get-authorized", "put-authorized", "get-unauthorized", "put-unauthorized", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "All commands succeed"
         },
     },
@@ -10,6 +15,19 @@
     "responses":
     {
         "get": {
+            "pattern": "GET.*",
+
+            "commands" : [
+                          "HTTP/1.1 200 OK\r\n",
+                          "Content-Type: text/html; charset=iso-8859-1\r\n\r\n",
+                          "«data»",
+                          "«close»"
+                          ],
+
+            "comment" : "A working get command with no authorization. Returns the value of server.data as content"
+        },
+
+        "get-authorized": {
             "pattern": "GET.*Authorization: Basic dXNlcjpwYXNz.*",
 
             "commands" : [
@@ -17,36 +35,65 @@
                           "Content-Type: text/html; charset=iso-8859-1\r\n\r\n",
                           "«data»",
                           "«close»"
-                          ]
+                          ],
+
+            "comment" : "A working get command. Matches GET sent with 'user' and 'pass' as the username and password. Returns the value of server.data as content"
         },
 
         "put": {
+            "pattern": "PUT.*",
+
+            "commands" : [
+                          "HTTP/1.1 200 OK\r\n\r\n",
+                          "«close»"
+                          ],
+
+            "comment" : "A working PUT command with no authorization."
+        },
+
+        "put-authorized": {
             "pattern": "PUT.*Authorization: Basic dXNlcjpwYXNz.*",
 
             "commands" : [
                           "HTTP/1.1 200 OK\r\n\r\n",
                           "«close»"
+                          ],
+
+            "comment" : "A working PUT command. Matches PUT sent with 'user' and 'pass' as the username and password. "
+        },
+
+        "command-unauthorized": {
+            "pattern": "(GET|PUT|HEAD).*Authorization: Basic .*",
+
+            "commands" : [
+                          "HTTP/1.0 401 Unauthorized\r\n",
+                          "WWW-Authenticate: Basic realm=\"test\"\r\n\r\n",
+                          "«close»"
                           ]
         },
 
-        "unauthorized":
+        "unknown":
         {
             "pattern": ".*Authorization: Basic .*",
             "commands": [
                          "HTTP/1.0 501 Not Implemented\r\n\r\b",
                          "«close»"
-                         ]
+                         ],
+
+            "comment" : "Matches any other command sent with authorization - returns Not Implemented"
         },
 
 
-        "unknown":
+        "unauthorized":
         {
             "pattern" : ".*\r\n\r\n.*",
             "commands" : [
                           "HTTP/1.0 401 Unauthorized\r\n",
                           "WWW-Authenticate: Basic realm=\"test\"\r\n\r\n",
                           "«close»"
-                          ]
+                          ],
+
+            "comment" : "Matches anything sent without authorization - returns Unauthorized"
         },
         
     }
