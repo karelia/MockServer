@@ -76,6 +76,12 @@
 
 @property (strong, nonatomic) KMSResponder* responder;
 
+/**
+ Transcript of all data sent and received, and all commands processed.
+ */
+
+@property (strong, nonatomic) NSMutableArray* transcript;
+
 /** 
  Make a server that uses the given responder object to reply to incoming requests.
  The server will listen on an automatically allocated port.

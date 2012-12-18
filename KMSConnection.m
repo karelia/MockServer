@@ -10,6 +10,7 @@
 #import "KMSServer.h"
 #import "KMSListener.h"
 #import "KMSResponder.h"
+#import "KMSTranscriptEntry.h"
 
 @interface KMSConnection()
 
@@ -96,6 +97,7 @@
     {
         NSDictionary* substitutions = [self.server standardSubstitutions];
         NSString* request = [[NSString alloc] initWithBytes:buffer length:bytesRead encoding:NSUTF8StringEncoding];
+        [self.server.transcript addObject:[KMSTranscriptEntry entryWithType:KMSTranscriptInput value:request]];
         KMSLog(@"got request '%@'", request);
         NSArray* commands = [self.responder responseForRequest:request substitutions:substitutions];
         if (commands)
@@ -116,6 +118,7 @@
 - (void)processClose
 {
     KMSLogDetail(@"closed connection");
+    [self.server.transcript addObject:[KMSTranscriptEntry entryWithType:KMSTranscriptCommand value:CloseCommand]];
     [self.output close];
     [self.input close];
 }
@@ -170,6 +173,7 @@
     {
         NSUInteger written = [self.output write:[self.outputData bytes] maxLength:bytesToWrite];
         [self.outputData replaceBytesInRange:NSMakeRange(0, written) withBytes:nil length:0];
+        [self.server.transcript addObject:[KMSTranscriptEntry entryWithType:KMSTranscriptOutput value:self.outputData]];
 
         KMSLogDetail(@"wrote %ld bytes", (long)written);
     }

@@ -21,7 +21,6 @@
 @property (strong, nonatomic) NSOperationQueue* queue;
 @property (strong, nonatomic) NSDateFormatter* rfc1123DateFormatter;
 
-
 @end
 
 @implementation KMSServer
@@ -34,6 +33,7 @@
 @synthesize responder = _responder;
 @synthesize rfc1123DateFormatter = _rfc1123DateFormatter;
 @synthesize running = _running;
+@synthesize transcript = _transcript;
 
 NSString *const CloseCommand = @"«close»";
 NSString *const DataCommand = @"«data»";
@@ -64,7 +64,8 @@ NSString *const InitialResponseKey = @"«initial»";
         self.queue = [NSOperationQueue currentQueue];
         self.responder = responder;
         self.connections = [NSMutableArray array];
-
+        self.transcript = [NSMutableArray array];
+        
         NSDateFormatter* formatter = [[[NSDateFormatter alloc] init] autorelease];
         [formatter setFormatterBehavior:NSDateFormatterBehavior10_4];
         [formatter setLocale:[[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"] autorelease]];
@@ -96,7 +97,8 @@ NSString *const InitialResponseKey = @"«initial»";
     [_dataListener release];
     [_queue release];
     [_responder release];
-
+    [_transcript release];
+    
     [super dealloc];
 }
 
