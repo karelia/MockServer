@@ -153,7 +153,14 @@
                     }
                     else
                     {
-                        KMSLog(@"queued output %@", command);
+                        // log just the first line of the output
+                        NSString* string = command;
+                        NSRange range = [command rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet]];
+                        if (range.location != NSNotFound)
+                        {
+                            string = [NSString stringWithFormat:@"%@… (%ld bytes)", [string substringToIndex:range.location], (long) [string length]];
+                        }
+                        KMSLog(@"queued output %@", string);
                         command = [command dataUsingEncoding:NSUTF8StringEncoding];
                     }
                 }

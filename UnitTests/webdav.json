@@ -17,7 +17,7 @@
         },
 
         "delete fails": {
-            "responses": ["find", "fail", "delete-fail", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["find", "put", "delete-fail", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "All commands succeed"
         },
 
