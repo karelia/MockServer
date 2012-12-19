@@ -6,6 +6,11 @@
             "comment" : "All commands succeed"
         },
 
+        "get hangs": {
+            "responses": ["get-hangs", "put", "unknown" ],
+            "comment" : "All commands succeed"
+        },
+
         "authorized": {
             "responses": ["get-authorized", "put-authorized", "get-unauthorized", "put-unauthorized", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "All commands succeed"
@@ -25,6 +30,17 @@
                           ],
 
             "comment" : "A working get command with no authorization. Returns the value of server.data as content"
+        },
+
+        "get-hangs": {
+            "pattern": "GET.*",
+
+            "commands" : [
+                          "HTTP/1.1 200 OK\r\n",
+                          "Content-Type: text/html; charset=iso-8859-1",
+                          ],
+
+            "comment" : "A working get command which starts sending a response, but never finished. Should hang the client (until it times out)."
         },
 
         "get-authorized": {
