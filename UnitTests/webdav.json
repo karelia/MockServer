@@ -9,7 +9,12 @@
         "make fails": {
             "responses": ["find", "put", "delete", "mkcol-fail", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "Making directory fails as if it already exists"
-        }
+        },
+
+        "put fails": {
+            "responses": ["find", "put-fail", "delete", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
+            "comment" : "All commands succeed"
+        },
 
     },
 
@@ -53,6 +58,15 @@
 
             "commands" : [
                           "HTTP/1.1 200 OK\r\n\r\n",
+                          "«close»"
+                          ]
+        },
+
+        "put-fail": {
+            "pattern": "PUT.*Authorization: Basic dXNlcjpwYXNz.*",
+
+            "commands" : [
+                          "HTTP/1.1 405 Method Not Allowed\r\n\r\n",
                           "«close»"
                           ]
         },
