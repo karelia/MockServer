@@ -147,6 +147,7 @@
                 {
                     if ([command isEqual:DataCommand])
                     {
+                        KMSAssert(self.server.data);
                         command = self.server.data;
                         KMSLog(@"queued server.data as output");
                     }
