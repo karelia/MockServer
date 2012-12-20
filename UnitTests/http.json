@@ -11,6 +11,11 @@
             "comment" : "All commands succeed"
         },
 
+        "get disconnects": {
+            "responses": ["get-disconnects", "put", "unknown" ],
+            "comment" : "All commands succeed"
+        },
+
         "authorized": {
             "responses": ["get-authorized", "put-authorized", "get-unauthorized", "put-unauthorized", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "All commands succeed"
@@ -51,6 +56,16 @@
                           ],
 
             "comment" : "A working get command which starts sending a response, but never finished. Should hang the client (until it times out)."
+        },
+
+        "get-disconnects": {
+            "pattern": "GET.*",
+
+            "commands" : [
+                          "«close»"
+                          ],
+
+            "comment" : "A get command which disconnects without sending anything. Should hopefully cause an error at the client end."
         },
 
         "get-authorized": {

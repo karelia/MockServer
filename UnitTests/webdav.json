@@ -11,19 +11,44 @@
             "comment" : "Making directory fails as if it already exists"
         },
 
+        "make hangs": {
+            "responses": ["find", "put", "delete", "mkcol-hang", "command-unauthorized", "unknown", "unauthorized" ],
+            "comment" : "Making directory hangs - client should time out eventually."
+        },
+
+        "make disconnects": {
+            "responses": ["find", "put", "delete", "mkcol-disconnect", "command-unauthorized", "unknown", "unauthorized" ],
+            "comment" : "Making directory hangs - client should time out eventually."
+        },
+
         "put fails": {
             "responses": ["find", "put-fail", "delete", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
-            "comment" : "All commands succeed"
+            "comment" : "Put command fails."
         },
 
         "put hangs": {
-            "responses": ["find", "put-hangs", "delete", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
-            "comment" : "All commands succeed"
+            "responses": ["find", "put-hang", "delete", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
+            "comment" : "Put command hangs - client should time out eventually."
+        },
+
+        "put disconnects": {
+            "responses": ["find", "put-disconnect", "delete", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
+            "comment" : "Put command disconnects the connection abruptly."
         },
 
         "delete fails": {
             "responses": ["find", "put", "delete-fail", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
-            "comment" : "All commands succeed"
+            "comment" : "Delete command fails."
+        },
+
+        "delete hangs": {
+            "responses": ["find", "put", "delete-hang", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
+            "comment" : "Delete command hangs - client should time out eventually."
+        },
+
+        "delete disconnects": {
+            "responses": ["find", "put", "delete-disconnect", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
+            "comment" : "Delete command disconnects the connection abruptly."
         },
 
     },
@@ -72,7 +97,7 @@
                           ]
         },
 
-        "put-hangs": {
+        "put-hang": {
             "pattern": "PUT.*Authorization: Basic dXNlcjpwYXNz.*",
 
             "commands" : [
@@ -91,11 +116,37 @@
                           ]
         },
 
+        "put-disconnect": {
+            "pattern": "PUT.*Authorization: Basic dXNlcjpwYXNz.*",
+
+            "commands" : [
+                          "«close»"
+                          ],
+
+            "comment" : "Put appears to work, but doesn't quite finish sending the response. The client should hang (until it times out)"
+        },
+
         "delete": {
             "pattern": "DELETE.*Authorization: Basic dXNlcjpwYXNz.*",
 
             "commands" : [
                           "HTTP/1.1 204 No Content\r\n\r\n",
+                          "«close»"
+                          ]
+        },
+
+        "delete-hang": {
+            "pattern": "DELETE.*Authorization: Basic dXNlcjpwYXNz.*",
+
+            "commands" : [
+                          "HTTP/1.1 204 No Content",
+                          ]
+        },
+
+        "delete-disconnect": {
+            "pattern": "DELETE.*Authorization: Basic dXNlcjpwYXNz.*",
+
+            "commands" : [
                           "«close»"
                           ]
         },
@@ -132,6 +183,22 @@
 
             "commands" : [
                           "HTTP/1.1 405 Method Not Allowed\r\n\r\n",
+                          "«close»"
+                          ]
+        },
+
+        "mkcol-hang": {
+            "pattern": "MKCOL.*Authorization: Basic dXNlcjpwYXNz.*",
+
+            "commands" : [
+                          "HTTP/1.1 204 No Content",
+                          ]
+        },
+
+        "mkcol-disconnect": {
+            "pattern": "MKCOL.*Authorization: Basic dXNlcjpwYXNz.*",
+
+            "commands" : [
                           "«close»"
                           ]
         },
