@@ -16,6 +16,11 @@
             "comment" : "All commands succeed"
         },
 
+        "put hangs": {
+            "responses": ["find", "put-hangs", "delete", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
+            "comment" : "All commands succeed"
+        },
+
         "delete fails": {
             "responses": ["find", "put", "delete-fail", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "All commands succeed"
@@ -67,6 +72,16 @@
                           ]
         },
 
+        "put-hangs": {
+            "pattern": "PUT.*Authorization: Basic dXNlcjpwYXNz.*",
+
+            "commands" : [
+                          "HTTP/1.1 200 OK"
+                          ],
+
+            "comment" : "Put appears to work, but doesn't quite finish sending the response. The client should hang (until it times out)"
+        },
+        
         "put-fail": {
             "pattern": "PUT.*Authorization: Basic dXNlcjpwYXNz.*",
 
