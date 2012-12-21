@@ -92,7 +92,7 @@
             "pattern": "PUT.*Authorization: Basic dXNlcjpwYXNz.*",
 
             "commands" : [
-                          "HTTP/1.1 200 OK\r\n\r\n",
+                          "HTTP/1.1 204 No Content\r\n\r\n",
                           "«close»"
                           ]
         },
@@ -101,7 +101,7 @@
             "pattern": "PUT.*Authorization: Basic dXNlcjpwYXNz.*",
 
             "commands" : [
-                          "HTTP/1.1 200 OK"
+                          "HTTP/1.1 204 No Content",
                           ],
 
             "comment" : "Put appears to work, but doesn't quite finish sending the response. The client should hang (until it times out)"
@@ -120,6 +120,7 @@
             "pattern": "PUT.*Authorization: Basic dXNlcjpwYXNz.*",
 
             "commands" : [
+                          "HTTP/1.1",
                           "«close»"
                           ],
 
@@ -147,6 +148,7 @@
             "pattern": "DELETE.*Authorization: Basic dXNlcjpwYXNz.*",
 
             "commands" : [
+                          "HTTP/1.1",
                           "«close»"
                           ]
         },
@@ -199,6 +201,7 @@
             "pattern": "MKCOL.*Authorization: Basic dXNlcjpwYXNz.*",
 
             "commands" : [
+                          "HTTP/1.1",
                           "«close»"
                           ]
         },
