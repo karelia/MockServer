@@ -105,4 +105,12 @@
 
 - (void)pause;
 
+/**
+ Calls <resume> on the server after a call to <runUntilPaused>/<pause>.
+
+ After this call, it's ok to call <runUntilPaused>/<pause> again to perform more work.
+ */
+
+- (void)resume;
+
 @end

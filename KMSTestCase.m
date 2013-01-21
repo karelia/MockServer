@@ -67,23 +67,6 @@
     return url;
 }
 
-
-- (void)runUntilPaused
-{
-    [self.server runUntilPaused];
-}
-
-- (void)pause
-{
-    [self.server pause];
-}
-
-- (void)resume
-{
-    [self.server resume];
-}
-
-
 - (NSString*)stringForRequest:(NSURLRequest*)request
 {
     __block NSString* string = nil;
@@ -106,5 +89,22 @@
 
     return [string autorelease];
 }
+
+- (void)runUntilPaused
+{
+    [self.server runUntilPaused];
+}
+
+- (void)pause
+{
+    [self.server pause];
+}
+
+- (void)resume
+{
+    [self.server resume];
+}
+
+
 
 @end
