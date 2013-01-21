@@ -6,6 +6,11 @@
             "comment" : "Standard set of 'good' responses."
         },
 
+        "stor denied": {
+            "responses": ["initial", "user", "password", "sys", "pwd", "type", "cwd", "pasv", "size", "retr", "list", "mkd", "stor denied", "dele", "chmod", "commandNotUnderstood" ],
+            "comment" : "Denies creation of new files"
+        },
+
         "delete fail": {
             "responses": ["initial", "user", "password", "sys", "pwd", "type", "cwd", "pasv", "size", "retr", "list", "mkd", "stor", "deleFileDoesntExist", "chmod", "commandNotUnderstood" ],
             "comment" : "Good responses except that delete fails as if the file doesn't exist."
