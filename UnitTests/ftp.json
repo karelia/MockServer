@@ -178,6 +178,17 @@
 
         },
 
+        "stor denied" :
+        {
+            "pattern" :  "STOR ([a-zA-Z0-9.]+)",
+            "commands" : [
+                          0.1,
+                          "550 '$1': Access is denied.\r\n",
+                          ],
+            "comment" : "Response to a STOR command. Much like a RETR command, except that it's pretending to upload rather than download."
+
+        },
+
         "dele" :
         {
             "pattern" :  "DELE ([a-zA-Z0-9.]+)",
