@@ -83,7 +83,6 @@
     NSArray* commands = nil;
     NSRange wholeString = NSMakeRange(0, [request length]);
 
-    BOOL matched = NO;
     NSUInteger count = [self.requests count];
     for (NSUInteger n = 0; n < count; ++n)
     {
@@ -94,7 +93,6 @@
             KMSLogDetail(@"matched with request pattern %@", expression);
             NSArray* rawCommands = self.responses[n];
             commands = [self substitutedCommands:rawCommands match:match request:request substitutions:substitutions];
-            matched = YES;
             break;
         }
     }

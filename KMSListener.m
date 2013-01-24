@@ -110,7 +110,9 @@
     if (self.listener)
     {
         CFSocketInvalidate(self.listener);
+#ifndef __clang_analyzer__ // this seems to be a false positive
         CFRelease(self.listener);
+#endif
         self.connectionBlock = nil;
         self.listener = nil;
     }
