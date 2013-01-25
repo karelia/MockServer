@@ -8,6 +8,10 @@
 
 #import "KMSCommand.h"
 
+/**
+ Command which sends the value of the server's data property down the connection.
+ */
+
 @interface KMSSendServerDataCommand : KMSCommand
 
 + (KMSSendServerDataCommand*)sendServerData;

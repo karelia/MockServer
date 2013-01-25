@@ -18,7 +18,7 @@
     return [result autorelease];
 }
 
-- (CGFloat)performOnConnection:(KMSConnection*)connection server:(KMSServer*)server
+- (NSTimeInterval)performOnConnection:(KMSConnection*)connection server:(KMSServer*)server
 {
     [connection close];
 

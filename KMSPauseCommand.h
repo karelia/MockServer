@@ -8,10 +8,26 @@
 
 #import "KMSCommand.h"
 
+/**
+ A command which inserts a pause into the connection's output stream.
+ */
+
+
 @interface KMSPauseCommand : KMSCommand
 
-@property (assign, nonatomic) CGFloat delay;
+/**
+ The delay time (in seconds) of the pause.
+ */
 
-+ (KMSPauseCommand*)pauseFor:(CGFloat)delay;
+@property (assign, nonatomic) NSTimeInterval delay;
+
+/**
+ Returns a new command which pauses for given delay.
+ 
+ @param delay The time (in seconds) to pause for.
+ @return The pause command.
+ */
+
++ (KMSPauseCommand*)pauseFor:(NSTimeInterval)delay;
 
 @end

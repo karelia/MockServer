@@ -19,7 +19,7 @@
     return [result autorelease];
 }
 
-- (CGFloat)performOnConnection:(KMSConnection*)connection server:(KMSServer*)server
+- (NSTimeInterval)performOnConnection:(KMSConnection*)connection server:(KMSServer*)server
 {
     KMSAssert(server.data);
     KMSLog(@"queued server.data as output");

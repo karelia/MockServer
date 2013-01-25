@@ -8,7 +8,17 @@
 
 #import "KMSCommand.h"
 
+/**
+ Command which causes the connection to close.
+ */
+
 @interface KMSCloseCommand : KMSCommand
+
+/**
+ Returns a new close command object.
+ 
+ @return The close command.
+ */
 
 + (KMSCloseCommand*)closeCommand;
 

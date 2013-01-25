@@ -44,9 +44,27 @@
 
 - (void)cancel;
 
-// TODO: comment
+/**
+ Append some data to the connection's output buffer.
+ 
+ The connection will attempt to send the contents of the buffer immediately, 
+ but won't necessarily manage to send it all at once. The rest will be send automatically
+ when the connection is ready for it.
+
+ Commands (such as KMSSendDataCommand or KMSSendStringCommand) use this
+ to queue up their output.
+
+ */
 
 - (void)appendOutput:(NSData*)output;
+
+/**
+ Close the connection. 
+ 
+ Generally only called by the KMSCloseCommand.
+
+ */
+
 - (void)close;
 
 @end

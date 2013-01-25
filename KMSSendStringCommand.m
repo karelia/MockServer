@@ -19,7 +19,7 @@
     return [result autorelease];
 }
 
-- (CGFloat)performOnConnection:(KMSConnection*)connection server:(KMSServer*)server
+- (NSTimeInterval)performOnConnection:(KMSConnection*)connection server:(KMSServer*)server
 {
     // log just the first line of the output
     NSString* log = self.string;

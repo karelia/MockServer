@@ -10,7 +10,7 @@
 
 @implementation KMSPauseCommand
 
-+ (KMSPauseCommand*)pauseFor:(CGFloat)delay
++ (KMSPauseCommand*)pauseFor:(NSTimeInterval)delay
 {
     KMSPauseCommand* result = [[KMSPauseCommand alloc] init];
     result.delay = delay;
@@ -18,7 +18,7 @@
     return [result autorelease];
 }
 
-- (CGFloat)performOnConnection:(KMSConnection*)connection server:(KMSServer*)server
+- (NSTimeInterval)performOnConnection:(KMSConnection*)connection server:(KMSServer*)server
 {
     KMSLog(@"paused for %lf seconds", self.delay);
     return self.delay;

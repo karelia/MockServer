@@ -33,7 +33,7 @@
     return result;
 }
 
-- (CGFloat)performOnConnection:(KMSConnection*)connection server:(KMSServer*)server
+- (NSTimeInterval)performOnConnection:(KMSConnection*)connection server:(KMSServer*)server
 {
     return 0;
 }

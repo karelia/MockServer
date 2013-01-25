@@ -41,7 +41,7 @@
  @param server The server that the connection belongs to.
  */
 
-- (CGFloat)performOnConnection:(KMSConnection*)connection server:(KMSServer*)server;
+- (NSTimeInterval)performOnConnection:(KMSConnection*)connection server:(KMSServer*)server;
 
 /**
  Perform text substitutions on the command.

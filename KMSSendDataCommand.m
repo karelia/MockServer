@@ -19,7 +19,7 @@
     return [result autorelease];
 }
 
-- (CGFloat)performOnConnection:(KMSConnection*)connection server:(KMSServer*)server
+- (NSTimeInterval)performOnConnection:(KMSConnection*)connection server:(KMSServer*)server
 {
     KMSLog(@"queued data %@", self.data);
     [connection appendOutput:self.data];
