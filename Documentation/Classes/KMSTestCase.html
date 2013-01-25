@@ -46,7 +46,11 @@
 	
 	<option value="//api/name/URLForPath:">&nbsp;&nbsp;&nbsp;&nbsp;- URLForPath:</option>
 	
+	<option value="//api/name/cleanupServer">&nbsp;&nbsp;&nbsp;&nbsp;- cleanupServer</option>
+	
 	<option value="//api/name/pause">&nbsp;&nbsp;&nbsp;&nbsp;- pause</option>
+	
+	<option value="//api/name/resume">&nbsp;&nbsp;&nbsp;&nbsp;- resume</option>
 	
 	<option value="//api/name/runUntilPaused">&nbsp;&nbsp;&nbsp;&nbsp;- runUntilPaused</option>
 	
@@ -86,7 +90,11 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/URLForPath:">URLForPath:</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/cleanupServer">cleanupServer</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/pause">pause</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/resume">resume</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/runUntilPaused">runUntilPaused</a></span></li>
 	
@@ -186,6 +194,14 @@ networking code that you&rsquo;re testing time to do its thing.</p>
 	
 </li><li>
 	<span class="tooltip">
+		<code><a href="#//api/name/cleanupServer">&ndash;&nbsp;cleanupServer</a></code>
+		<span class="tooltip"><p>Clean up after a test.
+This is called automatically by tearDown, but you can also call it yourself if you want to call setupServerWithScheme:responses: again with different settings.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/useResponseSet:">&ndash;&nbsp;useResponseSet:</a></code>
 		<span class="tooltip"><p>Switch the current server to use a different response set.
 You can use this to change the responses you&rsquo;re doing mid-test. For example, you might make a request
@@ -220,6 +236,13 @@ an NSString.</p></span>
 	<span class="tooltip">
 		<code><a href="#//api/name/pause">&ndash;&nbsp;pause</a></code>
 		<span class="tooltip"><p>Calls <pause> on the server to cause <a href="#//api/name/runUntilPaused">runUntilPaused</a> to return.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/resume">&ndash;&nbsp;resume</a></code>
+		<span class="tooltip"><p>Calls <resume> on the server after a call to <a href="#//api/name/runUntilPaused">runUntilPaused</a>/<a href="#//api/name/pause">pause</a>.</p></span>
 	</span>
 	
 	
@@ -297,6 +320,43 @@ an NSString.</p></span>
 </div>
 						
 						<div class="section-method">
+	<a name="//api/name/cleanupServer" title="cleanupServer"></a>
+	<h3 class="subsubtitle method-title">cleanupServer</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Clean up after a test.
+This is called automatically by tearDown, but you can also call it yourself if you want to call setupServerWithScheme:responses: again with different settings.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)cleanupServer</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KMSTestCase.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/pause" title="pause"></a>
 	<h3 class="subsubtitle method-title">pause</h3>
 	
@@ -321,6 +381,47 @@ an NSString.</p></span>
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>After this call, it&rsquo;s ok to call <a href="#//api/name/runUntilPaused">runUntilPaused</a> again to perform more work.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KMSTestCase.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/resume" title="resume"></a>
+	<h3 class="subsubtitle method-title">resume</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Calls <resume> on the server after a call to <a href="#//api/name/runUntilPaused">runUntilPaused</a>/<a href="#//api/name/pause">pause</a>.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)resume</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>After this call, it&rsquo;s ok to call <a href="#//api/name/runUntilPaused">runUntilPaused</a>/<a href="#//api/name/pause">pause</a> again to perform more work.</p>
 	</div>
 	
 	
@@ -549,7 +650,7 @@ request again with a set that pretends to accept the password.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Karelia Software. All rights reserved. (Last updated: 2012-12-06)</span><br />
+						<p><span class="copyright">&copy; 2013 Karelia Software. All rights reserved. (Last updated: 2013-01-25)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						

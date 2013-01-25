@@ -35,13 +35,15 @@
 
 <h2>Key Classes</h2>
 
-<p>Essentially the design revolves around the interation of these classes: <a href="../../Classes/KMSServer.html">KMSServer</a>, <a href="../../Classes/KMSConnection.html">KMSConnection</a>, <a href="../../Classes/KMSListener.html">KMSListener</a>, <a href="../../Classes/KMSResponseCollection.html">KMSResponseCollection</a> and a subclass of <a href="../../Classes/KMSResponder.html">KMSResponder</a>.</p>
+<p>Essentially the design revolves around the interation of these classes: <a href="../../Classes/KMSServer.html">KMSServer</a>, <a href="../../Classes/KMSCommand.html">KMSCommand</a>, <a href="../../Classes/KMSConnection.html">KMSConnection</a>, <a href="../../Classes/KMSListener.html">KMSListener</a>, <a href="../../Classes/KMSResponseCollection.html">KMSResponseCollection</a> and a subclass of <a href="../../Classes/KMSResponder.html">KMSResponder</a>.</p>
 
 <p>The <a href="../../Classes/KMSServer.html">KMSServer</a> is the focus and holds references to all the other objects.</p>
 
 <p>The abstract <a href="../../Classes/KMSResponder.html">KMSResponder</a> class is responsible for the actual behaviour of the server. We currently provide one concrete subclass of this &ndash; <a href="../../Classes/KMSRegExResponder.html">KMSRegExResponder</a> &ndash; which works by pattern matching. You&rsquo;ll can create one of these to pass to the <a href="../../Classes/KMSServer.html">KMSServer</a> object, or you can use the <a href="../../Classes/KMSResponseCollection.html">KMSResponseCollection</a> class to generate them from a JSON file defining their contents.</p>
 
 <p>The internal <a href="../../Classes/KMSConnection.html">KMSConnection</a> and <a href="../../Classes/KMSListener.html">KMSListener</a> classes are responsible for implementing the networking. Their function is mentioned below, but you shouldn&rsquo;t need to deal with them directly.</p>
+
+<p>Instances of <a href="../../Classes/KMSCommand.html">KMSCommand</a> represent actions to perform on the connection in response to incoming data. Typically these do things like sending back data, pausing, or closing the connection.</p>
 
 <h2>Listening For Connections</h2>
 
@@ -65,30 +67,23 @@
 
 <p>When a <a href="../../Classes/KMSConnection.html">KMSConnection</a> receives input, it passes the input to its associated <a href="../../Classes/KMSResponder.html">KMSResponder</a> object.</p>
 
-<p>The role of the responder object is to process input, and return a list of &ldquo;commands&rdquo; to execute.</p>
+<p>The role of the responder object is to process input, and return a list of <a href="../../Classes/KMSCommand.html">KMSCommand</a> objects to execute.</p>
 
 <p><a href="../../Classes/KMSResponder.html">KMSResponder</a> is an abstract class. Currently there is a single implementation &ndash; <a href="../../Classes/KMSRegExResponder.html">KMSRegExResponder</a>.</p>
 
 <p>This class uses pattern matching to select one from a series of pre-baked responses. It is given a list of patterns, and works through them in order until one matches.</p>
 
-<p>It then returns the list of &ldquo;commands&rdquo; associated with that pattern.</p>
+<p>It then returns the list of commands associated with that pattern.</p>
 
-<p>These commands currently consist of NSString, NSData, or NSNumber objects.</p>
+<p>See the documentation for <a href="../../Classes/KMSCommand.html">KMSCommand</a> and its subclasses for a list of the built-in commands that can be returned.</p>
 
-<ul>
-<li>NSData objects are sent back directly as output.</li>
-<li>NSString objects are also sent back, except for the constant CloseCommand string, which closes the connection instead.</li>
-<li>NSNumber objects are interpreted as times, in seconds, to pause before sending back further output.</li>
-</ul>
-
-
-<p>The class also performs text substitutions on the NSString items that it returns. This allows you to add a certain amount of dynamism to the responses that are returned.</p>
+<p>Before returning the command list, substitutions are performed on any that are text-based. This allows you to add a certain amount of dynamism to the responses that are returned, by substituting in things like the address of the server, the current time, and so on. This is sufficient to mimic the behaviour of a lot of servers. For more complex cases, custom command subclasses can be written, which are free to produce completely dynamic responses based on the current state of the responder, connection and server.</p>
 
 <p>A <a href="../../Classes/KMSResponder.html">KMSResponder</a> also has an <initialResponse> property. The list of commands associated with this property is returned automatically by the associated <a href="../../Classes/KMSConnection.html">KMSConnection</a> when a connection first starts.</p>
 
 <p>Setting this property is essential for faking any protocol that starts by sending something back to the client. For example, an FTP server typically starts by sending something like this: &ldquo;220 10.1.1.23 FTP server (ACME FTP Server v1.1) ready.\r\n&rdquo;.</p>
 
-<p>To make life easier, the <a href="../../Classes/KMSResponseCollection.html">KMSResponseCollection</a> class allows you to create <a href="../../Classes/KMSRegExResponder.html">KMSRegExResponder</a> objects by loading the response data from disk. See the ftp.json and webdav.json files for examples of the file format.</p>
+<p>To make life easier, the <a href="../../Classes/KMSResponseCollection.html">KMSResponseCollection</a> class allows you to create <a href="../../Classes/KMSRegExResponder.html">KMSRegExResponder</a> objects by loading the response data from disk. See the ftp.json, webdav.json and http.json files for examples of the file format.</p>
 
 <h2>Passive Data Requests</h2>
 
@@ -113,7 +108,7 @@
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Karelia Software. All rights reserved. (Last updated: 2012-12-06)</span><br />
+						<p><span class="copyright">&copy; 2013 Karelia Software. All rights reserved. (Last updated: 2013-01-25)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 840)</a>.</span></p>
 						

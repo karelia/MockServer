@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
-		<title>KMSResponder Class Reference</title>
+		<title>KMSSendServerDataCommand Class Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
@@ -17,7 +17,7 @@
 			</div>
 			
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">KMSResponder Class Reference</h1>
+				<h1 class="hideInXcode">KMSSendServerDataCommand Class Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -32,21 +32,12 @@
 	
 	
 	
-	<option value="tasks">Tasks</option>
 	
 	
 	
 	
 	
 	
-	
-	
-	
-	<option value="instance_methods">Instance Methods</option>
-	
-	<option value="//api/name/initialResponse">&nbsp;&nbsp;&nbsp;&nbsp;- initialResponse</option>
-	
-	<option value="//api/name/responseForRequest:substitutions:">&nbsp;&nbsp;&nbsp;&nbsp;- responseForRequest:substitutions:</option>
 	
 	
 	
@@ -62,9 +53,6 @@
 
 
 
-<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
-	
-</ul></li>
 
 
 
@@ -72,22 +60,13 @@
 
 
 
-
-
-<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initialResponse">initialResponse</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/responseForRequest:substitutions:">responseForRequest:substitutions:</a></span></li>
-	
-</ul></li>
 
 
 			</ul>
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="KMSResponder Class Reference" name="top"></a>
+				<a title="KMSSendServerDataCommand Class Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -96,7 +75,7 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">KMSResponder Class Reference</h1>
+						<h1 class="title title-header">KMSSendServerDataCommand Class Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
@@ -104,10 +83,10 @@
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
 	<td class="specification-title">Inherits from</td>
-	<td class="specification-value">NSObject</td>
+	<td class="specification-value"><a href="../Classes/KMSCommand.html">KMSCommand</a> : NSObject</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">KMSResponder.h</td>
+	<td class="specification-value">KMSSendServerDataCommand.h</td>
 </tr>
 						</tbody></table></div>
 					
@@ -117,45 +96,7 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>Object which responds to incoming data by outputting a list of commands.</p>
-
-<p>This is an abstract class. Subclasses can choose to perform some sort of
-pattern matching to choose from a set of predefined responses (see <a href="../Classes/KMSRegExResponder.html">KMSRegExResponder</a>),
-or they can implement a state machine or some other complex behaviour.
-In theory they could even implement proper server implications, although that&rsquo;s not really the intention
-of the KMSServer system.</p>
-					</div>
-					
-					
-					
-					
-					
-					<div class="section section-tasks">
-						<a title="Tasks" name="tasks"></a>
-						<h2 class="subtitle subtitle-tasks">Tasks</h2>
-						
-						
-						
-						
-
-						<ul class="task-list">
-							<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/initialResponse">&ndash;&nbsp;initialResponse</a></code>
-		<span class="tooltip"><p>The commands to execute when a connection is first made.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/responseForRequest:substitutions:">&ndash;&nbsp;responseForRequest:substitutions:</a></code>
-		<span class="tooltip"><p>Return a list of commands in response to a given input request.</p></span>
-	</span>
-	
-	
-</li>
-						</ul>
-						
+						<p>Command which sends the value of the server&rsquo;s data property down the connection.</p>
 					</div>
 					
 					
@@ -166,103 +107,9 @@ of the KMSServer system.</p>
 					
 					
 					
-					<div class="section section-methods">
-						<a title="Instance Methods" name="instance_methods"></a>
-						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
-						
-						<div class="section-method">
-	<a name="//api/name/initialResponse" title="initialResponse"></a>
-	<h3 class="subsubtitle method-title">initialResponse</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>The commands to execute when a connection is first made.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (NSArray *)initialResponse</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KMSResponder.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/responseForRequest:substitutions:" title="responseForRequest:substitutions:"></a>
-	<h3 class="subsubtitle method-title">responseForRequest:substitutions:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Return a list of commands in response to a given input request.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (NSArray *)responseForRequest:(NSString *)<em>request</em> substitutions:(NSDictionary *)<em>substitutions</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>request</em></dt>
-			<dd><p>The incoming request.</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>substitutions</em></dt>
-			<dd><p>A dictionary of global substitution values to use when formulating the responses.</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	<div class="method-subsection return">
-		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>An array of NSString, NSData or NSNumber &ldquo;coimmands&rdquo;.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KMSResponder.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-					</div>
+					
+					
+					
 					
 					
 				</div>
