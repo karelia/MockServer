@@ -115,7 +115,7 @@
     }
 }
 
-- (void)processClose
+- (void)close
 {
     KMSLogDetail(@"closed connection");
     [self.server.transcript addObject:[KMSTranscriptEntry entryWithType:KMSTranscriptCommand value:CloseCommand]];
@@ -172,7 +172,10 @@
     }
 }
 
-
+- (void)appendOutput:(NSData*)output
+{
+    [self.outputData appendData:output];
+}
 
 - (void)processOutput
 {

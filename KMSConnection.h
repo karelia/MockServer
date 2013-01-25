@@ -44,4 +44,9 @@
 
 - (void)cancel;
 
+// TODO: comment
+
+- (void)appendOutput:(NSData*)output;
+- (void)close;
+
 @end
