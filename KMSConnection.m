@@ -11,15 +11,17 @@
 #import "KMSListener.h"
 #import "KMSResponder.h"
 #import "KMSTranscriptEntry.h"
+#import "KMSCommand.h"
 
 @interface KMSConnection()
 
+@property (strong, nonatomic) NSMutableArray* commands;
 @property (strong, nonatomic) NSInputStream* input;
 @property (strong, nonatomic) NSOutputStream* output;
 @property (strong, nonatomic) NSMutableData* outputData;
+@property (assign, nonatomic) dispatch_queue_t queue;
 @property (strong, nonatomic) KMSResponder* responder;
 @property (strong, nonatomic) KMSServer* server;
-
 
 @end
 
@@ -28,6 +30,7 @@
 @synthesize input   = _input;
 @synthesize output = _output;
 @synthesize outputData = _outputData;
+@synthesize queue = _queue;
 @synthesize responder = _responder;
 @synthesize server = _server;
 
@@ -48,6 +51,8 @@
         self.responder = responder;
         self.outputData = [NSMutableData data];
 
+        self.queue = dispatch_queue_create("com.karelia.mockserver.connection", 0);
+        
         CFReadStreamRef readStream;
         CFWriteStreamRef writeStream;
         CFStreamCreatePairWithSocket(NULL, socket, &readStream, &writeStream);
@@ -61,6 +66,9 @@
 
 - (void)dealloc
 {
+    dispatch_release(_queue);
+    _queue = nil;
+
     [_input release];
     [_output release];
     [_outputData release];
@@ -100,16 +108,14 @@
         [self.server.transcript addObject:[KMSTranscriptEntry entryWithType:KMSTranscriptInput value:request]];
         KMSLog(@"got request '%@'", request);
         NSArray* commands = [self.responder responseForRequest:request substitutions:substitutions];
-        if (commands)
-        {
-            [self processCommands:commands];
-        }
-        else
+        if (!commands)
         {
             // if nothing matched, close the connection
             // to prevent this, add a key of ".*" as the last response in the array
-            [self processCommands:@[CloseCommand]];
+            commands = @[[KMSCloseCommand closeCommand]];
         }
+
+        [self queueCommands:commands];
 
         [request release];
     }
@@ -123,58 +129,39 @@
     [self.input close];
 }
 
-- (void)processCommands:(NSArray*)commands
+- (void)queueCommands:(NSArray*)commands
 {
-    NSTimeInterval delay = 0.0;
-    for (id command in commands)
-    {
-        if ([command isKindOfClass:[NSNumber class]])
+    dispatch_async(self.queue, ^{
+        BOOL isEmpty = [self.commands count] == 0;
+        [self.commands addObjectsFromArray:commands];
+        if (isEmpty)
         {
-            delay += [command doubleValue];
+            [self processNextCommand];
         }
-        else
-        {
-            SEL method;
-            BOOL isString = [command isKindOfClass:[NSString class]];
-            if (isString && [command isEqual:CloseCommand])
-            {
-                method = @selector(processClose);
-            }
-            else
-            {
-                method = @selector(processOutput);
-                if (isString)
-                {
-                    if ([command isEqual:DataCommand])
-                    {
-                        KMSAssert(self.server.data);
-                        command = self.server.data;
-                        KMSLog(@"queued server.data as output");
-                    }
-                    else
-                    {
-                        // log just the first line of the output
-                        NSString* string = command;
-                        NSRange range = [command rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet]];
-                        if (range.location != NSNotFound)
-                        {
-                            string = [NSString stringWithFormat:@"%@… (%ld bytes)", [string substringToIndex:range.location], (long) [string length]];
-                        }
-                        KMSLog(@"queued output %@", string);
-                        command = [command dataUsingEncoding:NSUTF8StringEncoding];
-                    }
-                }
-                [self.outputData appendData:command];
-            }
+    });
+}
 
-            [self performSelector:method withObject:command afterDelay:delay];
-        }
+- (void)processNextCommand
+{
+    KMSAssert(dispatch_get_current_queue() == self.queue);
+
+    KMSCommand* command = self.commands[0];
+    [self.commands removeObjectAtIndex:0];
+
+    NSTimeInterval delay = [command performOnConnection:self server:self.server];
+    if ([self.commands count] > 0)
+    {
+        dispatch_time_t nextTimeToProcess = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC));
+        dispatch_after(nextTimeToProcess, self.queue, ^(void){
+            [self processNextCommand];
+        });
     }
 }
 
 - (void)appendOutput:(NSData*)output
 {
     [self.outputData appendData:output];
+    [self processOutput];
 }
 
 - (void)processOutput
