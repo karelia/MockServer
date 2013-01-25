@@ -10,7 +10,28 @@
 #import "KMSConnection.h"
 #import "KMSServer.h"
 
+#import "KMSPauseCommand.h"
+#import "KMSSendDataCommand.h"
+#import "KMSSendStringCommand.h"
+#import "KMSSendServerDataCommand.h"
+#import "KMSCloseCommand.h"
+
 @implementation KMSCommand
+
++ (NSArray*)commandArrayFromObjectArray:(NSArray*)array
+{
+    NSMutableArray* result = [NSMutableArray arrayWithCapacity:[array count]];
+    for (id item in array)
+    {
+        KMSCommand* command = [item asKMSCommand];
+        if (command)
+        {
+            [result addObject:command];
+        }
+    }
+
+    return result;
+}
 
 - (CGFloat)performOnConnection:(KMSConnection*)connection server:(KMSServer*)server
 {
@@ -20,133 +41,6 @@
 - (KMSCommand*)substitutedWithValues:(NSDictionary *)values
 {
     return self;
-}
-
-@end
-
-@implementation KMSPauseCommand
-
-+ (KMSPauseCommand*)pauseFor:(CGFloat)delay
-{
-    KMSPauseCommand* result = [[KMSPauseCommand alloc] init];
-    result.delay = delay;
-
-    return [result autorelease];
-}
-
-- (CGFloat)performOnConnection:(KMSConnection*)connection server:(KMSServer*)server
-{
-    KMSLog(@"paused for %lf seconds", self.delay);
-    return self.delay;
-}
-
-@end
-
-@implementation KMSSendDataCommand
-
-+ (KMSSendDataCommand*)sendData:(NSData *)data
-{
-    KMSSendDataCommand* result = [[KMSSendDataCommand alloc] init];
-    result.data = data;
-
-    return [result autorelease];
-}
-
-- (CGFloat)performOnConnection:(KMSConnection*)connection server:(KMSServer*)server
-{
-    KMSLog(@"queued data %@", self.data);
-    [connection appendOutput:self.data];
-    
-    return 0;
-}
-
-@end
-
-@implementation KMSSendStringCommand
-
-+ (KMSSendStringCommand*)sendString:(NSString *)string
-{
-    KMSSendStringCommand* result = [[KMSSendStringCommand alloc] init];
-    result.string = string;
-
-    return [result autorelease];
-}
-
-- (CGFloat)performOnConnection:(KMSConnection*)connection server:(KMSServer*)server
-{
-    // log just the first line of the output
-    NSString* log = self.string;
-    NSRange range = [log rangeOfCharacterFromSet:[NSCharacterSet newlineCharacterSet]];
-    if (range.location != NSNotFound)
-    {
-        log = [NSString stringWithFormat:@"%@… (%ld bytes)", [log substringToIndex:range.location], (long) [log length]];
-    }
-    KMSLog(@"queued output %@", log);
-
-    [connection appendOutput:[self.string dataUsingEncoding:NSUTF8StringEncoding]];
-
-    return 0;
-}
-
-- (KMSCommand*)substitutedWithValues:(NSDictionary*)substitutions
-{
-    KMSCommand* result;
-
-    BOOL containsTokens = [self.string rangeOfString:@"$"].location != NSNotFound;
-    if (containsTokens)
-    {
-        NSMutableString* substituted = [NSMutableString stringWithString:self.string];
-        [substitutions enumerateKeysAndObjectsUsingBlock:^(id key, id replacement, BOOL *stop) {
-            [substituted replaceOccurrencesOfString:key withString:replacement options:0 range:NSMakeRange(0, [substituted length])];
-        }];
-
-        KMSLogDetail(@"expanded response %@ as %@", self.string, substituted);
-        result = [KMSSendStringCommand sendString:substituted];
-    }
-    else
-    {
-        result = self;
-    }
-
-    return result;
-}
-
-@end
-
-@implementation KMSSendServerDataCommand
-
-+ (KMSSendServerDataCommand*)sendServerData
-{
-    KMSSendServerDataCommand* result = [[KMSSendServerDataCommand alloc] init];
-
-    return [result autorelease];
-}
-
-- (CGFloat)performOnConnection:(KMSConnection*)connection server:(KMSServer*)server
-{
-    KMSAssert(server.data);
-    KMSLog(@"queued server.data as output");
-    [connection appendOutput:server.data];
-
-    return 0;
-}
-
-@end
-
-@implementation KMSCloseCommand
-
-+ (KMSCloseCommand*)closeCommand
-{
-    KMSCloseCommand* result = [[KMSCloseCommand alloc] init];
-
-    return [result autorelease];
-}
-
-- (CGFloat)performOnConnection:(KMSConnection*)connection server:(KMSServer*)server
-{
-    [connection close];
-
-    return 0;
 }
 
 @end

@@ -30,21 +30,6 @@
     return [server autorelease];
 }
 
-- (NSArray*)commandArrayFromObjectArray:(NSArray*)array
-{
-    NSMutableArray* result = [NSMutableArray arrayWithCapacity:[array count]];
-    for (id item in array)
-    {
-        KMSCommand* command = [item asKMSCommand];
-        if (command)
-        {
-            [result addObject:command];
-        }
-    }
-
-    return result;
-}
-
 - (id)initWithResponses:(NSArray *)responses
 {
     if ((self = [super init]) != nil)
@@ -59,7 +44,7 @@
             if (length > 0)
             {
                 NSString* key = response[0];
-                NSArray* commands = [self commandArrayFromObjectArray:[response subarrayWithRange:NSMakeRange(1, length - 1)]];
+                NSArray* commands = [KMSCommand commandArrayFromObjectArray:[response subarrayWithRange:NSMakeRange(1, length - 1)]];
                 if ([key isEqualToString:InitialResponseKey])
                 {
                     
