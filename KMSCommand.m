@@ -17,6 +17,11 @@
     return 0;
 }
 
+- (KMSCommand*)substitutedWithValues:(NSDictionary *)values
+{
+    return self;
+}
+
 @end
 
 @implementation KMSPauseCommand
@@ -81,6 +86,29 @@
     [connection appendOutput:[self.string dataUsingEncoding:NSUTF8StringEncoding]];
 
     return 0;
+}
+
+- (KMSCommand*)substitutedWithValues:(NSDictionary*)substitutions
+{
+    KMSCommand* result;
+
+    BOOL containsTokens = [self.string rangeOfString:@"$"].location != NSNotFound;
+    if (containsTokens)
+    {
+        NSMutableString* substituted = [NSMutableString stringWithString:self.string];
+        [substitutions enumerateKeysAndObjectsUsingBlock:^(id key, id replacement, BOOL *stop) {
+            [substituted replaceOccurrencesOfString:key withString:replacement options:0 range:NSMakeRange(0, [substituted length])];
+        }];
+
+        KMSLogDetail(@"expanded response %@ as %@", self.string, substituted);
+        result = [KMSSendStringCommand sendString:substituted];
+    }
+    else
+    {
+        result = self;
+    }
+
+    return result;
 }
 
 @end
@@ -152,7 +180,7 @@
     }
     else
     {
-        return [KMSSendDataCommand sendData:[self dataUsingEncoding:NSUTF8StringEncoding]];
+        result = [KMSSendStringCommand sendString:self];
     }
 
     return result;
@@ -167,6 +195,17 @@
 - (KMSCommand*)asKMSCommand
 {
     return [KMSSendDataCommand sendData:self];
+}
+
+@end
+
+#pragma mark - NSNumber
+
+@implementation NSNumber(KMSCommand)
+
+- (KMSCommand*)asKMSCommand
+{
+    return [KMSPauseCommand pauseFor:[self doubleValue]];
 }
 
 @end

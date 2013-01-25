@@ -132,9 +132,14 @@
 - (void)queueCommands:(NSArray*)commands
 {
     dispatch_async(self.queue, ^{
-        BOOL isEmpty = [self.commands count] == 0;
+        if (!self.commands)
+        {
+            self.commands = [NSMutableArray array];
+        }
+        
+        BOOL wasEmpty = [self.commands count] == 0;
         [self.commands addObjectsFromArray:commands];
-        if (isEmpty)
+        if (wasEmpty)
         {
             [self processNextCommand];
         }
@@ -145,16 +150,20 @@
 {
     KMSAssert(dispatch_get_current_queue() == self.queue);
 
-    KMSCommand* command = self.commands[0];
-    [self.commands removeObjectAtIndex:0];
-
-    NSTimeInterval delay = [command performOnConnection:self server:self.server];
-    if ([self.commands count] > 0)
+    NSUInteger count = [self.commands count];
+    if (count)
     {
-        dispatch_time_t nextTimeToProcess = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC));
-        dispatch_after(nextTimeToProcess, self.queue, ^(void){
-            [self processNextCommand];
-        });
+        KMSCommand* command = self.commands[0];
+        [self.commands removeObjectAtIndex:0];
+
+        NSTimeInterval delay = [command performOnConnection:self server:self.server];
+        if (count > 1)
+        {
+            dispatch_time_t nextTimeToProcess = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC));
+            dispatch_after(nextTimeToProcess, self.queue, ^(void){
+                [self processNextCommand];
+            });
+        }
     }
 }
 
@@ -257,7 +266,7 @@
             KMSLogDetail(@"opened %@ stream", [self nameForStream:stream]);
             if (stream == self.input)
             {
-                [self processCommands:self.responder.initialResponse];
+                [self queueCommands:self.responder.initialResponse];
             }
             break;
         }
@@ -272,7 +281,9 @@
         case NSStreamEventHasSpaceAvailable:
         {
             KMSAssert(stream == self.output);     // should never happen for the input stream
-            [self processOutput];
+            dispatch_async(self.queue, ^{
+                [self processOutput];
+            });
             break;
         }
 

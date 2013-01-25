@@ -14,6 +14,7 @@
 @interface KMSCommand : NSObject
 
 - (CGFloat)performOnConnection:(KMSConnection*)connection server:(KMSServer*)server;
+- (KMSCommand*)substitutedWithValues:(NSDictionary*)values;
 
 @end
 

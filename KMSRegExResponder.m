@@ -5,6 +5,7 @@
 
 #import "KMSRegExResponder.h"
 #import "KMSServer.h"
+#import "KMSCommand.h"
 
 @interface KMSRegExResponder()
 
@@ -29,6 +30,21 @@
     return [server autorelease];
 }
 
+- (NSArray*)commandArrayFromObjectArray:(NSArray*)array
+{
+    NSMutableArray* result = [NSMutableArray arrayWithCapacity:[array count]];
+    for (id item in array)
+    {
+        KMSCommand* command = [item asKMSCommand];
+        if (command)
+        {
+            [result addObject:command];
+        }
+    }
+
+    return result;
+}
+
 - (id)initWithResponses:(NSArray *)responses
 {
     if ((self = [super init]) != nil)
@@ -43,9 +59,10 @@
             if (length > 0)
             {
                 NSString* key = response[0];
-                NSArray* commands = [response subarrayWithRange:NSMakeRange(1, length - 1)];
+                NSArray* commands = [self commandArrayFromObjectArray:[response subarrayWithRange:NSMakeRange(1, length - 1)]];
                 if ([key isEqualToString:InitialResponseKey])
                 {
+                    
                     self.initialResponse = commands;
                 }
                 else
@@ -128,22 +145,8 @@
     NSMutableArray* substitutedCommands = [NSMutableArray arrayWithCapacity:[commands count]];
     for (id command in commands)
     {
-        if ([command isKindOfClass:[NSString class]])
-        {
-            BOOL containsTokens = [command rangeOfString:@"$"].location != NSNotFound;
-            if (containsTokens)
-            {
-                NSMutableString* substituted = [NSMutableString stringWithString:command];
-                [substitutions enumerateKeysAndObjectsUsingBlock:^(id key, id replacement, BOOL *stop) {
-                    [substituted replaceOccurrencesOfString:key withString:replacement options:0 range:NSMakeRange(0, [substituted length])];
-                }];
-
-                KMSLogDetail(@"expanded response %@ as %@", command, substituted);
-                command = substituted;
-            }
-        }
-
-        [substitutedCommands addObject:command];
+        KMSCommand* substituted = [command substitutedWithValues:substitutions];
+        [substitutedCommands addObject:substituted];
     }
 
     return substitutedCommands;
