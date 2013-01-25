@@ -12,12 +12,15 @@ The responses consist of an array of arrays. Each of the inner arrays is in this
     @[pattern, command, command...]
 
 The pattern is a regular expression which is matched against input received by the server.
-The commands are NSString, NSData, or NSNumber objects, which are processed when
-the pattern has been matched.
 
-NSData objects are sent back directly as output.
-NSString objects are also sent back, except for the constant CloseCommand string, which closes the connection instead.
-NSNumber objects are interpreted as times, in seconds, to pause before sending back further output.
+The commands are subclasses of the KMSCommand class. Predefined command classes include:
+
+  - KMSSendDataCommand, KMSSendStringCommand, KMSSendServerDataCommand, which send output back to the client
+  - KMSCloseCommand, which closes the connection
+  - KMSPauseCommand, which causes the connection to pause before sending anything more
+  
+Other command classes can easily be defined to perform custom actions, such as pausing for a random time, or sending
+back some dynamically generated content.
 
 The server includes a facilty for loading these response arrays easily from a JSON file.
 
