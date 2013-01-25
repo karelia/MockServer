@@ -10,6 +10,9 @@
 
 #import "KMSServer.h"
 #import "KMSRegExResponder.h"
+#import "KMSSendStringCommand.h"
+#import "KMSPauseCommand.h"
+#import "KMSCloseCommand.h"
 
 #import <SenTestingKit/SenTestingKit.h>
 
@@ -25,8 +28,8 @@ static NSString*const HTTPContent = @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 
 - (NSArray*)httpResponses
 {
     NSArray* responses = @[
-    @[ @"^GET .* HTTP.*", HTTPHeader, HTTPContent, @(0.1), CloseCommand],
-    @[@"^HEAD .* HTTP.*", HTTPHeader, CloseCommand],
+    @[ @"^GET .* HTTP.*", [KMSSendStringCommand sendString:HTTPHeader], [KMSSendStringCommand sendString:HTTPContent], [KMSPauseCommand pauseFor:0.1], [KMSCloseCommand closeCommand]],
+    @[@"^HEAD .* HTTP.*", [KMSSendStringCommand sendString:HTTPHeader], [KMSCloseCommand closeCommand]],
     ];
 
     return responses;

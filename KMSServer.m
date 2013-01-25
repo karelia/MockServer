@@ -13,6 +13,10 @@
 #import "KMSListener.h"
 #import "KMSRegExResponder.h"
 
+#import "KMSSendDataCommand.h"
+#import "KMSPauseCommand.h"
+#import "KMSCloseCommand.h"
+
 @interface KMSServer()
 
 @property (strong, nonatomic) NSMutableArray* connections;
@@ -35,9 +39,9 @@
 @synthesize running = _running;
 @synthesize transcript = _transcript;
 
-NSString *const CloseCommand = @"«close»";
-NSString *const DataCommand = @"«data»";
-NSString *const InitialResponseKey = @"«initial»";
+NSString *const CloseCommandToken = @"«close»";
+NSString *const DataCommandToken = @"«data»";
+NSString *const InitialResponsePattern = @"«initial»";
 
 #pragma mark - Object Lifecycle
 
@@ -220,7 +224,7 @@ NSString *const InitialResponseKey = @"«initial»";
                 data = [@"Test data" dataUsingEncoding:NSUTF8StringEncoding];
             }
 
-            NSArray* responses = @[ @[InitialResponseKey, data, @(0.1), CloseCommand ] ];
+            NSArray* responses = @[ @[InitialResponsePattern, [KMSSendDataCommand sendData:data], [KMSPauseCommand pauseFor:0.1], [KMSCloseCommand closeCommand] ] ];
             KMSRegExResponder* responder = [KMSRegExResponder responderWithResponses:responses];
             KMSConnection* connection = [KMSConnection connectionWithSocket:socket responder:responder server:server];
             [self.connections addObject:connection];

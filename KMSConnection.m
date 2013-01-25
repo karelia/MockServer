@@ -12,6 +12,7 @@
 #import "KMSResponder.h"
 #import "KMSTranscriptEntry.h"
 #import "KMSCommand.h"
+#import "KMSCloseCommand.h"
 
 @interface KMSConnection()
 
@@ -124,7 +125,7 @@
 - (void)close
 {
     KMSLogDetail(@"closed connection");
-    [self.server.transcript addObject:[KMSTranscriptEntry entryWithType:KMSTranscriptCommand value:CloseCommand]];
+    [self.server.transcript addObject:[KMSTranscriptEntry entryWithType:KMSTranscriptCommand value:CloseCommandToken]];
     [self.output close];
     [self.input close];
 }

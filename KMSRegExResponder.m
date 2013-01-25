@@ -43,9 +43,9 @@
             NSUInteger length = [response count];
             if (length > 0)
             {
-                NSString* key = response[0];
+                NSString* pattern = response[0];
                 NSArray* commands = [KMSCommand commandArrayFromObjectArray:[response subarrayWithRange:NSMakeRange(1, length - 1)]];
-                if ([key isEqualToString:InitialResponseKey])
+                if ([pattern isEqualToString:InitialResponsePattern])
                 {
                     
                     self.initialResponse = commands;
@@ -53,7 +53,7 @@
                 else
                 {
                     NSError* error = nil;
-                    NSRegularExpression* expression = [NSRegularExpression regularExpressionWithPattern:key options:options error:&error];
+                    NSRegularExpression* expression = [NSRegularExpression regularExpressionWithPattern:pattern options:options error:&error];
                     if (expression)
                     {
                         [expressions addObject:expression];

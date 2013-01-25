@@ -33,6 +33,11 @@
     return result;
 }
 
+- (KMSCommand*)asKMSCommand
+{
+    return self;
+}
+
 - (NSTimeInterval)performOnConnection:(KMSConnection*)connection server:(KMSServer*)server
 {
     return 0;
@@ -64,11 +69,11 @@
 {
     KMSCommand* result = nil;
 
-    if ([self isEqual:CloseCommand])
+    if ([self isEqual:CloseCommandToken])
     {
         result = [KMSCloseCommand closeCommand];
     }
-    else if ([self isEqual:DataCommand])
+    else if ([self isEqual:DataCommandToken])
     {
         result = [KMSSendServerDataCommand sendServerData];
     }

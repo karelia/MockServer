@@ -34,7 +34,7 @@
  pattern, command, command...
 
  The pattern is a regular expression which is matched against input received by the server.
- The commands are NSString, NSData, or NSNumber objects, which are processed when
+ The commands are instances of KMSCommand, which are performed when
  the pattern has been matched.
 
  See the [documentation](http://karelia.github.com/MockServer/Documentation/).
@@ -195,19 +195,19 @@
  it writes back the contents of it's data property.
  */
 
-extern NSString *const DataCommand;
+extern NSString *const DataCommandToken;
 
 /**
  When the server encounters this as an output item,
  it closes the connection.
  */
 
-extern NSString *const CloseCommand;
+extern NSString *const CloseCommandToken;
 
 /**
- The server interprets a response with this key specially.
+ The server interprets a response with this pattern specially.
  When the connection is first opened, the data associated
  with this key is immediately sent back.
  */
 
-extern NSString *const InitialResponseKey;
+extern NSString *const InitialResponsePattern;
