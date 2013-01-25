@@ -11,13 +11,15 @@ Because the stand-in servers are actually faked, it also allows us to script par
 Key Classes
 -----------
 
-Essentially the design revolves around the interation of these classes: <KMSServer>, <KMSConnection>, <KMSListener>, <KMSResponseCollection> and a subclass of <KMSResponder>.
+Essentially the design revolves around the interation of these classes: <KMSServer>, <KMSCommand>, <KMSConnection>, <KMSListener>, <KMSResponseCollection> and a subclass of <KMSResponder>.
 
 The <KMSServer> is the focus and holds references to all the other objects. 
 
 The abstract <KMSResponder> class is responsible for the actual behaviour of the server. We currently provide one concrete subclass of this - <KMSRegExResponder> - which works by pattern matching. You'll can create one of these to pass to the <KMSServer> object, or you can use the <KMSResponseCollection> class to generate them from a JSON file defining their contents.
 
 The internal <KMSConnection> and <KMSListener> classes are responsible for implementing the networking. Their function is mentioned below, but you shouldn't need to deal with them directly.
+
+Instances of <KMSCommand> represent actions to perform on the connection in response to incoming data. Typically these do things like sending back data, pausing, or closing the connection.
 
 Listening For Connections
 -------------------------
@@ -45,27 +47,23 @@ Responding To Requests
 
 When a <KMSConnection> receives input, it passes the input to its associated <KMSResponder> object.
 
-The role of the responder object is to process input, and return a list of "commands" to execute.
+The role of the responder object is to process input, and return a list of <KMSCommand> objects to execute.
 
 <KMSResponder> is an abstract class. Currently there is a single implementation - <KMSRegExResponder>.
 
 This class uses pattern matching to select one from a series of pre-baked responses. It is given a list of patterns, and works through them in order until one matches.
 
-It then returns the list of "commands" associated with that pattern.
+It then returns the list of commands associated with that pattern.
 
-These commands currently consist of NSString, NSData, or NSNumber objects.
+See the documentation for <KMSCommand> and its subclasses for a list of the built-in commands that can be returned.
 
-- NSData objects are sent back directly as output.
-- NSString objects are also sent back, except for the constant CloseCommand string, which closes the connection instead.
-- NSNumber objects are interpreted as times, in seconds, to pause before sending back further output.
-
-The class also performs text substitutions on the NSString items that it returns. This allows you to add a certain amount of dynamism to the responses that are returned.
+Before returning the command list, substitutions are performed on any that are text-based. This allows you to add a certain amount of dynamism to the responses that are returned, by substituting in things like the address of the server, the current time, and so on. This is sufficient to mimic the behaviour of a lot of servers. For more complex cases, custom command subclasses can be written, which are free to produce completely dynamic responses based on the current state of the responder, connection and server.
 
 A <KMSResponder> also has an <initialResponse> property. The list of commands associated with this property is returned automatically by the associated <KMSConnection> when a connection first starts. 
 
 Setting this property is essential for faking any protocol that starts by sending something back to the client. For example, an FTP server typically starts by sending something like this: "220 10.1.1.23 FTP server (ACME FTP Server v1.1) ready.\r\n".
 
-To make life easier, the <KMSResponseCollection> class allows you to create <KMSRegExResponder> objects by loading the response data from disk. See the ftp.json and webdav.json files for examples of the file format.
+To make life easier, the <KMSResponseCollection> class allows you to create <KMSRegExResponder> objects by loading the response data from disk. See the ftp.json, webdav.json and http.json files for examples of the file format.
 
 Passive Data Requests
 ---------------------
