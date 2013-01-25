@@ -23,7 +23,7 @@
 
 - (void)tearDown
 {
-    [self.server stop];
+    [self cleanupServer];
 }
 
 - (BOOL)setupServerWithScheme:(NSString*)scheme responses:(NSString*)responsesFile;
@@ -50,6 +50,16 @@
     }
 
     return self.server != nil;
+}
+
+- (void)cleanupServer
+{
+    [self.server stop];
+    self.user = nil;
+    self.password = nil;
+    self.url = nil;
+    self.responses = nil;
+    self.server = nil;
 }
 
 - (void)useResponseSet:(NSString*)name

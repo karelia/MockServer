@@ -56,6 +56,13 @@
 
 - (BOOL)setupServerWithScheme:(NSString*)scheme responses:(NSString*)responsesFile;
 
+/**
+ Clean up after a test.
+ This is called automatically by tearDown, but you can also call it yourself if you want to call setupServerWithScheme:responses: again with different settings.
+ */
+
+- (void)cleanupServer;
+
 /** 
  Switch the current server to use a different response set.
  You can use this to change the responses you're doing mid-test. For example, you might make a request
