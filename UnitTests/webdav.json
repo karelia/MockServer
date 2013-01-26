@@ -1,4 +1,6 @@
 {
+    "scheme" : "webdav",
+    
     "sets":
     {
         "default": {

@@ -45,4 +45,10 @@
 
 - (KMSRegExResponder*)responderWithName:(NSString*)name;
 
+/**
+ Return the URL that this collection is used with.
+ */
+
+@property (strong, nonatomic) NSString* scheme;
+
 @end

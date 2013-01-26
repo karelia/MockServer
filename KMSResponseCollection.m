@@ -43,6 +43,7 @@
         {
             self.sets = info[@"sets"];
             self.responses = info[@"responses"];
+            self.scheme = info[@"scheme"];
         }
         else
         {

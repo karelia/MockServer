@@ -25,7 +25,7 @@
 - (void)testFTP
 {
     // setup a server object, using the ftp: scheme and taking the "default" set of responses from the "ftp.json" file.
-    if ([self setupServerWithScheme:@"ftp" responses:@"ftp"])
+    if ([self setupServerWithResponseFileNamed:@"ftp"])
     {
         // set up the data that the server will return
         NSString* testData = @"This is some test data";
@@ -49,7 +49,7 @@
     // test like the above one, but which doesn't use [self stringForRequest]
     
     // setup a server object, using the ftp: scheme and taking the "default" set of responses from the "ftp.json" file.
-    if ([self setupServerWithScheme:@"ftp" responses:@"ftp"])
+    if ([self setupServerWithResponseFileNamed:@"ftp"])
     {
         // set up the data that the server will return
         NSString* testData = @"This is some test data";
@@ -84,7 +84,7 @@
 - (void)testMultiple
 {
     // setup a server object, using the ftp: scheme and taking the "default" set of responses from the "ftp.json" file.
-    if ([self setupServerWithScheme:@"ftp" responses:@"ftp"])
+    if ([self setupServerWithResponseFileNamed:@"ftp"])
     {
         // setup an ftp request
         NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"ftp://user:pass@127.0.0.1:%ld/test.txt", (long)self.server.port]];

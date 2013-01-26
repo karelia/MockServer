@@ -45,16 +45,15 @@
 @property (strong, nonatomic) NSURL* url;
 
 /**
- Setup a test using a given scheme and the response from a given JSON file.
+ Setup a test using responses from a given JSON file.
  
- The response set called "default" is loaded from the response file. You can change to another set later by calling <useResponseSet>.
+ The set called "default" from the responses file is loaded. You can change to another set later by calling <useResponseSet>.
 
- @param scheme The URL scheme to use - eg ftp.
  @param responsesFile The name of the responses file. This should be a JSON file, added as a resource to the unit test bundle.
  @return YES if the test server got set up ok.
  */
 
-- (BOOL)setupServerWithScheme:(NSString*)scheme responses:(NSString*)responsesFile;
+- (BOOL)setupServerWithResponseFileNamed:(NSString*)responsesFile;
 
 /**
  Clean up after a test.
