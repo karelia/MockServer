@@ -54,7 +54,7 @@
 	
 	<option value="//api/name/runUntilPaused">&nbsp;&nbsp;&nbsp;&nbsp;- runUntilPaused</option>
 	
-	<option value="//api/name/setupServerWithScheme:responses:">&nbsp;&nbsp;&nbsp;&nbsp;- setupServerWithScheme:responses:</option>
+	<option value="//api/name/setupServerWithResponseFileNamed:">&nbsp;&nbsp;&nbsp;&nbsp;- setupServerWithResponseFileNamed:</option>
 	
 	<option value="//api/name/stringForRequest:">&nbsp;&nbsp;&nbsp;&nbsp;- stringForRequest:</option>
 	
@@ -98,7 +98,7 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/runUntilPaused">runUntilPaused</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setupServerWithScheme:responses:">setupServerWithScheme:responses:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setupServerWithResponseFileNamed:">setupServerWithResponseFileNamed:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/stringForRequest:">stringForRequest:</a></span></li>
 	
@@ -187,8 +187,8 @@ networking code that you&rsquo;re testing time to do its thing.</p>
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/setupServerWithScheme:responses:">&ndash;&nbsp;setupServerWithScheme:responses:</a></code>
-		<span class="tooltip"><p>Setup a test using a given scheme and the response from a given JSON file.</p></span>
+		<code><a href="#//api/name/setupServerWithResponseFileNamed:">&ndash;&nbsp;setupServerWithResponseFileNamed:</a></code>
+		<span class="tooltip"><p>Setup a test using responses from a given JSON file.</p></span>
 	</span>
 	
 	
@@ -475,28 +475,23 @@ This is called automatically by tearDown, but you can also call it yourself if y
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/setupServerWithScheme:responses:" title="setupServerWithScheme:responses:"></a>
-	<h3 class="subsubtitle method-title">setupServerWithScheme:responses:</h3>
+	<a name="//api/name/setupServerWithResponseFileNamed:" title="setupServerWithResponseFileNamed:"></a>
+	<h3 class="subsubtitle method-title">setupServerWithResponseFileNamed:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Setup a test using a given scheme and the response from a given JSON file.</p>
+		<p>Setup a test using responses from a given JSON file.</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (BOOL)setupServerWithScheme:(NSString *)<em>scheme</em> responses:(NSString *)<em>responsesFile</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (BOOL)setupServerWithResponseFileNamed:(NSString *)<em>responsesFile</em></code></div>
 
     
 	
 	<div class="method-subsection arguments-section parameters">
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>scheme</em></dt>
-			<dd><p>The URL scheme to use &ndash; eg ftp.</p></dd>
-		</dl>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>responsesFile</em></dt>
@@ -518,7 +513,7 @@ This is called automatically by tearDown, but you can also call it yourself if y
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>The response set called &ldquo;default&rdquo; is loaded from the response file. You can change to another set later by calling <useResponseSet>.</p>
+		<p>The set called &ldquo;default&rdquo; from the responses file is loaded. You can change to another set later by calling <useResponseSet>.</p>
 	</div>
 	
 	
