@@ -26,7 +26,7 @@
 /**
  Returns a new command to send a given string.
  
- @param The string to send.
+ @param string The string to send.
  @return The new command.
  */
 

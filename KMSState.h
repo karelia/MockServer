@@ -7,7 +7,7 @@
  Potentially server states.
  */
 
-typedef enum
+typedef NS_ENUM(NSUInteger, KMSState)
 {
     /// Server hasn't been started yet.
     KMSReady,
@@ -23,5 +23,5 @@ typedef enum
 
     /// Server is stopped.
     KMSStopped
-} KMSState;
+};
 

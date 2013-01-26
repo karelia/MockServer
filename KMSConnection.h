@@ -26,6 +26,7 @@
 
 + (KMSConnection*)connectionWithSocket:(int)socket responder:(KMSResponder*)responder server:(KMSServer*)server;
 
+
 /**
  Return a new connection on a given socket.
 
@@ -38,11 +39,25 @@
 
 - (id)initWithSocket:(int)socket responder:(KMSResponder*)responder server:(KMSServer*)server;
 
+
+
+
+/**
+ Close the connection.
+
+ Generally only called by the KMSCloseCommand.
+
+ */
+
+- (void)close;
+
+
 /**
  Disconnect the streams we're managing.
  */
 
 - (void)cancel;
+
 
 /**
  Append some data to the connection's output buffer.
@@ -54,17 +69,10 @@
  Commands (such as KMSSendDataCommand or KMSSendStringCommand) use this
  to queue up their output.
 
+ @param output The data to append to the output buffer.
+
  */
 
 - (void)appendOutput:(NSData*)output;
-
-/**
- Close the connection. 
- 
- Generally only called by the KMSCloseCommand.
-
- */
-
-- (void)close;
 
 @end
