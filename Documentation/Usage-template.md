@@ -9,14 +9,14 @@ Response file examples for ftp, http and webdav can be found in the MockServer p
 
 Some example unit tests are also available, but in this document I'll take you through how you might create one from scratch.
 
-### Imports
+## Imports
 
 After making a new source file, you first need to import the MockServer headers that you need. You'll definitely need `KMSTestCase.h`, and probably also `KMSServer.h`:
 
     #import "KMSTestCase.h"
     #import "KMSServer.h"
 
-### A Class And A Test
+## A Class And A Test
 
 Next, you want to declare your unit test class, inheriting from <KMSTestCase>:
 	
@@ -25,7 +25,7 @@ Next, you want to declare your unit test class, inheriting from <KMSTestCase>:
     @end
     
 
-### Set Up Server
+## Set Up Server
 
 As a simple example, we'll just implement a single test, which performs an FTP request.
 
@@ -61,7 +61,7 @@ So, to set some data to be returned, we use the <[KMSServer data]> property:
 	        self.server.data = [testData dataUsingEncoding:NSUTF8StringEncoding];
 			
 
-### Make A Request
+## Make A Request
 
 Next, we need to make an NSURLRequest object that we're going to use in our client code to do our actual FTP request.
 
@@ -77,7 +77,7 @@ In this case we're going to pretend to download a file called "test.txt" from th
 			NSURLRequest* request = [NSURLRequest requestWithURL:url];
 	
 
-### Perform The Download
+## Perform The Download
 
 Next, we want to actually peform the download. 
 
@@ -113,7 +113,7 @@ Here's the code:
 		 
 		[self runUntilPaused];
 
-### Test The Results
+## Test The Results
 
 Finally, we can check that we got back whatever it is that we were expecting to get back.
 

@@ -53,6 +53,9 @@ MockServer expects the modern runtime, and uses the latest syntax. It doesn't us
 
 Currently I've only tested it on the Mac, but I think it should work on iOS. Let me know if you encounter any issues.
 
+## Usage
+
+See the <Usage> document for a quick introduction into using MockServer with unit tests.
 
 ## For More Information
 
