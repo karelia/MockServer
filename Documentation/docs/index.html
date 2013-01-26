@@ -1,0 +1,184 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>MockServer Reference</title>
+		<link rel="stylesheet" type="text/css" href="css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.1 (build 858)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="index.html">MockServer </a></h1>
+				<a id="developerHome" href="index.html">Karelia Software</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">MockServer Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar"></ul>
+		</header>
+		<article>
+			<div id="overview_contents" role="main">
+				<div class="main-navigation navigation-top">
+					<a href="hierarchy.html">Next</a>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">MockServer Reference</h1>
+					</div>		
+				</div>
+				<div id="container">
+					
+					<div class="section section-overview index-overview">
+						
+						
+						<h1>Mock Server</h1>
+
+<p>A server which runs locally and pretends to be something else.</p>
+
+<p>You provide the server with an optional port to run on, and a responder object which is responsible for taking some input from the port and providing some output to send back.</p>
+
+<p>The default responder class works by pattern matching the input, and takes an array of predefined responses.</p>
+
+<p>The responses consist of an array of arrays. Each of the inner arrays is in this format:</p>
+
+<pre><code>@[pattern, command, command...]
+</code></pre>
+
+<p>The pattern is a regular expression which is matched against input received by the server.</p>
+
+<p>The commands are subclasses of <a href="Classes/KMSCommand.html">KMSCommand</a>. Predefined command classes are provided which send data back to the client (after performing text substitutions to customise the content), pause for a while, and close the connection. Other command classes can easily be defined to perform custom actions, such as pausing for a random time, or sending
+back some dynamically generated content.</p>
+
+<p>The server includes a facilty for loading these response arrays easily from a JSON file.</p>
+
+<h2>Ports</h2>
+
+<p>If you give the server no port, it is assigned one at random. You can discover this using the <a href="Classes/KMSServer.html#//api/name/port">[KMSServer port]</a> property, so that
+you can pass it on to the test code that will be making a connection.</p>
+
+<p>This is generally preferrable to setting a fixed port, as the system doesn&rsquo;t always free up ports instantly, so if you
+run multiple tests on a fixed port in quick succession you may find that the server fails to bind.</p>
+
+<h2>Data Transfers</h2>
+
+<p>As well as listening on it&rsquo;s assigned port, the server listens on a second port which can be used to fake FTP
+passive data connections.</p>
+
+<p>Any connection on this port will cause the contents of the <a href="Classes/KMSServer.html#//api/name/data">[KMSServer data]</a> property to be sent back, followed by
+the connection closing.</p>
+
+<h2>Substitions</h2>
+
+<p>There is a subsitituion system which allows the output that is sent back to vary somewhat based on context.
+You can use variables <code>$0</code>, <code>$1</code>, <code>$2</code> etc in a response, to refer to parts of the pattern that was matched against.</p>
+
+<p>Other substitutions that are currently implemented:</p>
+
+<pre><code>$address     the IP address of the server; should be 127.0.0.1
+$server      a fake name for the server, to return (eg in FTP responses)
+$pasv        the IP address and port number of the data connection, in FTP format (eg 127,0,0,1,120,12)
+$size        the size of the server's data property
+$date        the current date &amp; time in RFC1123 format
+</code></pre>
+
+<h2>Requirements</h2>
+
+<p>MockServer expects the modern runtime, and uses the latest syntax. It doesn&rsquo;t use ARC yet, but really only because I haven&rsquo;t got round to it.</p>
+
+<p>Currently I&rsquo;ve only tested it on the Mac, but I think it should work on iOS. Let me know if you encounter any issues.</p>
+
+<h2>Usage</h2>
+
+<p>See the <a href="docs/Documentation/Usage.html">Usage</a> document for a quick introduction into using MockServer with unit tests.</p>
+
+<h2>For More Information</h2>
+
+<p>See the full <a href="http://karelia.github.com/MockServer/Documentation/">documentation</a> on the web (if you&rsquo;re reading this on the web, that link probably refers to this page!).</p>
+
+<p>See MockServer&rsquo;s own <a href="https://github.com/karelia/MockServer/tree/master/UnitTests">unit tests</a> for some examples. KMSManualTests.m and KMSCollectionTests.m illustrate usage, and the ftp.json and webdav.json files give examples of responses files.</p>
+
+<p>If you find issues or have suggestions, please <a href="https://github.com/karelia/MockServer/issues">report them on github</a>, or <a href="http://www.bornsleepy.com/contact">mail me</a>.</p>
+
+<p><strong>Note about the documentation</strong>: The web version of this documentation was built with appledoc and the <a href="https://github.com/samdeane/gendoc">gendoc script</a>.
+For some reason that I haven&rsquo;t figured out yet, appledoc seems to get some of the index links wrong, so clicking on the MockServer link at the top-left may sometimes give you a 404 error. Sorry about that &ndash; it&rsquo;s a known issue which I&rsquo;ll try to fix!</p>
+						
+						
+					</div>
+					
+                        
+                    
+                        <div class="index-column">
+						<h2 class="index-title">Programming Guides</h2>
+						<ul>
+                        
+                        <li><a href="docs/Documentation/Design.html">Design</a></li>
+                        
+                        <li><a href="docs/Documentation/Logging.html">Logging</a></li>
+                        
+                        <li><a href="docs/Documentation/Responses.html">Responses</a></li>
+                        
+                        <li><a href="docs/Documentation/Usage.html">Usage</a></li>
+                        
+						</ul>
+                        </div>
+                    
+					
+					
+					<div class="index-column">
+						<h2 class="index-title">Class References</h2>
+						<ul>
+							
+							<li><a href="Classes/KMSCloseCommand.html">KMSCloseCommand</a></li>
+							
+							<li><a href="Classes/KMSCommand.html">KMSCommand</a></li>
+							
+							<li><a href="Classes/KMSConnection.html">KMSConnection</a></li>
+							
+							<li><a href="Classes/KMSListener.html">KMSListener</a></li>
+							
+							<li><a href="Classes/KMSPauseCommand.html">KMSPauseCommand</a></li>
+							
+							<li><a href="Classes/KMSRegExResponder.html">KMSRegExResponder</a></li>
+							
+							<li><a href="Classes/KMSResponder.html">KMSResponder</a></li>
+							
+							<li><a href="Classes/KMSResponseCollection.html">KMSResponseCollection</a></li>
+							
+							<li><a href="Classes/KMSSendDataCommand.html">KMSSendDataCommand</a></li>
+							
+							<li><a href="Classes/KMSSendServerDataCommand.html">KMSSendServerDataCommand</a></li>
+							
+							<li><a href="Classes/KMSSendStringCommand.html">KMSSendStringCommand</a></li>
+							
+							<li><a href="Classes/KMSServer.html">KMSServer</a></li>
+							
+							<li><a href="Classes/KMSTestCase.html">KMSTestCase</a></li>
+							
+							<li><a href="Classes/KMSTranscriptEntry.html">KMSTranscriptEntry</a></li>
+							
+						</ul>
+					</div>
+					
+					
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<a href="hierarchy.html">Next</a>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2013 Karelia Software. All rights reserved. (Last updated: 2013-01-26)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
+						
+	
+					</div>
+				</div>
+			</div>
+		</article>		
+	</body>
+</html>
