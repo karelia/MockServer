@@ -39,7 +39,7 @@
 
 <p>Some example unit tests are also available, but in this document I&rsquo;ll take you through how you might create one from scratch.</p>
 
-<h3>Imports</h3>
+<h2>Imports</h2>
 
 <p>After making a new source file, you first need to import the MockServer headers that you need. You&rsquo;ll definitely need <code>KMSTestCase.h</code>, and probably also <code>KMSServer.h</code>:</p>
 
@@ -47,7 +47,7 @@
 #import "KMSServer.h"
 </code></pre>
 
-<h3>A Class And A Test</h3>
+<h2>A Class And A Test</h2>
 
 <p>Next, you want to declare your unit test class, inheriting from <a href="../../Classes/KMSTestCase.html">KMSTestCase</a>:</p>
 
@@ -56,7 +56,7 @@
 @end
 </code></pre>
 
-<h3>Set Up Server</h3>
+<h2>Set Up Server</h2>
 
 <p>As a simple example, we&rsquo;ll just implement a single test, which performs an FTP request.</p>
 
@@ -91,7 +91,7 @@
         self.server.data = [testData dataUsingEncoding:NSUTF8StringEncoding];
 </code></pre>
 
-<h3>Make A Request</h3>
+<h2>Make A Request</h2>
 
 <p>Next, we need to make an NSURLRequest object that we&rsquo;re going to use in our client code to do our actual FTP request.</p>
 
@@ -106,7 +106,7 @@
         NSURLRequest* request = [NSURLRequest requestWithURL:url];
 </code></pre>
 
-<h3>Perform The Download</h3>
+<h2>Perform The Download</h2>
 
 <p>Next, we want to actually peform the download.</p>
 
@@ -142,7 +142,7 @@
     [self runUntilPaused];
 </code></pre>
 
-<h3>Test The Results</h3>
+<h2>Test The Results</h2>
 
 <p>Finally, we can check that we got back whatever it is that we were expecting to get back.</p>
 
