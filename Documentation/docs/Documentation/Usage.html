@@ -39,11 +39,15 @@
 
 <p>Some example unit tests are also available, but in this document I&rsquo;ll take you through how you might create one from scratch.</p>
 
+<h3>Imports</h3>
+
 <p>After making a new source file, you first need to import the MockServer headers that you need. You&rsquo;ll definitely need <code>KMSTestCase.h</code>, and probably also <code>KMSServer.h</code>:</p>
 
 <pre><code>#import "KMSTestCase.h"
 #import "KMSServer.h"
 </code></pre>
+
+<h3>A Class And A Test</h3>
 
 <p>Next, you want to declare your unit test class, inheriting from <a href="../../Classes/KMSTestCase.html">KMSTestCase</a>:</p>
 
@@ -51,6 +55,8 @@
 
 @end
 </code></pre>
+
+<h3>Set Up Server</h3>
 
 <p>As a simple example, we&rsquo;ll just implement a single test, which performs an FTP request.</p>
 
@@ -78,12 +84,14 @@
 
 <p>This is the way MockServer works generally. It doesn&rsquo;t actually perform as a server at all in any real sense; instead, you give it the thing you want it to return, then run the real client code that sends a request to it, then check that the client code got back the thing that you asked MockServer to return.</p>
 
-<p>So, to set some data to be returned, we use the [KMSServer data] property:</p>
+<p>So, to set some data to be returned, we use the <a href="../../Classes/KMSServer.html#//api/name/data">[KMSServer data]</a> property:</p>
 
 <pre><code>        // set up the data that the server will return
         NSString* testData = @"This is some test data";
         self.server.data = [testData dataUsingEncoding:NSUTF8StringEncoding];
 </code></pre>
+
+<h3>Make A Request</h3>
 
 <p>Next, we need to make an NSURLRequest object that we&rsquo;re going to use in our client code to do our actual FTP request.</p>
 
@@ -97,6 +105,8 @@
         NSURL* url = [self URLForPath:@"test.txt"];
         NSURLRequest* request = [NSURLRequest requestWithURL:url];
 </code></pre>
+
+<h3>Perform The Download</h3>
 
 <p>Next, we want to actually peform the download.</p>
 
@@ -132,6 +142,8 @@
     [self runUntilPaused];
 </code></pre>
 
+<h3>Test The Results</h3>
+
 <p>Finally, we can check that we got back whatever it is that we were expecting to get back.</p>
 
 <p>In this case we should receive the test string that we asked MockServer to return to us:</p>
@@ -145,7 +157,7 @@
 
 <p>Clearly there&rsquo;s more going on under the hood of <a href="../../Classes/KMSTestCase.html">KMSTestCase</a>, but most of it is just housekeeping and for a lot of situations it should be sufficient for your needs.</p>
 
-<p>You can obviously use KMSServer directly if you need to do something more complicated &ndash; examining the source code of <a href="../../Classes/KMSTestCase.html">KMSTestCase</a> should give you everything you need.</p>
+<p>You can obviously use <a href="../../Classes/KMSServer.html">KMSServer</a> directly if you need to do something more complicated &ndash; examining the source code of <a href="../../Classes/KMSTestCase.html">KMSTestCase</a> should give you everything you need.</p>
 				</div>
 				<div id="footer">
 					<hr />
