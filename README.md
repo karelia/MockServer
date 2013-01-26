@@ -13,7 +13,7 @@ The responses consist of an array of arrays. Each of the inner arrays is in this
 
 The pattern is a regular expression which is matched against input received by the server.
 
-The commands are subclasses of the KMSCommand class. Predefined command classes are provided which send data back to the client (after performing text substitutions to customise the content), pause for a while, and close the connection. Other command classes can easily be defined to perform custom actions, such as pausing for a random time, or sending
+The commands are subclasses of <KMSCommand>. Predefined command classes are provided which send data back to the client (after performing text substitutions to customise the content), pause for a while, and close the connection. Other command classes can easily be defined to perform custom actions, such as pausing for a random time, or sending
 back some dynamically generated content.
 
 The server includes a facilty for loading these response arrays easily from a JSON file.
