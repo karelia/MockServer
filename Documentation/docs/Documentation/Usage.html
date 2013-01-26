@@ -1,0 +1,159 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>Usage Document</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<meta name="viewport" content="width=550" />
+		<link rel="stylesheet" type="text/css" href="../../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../../css/stylesPrint.css" />	
+		<meta name="generator" content="appledoc 2.1 (build 858)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">MockServer </a></h1>
+				<a id="developerHome" href="../index.html">Karelia Software</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode" id="pageTitleHeader">Usage Document</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar"></ul>
+		</header>
+		<article>
+			<a title="Usage Document" name="top"></a>
+			<div id="overview_contents" role="main">
+				<div id="container">	
+					<p>MockServer can be used in a number of different ways, but to simlpify things I&rsquo;ve tried to make it easy to use it in what I think is the most likely scenario: as part of a suite of unit tests using the standard SenTestKit framework that ships with Xcode.</p>
+
+<p>To do this, you need to make just two things:</p>
+
+<ul>
+<li>a responses file</li>
+<li>a unit test class that inherits from <a href="../../Classes/KMSTestCase.html">KMSTestCase</a>.</li>
+</ul>
+
+
+<p>Response file examples for ftp, http and webdav can be found in the MockServer project, and you may be able to use one of these directly.</p>
+
+<p>Some example unit tests are also available, but in this document I&rsquo;ll take you through how you might create one from scratch.</p>
+
+<p>After making a new source file, you first need to import the MockServer headers that you need. You&rsquo;ll definitely need <code>KMSTestCase.h</code>, and probably also <code>KMSServer.h</code>:</p>
+
+<pre><code>#import "KMSTestCase.h"
+#import "KMSServer.h"
+</code></pre>
+
+<p>Next, you want to declare your unit test class, inheriting from <a href="../../Classes/KMSTestCase.html">KMSTestCase</a>:</p>
+
+<pre><code>@interface KMSCollectionTests : KMSTestCase
+
+@end
+</code></pre>
+
+<p>As a simple example, we&rsquo;ll just implement a single test, which performs an FTP request.</p>
+
+<pre><code>@implementation KMSCollectionTests
+
+- (void)testFTP
+{
+</code></pre>
+
+<p>First, we need to set up a new mock server instance, and start it running.</p>
+
+<p>Luckily KMSTestCase has a method that does all the hard work for us: [KMSTestCase setupServerWithResponseFileNamed:].</p>
+
+<p>This method takes the name of a response file, and sets up a MockServer instance, running on a dynamically allocated port, and using the &ldquo;default&rdquo; set of responses from the response file, which should be added as a resource to your unit test bundle.</p>
+
+<p>We have to check the result of this call (which is a BOOL), in case anything goes wrong with the setup.</p>
+
+<pre><code>    // setup a server object, using the ftp: scheme and taking the "default" set of responses from the "ftp.json" file.
+    if ([self setupServerWithResponseFileNamed:@"ftp"])
+    {
+</code></pre>
+
+<p>Because we&rsquo;re going to fake a download, the next thing we have to do is to give the server some data to return to us when it pretends to respond to the download response.</p>
+
+<p>This is the way MockServer works generally. It doesn&rsquo;t actually perform as a server at all in any real sense; instead, you give it the thing you want it to return, then run the real client code that sends a request to it, then check that the client code got back the thing that you asked MockServer to return.</p>
+
+<p>So, to set some data to be returned, we use the [KMSServer data] property:</p>
+
+<pre><code>        // set up the data that the server will return
+        NSString* testData = @"This is some test data";
+        self.server.data = [testData dataUsingEncoding:NSUTF8StringEncoding];
+</code></pre>
+
+<p>Next, we need to make an NSURLRequest object that we&rsquo;re going to use in our client code to do our actual FTP request.</p>
+
+<p>Because the server is using a dynamically allocated port, we can&rsquo;t hard code the URL into the test; we have to figure it out on the fly. We do this by grabbing the port number back from the server, grabbing the scheme from the responses collection, and building up a URL from that information.</p>
+
+<p>Luckily <a href="../../Classes/KMSTestCase.html">KMSTestCase</a> provides a helper method to simplify this.</p>
+
+<p>In this case we&rsquo;re going to pretend to download a file called &ldquo;test.txt&rdquo; from the root of the FTP server:</p>
+
+<pre><code>        // setup an ftp request
+        NSURL* url = [self URLForPath:@"test.txt"];
+        NSURLRequest* request = [NSURLRequest requestWithURL:url];
+</code></pre>
+
+<p>Next, we want to actually peform the download.</p>
+
+<p>Because this is a unit test, the first instinct might be to do this synchronously. After all, a unit test is just one method, and we can&rsquo;t perform a test on what we got back until we&rsquo;ve actually got it. For an asynchronous case we&rsquo;d have to give back control to the main loop for a while until we somehow know that the request is done, and that all sounds a bit complicated.</p>
+
+<p>To test in real-world conditions though, we really do want to do things asynchronously. A synchronous test at this point really isn&rsquo;t a good idea, since (hopefully) we aren&rsquo;t going to be writing synchronous downloads in our apps.</p>
+
+<p>Luckily, MockServer and KMSTestCase have this covered. KMSTestCase has a two methods: <runUntilPaused>, and <pause>.</p>
+
+<p>The first of these hands back control to the main run loop, and pumps it until something calls <pause>. If we arrange to call this in our completion handler, we can happily set up an asynchronous request, wait for it to do it&rsquo;s thing, and then return control to our unit test so that we can check the results.</p>
+
+<p>Here&rsquo;s the code:</p>
+
+<pre><code>    __block NSString* string = nil;
+
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse* response, NSData* data, NSError* error)
+     {
+         if (error)
+         {
+             NSLog(@"got error %@", error);
+         }
+         else
+         {
+             string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+         }
+
+         [self pause];
+     }];
+
+    [self runUntilPaused];
+</code></pre>
+
+<p>Finally, we can check that we got back whatever it is that we were expecting to get back.</p>
+
+<p>In this case we should receive the test string that we asked MockServer to return to us:</p>
+
+<pre><code>    STAssertEqualObjects(string, testData, @"got the wrong response: %@", string);
+</code></pre>
+
+<p>And that, as they say, is that.</p>
+
+<p>By using KMSTestCase, most of the setup work and all of the cleanup work is done for us, and we can just concentrate on the code that performs whatever network operation it is that we&rsquo;re trying to test, and then checks the results to verify that they are ok.</p>
+
+<p>Clearly there&rsquo;s more going on under the hood of KMSTestCase, but most of it is just housekeeping and for a lot of situations it should be sufficient for your needs.</p>
+
+<p>You can obviously use KMSServer directly if you need to do something more complicated &ndash; examining the source code of KMSTestCase should give you everything you need.</p>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2013 Karelia Software. All rights reserved. (Last updated: 2013-01-26)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
+						
+					
+					</div>
+				</div>
+			</div>
+		</article>
+	</body>
+</html>
