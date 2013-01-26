@@ -49,18 +49,7 @@
 
 <p>The pattern is a regular expression which is matched against input received by the server.</p>
 
-<p>The commands are subclasses of the KMSCommand class. Predefined command classes include:</p>
-
-<ul>
-<li><a href="Classes/KMSSendDataCommand.html">KMSSendDataCommand</a>, send raw data back to the client</li>
-<li><KMSSendStringCommand>, send text back to the client</li>
-<li><KMSSendServerDataCommand>, send the value of the <a href="Classes/KMSServer.html#//api/name/data">[KMSServer data]</a> property back to the client</li>
-<li><a href="Classes/KMSCloseCommand.html">KMSCloseCommand</a>, which closes the connection</li>
-<li><KMSPauseCommand>, which causes the connection to pause before sending anything more</li>
-</ul>
-
-
-<p>Other command classes can easily be defined to perform custom actions, such as pausing for a random time, or sending
+<p>The commands are subclasses of the KMSCommand class. Predefined command classes are provided which send data back to the client (after performing text substitutions to customise the content), pause for a while, and close the connection. Other command classes can easily be defined to perform custom actions, such as pausing for a random time, or sending
 back some dynamically generated content.</p>
 
 <p>The server includes a facilty for loading these response arrays easily from a JSON file.</p>
