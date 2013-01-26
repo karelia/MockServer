@@ -62,13 +62,14 @@
 
 <p>First, we need to set up a new mock server instance, and start it running.</p>
 
-<p>Luckily KMSTestCase has a method that does all the hard work for us: [KMSTestCase setupServerWithResponseFileNamed:].</p>
+<p>Luckily KMSTestCase has a method that does all the hard work for us: <a href="../../Classes/KMSTestCase.html#//api/name/setupServerWithResponseFileNamed:">[KMSTestCase setupServerWithResponseFileNamed:]</a>.</p>
 
 <p>This method takes the name of a response file, and sets up a MockServer instance, running on a dynamically allocated port, and using the &ldquo;default&rdquo; set of responses from the response file, which should be added as a resource to your unit test bundle.</p>
 
 <p>We have to check the result of this call (which is a BOOL), in case anything goes wrong with the setup.</p>
 
-<pre><code>    // setup a server object, using the ftp: scheme and taking the "default" set of responses from the "ftp.json" file.
+<pre><code>    // setup a server object, using the ftp: scheme and taking
+    // the "default" set of responses from the "ftp.json" file.
     if ([self setupServerWithResponseFileNamed:@"ftp"])
     {
 </code></pre>
@@ -103,7 +104,7 @@
 
 <p>To test in real-world conditions though, we really do want to do things asynchronously. A synchronous test at this point really isn&rsquo;t a good idea, since (hopefully) we aren&rsquo;t going to be writing synchronous downloads in our apps.</p>
 
-<p>Luckily, MockServer and KMSTestCase have this covered. KMSTestCase has a two methods: <runUntilPaused>, and <pause>.</p>
+<p>Luckily, MockServer and KMSTestCase have this covered. <a href="../../Classes/KMSTestCase.html">KMSTestCase</a> has a two methods: <runUntilPaused>, and <pause>.</p>
 
 <p>The first of these hands back control to the main run loop, and pumps it until something calls <pause>. If we arrange to call this in our completion handler, we can happily set up an asynchronous request, wait for it to do it&rsquo;s thing, and then return control to our unit test so that we can check the results.</p>
 
@@ -111,19 +112,22 @@
 
 <pre><code>    __block NSString* string = nil;
 
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse* response, NSData* data, NSError* error)
-     {
-         if (error)
-         {
-             NSLog(@"got error %@", error);
-         }
-         else
-         {
-             string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-         }
+    [NSURLConnection sendAsynchronousRequest:request 
+        queue:[NSOperationQueue currentQueue] 
+        completionHandler:
+            ^(NSURLResponse* response, NSData* data, NSError* error)
+             {
+                 if (error)
+                 {
+                     NSLog(@"got error %@", error);
+                 }
+                 else
+                 {
+                     string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                 }
 
-         [self pause];
-     }];
+                 [self pause];
+             }];
 
     [self runUntilPaused];
 </code></pre>
@@ -137,11 +141,11 @@
 
 <p>And that, as they say, is that.</p>
 
-<p>By using KMSTestCase, most of the setup work and all of the cleanup work is done for us, and we can just concentrate on the code that performs whatever network operation it is that we&rsquo;re trying to test, and then checks the results to verify that they are ok.</p>
+<p>By using <a href="../../Classes/KMSTestCase.html">KMSTestCase</a>, most of the setup work and all of the cleanup work is done for us, and we can just concentrate on the code that performs whatever network operation it is that we&rsquo;re trying to test, and then checks the results to verify that they are ok.</p>
 
-<p>Clearly there&rsquo;s more going on under the hood of KMSTestCase, but most of it is just housekeeping and for a lot of situations it should be sufficient for your needs.</p>
+<p>Clearly there&rsquo;s more going on under the hood of <a href="../../Classes/KMSTestCase.html">KMSTestCase</a>, but most of it is just housekeeping and for a lot of situations it should be sufficient for your needs.</p>
 
-<p>You can obviously use KMSServer directly if you need to do something more complicated &ndash; examining the source code of KMSTestCase should give you everything you need.</p>
+<p>You can obviously use KMSServer directly if you need to do something more complicated &ndash; examining the source code of <a href="../../Classes/KMSTestCase.html">KMSTestCase</a> should give you everything you need.</p>
 				</div>
 				<div id="footer">
 					<hr />
