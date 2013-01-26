@@ -68,7 +68,7 @@ The pattern: "«initial»" is used to define a response that will always be sent
 
 A response of "«close»" is not sent back to the client. Instead it is interpreted as an instruction to close the connection.
 
-A response of "«data»" causes the value of the <[MockServer data]> property to be sent back to the client.
+A response of "«data»" causes the value of the <[KMSServer data]> property to be sent back to the client.
 
 
 
