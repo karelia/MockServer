@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
-		<title>KMSRegExResponder Class Reference</title>
+		<title>KMSTranscriptEntry Class Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
@@ -17,7 +17,7 @@
 			</div>
 			
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">KMSRegExResponder Class Reference</h1>
+				<h1 class="hideInXcode">KMSTranscriptEntry Class Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -38,18 +38,20 @@
 	
 	
 	
+	<option value="properties">Properties</option>
+	
+	<option value="//api/name/type">&nbsp;&nbsp;&nbsp;&nbsp;type</option>
+	
+	<option value="//api/name/value">&nbsp;&nbsp;&nbsp;&nbsp;value</option>
+	
+	
 	
 	
 	<option value="class_methods">Class Methods</option>
 	
-	<option value="//api/name/responderWithResponses:">&nbsp;&nbsp;&nbsp;&nbsp;+ responderWithResponses:</option>
+	<option value="//api/name/entryWithType:value:">&nbsp;&nbsp;&nbsp;&nbsp;+ entryWithType:value:</option>
 	
 	
-	
-	
-	<option value="instance_methods">Instance Methods</option>
-	
-	<option value="//api/name/initWithResponses:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithResponses:</option>
 	
 	
 	
@@ -73,28 +75,30 @@
 
 
 
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/type">type</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/value">value</a></span></li>
+	
+</ul></li>
+
 
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/responderWithResponses:">responderWithResponses:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/entryWithType:value:">entryWithType:value:</a></span></li>
 	
 </ul></li>
 
 
-
-<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithResponses:">initWithResponses:</a></span></li>
-	
-</ul></li>
 
 
 			</ul>
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="KMSRegExResponder Class Reference" name="top"></a>
+				<a title="KMSTranscriptEntry Class Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -103,7 +107,7 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">KMSRegExResponder Class Reference</h1>
+						<h1 class="title title-header">KMSTranscriptEntry Class Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
@@ -111,10 +115,10 @@
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
 	<td class="specification-title">Inherits from</td>
-	<td class="specification-value"><a href="../Classes/KMSResponder.html">KMSResponder</a> : NSObject</td>
+	<td class="specification-value">NSObject</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">KMSRegExResponder.h</td>
+	<td class="specification-value">KMSTranscriptEntry.h</td>
 </tr>
 						</tbody></table></div>
 					
@@ -124,16 +128,11 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>Object which responds to incoming data by outputting a list of commands.</p>
+						<p>Represents an entry in the server&rsquo;s transcript.</p>
 
-<p>This class works by matching the input against a list of regular expression patterns.</p>
+<p>As it runs, the server records each input, output, and command that it executes.</p>
 
-<p>Commands, in this context, means an array of  NSString, NSData, or NSNumber
-objects.</p>
-
-<p>NSData objects are sent back directly as output.
-NSString objects are also sent back, except for the constant CloseCommand string, which closes the connection instead.
-NSNumber objects are interpreted as times, in seconds, to pause before sending back further output.</p>
+<p>Unit tests can use this information, for example, to check that the client code is sending the right input.</p>
 					</div>
 					
 					
@@ -151,15 +150,22 @@ NSNumber objects are interpreted as times, in seconds, to pause before sending b
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/responderWithResponses:">+&nbsp;responderWithResponses:</a></code>
-		<span class="tooltip"><p>Return a new responder object, using an array of responses.</p></span>
+		<code><a href="#//api/name/type">&nbsp;&nbsp;type</a></code>
+		<span class="tooltip"><p>The type of entry.</p></span>
 	</span>
-	
+	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initWithResponses:">&ndash;&nbsp;initWithResponses:</a></code>
-		<span class="tooltip"><p>Initialise a new responder object, using an array of responses.</p></span>
+		<code><a href="#//api/name/value">&nbsp;&nbsp;value</a></code>
+		<span class="tooltip"><p>The value of the transcript entry.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/entryWithType:value:">+&nbsp;entryWithType:value:</a></code>
+		<span class="tooltip"><p>Returns a new transcript entry with a given type and value.</p></span>
 	</span>
 	
 	
@@ -172,6 +178,84 @@ NSNumber objects are interpreted as times, in seconds, to pause before sending b
 					
 					
 					
+					<div class="section section-methods">
+						<a title="Properties" name="properties"></a>
+						<h2 class="subtitle subtitle-methods">Properties</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/type" title="type"></a>
+	<h3 class="subsubtitle method-title">type</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The type of entry.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (assign, nonatomic) KMSTranscriptEntryType type</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KMSTranscriptEntry.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/value" title="value"></a>
+	<h3 class="subsubtitle method-title">value</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The value of the transcript entry.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (strong, nonatomic) id value</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">KMSTranscriptEntry.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
 					
 					
 					<div class="section section-methods">
@@ -179,18 +263,18 @@ NSNumber objects are interpreted as times, in seconds, to pause before sending b
 						<h2 class="subtitle subtitle-methods">Class Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/responderWithResponses:" title="responderWithResponses:"></a>
-	<h3 class="subsubtitle method-title">responderWithResponses:</h3>
+	<a name="//api/name/entryWithType:value:" title="entryWithType:value:"></a>
+	<h3 class="subsubtitle method-title">entryWithType:value:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Return a new responder object, using an array of responses.</p>
+		<p>Returns a new transcript entry with a given type and value.</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>+ (KMSRegExResponder *)responderWithResponses:(NSArray *)<em>responses</em></code></div>
+	<div class="method-subsection method-declaration"><code>+ (KMSTranscriptEntry *)entryWithType:(KMSTranscriptEntryType)<em>type</em> value:(id)<em>value</em></code></div>
 
     
 	
@@ -198,8 +282,13 @@ NSNumber objects are interpreted as times, in seconds, to pause before sending b
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>responses</em></dt>
-			<dd><p>An array of patterns and commands.</p></dd>
+			<dt><em>type</em></dt>
+			<dd><p>The type of the new entry.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>value</em></dt>
+			<dd><p>The value of the new entry.</p></dd>
 		</dl>
 		
 	</div>
@@ -208,22 +297,12 @@ NSNumber objects are interpreted as times, in seconds, to pause before sending b
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>The new responder object.</p>
+		<p>The new transcript entry.</p>
 	</div>
 	
 	
 	
 	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>The responses consist of an array of arrays. Each of the inner arrays is in this format:</p>
-
-<pre><code> @[pattern, command, command...]
-</code></pre>
-
-<p>The pattern is a regular expression which is matched against input received by the server.</p>
-	</div>
 	
 	
 	
@@ -233,7 +312,7 @@ NSNumber objects are interpreted as times, in seconds, to pause before sending b
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KMSRegExResponder.h</code><br />
+		<code class="declared-in-ref">KMSTranscriptEntry.h</code><br />
 	</div>				
 	
 	
@@ -242,73 +321,6 @@ NSNumber objects are interpreted as times, in seconds, to pause before sending b
 					</div>
 					
 					
-					
-					<div class="section section-methods">
-						<a title="Instance Methods" name="instance_methods"></a>
-						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
-						
-						<div class="section-method">
-	<a name="//api/name/initWithResponses:" title="initWithResponses:"></a>
-	<h3 class="subsubtitle method-title">initWithResponses:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Initialise a new responder object, using an array of responses.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (id)initWithResponses:(NSArray *)<em>responses</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>responses</em></dt>
-			<dd><p>An array of patterns and commands.</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	<div class="method-subsection return">
-		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>The new responder object.</p>
-	</div>
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>The responses consist of an array of arrays. Each of the inner arrays is in this format:</p>
-
-<pre><code> @[pattern, command, command...]
-</code></pre>
-
-<p>The pattern is a regular expression which is matched against input received by the server.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">KMSRegExResponder.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-					</div>
 					
 					
 				</div>
