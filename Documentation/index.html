@@ -52,8 +52,10 @@
 <p>The commands are subclasses of the KMSCommand class. Predefined command classes include:</p>
 
 <ul>
-<li><a href="Classes/KMSSendDataCommand.html">KMSSendDataCommand</a>, <KMSSendStringCommand>, <KMSSendServerDataCommand>, which send output back to the client</li>
-<li><KMSCloseCommand>, which closes the connection</li>
+<li><a href="Classes/KMSSendDataCommand.html">KMSSendDataCommand</a>, send raw data back to the client</li>
+<li><KMSSendStringCommand>, send text back to the client</li>
+<li><KMSSendServerDataCommand>, send the value of the <a href="Classes/KMSServer.html#//api/name/data">[KMSServer data]</a> property back to the client</li>
+<li><a href="Classes/KMSCloseCommand.html">KMSCloseCommand</a>, which closes the connection</li>
 <li><KMSPauseCommand>, which causes the connection to pause before sending anything more</li>
 </ul>
 
