@@ -32,7 +32,7 @@
         self.server.data = [testData dataUsingEncoding:NSUTF8StringEncoding];
 
         // setup an ftp request
-        NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"ftp://user:pass@127.0.0.1:%ld/test.txt", (long)self.server.port]];
+        NSURL* url = [self URLForPath:@"test.txt"];
         NSURLRequest* request = [NSURLRequest requestWithURL:url];
 
         // perform the request using NSURLConnection
