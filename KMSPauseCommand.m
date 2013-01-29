@@ -7,6 +7,7 @@
 //
 
 #import "KMSPauseCommand.h"
+#import "KMSServer.h"
 
 @implementation KMSPauseCommand
 

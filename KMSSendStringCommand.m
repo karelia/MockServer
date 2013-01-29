@@ -8,6 +8,7 @@
 
 #import "KMSSendStringCommand.h"
 #import "KMSConnection.h"
+#import "KMSServer.h"
 
 @implementation KMSSendStringCommand
 
