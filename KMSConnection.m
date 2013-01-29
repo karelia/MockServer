@@ -155,6 +155,7 @@
     if (count)
     {
         KMSCommand* command = self.commands[0];
+        [command retain];
         [self.commands removeObjectAtIndex:0];
 
         NSTimeInterval delay = [command performOnConnection:self server:self.server];
@@ -165,6 +166,8 @@
                 [self processNextCommand];
             });
         }
+
+        [command release];
     }
 }
 
@@ -275,7 +278,9 @@
         case NSStreamEventHasBytesAvailable:
         {
             KMSAssert(stream == self.input);     // should never happen for the output stream
-            [self processInput];
+            dispatch_async(self.queue, ^{
+                [self processInput];
+            });
             break;
         }
 

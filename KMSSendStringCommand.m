@@ -20,6 +20,13 @@
     return [result autorelease];
 }
 
+- (void)dealloc
+{
+    [_string release];
+
+    [super dealloc];
+}
+
 - (NSTimeInterval)performOnConnection:(KMSConnection*)connection server:(KMSServer*)server
 {
     // log just the first line of the output

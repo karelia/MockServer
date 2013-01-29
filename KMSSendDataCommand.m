@@ -20,6 +20,13 @@
     return [result autorelease];
 }
 
+- (void)dealloc
+{
+    [_data release];
+
+    [super dealloc];
+}
+
 - (NSTimeInterval)performOnConnection:(KMSConnection*)connection server:(KMSServer*)server
 {
     KMSLog(@"queued data %@", self.data);
