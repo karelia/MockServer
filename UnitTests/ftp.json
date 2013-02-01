@@ -8,6 +8,11 @@
             "comment" : "Standard set of 'good' responses."
         },
 
+        "cwd fail": {
+            "responses": ["initial", "user", "password", "sys", "pwd", "type", "cwdDoesntExist", "pasv", "size", "retr", "list", "mkd", "stor", "dele", "chmod", "commandNotUnderstood" ],
+            "comment" : "Standard set of 'good' responses."
+        },
+
         "stor denied": {
             "responses": ["initial", "user", "password", "sys", "pwd", "type", "cwd", "pasv", "size", "retr", "list", "mkd", "stor denied", "dele", "chmod", "commandNotUnderstood" ],
             "comment" : "Denies creation of new files"
@@ -124,6 +129,15 @@
                           "250 CWD command successful.\r\n"
                           ],
             "comment" : "Response to the CWD command. Pretends to change directory."
+        },
+
+        "cwdDoesntExist" :
+        {
+            "pattern" : "CWD .*",
+            "commands" : [
+                          "550 CWD failed. No permission.\r\n"
+                          ],
+            "comment" : "Response to the CWD command when the directory doesn't exist."
         },
 
         "pasv" :
