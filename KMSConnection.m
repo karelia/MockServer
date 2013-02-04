@@ -83,7 +83,9 @@
 
 - (void)cancel
 {
-    [self disconnectStreams:@"cancelled"];
+    dispatch_sync(self.queue, ^{
+        [self disconnectStreams:@"cancelled"];
+    });
 }
 
 #pragma mark - Data Processing
