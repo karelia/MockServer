@@ -4,42 +4,42 @@
     "sets":
     {
         "default": {
-            "responses": ["find", "put", "delete", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["get", "find", "put", "delete", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "All commands succeed"
         },
 
         "make fails": {
-            "responses": ["find", "put", "delete", "mkcol-fail", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["get", "find", "put", "delete", "mkcol-fail", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "Making directory fails as if it already exists"
         },
 
         "make hangs": {
-            "responses": ["find", "put", "delete", "mkcol-hang", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["get", "find", "put", "delete", "mkcol-hang", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "Making directory hangs - client should time out eventually."
         },
 
         "make disconnects": {
-            "responses": ["find", "put", "delete", "mkcol-disconnect", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["get", "find", "put", "delete", "mkcol-disconnect", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "Making directory hangs - client should time out eventually."
         },
 
         "put fails": {
-            "responses": ["find", "put-fail", "delete", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["get", "find", "put-fail", "delete", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "Put command fails."
         },
 
         "put hangs": {
-            "responses": ["find", "put-hang", "delete", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["get", "find", "put-hang", "delete", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "Put command hangs - client should time out eventually."
         },
 
         "put disconnects": {
-            "responses": ["find", "put-disconnect", "delete", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["get", "find", "put-disconnect", "delete", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "Put command disconnects the connection abruptly."
         },
 
         "delete fails": {
-            "responses": ["find", "put", "delete-fail", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["get", "find", "put", "delete-fail", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "Delete command fails."
         },
 
@@ -57,8 +57,21 @@
 
     "responses":
     {
+        "get": {
+            "pattern": "GET.*",
+
+            "commands" : [
+                          "HTTP/1.1 200 OK\r\n",
+                          "Content-Type: text/html; charset=iso-8859-1\r\n\r\n",
+                          "«data»",
+                          "«close»"
+                          ],
+
+            "comment" : "A working get command with no authorization. Returns the value of server.data as content"
+        },
+        
         "find":   {
-            "pattern" : "PROPFIND ([a-zA-Z0-9\/]+) HTTP\/1.1.*Authorization: Basic dXNlcjpkZW1v.*",
+            "pattern" : "PROPFIND ([a-zA-Z0-9\/]+) HTTP\/1.1.*Authorization: Basic dXNlcjpwYXNz.*",
             "commands" : [
                           "HTTP/1.1 207 Multi-Status\r\nDate: $date\r\nServer: Apache/2.2.14 (Unix) DAV/2 mod_ssl/2.2.14 OpenSSL/0.9.8l PHP/5.3.1 mod_perl/2.0.4 Perl/v5.10.1\r\nContent-Type: text/xml; charset=\"utf-8\"\r\n\r\n",
 
