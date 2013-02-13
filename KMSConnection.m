@@ -91,6 +91,16 @@
     });
 }
 
+- (void)appendOutput:(NSData*)output
+{
+    // this should only be called from within a performOnConnection call on a command
+    // so we should already be on our serial queue
+    KMSAssert(dispatch_get_current_queue() == self.queue);
+
+    [self.outputData appendData:output];
+    [self processOutput];
+}
+
 #pragma mark - Data Processing
 
 - (void)processInput
@@ -178,13 +188,6 @@
     }
 }
 
-- (void)appendOutput:(NSData*)output
-{
-    dispatch_async(self.queue, ^{
-        [self.outputData appendData:output];
-        [self processOutput];
-    });
-}
 
 - (void)processOutput
 {
