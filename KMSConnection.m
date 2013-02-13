@@ -22,7 +22,6 @@
 @property (strong, nonatomic) NSMutableData* outputData;
 @property (assign, nonatomic) dispatch_queue_t queue;
 @property (strong, nonatomic) KMSResponder* responder;
-@property (strong, nonatomic) NSRunLoop* runLoop;
 @property (strong, nonatomic) KMSServer* server;
 
 @end
@@ -34,7 +33,6 @@
 @synthesize outputData = _outputData;
 @synthesize queue = _queue;
 @synthesize responder = _responder;
-@synthesize runLoop = _runLoop;
 @synthesize server = _server;
 
 #pragma mark - Object Lifecycle
@@ -53,7 +51,6 @@
         self.server = server;
         self.responder = responder;
         self.outputData = [NSMutableData data];
-        self.runLoop = [NSRunLoop currentRunLoop];
 
         self.queue = dispatch_queue_create("com.karelia.mockserver.connection", 0);
         
@@ -212,7 +209,7 @@
 
     [stream setProperty:(id)kCFBooleanTrue forKey:(NSString *)kCFStreamPropertyShouldCloseNativeSocket];
     stream.delegate = self;
-    [stream scheduleInRunLoop:self.runLoop forMode:NSDefaultRunLoopMode];
+    [stream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
     [stream open];
     CFRelease(stream);
 
@@ -224,8 +221,10 @@
     if (stream)
     {
         stream.delegate = nil;
-        [stream removeFromRunLoop:self.runLoop forMode:NSDefaultRunLoopMode];
-        [stream close];
+        dispatch_async(dispatch_get_main_queue(), ^() {
+            [stream removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+            [stream close];
+        });
     }
 }
 
