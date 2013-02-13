@@ -32,20 +32,25 @@
     self.password = @"pass";
 
     NSURL* url = [[NSBundle bundleForClass:[self class]] URLForResource:responsesFile withExtension:@"json"];
-    self.responses = [KMSResponseCollection collectionWithURL:url];
-    KMSRegExResponder* responder = [self.responses responderWithName:@"default"];
-    if (responder)
+    KMSLog(@"no response file called '%@'", responsesFile);
+
+    if (url)
     {
-        self.server = [KMSServer serverWithPort:0 responder:responder];
-        STAssertNotNil(self.server, @"got server");
-
-        if (self.server)
+        self.responses = [KMSResponseCollection collectionWithURL:url];
+        KMSRegExResponder* responder = [self.responses responderWithName:@"default"];
+        if (responder)
         {
-            [self.server start];
-            BOOL started = self.server.running;
-            STAssertTrue(started, @"server started ok");
+            self.server = [KMSServer serverWithPort:0 responder:responder];
+            STAssertNotNil(self.server, @"got server");
 
-            self.url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://127.0.0.1:%ld", self.responses.scheme, self.server.port]];
+            if (self.server)
+            {
+                [self.server start];
+                BOOL started = self.server.running;
+                STAssertTrue(started, @"server started ok");
+
+                self.url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://127.0.0.1:%ld", self.responses.scheme, self.server.port]];
+            }
         }
     }
 
