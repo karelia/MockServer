@@ -50,6 +50,7 @@
 
 - (void)dealloc
 {
+    KMSAssert(_listener == nil);
 
     [super dealloc];
 }
@@ -239,7 +240,7 @@ static void callbackAcceptConnection(CFSocketRef s, CFSocketCallBackType type, C
     {
         CFRunLoopSourceRef source = CFSocketCreateRunLoopSource(NULL, self.listener, 0);
         KMSAssert(source);
-        CFRunLoopAddSource(CFRunLoopGetCurrent(), source, kCFRunLoopDefaultMode);
+        CFRunLoopAddSource(CFRunLoopGetMain(), source, kCFRunLoopDefaultMode);
         CFRelease(source);
     }
     else
