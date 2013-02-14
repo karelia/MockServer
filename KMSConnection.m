@@ -57,8 +57,6 @@
 
         self.input = [self setupStream:(NSStream*)readStream];
         self.output = [self setupStream:(NSStream*)writeStream];
-        //        [self.input open];
-        //[self.output open];
     }
 
     return self;
@@ -218,10 +216,8 @@
     if (stream)
     {
         stream.delegate = nil;
-        //        dispatch_async(dispatch_get_main_queue(), ^() {
-            [stream removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-            [stream close];
-        //        });
+        [stream removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+        [stream close];
     }
 }
 
