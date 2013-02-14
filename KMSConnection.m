@@ -201,10 +201,11 @@
 - (id)setupStream:(NSStream*)stream
 {
     KMSAssert(stream);
+    KMSAssert([NSThread isMainThread]);
 
     [stream setProperty:(id)kCFBooleanTrue forKey:(NSString *)kCFStreamPropertyShouldCloseNativeSocket];
     stream.delegate = self;
-    [stream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+    [stream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
     [stream open];
     CFRelease(stream);
 
@@ -213,10 +214,12 @@
 
 - (void)cleanupStream:(NSStream*)stream
 {
+    KMSAssert([NSThread isMainThread]);
+
     if (stream)
     {
         stream.delegate = nil;
-        [stream removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+        [stream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
         [stream close];
     }
 }
