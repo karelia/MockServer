@@ -57,6 +57,8 @@
 
 @property (readonly, nonatomic) NSUInteger port;
 
+@property (assign, nonatomic) dispatch_queue_t queue;
+
 /**
  YES if the server is running. NO if the stop method has been called.
  */
@@ -81,6 +83,9 @@
  */
 
 @property (strong, nonatomic) NSMutableArray* transcript;
+
+
+
 
 /** 
  Make a server that uses the given responder object to reply to incoming requests.

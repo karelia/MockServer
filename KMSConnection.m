@@ -20,7 +20,6 @@
 @property (strong, nonatomic) NSInputStream* input;
 @property (strong, nonatomic) NSOutputStream* output;
 @property (strong, nonatomic) NSMutableData* outputData;
-@property (assign, nonatomic) dispatch_queue_t queue;
 @property (strong, nonatomic) KMSResponder* responder;
 @property (strong, nonatomic) KMSServer* server;
 
@@ -31,7 +30,6 @@
 @synthesize input   = _input;
 @synthesize output = _output;
 @synthesize outputData = _outputData;
-@synthesize queue = _queue;
 @synthesize responder = _responder;
 @synthesize server = _server;
 
@@ -52,7 +50,6 @@
         self.responder = responder;
         self.outputData = [NSMutableData data];
 
-        self.queue = dispatch_queue_create("com.karelia.mockserver.connection", 0);
         
         CFReadStreamRef readStream;
         CFWriteStreamRef writeStream;
@@ -60,6 +57,8 @@
 
         self.input = [self setupStream:(NSStream*)readStream];
         self.output = [self setupStream:(NSStream*)writeStream];
+        //        [self.input open];
+        //[self.output open];
     }
 
     return self;
@@ -67,8 +66,6 @@
 
 - (void)dealloc
 {
-    dispatch_release(_queue);
-    _queue = nil;
 
     [_input release];
     [_output release];
@@ -83,7 +80,7 @@
 
 - (void)cancel
 {
-    dispatch_sync(self.queue, ^{
+    dispatch_sync(self.server.queue, ^{
         [self disconnectStreams:@"cancelled"];
     });
 }
@@ -92,7 +89,7 @@
 {
     // this should only be called from within a performOnConnection call on a command
     // so we should already be on our serial queue
-    KMSAssert(dispatch_get_current_queue() == self.queue);
+    KMSAssert(dispatch_get_current_queue() == self.server.queue);
 
     [self.outputData appendData:output];
     [self processOutput];
@@ -102,7 +99,7 @@
 
 - (void)processInput
 {
-    KMSAssert(dispatch_get_current_queue() == self.queue);
+    KMSAssert(dispatch_get_current_queue() == self.server.queue);
 
     uint8_t buffer[32768];
     NSInteger bytesRead = [self.input read:buffer maxLength:sizeof(buffer)];
@@ -146,7 +143,7 @@
 
 - (void)queueCommands:(NSArray*)commands
 {
-    KMSAssert(dispatch_get_current_queue() == self.queue);
+    KMSAssert(dispatch_get_current_queue() == self.server.queue);
 
     if (!self.commands)
     {
@@ -163,7 +160,7 @@
 
 - (void)processNextCommand
 {
-    KMSAssert(dispatch_get_current_queue() == self.queue);
+    KMSAssert(dispatch_get_current_queue() == self.server.queue);
 
     NSUInteger count = [self.commands count];
     if (count)
@@ -176,7 +173,7 @@
         if (count > 1)
         {
             dispatch_time_t nextTimeToProcess = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC));
-            dispatch_after(nextTimeToProcess, self.queue, ^(void){
+            dispatch_after(nextTimeToProcess, self.server.queue, ^(void){
                 [self processNextCommand];
             });
         }
@@ -188,7 +185,7 @@
 
 - (void)processOutput
 {
-    KMSAssert(dispatch_get_current_queue() == self.queue);
+    KMSAssert(dispatch_get_current_queue() == self.server.queue);
 
     NSUInteger bytesToWrite = [self.outputData length];
     if (bytesToWrite)
@@ -221,25 +218,27 @@
     if (stream)
     {
         stream.delegate = nil;
-        dispatch_async(dispatch_get_main_queue(), ^() {
+        //        dispatch_async(dispatch_get_main_queue(), ^() {
             [stream removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
             [stream close];
-        });
+        //        });
     }
 }
 
 - (void)disconnectStreams:(NSString*)reason
 {
-    KMSAssert(dispatch_get_current_queue() == self.queue);
+    //    KMSAssert(dispatch_get_current_queue() == self.server.queue);
+    KMSLogDetail(@"disconnecting: %@", reason);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self cleanupStream:self.input];
+        self.input = nil;
 
-    [self cleanupStream:self.input];
-    self.input = nil;
+        [self cleanupStream:self.output];
+        self.output = nil;
 
-    [self cleanupStream:self.output];
-    self.output = nil;
-
-    [self.server connectionDidClose:self];
-    KMSLogDetail(@"disconnected: %@", reason);
+        [self.server connectionDidClose:self];
+        KMSLogDetail(@"disconnected: %@", reason);
+    });
 }
 
 - (NSString*)nameForStream:(NSStream*)stream
@@ -283,7 +282,7 @@
             KMSLogDetail(@"opened %@ stream", [self nameForStream:stream]);
             if (stream == self.input)
             {
-                dispatch_async(self.queue, ^{
+                dispatch_async(self.server.queue, ^{
                     [self queueCommands:self.responder.initialResponse];
                 });
             }
@@ -293,7 +292,7 @@
         case NSStreamEventHasBytesAvailable:
         {
             KMSAssert(stream == self.input);     // should never happen for the output stream
-            dispatch_async(self.queue, ^{
+            dispatch_async(self.server.queue, ^{
                 [self processInput];
             });
             break;
@@ -302,7 +301,7 @@
         case NSStreamEventHasSpaceAvailable:
         {
             KMSAssert(stream == self.output);     // should never happen for the input stream
-            dispatch_async(self.queue, ^{
+            dispatch_async(self.server.queue, ^{
                 [self processOutput];
             });
             break;
@@ -311,7 +310,7 @@
         case NSStreamEventErrorOccurred:
         {
             KMSLog(@"got error for %@ stream", [self nameForStream:stream]);
-            dispatch_async(self.queue, ^{
+            dispatch_async(self.server.queue, ^{
                 [self disconnectStreams:@"Stream open error"];
             });
             break;

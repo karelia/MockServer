@@ -22,7 +22,6 @@
 @property (strong, nonatomic) NSMutableArray* connections;
 @property (strong, nonatomic) KMSListener* dataListener;
 @property (strong, nonatomic) KMSListener* listener;
-@property (strong, nonatomic) NSOperationQueue* queue;
 @property (strong, nonatomic) NSDateFormatter* rfc1123DateFormatter;
 
 @end
@@ -65,7 +64,7 @@ NSString *const InitialResponsePattern = @"«initial»";
 
     if ((self = [super init]) != nil)
     {
-        self.queue = [NSOperationQueue currentQueue];
+        self.queue = dispatch_queue_create("com.karelia.mockserver", 0);
         self.responder = responder;
         self.connections = [NSMutableArray array];
         self.transcript = [NSMutableArray array];
@@ -81,11 +80,12 @@ NSString *const InitialResponsePattern = @"«initial»";
             KMSAssert(socket != 0);
 
             KMSLogDetail(@"received connection");
-            @synchronized(self.connections)
-            {
+            dispatch_async(dispatch_get_main_queue(), ^{
                 KMSConnection* connection = [KMSConnection connectionWithSocket:socket responder:nil server:self];
-                [self.connections addObject:connection];
-            }
+                dispatch_async(self.queue, ^{
+                    [self.connections addObject:connection];
+                });
+            });
 
             return YES;
         }];
@@ -96,10 +96,12 @@ NSString *const InitialResponsePattern = @"«initial»";
 
 - (void)dealloc
 {
+    dispatch_release(_queue);
+    _queue = nil;
+
     [_connections release];
     [_data release];
     [_dataListener release];
-    [_queue release];
     [_responder release];
     [_transcript release];
     
@@ -123,10 +125,8 @@ NSString *const InitialResponsePattern = @"«initial»";
 
 - (void)pause
 {
-    [self.queue addOperationWithBlock:^{
-        KMSLogDetail(@"pause requested");
-        self.state = KMSPauseRequested;
-    }];
+    KMSLogDetail(@"pause requested");
+    self.state = KMSPauseRequested;
 }
 
 - (void)resume
@@ -145,9 +145,7 @@ NSString *const InitialResponsePattern = @"«initial»";
 - (void)stop
 {
     KMSLogDetail(@"stop requested");
-    [self.queue addOperationWithBlock:^{
-        [self stopConnections];
-    }];
+    [self stopConnections];
 }
 
 - (void)stopConnections
@@ -155,15 +153,9 @@ NSString *const InitialResponsePattern = @"«initial»";
     [self.listener stop:@"stopped externally"];
     [self.dataListener stop:@"stopped externally"];
 
-    @synchronized(self.connections)
+    for (KMSConnection* connection in self.connections)
     {
-        NSArray* connections = [self.connections copy];
-        for (KMSConnection* connection in connections)
-        {
-            [connection cancel];
-        }
-        [connections release];
-        NSAssert([self.connections count] == 0, @"all connections should have closed");
+        [connection cancel];
     }
 
     self.state = KMSStopped;
@@ -211,29 +203,28 @@ NSString *const InitialResponsePattern = @"«initial»";
 
 - (void)makeDataListener
 {
-    @synchronized(self.connections)
-    {
-        __block KMSServer* server = self;
-        self.dataListener = [KMSListener listenerWithPort:0 connectionBlock:^BOOL(int socket) {
+    dispatch_async(self.queue, ^{
+            __block KMSServer* server = self;
+            self.dataListener = [KMSListener listenerWithPort:0 connectionBlock:^BOOL(int socket) {
 
-            KMSLogDetail(@"got connection on data listener");
+                KMSLogDetail(@"got connection on data listener");
 
-            NSData* data = server.data;
-            if (!data)
-            {
-                data = [@"Test data" dataUsingEncoding:NSUTF8StringEncoding];
-            }
+                NSData* data = server.data;
+                if (!data)
+                {
+                    data = [@"Test data" dataUsingEncoding:NSUTF8StringEncoding];
+                }
 
-            NSArray* responses = @[ @[InitialResponsePattern, [KMSSendDataCommand sendData:data], [KMSPauseCommand pauseFor:0.1], [KMSCloseCommand closeCommand] ] ];
-            KMSRegExResponder* responder = [KMSRegExResponder responderWithResponses:responses];
-            KMSConnection* connection = [KMSConnection connectionWithSocket:socket responder:responder server:server];
-            [self.connections addObject:connection];
+                NSArray* responses = @[ @[InitialResponsePattern, [KMSSendDataCommand sendData:data], [KMSPauseCommand pauseFor:0.1], [KMSCloseCommand closeCommand] ] ];
+                KMSRegExResponder* responder = [KMSRegExResponder responderWithResponses:responses];
+                KMSConnection* connection = [KMSConnection connectionWithSocket:socket responder:responder server:server];
+                [self.connections addObject:connection];
+                
+                return YES;
+            }];
             
-            return YES;
-        }];
-        
-        [self.dataListener start];
-    }
+            [self.dataListener start];
+    });
 }
 
 - (void)disposeDataListener
@@ -244,12 +235,11 @@ NSString *const InitialResponsePattern = @"«initial»";
 
 - (void)connectionDidClose:(KMSConnection*)connection
 {
-    @synchronized(self.connections)
-    {
+    dispatch_async(self.queue, ^{
         NSAssert([self.connections indexOfObject:connection] != NSNotFound, @"connection should be in our list");
         KMSLogDetail(@"connection %@ closed", connection);
         [self.connections removeObject:connection];
-    }
+    });
 }
 
 @end
