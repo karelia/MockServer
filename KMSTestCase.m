@@ -32,8 +32,6 @@
     self.password = @"pass";
 
     NSURL* url = [[NSBundle bundleForClass:[self class]] URLForResource:responsesFile withExtension:@"json"];
-    KMSLog(@"no response file called '%@'", responsesFile);
-
     if (url)
     {
         self.responses = [KMSResponseCollection collectionWithURL:url];
@@ -52,6 +50,10 @@
                 self.url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://127.0.0.1:%ld", self.responses.scheme, self.server.port]];
             }
         }
+    }
+    else
+    {
+        KMSLog(@"no response file called '%@'", responsesFile);
     }
 
     return self.server != nil;
