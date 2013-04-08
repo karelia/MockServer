@@ -84,6 +84,7 @@ NSString *const InitialResponsePattern = @"«initial»";
                 KMSConnection* connection = [KMSConnection connectionWithSocket:socket responder:nil server:self];
                 dispatch_async(self.queue, ^{
                     [self.connections addObject:connection];
+                    KMSLogDetail(@"connection added %@", connection);
                 });
             });
 
