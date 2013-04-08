@@ -228,15 +228,25 @@
 {
     //    KMSAssert(dispatch_get_current_queue() == self.server.queue);
     KMSLogDetail(@"disconnecting: %@", reason);
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self cleanupStream:self.input];
+    dispatch_async(self.server.queue, ^{
+        NSInputStream* input = self.input;
+        NSOutputStream* output = self.output;
+
+        // stop the streams generating any more events
+        input.delegate = nil;
+        output.delegate = nil;
+
+        // do final stream cleanup on the main queue
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self cleanupStream:input];
+            [self cleanupStream:output];
+
+            [self.server connectionDidClose:self];
+            KMSLogDetail(@"disconnected: %@", reason);
+        });
+
         self.input = nil;
-
-        [self cleanupStream:self.output];
         self.output = nil;
-
-        [self.server connectionDidClose:self];
-        KMSLogDetail(@"disconnected: %@", reason);
     });
 }
 
