@@ -235,8 +235,8 @@ NSString *const InitialResponsePattern = @"«initial»";
 
 - (void)connectionDidClose:(KMSConnection*)connection
 {
+    NSAssert([self.connections indexOfObject:connection] != NSNotFound, @"connection should be in our list");
     dispatch_async(self.queue, ^{
-        NSAssert([self.connections indexOfObject:connection] != NSNotFound, @"connection should be in our list");
         KMSLogDetail(@"connection %@ closed", connection);
         [self.connections removeObject:connection];
     });
