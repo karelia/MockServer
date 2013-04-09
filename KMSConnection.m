@@ -189,10 +189,17 @@
     if (bytesToWrite)
     {
         NSUInteger written = [self.output write:[self.outputData bytes] maxLength:bytesToWrite];
-        [self.outputData replaceBytesInRange:NSMakeRange(0, written) withBytes:nil length:0];
-        [self.server.transcript addObject:[KMSTranscriptEntry entryWithType:KMSTranscriptOutput value:self.outputData]];
+        if (written != -1)
+        {
+            [self.outputData replaceBytesInRange:NSMakeRange(0, written) withBytes:nil length:0];
+            [self.server.transcript addObject:[KMSTranscriptEntry entryWithType:KMSTranscriptOutput value:self.outputData]];
 
-        KMSLogDetail(@"wrote %ld bytes", (long)written);
+            KMSLogDetail(@"wrote %ld bytes", (long)written);
+        }
+        else
+        {
+            [self disconnectStreams:@"write error (connection already closed?)"];
+        }
     }
 }
 
