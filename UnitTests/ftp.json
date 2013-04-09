@@ -48,8 +48,8 @@
             "comment" : "Responses as if the user/password is bad."
         },
 
-        "chroot jail": {
-            "responses": ["initial", "user", "password", "sys", "pwd chroot jail", "type", "cwd", "pasv", "size", "retr", "list", "mkd", "stor denied", "dele", "chmod", "commandNotUnderstood" ],
+        "chroot fail": {
+            "responses": ["initial", "user", "password", "sys", "pwd chroot fail", "type", "cwd", "pasv", "size", "retr", "list", "mkd", "stor denied", "dele", "chmod", "commandNotUnderstood" ],
             "comment" : "Claims to login at /Home and then denies all writing. Ideally would allow writing inside /Home, but we're not that advanced yet"
         }
         
@@ -105,7 +105,7 @@
             "comment" : "Response to the PWD command. Pretends that the current path is '/'."
         },
 
-        "pwd chroot jail" : {
+        "pwd chroot fail" : {
             "pattern" : "PWD",
             "commands" : [
                           "257 \"/Home\" is the current directory.\r\n"
