@@ -4,52 +4,52 @@
     "sets":
     {
         "default": {
-            "responses": ["get", "find", "put", "delete", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["get", "find", "put", "delete", "mkcol", "move", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "All commands succeed"
         },
 
         "make fails": {
-            "responses": ["get", "find", "put", "delete", "mkcol-fail", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["get", "find", "put", "delete", "mkcol-fail", "move", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "Making directory fails as if it already exists"
         },
 
         "make hangs": {
-            "responses": ["get", "find", "put", "delete", "mkcol-hang", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["get", "find", "put", "delete", "mkcol-hang", "move", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "Making directory hangs - client should time out eventually."
         },
 
         "make disconnects": {
-            "responses": ["get", "find", "put", "delete", "mkcol-disconnect", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["get", "find", "put", "delete", "mkcol-disconnect", "move", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "Making directory hangs - client should time out eventually."
         },
 
         "put fails": {
-            "responses": ["get", "find", "put-fail", "delete", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["get", "find", "put-fail", "delete", "mkcol", "move", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "Put command fails."
         },
 
         "put hangs": {
-            "responses": ["get", "find", "put-hang", "delete", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["get", "find", "put-hang", "delete", "mkcol", "move", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "Put command hangs - client should time out eventually."
         },
 
         "put disconnects": {
-            "responses": ["get", "find", "put-disconnect", "delete", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["get", "find", "put-disconnect", "delete", "mkcol", "move", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "Put command disconnects the connection abruptly."
         },
 
         "delete fails": {
-            "responses": ["get", "find", "put", "delete-fail", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["get", "find", "put", "delete-fail", "mkcol", "move", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "Delete command fails."
         },
 
         "delete hangs": {
-            "responses": ["find", "put", "delete-hang", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["find", "put", "delete-hang", "mkcol", "move", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "Delete command hangs - client should time out eventually."
         },
 
         "delete disconnects": {
-            "responses": ["find", "put", "delete-disconnect", "mkcol", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["find", "put", "delete-disconnect", "mkcol", "move", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "Delete command disconnects the connection abruptly."
         },
 
@@ -217,6 +217,42 @@
 
             "commands" : [
                           "HTTP/1.1",
+                          "«close»"
+                          ]
+        },
+
+        "move": {
+            "pattern": "MOVE.*Authorization: Basic dXNlcjpwYXNz.*",
+
+            "commands" : [
+                          "HTTP/1.1 201 Created\r\n\r\n",
+                          "«close»"
+                          ]
+        },
+
+        "move-overwrite": {
+            "pattern": "MOVE.*Authorization: Basic dXNlcjpwYXNz.*",
+
+            "commands" : [
+                          "HTTP/1.1 204 No Content\r\n\r\n",
+                          "«close»"
+                          ]
+        },
+
+        "move-overwrite-not-allowed": {
+            "pattern": "MOVE.*Authorization: Basic dXNlcjpwYXNz.*",
+
+            "commands" : [
+                          "HTTP/1.1 412 Precondition Failed\r\n\r\n",
+                          "«close»"
+                          ]
+        },
+
+        "move-overwrite-fail": {
+            "pattern": "MOVE.*Authorization: Basic dXNlcjpwYXNz.*",
+
+            "commands" : [
+                          "HTTP/1.1 423 Locked\r\n\r\n",
                           "«close»"
                           ]
         },
