@@ -4,7 +4,7 @@
     "sets":
     {
         "default": {
-            "responses": ["get", "find", "put", "delete", "mkcol", "move", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["get", "find", "put-expect", "put", "delete", "mkcol", "move", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "All commands succeed"
         },
 
@@ -103,6 +103,16 @@
                           ]
         },
 
+        "put-expect": {
+            "pattern": "PUT.*Expect: 100-Continue.*Authorization: Basic dXNlcjpwYXNz.*",
+
+            "commands" : [
+                          "HTTP/1.1 100 Continue\r\n\r\n",
+                          "HTTP/1.1 204 No Content\r\n\r\n",
+                          "«close»"
+                          ]
+        },
+
         "put": {
             "pattern": "PUT.*Authorization: Basic dXNlcjpwYXNz.*",
 
@@ -111,7 +121,7 @@
                           "«close»"
                           ]
         },
-
+        
         "put-hang": {
             "pattern": "PUT.*Authorization: Basic dXNlcjpwYXNz.*",
 
