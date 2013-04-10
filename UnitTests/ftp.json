@@ -49,7 +49,7 @@
         },
 
         "chroot fail": {
-            "responses": ["initial", "user", "password", "sys", "pwd chroot fail", "type", "cwd", "pasv", "size", "retr", "list", "mkd", "stor denied", "dele", "chmod", "commandNotUnderstood" ],
+            "responses": ["initial", "user", "password", "sys", "pwd chroot fail", "type", "cwd", "pasv", "size", "retr", "list", "mkd", "stor", "dele", "chmod", "commandNotUnderstood" ],
             "comment" : "Claims to login at /Home and then denies all writing. Ideally would allow writing inside /Home, but we're not that advanced yet"
         }
         
