@@ -7,11 +7,11 @@
 #import "KMSState.h"
 
 #ifndef KMSLog
-#define KMSLog NSLog
+#define KMSLog(...) do { if ([KMSServer loggingLevel] > KMSLoggingOff) NSLog(__VA_ARGS__); } while (0)
 #endif
 
 #ifndef KMSLogDetail
-#define KMSLogDetail NSLog
+#define KMSLogDetail(...) do { if ([KMSServer loggingLevel] == KMSLoggingDetail) NSLog(__VA_ARGS__); } while (0)
 #endif
 
 #ifndef KMSAssert
@@ -22,6 +22,12 @@
 @class KMSConnection;
 
 
+typedef NS_ENUM(NSUInteger, KMSLogLevel)
+{
+    KMSLoggingOff,
+    KMSLoggingBasic,
+    KMSLoggingDetail
+};
 
 
 /**
@@ -108,6 +114,28 @@
  */
 
 + (KMSServer*)serverWithPort:(NSUInteger)port responder:(KMSResponder*)responder;
+
+/**
+ The logging level to use.
+ 
+ This is a global setting which determines how much logging MockServer spits out.
+ The default is KMSLoggingOff.
+ 
+ @return The current logging level.
+ */
+
++ (KMSLogLevel)loggingLevel;
+
+/**
+ Set the logging level to use.
+
+ This is a global setting which determines how much logging MockServer spits out.
+ The default is KMSLoggingOff.
+
+ @param level The new logging level.
+ */
+
++ (void)setLoggingLevel:(KMSLogLevel)level;
 
 /**
  Initialise with a given set of responses, listening on a given port.

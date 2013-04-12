@@ -243,4 +243,18 @@ NSString *const InitialResponsePattern = @"«initial»";
     });
 }
 
+#pragma mark - Logging
+
+static KMSLogLevel gLoggingLevel = KMSLoggingOff;
+
++ (KMSLogLevel)loggingLevel
+{
+    return gLoggingLevel;
+}
+
++ (void)setLoggingLevel:(KMSLogLevel)level
+{
+    gLoggingLevel = level;
+}
+
 @end
