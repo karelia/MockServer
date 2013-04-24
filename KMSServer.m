@@ -119,7 +119,7 @@ NSString *const InitialResponsePattern = @"«initial»";
         [self makeDataListener];
 
         KMSAssert(self.port != 0);
-        KMSLog(@"server started on port %ld", self.port);
+        KMSLog(@"server started on port %ld", (unsigned long)self.port);
         self.state = KMSRunning;
     }
 }
