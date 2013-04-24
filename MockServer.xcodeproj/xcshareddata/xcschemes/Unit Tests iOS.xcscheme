@@ -18,7 +18,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5F53DAEB1727B9E800DE6269"
                BuildableName = "UnitTests-iOS.octest"
-               BlueprintName = "UnitTests-iOS"
+               BlueprintName = "UnitTests iOS"
                ReferencedContainer = "container:MockServer.xcodeproj">
             </BuildableReference>
          </TestableReference>

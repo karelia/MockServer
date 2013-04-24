@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "220AD7971509019B00748655"
                BuildableName = "UnitTests.octest"
-               BlueprintName = "UnitTests"
+               BlueprintName = "UnitTests OSX"
                ReferencedContainer = "container:MockServer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -34,7 +34,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "220AD7971509019B00748655"
                BuildableName = "UnitTests.octest"
-               BlueprintName = "UnitTests"
+               BlueprintName = "UnitTests OSX"
                ReferencedContainer = "container:MockServer.xcodeproj">
             </BuildableReference>
             <SkippedTests>

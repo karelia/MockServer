@@ -255,9 +255,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		220AD7971509019B00748655 /* UnitTests */ = {
+		220AD7971509019B00748655 /* UnitTests OSX */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 220AD7A71509019B00748655 /* Build configuration list for PBXNativeTarget "UnitTests" */;
+			buildConfigurationList = 220AD7A71509019B00748655 /* Build configuration list for PBXNativeTarget "UnitTests OSX" */;
 			buildPhases = (
 				220AD7931509019B00748655 /* Sources */,
 				220AD7941509019B00748655 /* Frameworks */,
@@ -269,14 +269,14 @@
 			);
 			dependencies = (
 			);
-			name = UnitTests;
+			name = "UnitTests OSX";
 			productName = Tests;
 			productReference = 220AD7981509019B00748655 /* UnitTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
-		5F53DAEB1727B9E800DE6269 /* UnitTests-iOS */ = {
+		5F53DAEB1727B9E800DE6269 /* UnitTests iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5F53DAFE1727B9E800DE6269 /* Build configuration list for PBXNativeTarget "UnitTests-iOS" */;
+			buildConfigurationList = 5F53DAFE1727B9E800DE6269 /* Build configuration list for PBXNativeTarget "UnitTests iOS" */;
 			buildPhases = (
 				5F53DAE71727B9E800DE6269 /* Sources */,
 				5F53DAE81727B9E800DE6269 /* Frameworks */,
@@ -287,7 +287,7 @@
 			);
 			dependencies = (
 			);
-			name = "UnitTests-iOS";
+			name = "UnitTests iOS";
 			productName = "UnitTests-iOS";
 			productReference = 5F53DAEC1727B9E800DE6269 /* UnitTests-iOS.octest */;
 			productType = "com.apple.product-type.bundle";
@@ -323,8 +323,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				220AD7971509019B00748655 /* UnitTests */,
-				5F53DAEB1727B9E800DE6269 /* UnitTests-iOS */,
+				220AD7971509019B00748655 /* UnitTests OSX */,
+				5F53DAEB1727B9E800DE6269 /* UnitTests iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -632,7 +632,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		220AD7A71509019B00748655 /* Build configuration list for PBXNativeTarget "UnitTests" */ = {
+		220AD7A71509019B00748655 /* Build configuration list for PBXNativeTarget "UnitTests OSX" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				220AD7A81509019B00748655 /* Debug */,
@@ -642,7 +642,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5F53DAFE1727B9E800DE6269 /* Build configuration list for PBXNativeTarget "UnitTests-iOS" */ = {
+		5F53DAFE1727B9E800DE6269 /* Build configuration list for PBXNativeTarget "UnitTests iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5F53DAFB1727B9E800DE6269 /* Debug */,
@@ -650,6 +650,7 @@
 				5F53DAFD1727B9E800DE6269 /* Plugin */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "MockServer" */ = {
 			isa = XCConfigurationList;
