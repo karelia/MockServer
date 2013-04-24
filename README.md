@@ -28,7 +28,7 @@ run multiple tests on a fixed port in quick succession you may find that the ser
 
 ## Data Transfers
 
-As well as listening on it's assigned port, the server listens on a second port which can be used to fake FTP
+As well as listening on its assigned port, the server listens on a second port which can be used to fake FTP
 passive data connections.
 
 Any connection on this port will cause the contents of the <[KMSServer data]> property to be sent back, followed by

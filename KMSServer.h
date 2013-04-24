@@ -233,7 +233,7 @@ typedef NS_ENUM(NSUInteger, KMSLogLevel)
 
 /**
  When the server encounters this as an output item,
- it writes back the contents of it's data property.
+ it writes back the contents of its data property.
  */
 
 extern NSString *const DataCommandToken;
