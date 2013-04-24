@@ -62,7 +62,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		220AD7981509019B00748655 /* UnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		220AD7981509019B00748655 /* UnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = UnitTests.octest; path = "UnitTests OSX.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		220AD7991509019B00748655 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		2239A1FD164C5381008D4ADE /* UnitTest.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UnitTest.plist; sourceTree = "<group>"; };
 		2239A200164C53F3008D4ADE /* KMSServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMSServer.h; sourceTree = SOURCE_ROOT; };
@@ -108,7 +108,7 @@
 		22F6D0DA165A65AB00443CC9 /* Classes.graffle */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Classes.graffle; sourceTree = "<group>"; };
 		22F6D0DB165A65AB00443CC9 /* Design-template.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Design-template.md"; sourceTree = "<group>"; wrapsLines = 1; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		5F53DAEC1727B9E800DE6269 /* UnitTests-iOS.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "UnitTests-iOS.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F53DAEC1727B9E800DE6269 /* UnitTests-iOS.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "UnitTests-iOS.octest"; path = "UnitTests iOS.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F53DAEE1727B9E800DE6269 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
@@ -365,6 +365,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+			showEnvVarsInLog = 0;
 		};
 		5F53DAEA1727B9E800DE6269 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -378,6 +379,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 

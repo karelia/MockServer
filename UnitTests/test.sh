@@ -26,7 +26,9 @@ testMac()
 		cat "$testerr"
 	else
 		cd "$build"
+        rm -rf test-reports
 		"../$ocunit2junit" < "$testout"
+        mv test-reports mac-reports
 		cd ..
 	fi
 }
@@ -42,12 +44,20 @@ testIOS()
 		cat "$testerr"
 	else
 		cd "$build"
+        rm -rf test-reports
 		"../$ocunit2junit" < "$testout"
+        mv test-reports ios-reports
 		cd ..
 	fi
 }
 
 
-testIOS
 testMac
+testIOS
+
+cd "$build"
+mkdir test-reports
+mv mac-reports test-reports/
+mv ios-reports test-reports/
+
 
