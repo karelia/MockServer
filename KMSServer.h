@@ -221,6 +221,14 @@ typedef NS_ENUM(NSUInteger, KMSLogLevel)
 
 - (void)connectionDidClose:(KMSConnection*)connection;
 
+/**
+ Called by a connection to check the current queue.
+ 
+ *Not intended to be called by user code.*
+ */
+
+- (BOOL)currentQueueTargetsServerQueue;
+
 @end
 
 /**

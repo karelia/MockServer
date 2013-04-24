@@ -87,7 +87,7 @@
 {
     // this should only be called from within a performOnConnection call on a command
     // so we should already be on our serial queue
-    KMSAssert(dispatch_get_current_queue() == self.server.queue);
+    KMSAssert(self.server.currentQueueTargetsServerQueue);
 
     [self.outputData appendData:output];
     [self processOutput];
@@ -97,7 +97,7 @@
 
 - (void)processInput
 {
-    KMSAssert(dispatch_get_current_queue() == self.server.queue);
+    KMSAssert(self.server.currentQueueTargetsServerQueue);
 
     uint8_t buffer[32768];
     NSInteger bytesRead = [self.input read:buffer maxLength:sizeof(buffer)];
@@ -141,7 +141,7 @@
 
 - (void)queueCommands:(NSArray*)commands
 {
-    KMSAssert(dispatch_get_current_queue() == self.server.queue);
+    KMSAssert(self.server.currentQueueTargetsServerQueue);
 
     if (!self.commands)
     {
@@ -158,7 +158,7 @@
 
 - (void)processNextCommand
 {
-    KMSAssert(dispatch_get_current_queue() == self.server.queue);
+    KMSAssert(self.server.currentQueueTargetsServerQueue);
 
     NSUInteger count = [self.commands count];
     if (count)
@@ -183,7 +183,7 @@
 
 - (void)processOutput
 {
-    KMSAssert(dispatch_get_current_queue() == self.server.queue);
+    KMSAssert(self.server.currentQueueTargetsServerQueue);
 
     NSUInteger bytesToWrite = [self.outputData length];
     if (bytesToWrite)
