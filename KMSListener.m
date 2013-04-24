@@ -88,7 +88,7 @@
     if (success)
     {
         KMSAssert(self.port != 0);
-        KMSLog(@"listener started on port %ld", self.port);
+        KMSLog(@"listener started on port %ld", (unsigned long)self.port);
     }
     else
     {

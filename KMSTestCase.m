@@ -47,7 +47,7 @@
                 BOOL started = self.server.running;
                 STAssertTrue(started, @"server started ok");
 
-                self.url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://127.0.0.1:%ld", self.responses.scheme, self.server.port]];
+                self.url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://127.0.0.1:%ld", self.responses.scheme, (unsigned long)self.server.port]];
             }
         }
     }

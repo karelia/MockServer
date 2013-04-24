@@ -38,6 +38,8 @@
 @synthesize running = _running;
 @synthesize transcript = _transcript;
 
+static void *queueIdentifierKey;
+
 NSString *const CloseCommandToken = @"«close»";
 NSString *const DataCommandToken = @"«data»";
 NSString *const InitialResponsePattern = @"«initial»";
@@ -65,6 +67,7 @@ NSString *const InitialResponsePattern = @"«initial»";
     if ((self = [super init]) != nil)
     {
         self.queue = dispatch_queue_create("com.karelia.mockserver", 0);
+        dispatch_queue_set_specific(self.queue, &queueIdentifierKey, self, NULL);
         self.responder = responder;
         self.connections = [NSMutableArray array];
         self.transcript = [NSMutableArray array];
@@ -119,7 +122,7 @@ NSString *const InitialResponsePattern = @"«initial»";
         [self makeDataListener];
 
         KMSAssert(self.port != 0);
-        KMSLog(@"server started on port %ld", self.port);
+        KMSLog(@"server started on port %ld", (unsigned long)self.port);
         self.state = KMSRunning;
     }
 }
@@ -255,6 +258,12 @@ static KMSLogLevel gLoggingLevel = KMSLoggingOff;
 + (void)setLoggingLevel:(KMSLogLevel)level
 {
     gLoggingLevel = level;
+}
+
+#pragma mark - Debugging
+
+- (BOOL)currentQueueTargetsServerQueue {
+    return dispatch_get_specific(&queueIdentifierKey) == self;
 }
 
 @end
