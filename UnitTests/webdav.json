@@ -4,52 +4,52 @@
     "sets":
     {
         "default": {
-            "responses": ["get", "find", "put-expect", "put", "delete", "mkcol", "move", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["get", "find", "put-expect", "put", "delete", "mkcol", "move", "copy", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "All commands succeed"
         },
 
         "make fails": {
-            "responses": ["get", "find", "put", "delete", "mkcol-fail", "move", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["get", "find", "put", "delete", "mkcol-fail", "move", "copy", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "Making directory fails as if it already exists"
         },
 
         "make hangs": {
-            "responses": ["get", "find", "put", "delete", "mkcol-hang", "move", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["get", "find", "put", "delete", "mkcol-hang", "move", "copy", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "Making directory hangs - client should time out eventually."
         },
 
         "make disconnects": {
-            "responses": ["get", "find", "put", "delete", "mkcol-disconnect", "move", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["get", "find", "put", "delete", "mkcol-disconnect", "move", "copy", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "Making directory hangs - client should time out eventually."
         },
 
         "put fails": {
-            "responses": ["get", "find", "put-fail", "delete", "mkcol", "move", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["get", "find", "put-fail", "delete", "mkcol", "move", "copy", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "Put command fails."
         },
 
         "put hangs": {
-            "responses": ["get", "find", "put-hang", "delete", "mkcol", "move", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["get", "find", "put-hang", "delete", "mkcol", "move", "copy", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "Put command hangs - client should time out eventually."
         },
 
         "put disconnects": {
-            "responses": ["get", "find", "put-disconnect", "delete", "mkcol", "move", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["get", "find", "put-disconnect", "delete", "mkcol", "move", "copy", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "Put command disconnects the connection abruptly."
         },
 
         "delete fails": {
-            "responses": ["get", "find", "put", "delete-fail", "mkcol", "move", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["get", "find", "put", "delete-fail", "mkcol", "move", "copy", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "Delete command fails."
         },
 
         "delete hangs": {
-            "responses": ["find", "put", "delete-hang", "mkcol", "move", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["find", "put", "delete-hang", "mkcol", "move", "copy", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "Delete command hangs - client should time out eventually."
         },
 
         "delete disconnects": {
-            "responses": ["find", "put", "delete-disconnect", "mkcol", "move", "command-unauthorized", "unknown", "unauthorized" ],
+            "responses": ["find", "put", "delete-disconnect", "mkcol", "move", "copy", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "Delete command disconnects the connection abruptly."
         },
 
@@ -76,29 +76,7 @@
                           "HTTP/1.1 207 Multi-Status\r\nDate: $date\r\nServer: Apache/2.2.14 (Unix) DAV/2 mod_ssl/2.2.14 OpenSSL/0.9.8l PHP/5.3.1 mod_perl/2.0.4 Perl/v5.10.1\r\nContent-Type: text/xml; charset=\"utf-8\"\r\n\r\n",
 
                           "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n",
-                          "<D:multistatus xmlns:D=\"DAV:\" xmlns:ns0=\"DAV:\">",
-
-                          "<D:response xmlns:lp1=\"DAV:\">",
-                          "<D:href>$1directory</D:href>",
-                          "<D:propstat>",
-                          "<D:prop>",
-                          "<lp1:resourcetype><D:collection/></lp1:resourcetype>",
-                          "</D:prop>",
-                          "<D:status>HTTP/1.1 200 OK</D:status>",
-                          "</D:propstat>",
-                          "</D:response>",
-
-                          "<D:response xmlns:lp1=\"DAV:\">",
-                          "<D:href>$1file.txt</D:href>",
-                          "<D:propstat>",
-                          "<D:prop>",
-                          "<lp1:resourcetype/>",
-                          "</D:prop>",
-                          "<D:status>HTTP/1.1 200 OK</D:status>",
-                          "</D:propstat>",
-                          "</D:response>",
-
-                          "</D:multistatus>\r\n",
+                          "«data»",
                           "«close»"
                           ]
         },
@@ -200,7 +178,7 @@
             "pattern": "MKCOL.*Authorization: Basic dXNlcjpwYXNz.*",
 
             "commands" : [
-                          "HTTP/1.1 204 No Content\r\n\r\n",
+                          "HTTP/1.1 201 Created\r\n\r\n",
                           "«close»"
                           ]
         },
@@ -267,8 +245,44 @@
                           ]
         },
 
+        "copy": {
+            "pattern": "COPY.*Authorization: Basic dXNlcjpwYXNz.*",
+
+            "commands" : [
+                          "HTTP/1.1 201 Created\r\n\r\n",
+                          "«close»"
+                          ]
+        },
+
+        "copy-overwrite": {
+            "pattern": "COPY.*Authorization: Basic dXNlcjpwYXNz.*",
+
+            "commands" : [
+                          "HTTP/1.1 204 No Content\r\n\r\n",
+                          "«close»"
+                          ]
+        },
+
+        "copy-overwrite-not-allowed": {
+            "pattern": "COPY.*Authorization: Basic dXNlcjpwYXNz.*",
+
+            "commands" : [
+                          "HTTP/1.1 412 Precondition Failed\r\n\r\n",
+                          "«close»"
+                          ]
+        },
+
+        "copy-overwrite-fail": {
+            "pattern": "COPY.*Authorization: Basic dXNlcjpwYXNz.*",
+
+            "commands" : [
+                          "HTTP/1.1 423 Locked\r\n\r\n",
+                          "«close»"
+                          ]
+        },
+
         "command-unauthorized": {
-            "pattern": "(PROPFIND|GET|PUT|DELETE|MKCOL).*Authorization: Basic .*",
+            "pattern": "(PROPFIND|GET|PUT|DELETE|MKCOL|MOVE|COPY).*Authorization: Basic .*",
 
             "commands" : [
                           "HTTP/1.0 401 Unauthorized\r\n",
