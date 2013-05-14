@@ -66,8 +66,9 @@ NSString *const InitialResponsePattern = @"«initial»";
 
     if ((self = [super init]) != nil)
     {
-        self.queue = dispatch_queue_create("com.karelia.mockserver", 0);
-        dispatch_queue_set_specific(self.queue, &queueIdentifierKey, self, NULL);
+        dispatch_queue_t queue = dispatch_queue_create("com.karelia.mockserver", 0);
+        self.queue = queue;
+        dispatch_queue_set_specific(queue, &queueIdentifierKey, self, NULL);
         self.responder = responder;
         self.connections = [NSMutableArray array];
         self.transcript = [NSMutableArray array];
@@ -85,7 +86,7 @@ NSString *const InitialResponsePattern = @"«initial»";
             KMSLogDetail(@"received connection");
             dispatch_async(dispatch_get_main_queue(), ^{
                 KMSConnection* connection = [KMSConnection connectionWithSocket:socket responder:nil server:self];
-                dispatch_async(self.queue, ^{
+                dispatch_async(queue, ^{
                     [self.connections addObject:connection];
                     KMSLogDetail(@"connection added %@", connection);
                 });
