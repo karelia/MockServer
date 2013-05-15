@@ -134,6 +134,10 @@
 {
     KMSAssert(socket >= 0);
 
+    // suppress the SIGPIPE signal
+    int value = 1;
+    setsockopt(socket, SOL_SOCKET, SO_NOSIGPIPE, &value, sizeof(value));
+
     BOOL ok = self.connectionBlock(socket);
     if (!ok)
     {
