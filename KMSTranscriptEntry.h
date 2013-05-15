@@ -21,6 +21,7 @@ typedef NS_ENUM(NSUInteger, KMSTranscriptEntryType)
 {
     KMSTranscriptInput,
     KMSTranscriptOutput,
+    KMSTranscriptEvent,
     KMSTranscriptCommand
 } ;
 

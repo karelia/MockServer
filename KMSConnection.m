@@ -23,6 +23,12 @@
 @property (strong, nonatomic) KMSResponder* responder;
 @property (strong, nonatomic) KMSServer* server;
 
+#if DEBUG
+
+@property (strong, nonatomic) NSString* lastDisconnectReason;
+
+#endif
+
 @end
 
 @implementation KMSConnection
@@ -105,12 +111,12 @@
     NSInteger bytesRead = [self.input read:buffer maxLength:sizeof(buffer)];
     if (bytesRead == -1)
     {
-        [self disconnectStreams:@"read error"];
+        [self disconnectStreams:[NSString stringWithFormat:@"read error %@", [self.input streamError]]];
     }
 
     else if (bytesRead == 0)
     {
-        [self disconnectStreams:@"no more data"];
+        [self disconnectStreams:@"no more data to read"];
     }
 
     else
@@ -199,7 +205,7 @@
         }
         else
         {
-            [self disconnectStreams:@"write error (connection already closed?)"];
+            [self disconnectStreams:[NSString stringWithFormat:@"write error %@", [self.output streamError]]];
         }
     }
 }
@@ -211,11 +217,8 @@
     KMSAssert(stream);
     KMSAssert([NSThread isMainThread]);
 
-    if (mode == OutputRunMode)
-    {
-        [stream setProperty:(id)kCFBooleanTrue forKey:(NSString *)kCFStreamPropertyShouldCloseNativeSocket];
-    }
-    
+    [stream setProperty:[NSNumber numberWithBool:(mode == OutputRunMode)] forKey:(NSString*)kCFStreamPropertyShouldCloseNativeSocket];
+
     stream.delegate = self;
     [stream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:mode];
     [stream open];
@@ -223,43 +226,44 @@
     return stream;
 }
 
-- (void)cleanupStream:(NSStream*)stream mode:(NSString*)mode
-{
-    KMSAssert([NSThread isMainThread]);
-
-    if (stream)
-    {
-        stream.delegate = nil;
-        [stream close];
-        [stream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:mode];
-    }
-}
-
 - (void)disconnectStreams:(NSString*)reason
 {
-    KMSLogDetail(@"disconnecting: %@", reason);
     dispatch_async(self.server.queue, ^{
         NSInputStream* input = self.input;
         NSOutputStream* output = self.output;
         if (input || output)
         {
-            // stop the streams generating any more events
-            input.delegate = nil;
-            output.delegate = nil;
+            KMSLogDetail(@"disconnecting: %@", reason);
+
+            #if DEBUG
+                self.lastDisconnectReason = reason;
+            #endif
+
+            KMSAssert(input && output);
 
             // do final stream cleanup on the main queue
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self cleanupStream:input mode:InputRunMode];
-                    [self cleanupStream:output mode:OutputRunMode];
+            input.delegate = nil;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [input close];
+            });
 
-                    KMSLogDetail(@"disconnected: %@", reason);
+            output.delegate = nil;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [output close];
             });
 
             // release the streams here, and tell the server that they're gone
-            // the block above still holds a reference to them until it's done and they've actually been properly cleaned up
+            // the block above still holds a reference to them until it's done and they've actually been properly closed
             [self.server connectionDidClose:self];
+            KMSLogDetail(@"disconnected: %@", reason);
             self.input = nil;
             self.output = nil;
+
+            [self.server.transcript addObject:[KMSTranscriptEntry entryWithType:KMSTranscriptEvent value:reason]];
+        }
+        else
+        {
+            KMSLog(@"attempting to disconnect again: %@\nalready closed because:%@", reason, self.lastDisconnectReason);
         }
     });
 }
@@ -335,7 +339,7 @@
             {
                 KMSLog(@"got error for %@ stream", [self nameForStream:stream]);
                 dispatch_async(self.server.queue, ^{
-                    [self disconnectStreams:@"Stream open error"];
+                    [self disconnectStreams:[NSString stringWithFormat:@"%@ error %@", [self nameForStream:stream], [stream streamError]]];
                 });
                 break;
             }
@@ -353,6 +357,10 @@
                 break;
             }
         }
+    }
+    else
+    {
+        NSLog(@"received an event whilst being disposed");
     }
 }
 
