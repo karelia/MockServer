@@ -18,12 +18,17 @@
             "comment" : "Denies creation of new files"
         },
 
-        "delete fail": {
+        "delete fails": {
             "responses": ["initial", "user", "password", "sys", "pwd", "type", "cwd", "pasv", "size", "retr", "list", "mkd", "stor", "deleFileDoesntExist", "chmod", "rename from", "rename to", "commandNotUnderstood" ],
             "comment" : "Good responses except that delete fails as if the file doesn't exist."
         },
 
-        "mkdir fail": {
+        "delete fails missing directory": {
+            "responses": ["initial", "user", "password", "sys", "pwd", "type", "cwdDoesntExist", "pasv", "size", "retr", "list", "mkd", "stor", "dele", "chmod", "rename from", "rename to", "commandNotUnderstood" ],
+            "comment" : "Standard set of 'good' responses."
+        },
+
+        "make fails": {
             "responses": ["initial", "user", "password", "sys", "pwd", "type", "cwd", "pasv", "size", "retr", "list", "mkdFileExists", "stor", "dele", "chmod", "rename from", "rename to", "commandNotUnderstood" ],
             "comment" : "Good responses except that mkdir fails as if the directory already exists."
         },

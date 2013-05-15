@@ -48,6 +48,11 @@
             "comment" : "Delete command fails."
         },
 
+        "delete fails missing directory": {
+            "responses": ["get", "find", "put", "delete-fail", "mkcol", "move", "copy", "command-unauthorized", "unknown", "unauthorized" ],
+            "comment" : "Delete command fails."
+        },
+
         "delete hangs": {
             "responses": ["find", "put", "delete-hang", "mkcol", "move", "copy", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "Delete command hangs - client should time out eventually."
