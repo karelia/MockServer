@@ -8,6 +8,11 @@
             "comment" : "All commands succeed"
         },
 
+        "bad login": {
+            "responses": ["command-unauthorized", "unknown", "unauthorized" ],
+            "comment" : "All commands fails because of bad authorization"
+        },
+
         "make fails": {
             "responses": ["get", "find", "put", "delete", "mkcol-fail", "move", "copy", "command-unauthorized", "unknown", "unauthorized" ],
             "comment" : "Making directory fails as if it already exists"
