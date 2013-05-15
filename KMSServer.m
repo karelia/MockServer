@@ -101,6 +101,7 @@ NSString *const InitialResponsePattern = @"«initial»";
 
 - (void)dealloc
 {
+    KMSAssert([self.connections count] == 0);
     dispatch_release(_queue);
     _queue = nil;
 
@@ -161,9 +162,9 @@ NSString *const InitialResponsePattern = @"«initial»";
     dispatch_async(self.queue, ^{
         NSArray* connections = self.connections;
         for (KMSConnection* connection in connections)
-    {
-        [connection cancel];
-    }
+        {
+            [connection cancel];
+        }
     });
 
     self.state = KMSStopped;
