@@ -158,10 +158,13 @@ NSString *const InitialResponsePattern = @"«initial»";
     [self.listener stop:@"stopped externally"];
     [self.dataListener stop:@"stopped externally"];
 
-    for (KMSConnection* connection in self.connections)
+    dispatch_async(self.queue, ^{
+        NSArray* connections = self.connections;
+        for (KMSConnection* connection in connections)
     {
         [connection cancel];
     }
+    });
 
     self.state = KMSStopped;
 }
