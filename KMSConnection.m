@@ -50,13 +50,15 @@
         self.responder = responder;
         self.outputData = [NSMutableData data];
 
-        
         CFReadStreamRef readStream;
         CFWriteStreamRef writeStream;
         CFStreamCreatePairWithSocket(NULL, socket, &readStream, &writeStream);
 
-        self.input = [self setupStream:(NSStream*)readStream];
-        self.output = [self setupStream:(NSStream*)writeStream];
+        self.input = [self setupStream:(NSStream*)readStream mode:InputRunMode];
+        self.output = [self setupStream:(NSStream*)writeStream mode:OutputRunMode];
+
+        CFRelease(readStream);
+        CFRelease(writeStream);
     }
 
     return self;
@@ -64,12 +66,12 @@
 
 - (void)dealloc
 {
+    KMSAssert((_input == nil) && (_output == nil));
 
     [_input release];
     [_output release];
     [_outputData release];
     [_server release];
-
     
     [super dealloc];
 }
@@ -78,7 +80,7 @@
 
 - (void)cancel
 {
-    dispatch_sync(self.server.queue, ^{
+    dispatch_async(self.server.queue, ^{
         [self disconnectStreams:@"cancelled"];
     });
 }
@@ -135,8 +137,7 @@
 {
     KMSLogDetail(@"closed connection");
     [self.server.transcript addObject:[KMSTranscriptEntry entryWithType:KMSTranscriptCommand value:CloseCommandToken]];
-    [self.output close];
-    [self.input close];
+    [self disconnectStreams:@"closed as part of response"];
 }
 
 - (void)queueCommands:(NSArray*)commands
@@ -205,29 +206,32 @@
 
 #pragma mark - Streams
 
-- (id)setupStream:(NSStream*)stream
+- (id)setupStream:(NSStream*)stream mode:(NSString*)mode
 {
     KMSAssert(stream);
     KMSAssert([NSThread isMainThread]);
 
-    [stream setProperty:(id)kCFBooleanTrue forKey:(NSString *)kCFStreamPropertyShouldCloseNativeSocket];
+    if (mode == OutputRunMode)
+    {
+        [stream setProperty:(id)kCFBooleanTrue forKey:(NSString *)kCFStreamPropertyShouldCloseNativeSocket];
+    }
+    
     stream.delegate = self;
-    [stream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    [stream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:mode];
     [stream open];
-    CFRelease(stream);
 
     return stream;
 }
 
-- (void)cleanupStream:(NSStream*)stream
+- (void)cleanupStream:(NSStream*)stream mode:(NSString*)mode
 {
     KMSAssert([NSThread isMainThread]);
 
     if (stream)
     {
         stream.delegate = nil;
-        [stream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
         [stream close];
+        [stream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:mode];
     }
 }
 
@@ -237,7 +241,6 @@
     dispatch_async(self.server.queue, ^{
         NSInputStream* input = self.input;
         NSOutputStream* output = self.output;
-
         if (input || output)
         {
             // stop the streams generating any more events
@@ -245,14 +248,16 @@
             output.delegate = nil;
 
             // do final stream cleanup on the main queue
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self cleanupStream:input];
-                [self cleanupStream:output];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self cleanupStream:input mode:InputRunMode];
+                    [self cleanupStream:output mode:OutputRunMode];
 
-                [self.server connectionDidClose:self];
-                KMSLogDetail(@"disconnected: %@", reason);
+                    KMSLogDetail(@"disconnected: %@", reason);
             });
-            
+
+            // release the streams here, and tell the server that they're gone
+            // the block above still holds a reference to them until it's done and they've actually been properly cleaned up
+            [self.server connectionDidClose:self];
             self.input = nil;
             self.output = nil;
         }
@@ -291,60 +296,62 @@
 
 - (void)stream:(NSStream*)stream handleEvent:(NSStreamEvent)eventCode
 {
-    KMSAssert((stream == self.input) || (stream == self.output));
-
-    switch (eventCode)
+    if ((self.input != nil) && (self.output != nil))    // if events come in after we've been shut down, ignore them...
     {
-        case NSStreamEventOpenCompleted:
+        KMSAssert((stream == self.input) || (stream == self.output));
+        switch (eventCode)
         {
-            KMSLogDetail(@"opened %@ stream", [self nameForStream:stream]);
-            if (stream == self.input)
+            case NSStreamEventOpenCompleted:
             {
-                dispatch_async(self.server.queue, ^{
-                    [self queueCommands:self.responder.initialResponse];
-                });
+                KMSLogDetail(@"opened %@ stream", [self nameForStream:stream]);
+                if (stream == self.input)
+                {
+                    dispatch_async(self.server.queue, ^{
+                        [self queueCommands:self.responder.initialResponse];
+                    });
+                }
+                break;
             }
-            break;
-        }
 
-        case NSStreamEventHasBytesAvailable:
-        {
-            KMSAssert(stream == self.input);     // should never happen for the output stream
-            dispatch_async(self.server.queue, ^{
-                [self processInput];
-            });
-            break;
-        }
+            case NSStreamEventHasBytesAvailable:
+            {
+                KMSAssert(stream == self.input);     // should never happen for the output stream
+                dispatch_async(self.server.queue, ^{
+                    [self processInput];
+                });
+                break;
+            }
 
-        case NSStreamEventHasSpaceAvailable:
-        {
-            KMSAssert(stream == self.output);     // should never happen for the input stream
-            dispatch_async(self.server.queue, ^{
-                [self processOutput];
-            });
-            break;
-        }
+            case NSStreamEventHasSpaceAvailable:
+            {
+                KMSAssert(stream == self.output);     // should never happen for the input stream
+                dispatch_async(self.server.queue, ^{
+                    [self processOutput];
+                });
+                break;
+            }
 
-        case NSStreamEventErrorOccurred:
-        {
-            KMSLog(@"got error for %@ stream", [self nameForStream:stream]);
-            dispatch_async(self.server.queue, ^{
-                [self disconnectStreams:@"Stream open error"];
-            });
-            break;
-        }
+            case NSStreamEventErrorOccurred:
+            {
+                KMSLog(@"got error for %@ stream", [self nameForStream:stream]);
+                dispatch_async(self.server.queue, ^{
+                    [self disconnectStreams:@"Stream open error"];
+                });
+                break;
+            }
 
-        case NSStreamEventEndEncountered:
-        {
-            KMSLogDetail(@"got eof for %@ stream", [self nameForStream:stream]);
-            break;
-        }
-
-        default:
-        {
-            KMSLog(@"unknown event for %@ stream", [self nameForStream:stream]);
-            KMSAssert(NO);
-            break;
+            case NSStreamEventEndEncountered:
+            {
+                KMSLogDetail(@"got eof for %@ stream", [self nameForStream:stream]);
+                break;
+            }
+                
+            default:
+            {
+                KMSLog(@"unknown event for %@ stream", [self nameForStream:stream]);
+                KMSAssert(NO);
+                break;
+            }
         }
     }
 }

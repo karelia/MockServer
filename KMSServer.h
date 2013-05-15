@@ -252,3 +252,7 @@ extern NSString *const CloseCommandToken;
  */
 
 extern NSString *const InitialResponsePattern;
+
+extern NSString *const ListenerRunMode;
+extern NSString *const InputRunMode;
+extern NSString *const OutputRunMode;

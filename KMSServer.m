@@ -44,6 +44,10 @@ NSString *const CloseCommandToken = @"«close»";
 NSString *const DataCommandToken = @"«data»";
 NSString *const InitialResponsePattern = @"«initial»";
 
+NSString *const ListenerRunMode = @"kCFRunLoopDefaultMode";
+NSString *const InputRunMode = @"InputRunMode"; //NSDefaultRunLoopMode
+NSString *const OutputRunMode = @"OutputRunMode"; //NSDefaultRunLoopMode
+
 #pragma mark - Object Lifecycle
 
 + (KMSServer*)serverWithResponder:(KMSResponder*)responder
@@ -178,7 +182,11 @@ NSString *const InitialResponsePattern = @"«initial»";
     while (self.state != KMSPauseRequested)
     {
         @autoreleasepool {
-            [[NSRunLoop currentRunLoop] runUntilDate:[NSDate date]];
+            NSRunLoop* loop = [NSRunLoop currentRunLoop];
+            [loop runMode:NSRunLoopCommonModes beforeDate:[NSDate date]];
+            [loop runMode:ListenerRunMode beforeDate:[NSDate date]];
+            [loop runMode:InputRunMode beforeDate:[NSDate date]];
+            [loop runMode:OutputRunMode beforeDate:[NSDate date]];
         }
     }
     self.state = KMSPaused;

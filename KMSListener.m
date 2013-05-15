@@ -110,7 +110,7 @@
 {
     if (_source)
     {
-        CFRunLoopRemoveSource(CFRunLoopGetMain(), _source, kCFRunLoopDefaultMode);
+        CFRunLoopRemoveSource(CFRunLoopGetMain(), _source, (CFStringRef)ListenerRunMode);
         CFRelease(_source);
         _source = nil;
     }
@@ -246,13 +246,13 @@ static void callbackAcceptConnection(CFSocketRef s, CFSocketCallBackType type, C
     {
         _source = CFSocketCreateRunLoopSource(NULL, _listener, 0);
         KMSAssert(_source);
-        CFRunLoopAddSource(CFRunLoopGetMain(), _source, kCFRunLoopDefaultMode);
+        CFRunLoopAddSource(CFRunLoopGetMain(), _source, (CFStringRef) ListenerRunMode);
     }
     else
     {
         KMSLog(@"couldn't make CFSocket for socket %d", socket);
     }
-
+    
     return result;
 }
 
