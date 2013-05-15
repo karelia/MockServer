@@ -15,17 +15,17 @@
 #import "KMSResponder.h"
 
 @interface KMSListener()
+{
+    CFSocketRef _listener;
+    CFRunLoopSourceRef _source;
+}
 
 @property (copy, nonatomic) ConnectionBlock connectionBlock;
-@property (assign, nonatomic) CFSocketRef listener;
 @property (assign, nonatomic) NSUInteger port;
 
 @end
 
 @implementation KMSListener
-
-@synthesize listener = _listener;
-@synthesize port = _port;
 
 #pragma mark - Object Lifecycle
 
@@ -108,15 +108,21 @@
 
 - (void)stop:(NSString*)reason
 {
-    if (self.listener)
+    if (_source)
     {
-        CFSocketInvalidate(self.listener);
-#ifndef __clang_analyzer__ // this seems to be a false positive
-        CFRelease(self.listener);
-#endif
-        self.connectionBlock = nil;
-        self.listener = nil;
+        CFRunLoopRemoveSource(CFRunLoopGetMain(), _source, kCFRunLoopDefaultMode);
+        CFRelease(_source);
+        _source = nil;
     }
+
+    if (_listener)
+    {
+        CFSocketInvalidate(_listener);
+        CFRelease(_listener);
+        _listener = nil;
+    }
+
+    self.connectionBlock = nil;
 
     KMSLogDetail(@"listener stopped because: %@", reason);
 }
@@ -141,7 +147,7 @@ static void callbackAcceptConnection(CFSocketRef s, CFSocketCallBackType type, C
 {
     KMSListener* obj = (KMSListener*)info;
     KMSAssert(type == kCFSocketAcceptCallBack);
-    KMSAssert(obj && (obj.listener == s));
+    KMSAssert(obj && (obj->_listener == s));
     KMSAssert(data);
 
     if (obj && data && (type == kCFSocketAcceptCallBack))
@@ -232,16 +238,15 @@ static void callbackAcceptConnection(CFSocketRef s, CFSocketCallBackType type, C
 {
     CFSocketContext context = { 0, (void *) self, NULL, NULL, NULL };
 
-    KMSAssert(self.listener == NULL);
-    self.listener = CFSocketCreateWithNative(NULL, socket, kCFSocketAcceptCallBack, callbackAcceptConnection, &context);
+    KMSAssert(_listener == NULL);
+    _listener = CFSocketCreateWithNative(NULL, socket, kCFSocketAcceptCallBack, callbackAcceptConnection, &context);
 
-    BOOL result = (self.listener != nil);
+    BOOL result = (_listener != nil);
     if (result)
     {
-        CFRunLoopSourceRef source = CFSocketCreateRunLoopSource(NULL, self.listener, 0);
-        KMSAssert(source);
-        CFRunLoopAddSource(CFRunLoopGetMain(), source, kCFRunLoopDefaultMode);
-        CFRelease(source);
+        _source = CFSocketCreateRunLoopSource(NULL, _listener, 0);
+        KMSAssert(_source);
+        CFRunLoopAddSource(CFRunLoopGetMain(), _source, kCFRunLoopDefaultMode);
     }
     else
     {
