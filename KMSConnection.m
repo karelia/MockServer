@@ -79,6 +79,10 @@
     [_outputData release];
     [_server release];
     
+#if DEBUG
+    [_lastDisconnectReason release];
+#endif
+
     [super dealloc];
 }
 
