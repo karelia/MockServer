@@ -254,16 +254,14 @@
 
             // do final stream cleanup on the main queue
             input.delegate = nil;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [input close];
-            });
-
             output.delegate = nil;
             dispatch_async(dispatch_get_main_queue(), ^{
+                [input close];
                 [output close];
             });
 
-            dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                 close(self.socket);
             });
 
