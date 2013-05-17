@@ -22,6 +22,7 @@
 @property (strong, nonatomic) NSMutableData* outputData;
 @property (strong, nonatomic) KMSResponder* responder;
 @property (strong, nonatomic) KMSServer* server;
+@property (assign, nonatomic) int socket;
 
 #if DEBUG
 
@@ -60,6 +61,7 @@
         CFWriteStreamRef writeStream;
         CFStreamCreatePairWithSocket(NULL, socket, &readStream, &writeStream);
 
+        self.socket = socket;
         self.input = [self setupStream:(NSStream*)readStream mode:InputRunMode];
         self.output = [self setupStream:(NSStream*)writeStream mode:OutputRunMode];
 
@@ -78,7 +80,7 @@
     [_output release];
     [_outputData release];
     [_server release];
-    
+
 #if DEBUG
     [_lastDisconnectReason release];
 #endif
@@ -221,7 +223,7 @@
     KMSAssert(stream);
     KMSAssert([NSThread isMainThread]);
 
-    [stream setProperty:[NSNumber numberWithBool:(mode == OutputRunMode)] forKey:(NSString*)kCFStreamPropertyShouldCloseNativeSocket];
+    [stream setProperty:@(NO) forKey:(NSString*)kCFStreamPropertyShouldCloseNativeSocket];
 
     stream.delegate = self;
     [stream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:mode];
@@ -254,6 +256,10 @@
             output.delegate = nil;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [output close];
+            });
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                close(self.socket);
             });
 
             // release the streams here, and tell the server that they're gone
