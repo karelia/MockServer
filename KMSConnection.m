@@ -313,15 +313,18 @@
 
 - (void)stream:(NSStream*)stream handleEvent:(NSStreamEvent)eventCode
 {
-    if ((self.input != nil) && (self.output != nil))    // if events come in after we've been shut down, ignore them...
+    NSInputStream* input = self.input;
+    NSOutputStream* output = self.output;
+
+    if ((input != nil) && (output != nil))    // if events come in after we've been shut down, ignore them...
     {
-        KMSAssert((stream == self.input) || (stream == self.output));
+        KMSAssert((stream == input) || (stream == output));
         switch (eventCode)
         {
             case NSStreamEventOpenCompleted:
             {
                 KMSLogDetail(@"opened %@ stream", [self nameForStream:stream]);
-                if (stream == self.input)
+                if (stream == input)
                 {
                     dispatch_async(self.server.queue, ^{
                         [self queueCommands:self.responder.initialResponse];
@@ -332,7 +335,7 @@
 
             case NSStreamEventHasBytesAvailable:
             {
-                KMSAssert(stream == self.input);     // should never happen for the output stream
+                KMSAssert(stream == input);     // should never happen for the output stream
                 dispatch_async(self.server.queue, ^{
                     [self processInput];
                 });
@@ -341,7 +344,7 @@
 
             case NSStreamEventHasSpaceAvailable:
             {
-                KMSAssert(stream == self.output);     // should never happen for the input stream
+                KMSAssert(stream == output);     // should never happen for the input stream
                 dispatch_async(self.server.queue, ^{
                     [self processOutput];
                 });
