@@ -92,6 +92,7 @@ NSString *const OutputRunMode = @"OutputRunMode"; //NSDefaultRunLoopMode
                 KMSConnection* connection = [KMSConnection connectionWithSocket:socket responder:nil server:self];
                 dispatch_async(queue, ^{
                     [self.connections addObject:connection];
+                    [connection open];
                     KMSLogDetail(@"connection added %@", connection);
                 });
             });
@@ -234,9 +235,14 @@ NSString *const OutputRunMode = @"OutputRunMode"; //NSDefaultRunLoopMode
 
                 NSArray* responses = @[ @[InitialResponsePattern, [KMSSendDataCommand sendData:data], [KMSPauseCommand pauseFor:0.1], [KMSCloseCommand closeCommand] ] ];
                 KMSRegExResponder* responder = [KMSRegExResponder responderWithResponses:responses];
-                KMSConnection* connection = [KMSConnection connectionWithSocket:socket responder:responder server:server];
-                [self.connections addObject:connection];
-                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    KMSConnection* connection = [KMSConnection connectionWithSocket:socket responder:responder server:server];
+                    dispatch_async(self.queue, ^{
+                        [self.connections addObject:connection];
+                        [connection open];
+                    });
+                });
+
                 return YES;
             }];
             

@@ -40,6 +40,14 @@
 - (id)initWithSocket:(int)socket responder:(KMSResponder*)responder server:(KMSServer*)server;
 
 
+/**
+ Open the connection.
+
+ Called by the server once it's added the connection to it's list.
+
+ */
+
+- (void)open;
 
 
 /**

@@ -90,6 +90,12 @@
 
 #pragma mark - Public API
 
+- (void)open
+{
+    [self.input open];
+    [self.output open];
+}
+
 - (void)cancel
 {
     dispatch_async(self.server.queue, ^{
@@ -227,7 +233,6 @@
 
     stream.delegate = self;
     [stream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:mode];
-    [stream open];
 
     return stream;
 }
