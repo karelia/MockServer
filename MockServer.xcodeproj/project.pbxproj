@@ -108,7 +108,7 @@
 		22F6D0DA165A65AB00443CC9 /* Classes.graffle */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Classes.graffle; sourceTree = "<group>"; };
 		22F6D0DB165A65AB00443CC9 /* Design-template.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Design-template.md"; sourceTree = "<group>"; wrapsLines = 1; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		5F53DAEC1727B9E800DE6269 /* UnitTests-iOS.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "UnitTests-iOS.octest"; path = "UnitTests iOS.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F53DAEC1727B9E800DE6269 /* UnitTests iOS.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "UnitTests iOS.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F53DAEE1727B9E800DE6269 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
@@ -136,7 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				220AD7981509019B00748655 /* UnitTests.octest */,
-				5F53DAEC1727B9E800DE6269 /* UnitTests-iOS.octest */,
+				5F53DAEC1727B9E800DE6269 /* UnitTests iOS.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -289,7 +289,7 @@
 			);
 			name = "UnitTests iOS";
 			productName = "UnitTests-iOS";
-			productReference = 5F53DAEC1727B9E800DE6269 /* UnitTests-iOS.octest */;
+			productReference = 5F53DAEC1727B9E800DE6269 /* UnitTests iOS.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -532,7 +532,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				WRAPPER_EXTENSION = octest;
@@ -558,7 +558,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -585,7 +585,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
