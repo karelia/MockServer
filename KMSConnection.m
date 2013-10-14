@@ -207,7 +207,12 @@
     NSUInteger bytesToWrite = [self.outputData length];
     if (bytesToWrite)
     {
-        NSUInteger written = [self.output write:[self.outputData bytes] maxLength:bytesToWrite];
+        // Force writing to happen on main thread since that's where the stream is scheduled
+        __block NSUInteger written;
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            written = [self.output write:[self.outputData bytes] maxLength:bytesToWrite];
+        });
+        
         if (written != -1)
         {
             [self.outputData replaceBytesInRange:NSMakeRange(0, written) withBytes:nil length:0];
