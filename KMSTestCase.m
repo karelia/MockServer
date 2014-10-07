@@ -39,13 +39,13 @@
         if (responder)
         {
             self.server = [KMSServer serverWithPort:0 responder:responder];
-            STAssertNotNil(self.server, @"got server");
+            XCTAssertNotNil(self.server, @"got server");
 
             if (self.server)
             {
                 [self.server start];
                 BOOL started = self.server.running;
-                STAssertTrue(started, @"server started ok");
+                XCTAssertTrue(started, @"server started ok");
 
                 self.url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://127.0.0.1:%ld", self.responses.scheme, (unsigned long)self.server.port]];
             }

@@ -14,9 +14,9 @@
 #import "KMSPauseCommand.h"
 #import "KMSCloseCommand.h"
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
-@interface KMSManualTests : SenTestCase
+@interface KMSManualTests : XCTestCase
 
 @end
 
@@ -40,10 +40,10 @@ static NSString*const HTTPContent = @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 
     KMSRegExResponder* responder = [KMSRegExResponder responderWithResponses:responses];
     KMSServer* server = [KMSServer serverWithPort:0 responder:responder];
 
-    STAssertNotNil(server, @"got server");
+    XCTAssertNotNil(server, @"got server");
     [server start];
     BOOL started = server.running;
-    STAssertTrue(started, @"server started ok");
+    XCTAssertTrue(started, @"server started ok");
     return started ? server : nil;
 }
 
@@ -93,7 +93,7 @@ static NSString*const HTTPContent = @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 
     if (server)
     {
         NSString* string = [self stringForScheme:@"http" path:@"/index.html" method:@"GET" server:server];
-        STAssertEqualObjects(string, HTTPContent, @"wrong response");
+        XCTAssertEqualObjects(string, HTTPContent, @"wrong response");
     }
 
     [server stop];
@@ -105,7 +105,7 @@ static NSString*const HTTPContent = @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 
     if (server)
     {
         NSString* string = [self stringForScheme:@"http" path:@"/index.html" method:@"HEAD" server:server];
-        STAssertEqualObjects(string, @"", @"wrong response");
+        XCTAssertEqualObjects(string, @"", @"wrong response");
     }
 
     [server stop];

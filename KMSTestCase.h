@@ -3,7 +3,7 @@
 //  Copyright 2012 Karelia Software. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
 @class KMSServer;
 @class KMSResponseCollection;
@@ -36,7 +36,7 @@
 
  */
 
-@interface KMSTestCase : SenTestCase
+@interface KMSTestCase : XCTestCase
 
 @property (strong, nonatomic) KMSServer* server;
 @property (strong, nonatomic) NSString* user;
