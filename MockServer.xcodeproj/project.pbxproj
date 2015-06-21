@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3CBCE6C91B36732300EB5E49 /* http.json in Resources */ = {isa = PBXBuildFile; fileRef = 22BC963A167FB72200144FFE /* http.json */; };
+		3CBCE6CA1B36732300EB5E49 /* ftp.json in Resources */ = {isa = PBXBuildFile; fileRef = 22662EED165D2C65005FCC4A /* ftp.json */; };
+		3CBCE6CB1B36732300EB5E49 /* webdav.json in Resources */ = {isa = PBXBuildFile; fileRef = 22662EEE165D2C65005FCC4A /* webdav.json */; };
 		3CD748A41B366825009C00C9 /* MockServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CD748A31B366825009C00C9 /* MockServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3CD748AA1B366826009C00C9 /* MockServer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD7489F1B366825009C00C9 /* MockServer.framework */; };
 		3CD748B11B366826009C00C9 /* MockServerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD748B01B366826009C00C9 /* MockServerTests.m */; };
@@ -358,6 +361,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CBCE6C91B36732300EB5E49 /* http.json in Resources */,
+				3CBCE6CA1B36732300EB5E49 /* ftp.json in Resources */,
+				3CBCE6CB1B36732300EB5E49 /* webdav.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
