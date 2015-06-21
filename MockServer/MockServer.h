@@ -14,6 +14,11 @@ FOUNDATION_EXPORT double MockServerVersionNumber;
 //! Project version string for MockServer.
 FOUNDATION_EXPORT const unsigned char MockServerVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <MockServer/PublicHeader.h>
-
-
+#import <MockServer/KMSCommand.h>
+#import <MockServer/KMSServer.h>
+#import <MockServer/KMSState.h>
+#import <MockServer/KMSRegExResponder.h>
+#import <MockServer/KMSResponder.h>
+#import <MockServer/KMSResponseCollection.h>
+#import <MockServer/KMSTestCase.h>
+#import <MockServer/KMSTranscriptEntry.h>
