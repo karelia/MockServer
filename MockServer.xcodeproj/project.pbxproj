@@ -7,26 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		220AD79A1509019B00748655 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220AD7991509019B00748655 /* SenTestingKit.framework */; };
-		2239A20A164C53F3008D4ADE /* KMSServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2239A201164C53F3008D4ADE /* KMSServer.m */; };
-		2239A20B164C53F3008D4ADE /* KMSConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2239A203164C53F3008D4ADE /* KMSConnection.m */; };
-		2239A20D164C53F3008D4ADE /* KMSListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 2239A207164C53F3008D4ADE /* KMSListener.m */; };
-		2239A20E164C53F3008D4ADE /* KMSResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2239A209164C53F3008D4ADE /* KMSResponder.m */; };
-		224AB38F166E5A660066B1C6 /* KMSCollectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 224AB38D166E5A660066B1C6 /* KMSCollectionTests.m */; };
-		224AB390166E5A660066B1C6 /* KMSManualTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 224AB38E166E5A660066B1C6 /* KMSManualTests.m */; };
-		224AB393166E5A7A0066B1C6 /* KMSTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 224AB392166E5A7A0066B1C6 /* KMSTestCase.m */; };
-		22662EE7165D219A005FCC4A /* KMSResponseCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 22662EE6165D219A005FCC4A /* KMSResponseCollection.m */; };
-		22662EEF165D2C65005FCC4A /* ftp.json in Resources */ = {isa = PBXBuildFile; fileRef = 22662EED165D2C65005FCC4A /* ftp.json */; };
-		22662EF0165D2C65005FCC4A /* webdav.json in Resources */ = {isa = PBXBuildFile; fileRef = 22662EEE165D2C65005FCC4A /* webdav.json */; };
-		2289BC0516AD63CD007DC402 /* KMSTranscriptEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 2289BC0416AD63CD007DC402 /* KMSTranscriptEntry.m */; };
-		22A6602516B3198300117D24 /* KMSCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A6602416B3198300117D24 /* KMSCommand.m */; };
-		22A6602816B32B4A00117D24 /* KMSSendDataCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A6602716B32B4A00117D24 /* KMSSendDataCommand.m */; };
-		22A6602B16B32BA300117D24 /* KMSSendStringCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A6602A16B32BA300117D24 /* KMSSendStringCommand.m */; };
-		22A6602E16B32BFD00117D24 /* KMSPauseCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A6602D16B32BFD00117D24 /* KMSPauseCommand.m */; };
-		22A6603116B32C7F00117D24 /* KMSSendServerDataCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A6603016B32C7E00117D24 /* KMSSendServerDataCommand.m */; };
-		22A6603416B32EFB00117D24 /* KMSCloseCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A6603316B32EFB00117D24 /* KMSCloseCommand.m */; };
-		22BC963B167FB72200144FFE /* http.json in Resources */ = {isa = PBXBuildFile; fileRef = 22BC963A167FB72200144FFE /* http.json */; };
-		22F6D0D8165A5B2400443CC9 /* KMSRegExResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F6D0D7165A5B2400443CC9 /* KMSRegExResponder.m */; };
 		3CD748A41B366825009C00C9 /* MockServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CD748A31B366825009C00C9 /* MockServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3CD748AA1B366826009C00C9 /* MockServer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD7489F1B366825009C00C9 /* MockServer.framework */; };
 		3CD748B11B366826009C00C9 /* MockServerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD748B01B366826009C00C9 /* MockServerTests.m */; };
@@ -52,26 +32,6 @@
 		3CD748D51B36693D009C00C9 /* KMSResponseCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 22662EE5165D2199005FCC4A /* KMSResponseCollection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3CD748D61B36693D009C00C9 /* KMSTestCase.h in Headers */ = {isa = PBXBuildFile; fileRef = 224AB391166E5A7A0066B1C6 /* KMSTestCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3CD748D71B36693D009C00C9 /* KMSTranscriptEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 2289BC0316AD63CD007DC402 /* KMSTranscriptEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5F53DAED1727B9E800DE6269 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220AD7991509019B00748655 /* SenTestingKit.framework */; };
-		5F53DAFF1727BAF000DE6269 /* KMSCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A6602416B3198300117D24 /* KMSCommand.m */; };
-		5F53DB001727BAF000DE6269 /* KMSServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2239A201164C53F3008D4ADE /* KMSServer.m */; };
-		5F53DB011727BAF000DE6269 /* KMSRegExResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F6D0D7165A5B2400443CC9 /* KMSRegExResponder.m */; };
-		5F53DB021727BAF000DE6269 /* KMSResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2239A209164C53F3008D4ADE /* KMSResponder.m */; };
-		5F53DB031727BAF000DE6269 /* KMSResponseCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 22662EE6165D219A005FCC4A /* KMSResponseCollection.m */; };
-		5F53DB041727BAF000DE6269 /* KMSTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 224AB392166E5A7A0066B1C6 /* KMSTestCase.m */; };
-		5F53DB051727BAF000DE6269 /* KMSTranscriptEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 2289BC0416AD63CD007DC402 /* KMSTranscriptEntry.m */; };
-		5F53DB061727BAF000DE6269 /* KMSCloseCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A6603316B32EFB00117D24 /* KMSCloseCommand.m */; };
-		5F53DB071727BAF000DE6269 /* KMSPauseCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A6602D16B32BFD00117D24 /* KMSPauseCommand.m */; };
-		5F53DB081727BAF000DE6269 /* KMSSendDataCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A6602716B32B4A00117D24 /* KMSSendDataCommand.m */; };
-		5F53DB091727BAF000DE6269 /* KMSSendServerDataCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A6603016B32C7E00117D24 /* KMSSendServerDataCommand.m */; };
-		5F53DB0A1727BAF000DE6269 /* KMSSendStringCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A6602A16B32BA300117D24 /* KMSSendStringCommand.m */; };
-		5F53DB0B1727BAF000DE6269 /* KMSConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2239A203164C53F3008D4ADE /* KMSConnection.m */; };
-		5F53DB0C1727BAF000DE6269 /* KMSListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 2239A207164C53F3008D4ADE /* KMSListener.m */; };
-		5F53DB0D1727BAF000DE6269 /* KMSCollectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 224AB38D166E5A660066B1C6 /* KMSCollectionTests.m */; };
-		5F53DB0E1727BAF000DE6269 /* KMSManualTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 224AB38E166E5A660066B1C6 /* KMSManualTests.m */; };
-		5F53DB0F1727BB0D00DE6269 /* http.json in Resources */ = {isa = PBXBuildFile; fileRef = 22BC963A167FB72200144FFE /* http.json */; };
-		5F53DB101727BB0D00DE6269 /* ftp.json in Resources */ = {isa = PBXBuildFile; fileRef = 22662EED165D2C65005FCC4A /* ftp.json */; };
-		5F53DB111727BB0D00DE6269 /* webdav.json in Resources */ = {isa = PBXBuildFile; fileRef = 22662EEE165D2C65005FCC4A /* webdav.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,20 +44,7 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		22FA97F715090855001728B8 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		220AD7981509019B00748655 /* UnitTests OSX.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "UnitTests OSX.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		220AD7991509019B00748655 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		2239A1FD164C5381008D4ADE /* UnitTest.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UnitTest.plist; sourceTree = "<group>"; };
 		2239A200164C53F3008D4ADE /* KMSServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMSServer.h; sourceTree = SOURCE_ROOT; };
@@ -149,19 +96,10 @@
 		3CD748A91B366825009C00C9 /* MockServerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MockServerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CD748AF1B366826009C00C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3CD748B01B366826009C00C9 /* MockServerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MockServerTests.m; sourceTree = "<group>"; };
-		5F53DAEC1727B9E800DE6269 /* UnitTests iOS.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "UnitTests iOS.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F53DAEE1727B9E800DE6269 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		220AD7941509019B00748655 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				220AD79A1509019B00748655 /* SenTestingKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3CD7489B1B366825009C00C9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -177,22 +115,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5F53DAE81727B9E800DE6269 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5F53DAED1727B9E800DE6269 /* SenTestingKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				220AD7981509019B00748655 /* UnitTests OSX.octest */,
-				5F53DAEC1727B9E800DE6269 /* UnitTests iOS.octest */,
 				3CD7489F1B366825009C00C9 /* MockServer.framework */,
 				3CD748A91B366825009C00C9 /* MockServerTests.xctest */,
 			);
@@ -368,25 +296,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		220AD7971509019B00748655 /* UnitTests OSX */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 220AD7A71509019B00748655 /* Build configuration list for PBXNativeTarget "UnitTests OSX" */;
-			buildPhases = (
-				220AD7931509019B00748655 /* Sources */,
-				220AD7941509019B00748655 /* Frameworks */,
-				220AD7951509019B00748655 /* Resources */,
-				22FA97F715090855001728B8 /* CopyFiles */,
-				220AD7961509019B00748655 /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "UnitTests OSX";
-			productName = Tests;
-			productReference = 220AD7981509019B00748655 /* UnitTests OSX.octest */;
-			productType = "com.apple.product-type.bundle.ocunit-test";
-		};
 		3CD7489E1B366825009C00C9 /* MockServer */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3CD748B21B366826009C00C9 /* Build configuration list for PBXNativeTarget "MockServer" */;
@@ -422,24 +331,6 @@
 			productName = MockServerTests;
 			productReference = 3CD748A91B366825009C00C9 /* MockServerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		5F53DAEB1727B9E800DE6269 /* UnitTests iOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5F53DAFE1727B9E800DE6269 /* Build configuration list for PBXNativeTarget "UnitTests iOS" */;
-			buildPhases = (
-				5F53DAE71727B9E800DE6269 /* Sources */,
-				5F53DAE81727B9E800DE6269 /* Frameworks */,
-				5F53DAE91727B9E800DE6269 /* Resources */,
-				5F53DAEA1727B9E800DE6269 /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "UnitTests iOS";
-			productName = "UnitTests-iOS";
-			productReference = 5F53DAEC1727B9E800DE6269 /* UnitTests iOS.octest */;
-			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -481,8 +372,6 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				220AD7971509019B00748655 /* UnitTests OSX */,
-				5F53DAEB1727B9E800DE6269 /* UnitTests iOS */,
 				3CD7489E1B366825009C00C9 /* MockServer */,
 				3CD748A81B366825009C00C9 /* MockServerTests */,
 			);
@@ -490,16 +379,6 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		220AD7951509019B00748655 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				22662EEF165D2C65005FCC4A /* ftp.json in Resources */,
-				22662EF0165D2C65005FCC4A /* webdav.json in Resources */,
-				22BC963B167FB72200144FFE /* http.json in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3CD7489D1B366825009C00C9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -514,73 +393,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5F53DAE91727B9E800DE6269 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5F53DB0F1727BB0D00DE6269 /* http.json in Resources */,
-				5F53DB101727BB0D00DE6269 /* ftp.json in Resources */,
-				5F53DB111727BB0D00DE6269 /* webdav.json in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		220AD7961509019B00748655 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5F53DAEA1727B9E800DE6269 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		220AD7931509019B00748655 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2239A20A164C53F3008D4ADE /* KMSServer.m in Sources */,
-				2239A20B164C53F3008D4ADE /* KMSConnection.m in Sources */,
-				2239A20D164C53F3008D4ADE /* KMSListener.m in Sources */,
-				2239A20E164C53F3008D4ADE /* KMSResponder.m in Sources */,
-				22F6D0D8165A5B2400443CC9 /* KMSRegExResponder.m in Sources */,
-				22662EE7165D219A005FCC4A /* KMSResponseCollection.m in Sources */,
-				224AB38F166E5A660066B1C6 /* KMSCollectionTests.m in Sources */,
-				224AB390166E5A660066B1C6 /* KMSManualTests.m in Sources */,
-				224AB393166E5A7A0066B1C6 /* KMSTestCase.m in Sources */,
-				2289BC0516AD63CD007DC402 /* KMSTranscriptEntry.m in Sources */,
-				22A6602516B3198300117D24 /* KMSCommand.m in Sources */,
-				22A6602816B32B4A00117D24 /* KMSSendDataCommand.m in Sources */,
-				22A6602B16B32BA300117D24 /* KMSSendStringCommand.m in Sources */,
-				22A6602E16B32BFD00117D24 /* KMSPauseCommand.m in Sources */,
-				22A6603116B32C7F00117D24 /* KMSSendServerDataCommand.m in Sources */,
-				22A6603416B32EFB00117D24 /* KMSCloseCommand.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3CD7489A1B366825009C00C9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -610,29 +425,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5F53DAE71727B9E800DE6269 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5F53DAFF1727BAF000DE6269 /* KMSCommand.m in Sources */,
-				5F53DB001727BAF000DE6269 /* KMSServer.m in Sources */,
-				5F53DB011727BAF000DE6269 /* KMSRegExResponder.m in Sources */,
-				5F53DB021727BAF000DE6269 /* KMSResponder.m in Sources */,
-				5F53DB031727BAF000DE6269 /* KMSResponseCollection.m in Sources */,
-				5F53DB041727BAF000DE6269 /* KMSTestCase.m in Sources */,
-				5F53DB051727BAF000DE6269 /* KMSTranscriptEntry.m in Sources */,
-				5F53DB061727BAF000DE6269 /* KMSCloseCommand.m in Sources */,
-				5F53DB071727BAF000DE6269 /* KMSPauseCommand.m in Sources */,
-				5F53DB081727BAF000DE6269 /* KMSSendDataCommand.m in Sources */,
-				5F53DB091727BAF000DE6269 /* KMSSendServerDataCommand.m in Sources */,
-				5F53DB0A1727BAF000DE6269 /* KMSSendStringCommand.m in Sources */,
-				5F53DB0B1727BAF000DE6269 /* KMSConnection.m in Sources */,
-				5F53DB0C1727BAF000DE6269 /* KMSListener.m in Sources */,
-				5F53DB0D1727BAF000DE6269 /* KMSCollectionTests.m in Sources */,
-				5F53DB0E1727BAF000DE6269 /* KMSManualTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -644,76 +436,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		220AD7A81509019B00748655 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				LD_RUNPATH_SEARCH_PATHS = "\"@loader_path/../Frameworks\"";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		220AD7A91509019B00748655 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				LD_RUNPATH_SEARCH_PATHS = "\"@loader_path/../Frameworks\"";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Release;
-		};
-		220AD7AA1509019B00748655 /* Plugin */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				LD_RUNPATH_SEARCH_PATHS = "\"@loader_path/../Frameworks\"";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Plugin;
-		};
 		3CD748B31B366826009C00C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -984,93 +706,6 @@
 			};
 			name = Plugin;
 		};
-		5F53DAFB1727B9E800DE6269 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		5F53DAFC1727B9E800DE6269 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				VALIDATE_PRODUCT = YES;
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Release;
-		};
-		5F53DAFD1727B9E800DE6269 /* Plugin */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				VALIDATE_PRODUCT = YES;
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Plugin;
-		};
 		79A857940B9267CA00D9C844 /* Plugin */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1109,16 +744,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		220AD7A71509019B00748655 /* Build configuration list for PBXNativeTarget "UnitTests OSX" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				220AD7A81509019B00748655 /* Debug */,
-				220AD7A91509019B00748655 /* Release */,
-				220AD7AA1509019B00748655 /* Plugin */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		3CD748B21B366826009C00C9 /* Build configuration list for PBXNativeTarget "MockServer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1136,16 +761,6 @@
 				3CD748B91B366826009C00C9 /* Plugin */,
 			);
 			defaultConfigurationIsVisible = 0;
-		};
-		5F53DAFE1727B9E800DE6269 /* Build configuration list for PBXNativeTarget "UnitTests iOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5F53DAFB1727B9E800DE6269 /* Debug */,
-				5F53DAFC1727B9E800DE6269 /* Release */,
-				5F53DAFD1727B9E800DE6269 /* Plugin */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "MockServer" */ = {
 			isa = XCConfigurationList;
