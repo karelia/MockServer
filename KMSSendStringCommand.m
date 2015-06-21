@@ -17,14 +17,7 @@
     KMSSendStringCommand* result = [[KMSSendStringCommand alloc] init];
     result.string = string;
 
-    return [result autorelease];
-}
-
-- (void)dealloc
-{
-    [_string release];
-
-    [super dealloc];
+    return result;
 }
 
 - (NSTimeInterval)performOnConnection:(KMSConnection*)connection server:(KMSServer*)server

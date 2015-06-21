@@ -12,14 +12,7 @@
     entry.type = type;
     entry.value = value;
 
-    return [entry autorelease];
-}
-
-- (void)dealloc
-{
-    [_value release];
-
-    [super dealloc];
+    return entry;
 }
 
 - (NSString*)description

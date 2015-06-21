@@ -13,9 +13,7 @@
 
 + (KMSCloseCommand*)closeCommand
 {
-    KMSCloseCommand* result = [[KMSCloseCommand alloc] init];
-
-    return [result autorelease];
+    return [[KMSCloseCommand alloc] init];
 }
 
 - (NSTimeInterval)performOnConnection:(KMSConnection*)connection server:(KMSServer*)server

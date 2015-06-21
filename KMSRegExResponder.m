@@ -27,7 +27,7 @@
 {
     KMSRegExResponder* server = [[KMSRegExResponder alloc] initWithResponses:responses];
 
-    return [server autorelease];
+    return server;
 }
 
 - (id)initWithResponses:(NSArray *)responses
@@ -67,15 +67,6 @@
     }
 
     return self;
-}
-
-- (void)dealloc
-{
-    [_initialResponse release];
-    [_responses release];
-    [_requests release];
-    
-    [super dealloc];
 }
 
 #pragma mark - Public API

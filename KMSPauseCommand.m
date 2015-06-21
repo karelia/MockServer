@@ -16,7 +16,7 @@
     KMSPauseCommand* result = [[KMSPauseCommand alloc] init];
     result.delay = delay;
 
-    return [result autorelease];
+    return result;
 }
 
 - (NSTimeInterval)performOnConnection:(KMSConnection*)connection server:(KMSServer*)server

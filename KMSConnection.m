@@ -46,7 +46,7 @@
 {
     KMSConnection* connection = [[KMSConnection alloc] initWithSocket:socket responder:responder server:server];
 
-    return [connection autorelease];
+    return connection;
 }
 
 - (id)initWithSocket:(int)socket responder:(KMSResponder*)responder server:(KMSServer*)server
@@ -62,8 +62,8 @@
         CFStreamCreatePairWithSocket(NULL, socket, &readStream, &writeStream);
 
         self.socket = socket;
-        self.input = [self setupStream:(NSStream*)readStream mode:InputRunMode];
-        self.output = [self setupStream:(NSStream*)writeStream mode:OutputRunMode];
+        self.input = [self setupStream:(NSStream*)CFBridgingRelease(readStream) mode:InputRunMode];
+        self.output = [self setupStream:(NSStream*)CFBridgingRelease(writeStream) mode:OutputRunMode];
 
         CFRelease(readStream);
         CFRelease(writeStream);
@@ -75,17 +75,6 @@
 - (void)dealloc
 {
     KMSAssert((_input == nil) && (_output == nil));
-
-    [_input release];
-    [_output release];
-    [_outputData release];
-    [_server release];
-
-#if DEBUG
-    [_lastDisconnectReason release];
-#endif
-
-    [super dealloc];
 }
 
 #pragma mark - Public API
@@ -146,8 +135,6 @@
         }
 
         [self queueCommands:commands];
-
-        [request release];
     }
 }
 
@@ -183,7 +170,6 @@
     if (count)
     {
         KMSCommand* command = self.commands[0];
-        [command retain];
         [self.commands removeObjectAtIndex:0];
 
         NSTimeInterval delay = [command performOnConnection:self server:self.server];
@@ -194,8 +180,6 @@
                 [self processNextCommand];
             });
         }
-
-        [command release];
     }
 }
 

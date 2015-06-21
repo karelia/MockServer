@@ -22,7 +22,7 @@
 {
     KMSResponseCollection* collection = [[KMSResponseCollection alloc] initWithURL:url];
 
-    return [collection autorelease];
+    return collection;
 }
 
 - (id)initWithURL:(NSURL*)url
@@ -48,20 +48,11 @@
         else
         {
             KMSLog(@"failed to load response collection with error: %@", error);
-            [self release];
             self = nil;
         }
     }
 
     return self;
-}
-
-- (void)dealloc
-{
-    [_sets release];
-    [_responses release];
-
-    [super dealloc];
 }
 
 - (NSArray*)responsesWithName:(NSString*)name

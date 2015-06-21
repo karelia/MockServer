@@ -54,14 +54,14 @@ NSString *const OutputRunMode = @"OutputRunMode"; //NSDefaultRunLoopMode
 {
     KMSServer* server = [[KMSServer alloc] initWithPort:0 responder:responder];
 
-    return [server autorelease];
+    return server;
 }
 
 + (KMSServer*)serverWithPort:(NSUInteger)port responder:(KMSResponder*)responder
 {
     KMSServer* server = [[KMSServer alloc] initWithPort:port responder:responder];
 
-    return [server autorelease];
+    return server;
 }
 
 - (id)initWithPort:(NSUInteger)port responder:(KMSResponder*)responder
@@ -72,14 +72,14 @@ NSString *const OutputRunMode = @"OutputRunMode"; //NSDefaultRunLoopMode
     {
         dispatch_queue_t queue = dispatch_queue_create("com.karelia.mockserver", 0);
         self.queue = queue;
-        dispatch_queue_set_specific(queue, &queueIdentifierKey, self, NULL);
+        dispatch_queue_set_specific(queue, &queueIdentifierKey, (__bridge void *)(self), NULL);
         self.responder = responder;
         self.connections = [NSMutableArray array];
         self.transcript = [NSMutableArray array];
         
-        NSDateFormatter* formatter = [[[NSDateFormatter alloc] init] autorelease];
+        NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
         [formatter setFormatterBehavior:NSDateFormatterBehavior10_4];
-        [formatter setLocale:[[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"] autorelease]];
+        [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
         [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
         [formatter setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss zzz"];
         self.rfc1123DateFormatter = formatter;
@@ -107,16 +107,7 @@ NSString *const OutputRunMode = @"OutputRunMode"; //NSDefaultRunLoopMode
 - (void)dealloc
 {
     KMSAssert([self.connections count] == 0);
-    dispatch_release(_queue);
     _queue = nil;
-
-    [_connections release];
-    [_data release];
-    [_dataListener release];
-    [_responder release];
-    [_transcript release];
-    
-    [super dealloc];
 }
 
 #pragma mark - Public API
@@ -282,7 +273,7 @@ static KMSLogLevel gLoggingLevel = KMSLoggingOff;
 #pragma mark - Debugging
 
 - (BOOL)currentQueueTargetsServerQueue {
-    return dispatch_get_specific(&queueIdentifierKey) == self;
+    return dispatch_get_specific(&queueIdentifierKey) == (__bridge void *)(self);
 }
 
 @end

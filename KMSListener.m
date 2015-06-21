@@ -33,7 +33,7 @@
 {
     KMSListener* listener = [[KMSListener alloc] initWithPort:port connectionBlock:block];
 
-    return [listener autorelease];
+    return listener;
 }
 
 - (id)initWithPort:(NSUInteger)port connectionBlock:(ConnectionBlock)block
@@ -51,8 +51,6 @@
 - (void)dealloc
 {
     KMSAssert(_listener == nil);
-
-    [super dealloc];
 }
 
 #pragma mark - Public API
@@ -149,7 +147,7 @@
 
 static void callbackAcceptConnection(CFSocketRef s, CFSocketCallBackType type, CFDataRef address, const void *data, void *info)
 {
-    KMSListener* obj = (KMSListener*)info;
+    KMSListener* obj = (__bridge KMSListener*)info;
     KMSAssert(type == kCFSocketAcceptCallBack);
     KMSAssert(obj && (obj->_listener == s));
     KMSAssert(data);
@@ -240,7 +238,7 @@ static void callbackAcceptConnection(CFSocketRef s, CFSocketCallBackType type, C
 
 - (BOOL)makeCFSocketForSocket:(int)socket
 {
-    CFSocketContext context = { 0, (void *) self, NULL, NULL, NULL };
+    CFSocketContext context = { 0, (__bridge void *) self, NULL, NULL, NULL };
 
     KMSAssert(_listener == NULL);
     _listener = CFSocketCreateWithNative(NULL, socket, kCFSocketAcceptCallBack, callbackAcceptConnection, &context);

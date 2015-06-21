@@ -17,14 +17,7 @@
     KMSSendDataCommand* result = [[KMSSendDataCommand alloc] init];
     result.data = data;
 
-    return [result autorelease];
-}
-
-- (void)dealloc
-{
-    [_data release];
-
-    [super dealloc];
+    return result;
 }
 
 - (NSTimeInterval)performOnConnection:(KMSConnection*)connection server:(KMSServer*)server

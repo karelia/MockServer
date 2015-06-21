@@ -16,7 +16,7 @@
 {
     KMSSendServerDataCommand* result = [[KMSSendServerDataCommand alloc] init];
 
-    return [result autorelease];
+    return result;
 }
 
 - (NSTimeInterval)performOnConnection:(KMSConnection*)connection server:(KMSServer*)server
