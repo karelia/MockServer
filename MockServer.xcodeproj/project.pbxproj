@@ -196,20 +196,12 @@
 			children = (
 				22F6D0D9165A65AB00443CC9 /* Documentation */,
 				22B47C59164AE5EE006E80EB /* MockServer */,
-				29B97317FDCFA39411CA2CEA /* Resources */,
 				3CD748A01B366825009C00C9 /* MockServer */,
 				3CD748AD1B366826009C00C9 /* MockServerTests */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
 			name = Connection;
-			sourceTree = "<group>";
-		};
-		29B97317FDCFA39411CA2CEA /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
@@ -735,6 +727,7 @@
 				3CD748B51B366826009C00C9 /* Plugin */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3CD748B61B366826009C00C9 /* Build configuration list for PBXNativeTarget "MockServerTests" */ = {
 			isa = XCConfigurationList;
@@ -744,6 +737,7 @@
 				3CD748B91B366826009C00C9 /* Plugin */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "MockServer" */ = {
 			isa = XCConfigurationList;
