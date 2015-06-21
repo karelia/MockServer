@@ -10,13 +10,27 @@
             buildForTesting = "YES"
             buildForRunning = "YES"
             buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3CD7489E1B366825009C00C9"
+               BuildableName = "MockServer.framework"
+               BlueprintName = "MockServer"
+               ReferencedContainer = "container:MockServer.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
             buildForArchiving = "NO"
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "220AD7971509019B00748655"
-               BuildableName = "UnitTests OSX.octest"
-               BlueprintName = "UnitTests OSX"
+               BlueprintIdentifier = "3CD748A81B366825009C00C9"
+               BuildableName = "MockServerTests.xctest"
+               BlueprintName = "MockServerTests"
                ReferencedContainer = "container:MockServer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,18 +46,22 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "220AD7971509019B00748655"
-               BuildableName = "UnitTests OSX.octest"
-               BlueprintName = "UnitTests OSX"
+               BlueprintIdentifier = "3CD748A81B366825009C00C9"
+               BuildableName = "MockServerTests.xctest"
+               BlueprintName = "MockServerTests"
                ReferencedContainer = "container:MockServer.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "KMSTestCase">
-               </Test>
-            </SkippedTests>
          </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "3CD7489E1B366825009C00C9"
+            BuildableName = "MockServer.framework"
+            BlueprintName = "MockServer"
+            ReferencedContainer = "container:MockServer.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -57,9 +75,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "220AD7971509019B00748655"
-            BuildableName = "UnitTests OSX.octest"
-            BlueprintName = "UnitTests OSX"
+            BlueprintIdentifier = "3CD7489E1B366825009C00C9"
+            BuildableName = "MockServer.framework"
+            BlueprintName = "MockServer"
             ReferencedContainer = "container:MockServer.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -72,6 +90,15 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "3CD7489E1B366825009C00C9"
+            BuildableName = "MockServer.framework"
+            BlueprintName = "MockServer"
+            ReferencedContainer = "container:MockServer.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
