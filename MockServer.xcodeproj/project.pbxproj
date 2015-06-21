@@ -155,30 +155,7 @@
 				2239A207164C53F3008D4ADE /* KMSListener.m */,
 			);
 			name = Internal;
-			sourceTree = "<group>";
-		};
-		22B47C59164AE5EE006E80EB /* MockServer */ = {
-			isa = PBXGroup;
-			children = (
-				22A6602316B3198300117D24 /* KMSCommand.h */,
-				22A6602416B3198300117D24 /* KMSCommand.m */,
-				2239A200164C53F3008D4ADE /* KMSServer.h */,
-				2239A201164C53F3008D4ADE /* KMSServer.m */,
-				227CF8C41671001900F28590 /* KMSState.h */,
-				22F6D0D6165A5B2400443CC9 /* KMSRegExResponder.h */,
-				22F6D0D7165A5B2400443CC9 /* KMSRegExResponder.m */,
-				2239A208164C53F3008D4ADE /* KMSResponder.h */,
-				2239A209164C53F3008D4ADE /* KMSResponder.m */,
-				22662EE5165D2199005FCC4A /* KMSResponseCollection.h */,
-				22662EE6165D219A005FCC4A /* KMSResponseCollection.m */,
-				224AB391166E5A7A0066B1C6 /* KMSTestCase.h */,
-				224AB392166E5A7A0066B1C6 /* KMSTestCase.m */,
-				2289BC0316AD63CD007DC402 /* KMSTranscriptEntry.h */,
-				2289BC0416AD63CD007DC402 /* KMSTranscriptEntry.m */,
-				2262E768165FC38D004BD4A2 /* Internal */,
-			);
-			name = MockServer;
-			path = "unit test";
+			path = "../unit test";
 			sourceTree = "<group>";
 		};
 		22F6D0D9165A65AB00443CC9 /* Documentation */ = {
@@ -198,7 +175,6 @@
 			isa = PBXGroup;
 			children = (
 				22F6D0D9165A65AB00443CC9 /* Documentation */,
-				22B47C59164AE5EE006E80EB /* MockServer */,
 				3CD748A01B366825009C00C9 /* MockServer */,
 				3CD748AD1B366826009C00C9 /* MockServerTests */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
@@ -219,6 +195,22 @@
 			isa = PBXGroup;
 			children = (
 				3CD748A31B366825009C00C9 /* MockServer.h */,
+				22A6602316B3198300117D24 /* KMSCommand.h */,
+				22A6602416B3198300117D24 /* KMSCommand.m */,
+				2239A200164C53F3008D4ADE /* KMSServer.h */,
+				2239A201164C53F3008D4ADE /* KMSServer.m */,
+				227CF8C41671001900F28590 /* KMSState.h */,
+				22F6D0D6165A5B2400443CC9 /* KMSRegExResponder.h */,
+				22F6D0D7165A5B2400443CC9 /* KMSRegExResponder.m */,
+				2239A208164C53F3008D4ADE /* KMSResponder.h */,
+				2239A209164C53F3008D4ADE /* KMSResponder.m */,
+				22662EE5165D2199005FCC4A /* KMSResponseCollection.h */,
+				22662EE6165D219A005FCC4A /* KMSResponseCollection.m */,
+				224AB391166E5A7A0066B1C6 /* KMSTestCase.h */,
+				224AB392166E5A7A0066B1C6 /* KMSTestCase.m */,
+				2289BC0316AD63CD007DC402 /* KMSTranscriptEntry.h */,
+				2289BC0416AD63CD007DC402 /* KMSTranscriptEntry.m */,
+				2262E768165FC38D004BD4A2 /* Internal */,
 				3CD748A11B366825009C00C9 /* Supporting Files */,
 			);
 			path = MockServer;
