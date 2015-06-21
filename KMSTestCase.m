@@ -10,17 +10,6 @@
 
 @implementation KMSTestCase
 
-- (void)dealloc
-{
-    [_password release];
-    [_responses release];
-    [_server release];
-    [_url release];
-    [_user release];
-
-    [super dealloc];
-}
-
 - (void)tearDown
 {
     [self cleanupServer];
@@ -104,7 +93,7 @@
 
     [self runUntilPaused];
 
-    return [string autorelease];
+    return string;
 }
 
 - (void)runUntilPaused
