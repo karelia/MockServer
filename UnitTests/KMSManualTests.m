@@ -82,7 +82,7 @@ static NSString*const HTTPContent = @"<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 
 
     [server runUntilPaused];
 
-    return [string autorelease];
+    return string;
 }
 
 #pragma mark - Tests
