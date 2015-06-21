@@ -14,7 +14,6 @@
 		3CBCE6CD1B36754E00EB5E49 /* KMSManualTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 224AB38E166E5A660066B1C6 /* KMSManualTests.m */; };
 		3CD748A41B366825009C00C9 /* MockServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CD748A31B366825009C00C9 /* MockServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3CD748AA1B366826009C00C9 /* MockServer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD7489F1B366825009C00C9 /* MockServer.framework */; };
-		3CD748B11B366826009C00C9 /* MockServerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD748B01B366826009C00C9 /* MockServerTests.m */; };
 		3CD748BB1B36687F009C00C9 /* KMSCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A6602416B3198300117D24 /* KMSCommand.m */; };
 		3CD748BD1B36687F009C00C9 /* KMSServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2239A201164C53F3008D4ADE /* KMSServer.m */; };
 		3CD748C01B36687F009C00C9 /* KMSRegExResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F6D0D7165A5B2400443CC9 /* KMSRegExResponder.m */; };
@@ -96,7 +95,6 @@
 		3CD748A31B366825009C00C9 /* MockServer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MockServer.h; sourceTree = "<group>"; };
 		3CD748A91B366825009C00C9 /* MockServerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MockServerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CD748AF1B366826009C00C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3CD748B01B366826009C00C9 /* MockServerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MockServerTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,7 +235,6 @@
 		3CD748AD1B366826009C00C9 /* MockServerTests */ = {
 			isa = PBXGroup;
 			children = (
-				3CD748B01B366826009C00C9 /* MockServerTests.m */,
 				224AB38D166E5A660066B1C6 /* KMSCollectionTests.m */,
 				224AB38E166E5A660066B1C6 /* KMSManualTests.m */,
 				2262E767165FBFFD004BD4A2 /* Response Files */,
@@ -406,7 +403,6 @@
 			files = (
 				3CBCE6CC1B36754E00EB5E49 /* KMSCollectionTests.m in Sources */,
 				3CBCE6CD1B36754E00EB5E49 /* KMSManualTests.m in Sources */,
-				3CD748B11B366826009C00C9 /* MockServerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
