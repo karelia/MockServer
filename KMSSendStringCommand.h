@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Karelia Software. All rights reserved.
 //
 
-#import "KMSCommand.h"
+#import <MockServer/MockServer.h>
 
 /**
  Command which sends a string down the connection.
