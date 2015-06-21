@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0450"
+   LastUpgradeVersion = "0630"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -54,6 +54,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "220AD7971509019B00748655"
+            BuildableName = "UnitTests OSX.octest"
+            BlueprintName = "UnitTests OSX"
+            ReferencedContainer = "container:MockServer.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

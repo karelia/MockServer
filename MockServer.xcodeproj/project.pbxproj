@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 47;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -27,6 +27,31 @@
 		22A6603416B32EFB00117D24 /* KMSCloseCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A6603316B32EFB00117D24 /* KMSCloseCommand.m */; };
 		22BC963B167FB72200144FFE /* http.json in Resources */ = {isa = PBXBuildFile; fileRef = 22BC963A167FB72200144FFE /* http.json */; };
 		22F6D0D8165A5B2400443CC9 /* KMSRegExResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F6D0D7165A5B2400443CC9 /* KMSRegExResponder.m */; };
+		3CD748A41B366825009C00C9 /* MockServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CD748A31B366825009C00C9 /* MockServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3CD748AA1B366826009C00C9 /* MockServer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD7489F1B366825009C00C9 /* MockServer.framework */; };
+		3CD748B11B366826009C00C9 /* MockServerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD748B01B366826009C00C9 /* MockServerTests.m */; };
+		3CD748BB1B36687F009C00C9 /* KMSCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A6602416B3198300117D24 /* KMSCommand.m */; };
+		3CD748BD1B36687F009C00C9 /* KMSServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2239A201164C53F3008D4ADE /* KMSServer.m */; };
+		3CD748C01B36687F009C00C9 /* KMSRegExResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F6D0D7165A5B2400443CC9 /* KMSRegExResponder.m */; };
+		3CD748C21B36687F009C00C9 /* KMSResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2239A209164C53F3008D4ADE /* KMSResponder.m */; };
+		3CD748C41B36687F009C00C9 /* KMSResponseCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 22662EE6165D219A005FCC4A /* KMSResponseCollection.m */; };
+		3CD748C61B36687F009C00C9 /* KMSTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 224AB392166E5A7A0066B1C6 /* KMSTestCase.m */; };
+		3CD748C81B36687F009C00C9 /* KMSTranscriptEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 2289BC0416AD63CD007DC402 /* KMSTranscriptEntry.m */; };
+		3CD748C91B366923009C00C9 /* KMSCloseCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A6603316B32EFB00117D24 /* KMSCloseCommand.m */; };
+		3CD748CA1B366923009C00C9 /* KMSPauseCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A6602D16B32BFD00117D24 /* KMSPauseCommand.m */; };
+		3CD748CB1B366923009C00C9 /* KMSSendDataCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A6602716B32B4A00117D24 /* KMSSendDataCommand.m */; };
+		3CD748CC1B366923009C00C9 /* KMSSendServerDataCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A6603016B32C7E00117D24 /* KMSSendServerDataCommand.m */; };
+		3CD748CD1B366923009C00C9 /* KMSSendStringCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A6602A16B32BA300117D24 /* KMSSendStringCommand.m */; };
+		3CD748CE1B366923009C00C9 /* KMSConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2239A203164C53F3008D4ADE /* KMSConnection.m */; };
+		3CD748CF1B366923009C00C9 /* KMSListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 2239A207164C53F3008D4ADE /* KMSListener.m */; };
+		3CD748D01B36693D009C00C9 /* KMSCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 22A6602316B3198300117D24 /* KMSCommand.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3CD748D11B36693D009C00C9 /* KMSServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 2239A200164C53F3008D4ADE /* KMSServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3CD748D21B36693D009C00C9 /* KMSState.h in Headers */ = {isa = PBXBuildFile; fileRef = 227CF8C41671001900F28590 /* KMSState.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3CD748D31B36693D009C00C9 /* KMSRegExResponder.h in Headers */ = {isa = PBXBuildFile; fileRef = 22F6D0D6165A5B2400443CC9 /* KMSRegExResponder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3CD748D41B36693D009C00C9 /* KMSResponder.h in Headers */ = {isa = PBXBuildFile; fileRef = 2239A208164C53F3008D4ADE /* KMSResponder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3CD748D51B36693D009C00C9 /* KMSResponseCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = 22662EE5165D2199005FCC4A /* KMSResponseCollection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3CD748D61B36693D009C00C9 /* KMSTestCase.h in Headers */ = {isa = PBXBuildFile; fileRef = 224AB391166E5A7A0066B1C6 /* KMSTestCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3CD748D71B36693D009C00C9 /* KMSTranscriptEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 2289BC0316AD63CD007DC402 /* KMSTranscriptEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5F53DAED1727B9E800DE6269 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220AD7991509019B00748655 /* SenTestingKit.framework */; };
 		5F53DAFF1727BAF000DE6269 /* KMSCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A6602416B3198300117D24 /* KMSCommand.m */; };
 		5F53DB001727BAF000DE6269 /* KMSServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2239A201164C53F3008D4ADE /* KMSServer.m */; };
@@ -49,6 +74,16 @@
 		5F53DB111727BB0D00DE6269 /* webdav.json in Resources */ = {isa = PBXBuildFile; fileRef = 22662EEE165D2C65005FCC4A /* webdav.json */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		3CD748AB1B366826009C00C9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3CD7489E1B366825009C00C9;
+			remoteInfo = MockServer;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		22FA97F715090855001728B8 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -62,7 +97,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		220AD7981509019B00748655 /* UnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = UnitTests.octest; path = "UnitTests OSX.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		220AD7981509019B00748655 /* UnitTests OSX.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "UnitTests OSX.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		220AD7991509019B00748655 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		2239A1FD164C5381008D4ADE /* UnitTest.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UnitTest.plist; sourceTree = "<group>"; };
 		2239A200164C53F3008D4ADE /* KMSServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMSServer.h; sourceTree = SOURCE_ROOT; };
@@ -108,6 +143,12 @@
 		22F6D0DA165A65AB00443CC9 /* Classes.graffle */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Classes.graffle; sourceTree = "<group>"; };
 		22F6D0DB165A65AB00443CC9 /* Design-template.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Design-template.md"; sourceTree = "<group>"; wrapsLines = 1; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		3CD7489F1B366825009C00C9 /* MockServer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MockServer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3CD748A21B366825009C00C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3CD748A31B366825009C00C9 /* MockServer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MockServer.h; sourceTree = "<group>"; };
+		3CD748A91B366825009C00C9 /* MockServerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MockServerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3CD748AF1B366826009C00C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3CD748B01B366826009C00C9 /* MockServerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MockServerTests.m; sourceTree = "<group>"; };
 		5F53DAEC1727B9E800DE6269 /* UnitTests iOS.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "UnitTests iOS.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F53DAEE1727B9E800DE6269 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -118,6 +159,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				220AD79A1509019B00748655 /* SenTestingKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3CD7489B1B366825009C00C9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3CD748A61B366825009C00C9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CD748AA1B366826009C00C9 /* MockServer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,8 +191,10 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				220AD7981509019B00748655 /* UnitTests.octest */,
+				220AD7981509019B00748655 /* UnitTests OSX.octest */,
 				5F53DAEC1727B9E800DE6269 /* UnitTests iOS.octest */,
+				3CD7489F1B366825009C00C9 /* MockServer.framework */,
+				3CD748A91B366825009C00C9 /* MockServerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -229,6 +287,8 @@
 				22B47C59164AE5EE006E80EB /* MockServer */,
 				2239A1FB164C5381008D4ADE /* UnitTests */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
+				3CD748A01B366825009C00C9 /* MockServer */,
+				3CD748AD1B366826009C00C9 /* MockServerTests */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -252,7 +312,60 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3CD748A01B366825009C00C9 /* MockServer */ = {
+			isa = PBXGroup;
+			children = (
+				3CD748A31B366825009C00C9 /* MockServer.h */,
+				3CD748A11B366825009C00C9 /* Supporting Files */,
+			);
+			path = MockServer;
+			sourceTree = "<group>";
+		};
+		3CD748A11B366825009C00C9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3CD748A21B366825009C00C9 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3CD748AD1B366826009C00C9 /* MockServerTests */ = {
+			isa = PBXGroup;
+			children = (
+				3CD748B01B366826009C00C9 /* MockServerTests.m */,
+				3CD748AE1B366826009C00C9 /* Supporting Files */,
+			);
+			path = MockServerTests;
+			sourceTree = "<group>";
+		};
+		3CD748AE1B366826009C00C9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3CD748AF1B366826009C00C9 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		3CD7489C1B366825009C00C9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CD748A41B366825009C00C9 /* MockServer.h in Headers */,
+				3CD748D01B36693D009C00C9 /* KMSCommand.h in Headers */,
+				3CD748D31B36693D009C00C9 /* KMSRegExResponder.h in Headers */,
+				3CD748D41B36693D009C00C9 /* KMSResponder.h in Headers */,
+				3CD748D51B36693D009C00C9 /* KMSResponseCollection.h in Headers */,
+				3CD748D11B36693D009C00C9 /* KMSServer.h in Headers */,
+				3CD748D21B36693D009C00C9 /* KMSState.h in Headers */,
+				3CD748D61B36693D009C00C9 /* KMSTestCase.h in Headers */,
+				3CD748D71B36693D009C00C9 /* KMSTranscriptEntry.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		220AD7971509019B00748655 /* UnitTests OSX */ = {
@@ -271,8 +384,44 @@
 			);
 			name = "UnitTests OSX";
 			productName = Tests;
-			productReference = 220AD7981509019B00748655 /* UnitTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productReference = 220AD7981509019B00748655 /* UnitTests OSX.octest */;
+			productType = "com.apple.product-type.bundle.ocunit-test";
+		};
+		3CD7489E1B366825009C00C9 /* MockServer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3CD748B21B366826009C00C9 /* Build configuration list for PBXNativeTarget "MockServer" */;
+			buildPhases = (
+				3CD7489A1B366825009C00C9 /* Sources */,
+				3CD7489B1B366825009C00C9 /* Frameworks */,
+				3CD7489C1B366825009C00C9 /* Headers */,
+				3CD7489D1B366825009C00C9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MockServer;
+			productName = MockServer;
+			productReference = 3CD7489F1B366825009C00C9 /* MockServer.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		3CD748A81B366825009C00C9 /* MockServerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3CD748B61B366826009C00C9 /* Build configuration list for PBXNativeTarget "MockServerTests" */;
+			buildPhases = (
+				3CD748A51B366825009C00C9 /* Sources */,
+				3CD748A61B366825009C00C9 /* Frameworks */,
+				3CD748A71B366825009C00C9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3CD748AC1B366826009C00C9 /* PBXTargetDependency */,
+			);
+			name = MockServerTests;
+			productName = MockServerTests;
+			productReference = 3CD748A91B366825009C00C9 /* MockServerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		5F53DAEB1727B9E800DE6269 /* UnitTests iOS */ = {
 			isa = PBXNativeTarget;
@@ -290,7 +439,7 @@
 			name = "UnitTests iOS";
 			productName = "UnitTests-iOS";
 			productReference = 5F53DAEC1727B9E800DE6269 /* UnitTests iOS.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -299,11 +448,20 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = KMS;
-				LastUpgradeCheck = 0440;
+				LastTestingUpgradeCheck = 0630;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Karelia Software";
+				TargetAttributes = {
+					3CD7489E1B366825009C00C9 = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+					3CD748A81B366825009C00C9 = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+				};
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "MockServer" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 6.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -325,6 +483,8 @@
 			targets = (
 				220AD7971509019B00748655 /* UnitTests OSX */,
 				5F53DAEB1727B9E800DE6269 /* UnitTests iOS */,
+				3CD7489E1B366825009C00C9 /* MockServer */,
+				3CD748A81B366825009C00C9 /* MockServerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -337,6 +497,20 @@
 				22662EEF165D2C65005FCC4A /* ftp.json in Resources */,
 				22662EF0165D2C65005FCC4A /* webdav.json in Resources */,
 				22BC963B167FB72200144FFE /* http.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3CD7489D1B366825009C00C9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3CD748A71B366825009C00C9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,6 +581,35 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3CD7489A1B366825009C00C9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CD748C91B366923009C00C9 /* KMSCloseCommand.m in Sources */,
+				3CD748CA1B366923009C00C9 /* KMSPauseCommand.m in Sources */,
+				3CD748CB1B366923009C00C9 /* KMSSendDataCommand.m in Sources */,
+				3CD748CC1B366923009C00C9 /* KMSSendServerDataCommand.m in Sources */,
+				3CD748CD1B366923009C00C9 /* KMSSendStringCommand.m in Sources */,
+				3CD748CE1B366923009C00C9 /* KMSConnection.m in Sources */,
+				3CD748CF1B366923009C00C9 /* KMSListener.m in Sources */,
+				3CD748BB1B36687F009C00C9 /* KMSCommand.m in Sources */,
+				3CD748BD1B36687F009C00C9 /* KMSServer.m in Sources */,
+				3CD748C01B36687F009C00C9 /* KMSRegExResponder.m in Sources */,
+				3CD748C21B36687F009C00C9 /* KMSResponder.m in Sources */,
+				3CD748C41B36687F009C00C9 /* KMSResponseCollection.m in Sources */,
+				3CD748C61B36687F009C00C9 /* KMSTestCase.m in Sources */,
+				3CD748C81B36687F009C00C9 /* KMSTranscriptEntry.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3CD748A51B366825009C00C9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CD748B11B366826009C00C9 /* MockServerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5F53DAE71727B9E800DE6269 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -432,12 +635,19 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		3CD748AC1B366826009C00C9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3CD7489E1B366825009C00C9 /* MockServer */;
+			targetProxy = 3CD748AB1B366826009C00C9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
 		220AD7A81509019B00748655 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
@@ -466,7 +676,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -488,7 +697,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -503,6 +711,276 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
+			};
+			name = Plugin;
+		};
+		3CD748B31B366826009C00C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = MockServer/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3CD748B41B366826009C00C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = MockServer/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		3CD748B51B366826009C00C9 /* Plugin */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = MockServer/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Plugin;
+		};
+		3CD748B71B366826009C00C9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = MockServerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		3CD748B81B366826009C00C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = MockServerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		3CD748B91B366826009C00C9 /* Plugin */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = MockServerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Plugin;
 		};
@@ -596,11 +1074,10 @@
 		79A857940B9267CA00D9C844 /* Plugin */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				SDKROOT = macosx;
 			};
 			name = Plugin;
@@ -608,11 +1085,10 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -621,12 +1097,11 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -643,6 +1118,24 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		3CD748B21B366826009C00C9 /* Build configuration list for PBXNativeTarget "MockServer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3CD748B31B366826009C00C9 /* Debug */,
+				3CD748B41B366826009C00C9 /* Release */,
+				3CD748B51B366826009C00C9 /* Plugin */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		3CD748B61B366826009C00C9 /* Build configuration list for PBXNativeTarget "MockServerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3CD748B71B366826009C00C9 /* Debug */,
+				3CD748B81B366826009C00C9 /* Release */,
+				3CD748B91B366826009C00C9 /* Plugin */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		5F53DAFE1727B9E800DE6269 /* Build configuration list for PBXNativeTarget "UnitTests iOS" */ = {
 			isa = XCConfigurationList;
