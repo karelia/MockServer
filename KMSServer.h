@@ -63,7 +63,7 @@ typedef NS_ENUM(NSUInteger, KMSLogLevel)
 
 @property (readonly, nonatomic) NSUInteger port;
 
-@property (assign, nonatomic) dispatch_queue_t queue;
+@property (retain, nonatomic) dispatch_queue_t queue;
 
 /**
  YES if the server is running. NO if the stop method has been called.
