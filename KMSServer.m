@@ -72,7 +72,8 @@ NSString *const OutputRunMode = @"OutputRunMode"; //NSDefaultRunLoopMode
     {
         dispatch_queue_t queue = dispatch_queue_create("com.karelia.mockserver", 0);
         self.queue = queue;
-        dispatch_queue_set_specific(queue, &queueIdentifierKey, (__bridge void *)(self), NULL);
+        dispatch_queue_set_specific(queue, &queueIdentifierKey, (void *)CFBridgingRetain(self), NULL);
+        
         self.responder = responder;
         self.connections = [NSMutableArray array];
         self.transcript = [NSMutableArray array];
