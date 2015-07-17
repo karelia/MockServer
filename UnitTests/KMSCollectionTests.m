@@ -40,7 +40,7 @@
         NSString* string = [self stringForRequest:request];
 
         // check that we got back what we were expecting
-        STAssertEqualObjects(string, testData, @"got the wrong response: %@", string);
+        XCTAssertEqualObjects(string, testData, @"got the wrong response: %@", string);
     }
 }
 
@@ -64,12 +64,12 @@
          {
              if (error)
              {
-                 STFail(@"got error %@", error);
+                 XCTFail(@"got error %@", error);
              }
              else
              {
                  NSString* string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                 STAssertEqualObjects(string, testData, @"got the wrong response: %@", string);
+                 XCTAssertEqualObjects(string, testData, @"got the wrong response: %@", string);
              }
 
              [self pause];
@@ -99,7 +99,7 @@
          {
              if (error)
              {
-                 STFail(@"got error %@", error);
+                 XCTFail(@"got error %@", error);
              }
              else
              {
@@ -111,7 +111,7 @@
 
         NSLog(@"send request for test.txt");
         [self runUntilPaused];
-        STAssertEqualObjects(string, @"this is a test", @"got the wrong response: %@", string);
+        XCTAssertEqualObjects(string, @"this is a test", @"got the wrong response: %@", string);
 
         [self.server resume];
 
@@ -123,7 +123,7 @@
          {
              if (error)
              {
-                 STFail(@"got error %@", error);
+                 XCTFail(@"got error %@", error);
              }
              else
              {
@@ -135,7 +135,7 @@
 
         NSLog(@"send request for another.txt");
         [self runUntilPaused];
-        STAssertEqualObjects(string, @"this is another test", @"got the wrong response: %@", string);
+        XCTAssertEqualObjects(string, @"this is another test", @"got the wrong response: %@", string);
     }
 }
 

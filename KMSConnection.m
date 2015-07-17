@@ -62,8 +62,8 @@
         CFStreamCreatePairWithSocket(NULL, socket, &readStream, &writeStream);
 
         self.socket = socket;
-        self.input = [self setupStream:(NSStream*)readStream mode:InputRunMode];
-        self.output = [self setupStream:(NSStream*)writeStream mode:OutputRunMode];
+        self.input = [self setupStream:(NSInputStream*)readStream mode:InputRunMode];
+        self.output = [self setupStream:(NSOutputStream*)writeStream mode:OutputRunMode];
 
         CFRelease(readStream);
         CFRelease(writeStream);
